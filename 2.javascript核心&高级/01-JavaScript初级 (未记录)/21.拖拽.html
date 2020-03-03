@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			#box1 {
+				width: 200px;
+			 	height: 200px;
+			   	background-color: brown;
+				position: absolute;
+				cursor: pointer;
+			}
+			#box2 {
+				width: 200px;
+				height:200px;
+				background-color: seagreen;
+				position: absolute;
+				top: 300px;
+				cursor: pointer;
+			}
+			#span {
+				background-color: blue;	
+			}
+		</style>
+		<script type="text/javascript">
+		window.onload=	function () {
+			function drag (obj) {
+				obj.onmousedown = function (event){			//鼠标按下时触发次函数
+					obj.setCapture && obj.setCapture();	//当点击时所有事件都捕获为box1的事件
+					
+					event = event||window.event;    //兼容IE8
+					 x = event.clientX;				//记录浏览器鼠标所在位置的水平轴
+					 y = event.clientY;				//记录浏览器鼠标所在位置的垂直轴
+					 
+					 boxX = x - obj.offsetLeft;	//当鼠标按下时记录一次元素内的水平轴	
+					// 浏览器鼠标所在的水平轴 - 元素的水平偏移量 = 元素内的水平轴
+					
+					 boxY = y - obj.offsetTop;		//当鼠标按下时记录一次元素内的垂直轴
+					 //浏览器鼠标所在的垂直轴 - 元素的垂直偏移量 = 元素内的垂直轴
+					 obj.style.position = "absolute";
+				document.onmousemove = function (event){
+					//网页内移动时触发此函数 由于在按下事件内 所以只有在box1按下事件触发后才会触发此函数
+					event = event||window.event;
+					var x = event.clientX;
+					var y = event.clientY;
+					
+					obj.style.left = (x - boxX) + "px"; //鼠标水平轴 减去 元素记录水平轴
+					obj.style.top  = (y - boxY) + "px"; //鼠标垂直轴 减去 元素记录垂直轴
+					
+				}
+				
+				obj.onmouseup = function (){     //在box1鼠标松开时运行此函数
+				document.onmousemove = null; //浏览器的移动事件转为null 则停止移动
+				obj.releaseCapture && obj.releaseCapture();	//释放box1的点击事件
+				}
+				
+				return false; //兼容谷歌和IE浏览器 清除默认行为
+			}}
+			box = document.getElementById("box1");
+			drag(box1);
+			drag(box2);
+			}
+		
+			
+		
+		</script>
+		
+	</head>
+	<body>
+asdsadsada
+		<div id="box1"></div>
+		<div id="box2"></div>
+	</body>
+	
+	
+</html>

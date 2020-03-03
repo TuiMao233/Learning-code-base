@@ -1,0 +1,46 @@
+/*less中的混合
+ * 混合加上将一系列属性从一个规则集引入另一个规则集的方式
+ *  1.普通混合
+ *  2.不带输出的混合
+ *  3.带参数的混合
+ *  4.带参数并且有默认值的混合
+ *  5.带多个参数的混合
+ *  6.命名参数
+ *  7.匹配模式
+ *  8.arguments变量
+ */
+.juzhong(){ // 普通混合
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+}
+
+.zuoyou(){ // 普通混合
+    margin: 0 auto;
+}
+
+@color:darkgray;
+#wrap {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border: 1px solid;
+    .zuoyou;
+    
+    .inner {
+       .juzhong;
+       background: dimgray;
+       height: 100px;
+       width: 100px;       
+    }
+    
+    .inner2 {
+       .juzhong;
+       background: tan;
+       height: 100px;
+       width: 100px;  
+    }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.12.4.js"></script>
+	</head>
+	<body>
+		<!--
+			1.  导入JQuery库
+			2.  获取name="username" 的节点username
+			3.1   为username的value属性值，取出前后空格且不为空。准备发送Ajax请求
+			3.2   发送Ajax请求检验username是否可用
+			3.3   在服务端直接返回一个html的片段：<font color="red">该用户名已经被使用</font>
+			3.4 在客户端浏览器把其添加到#message 的html 中
+		-->
+		<form>
+			UserName:<input type="text" name="username" /><span id="details"></span>
+			<br />
+			<input type="button" name="Submit"/>
+		</form>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			$("[name='username']").change(function(event){
+				var val = $(this).val();
+				val = $.trim(val); //jq取出前后空格
+				var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+				if(uPattern.test(val)){
+					console.log(val)
+					var url = "data/验证失败.html";
+					var ages = {"time":new Date()};
+					$.get(url,ages,function(data){
+						$("#details").html(data);
+					})
+				}
+			})
+		})
+	</script>
+</html>

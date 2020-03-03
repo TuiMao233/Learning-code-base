@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*	通配符选择器 *{margin:0;}
+			 * 	元素选择器 body{}
+			 * 	类选择器 .list{}
+			 * 	id选择器 #list{}
+			 * 	分组选择器 .list,#wrap{}
+			 * 	后代选择器 .list li{}    会选中孙子的li
+			 * 	子元素选择器 .wrap>li{}  不会选中孙子的li
+			 * 	兄弟选择器 #wrap #first + inner{}
+			 * 	通用兄弟选择器 #wrap #first ~ div {}
+			 */
+			#wrap{
+				width: 200px;
+				height: 200px;
+			}
+			
+			#wrap #first ~ div{/*相邻兄弟选择器*/ /*必须是紧跟的*/
+				color: #D2691E;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div>1
+				<div>1-1</div>
+			</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+		</div>
+		<div id="wrap">
+			<div class="inner">inner</div>
+			<div id="first">first</div>		<!--只要是下面的,符合选择器的-->
+			<div class="inner">inner</div>
+			<div class="inner">inner</div>
+			<div class="inner">inner</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>49-图标特效</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+            width: 400px;
+            height: 250px;
+            border: 1px solid #000;
+            margin: 100px auto;
+        }
+        ul>li{
+            width: 100px;
+            height: 50px;
+            margin-top: 50px;
+            text-align: center;
+            float: left;
+            overflow: hidden;
+        }
+        ul>li>span{
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: url("img/bg.png") no-repeat 0 0;
+            position: relative;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+			/* 遍历li更新所有图片和字体 */
+			$('li').each(function(index,item){
+				// 定制精灵图 每次向上位移-24px
+				var $url = `url("img/bg.png") no-repeat 0  ${index * -24}px`
+				// 将新的url信息插入span中
+				$(this).children("span").css("background", $url);
+			})
+			 
+			$('li').mouseenter(function(){ // li的移入事件
+				$(this).children('span').animate({
+					top:-50 // 移入上方
+				},1000, function(){
+					$(this).css('top', '50px') // 将位置拉到下面
+				}).animate({
+					top:0 // 恢复原点
+				})
+			})
+			
+        });
+    </script>
+</head>
+<body>
+<ul>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+    <li><span></span><p>百度</p></li>
+</ul>
+</body>
+</html>

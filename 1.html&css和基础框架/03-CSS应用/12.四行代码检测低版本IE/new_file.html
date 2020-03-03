@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script>
+		
+function isIE(version){
+	var b = document.createElement('b');
+	b.innerHTML = "<!--[if IE "+version+"]><i></i><![endif]-->"
+	return b.getElementsByTagName("i").length == 1;
+}
+console.log(isIE(8)||isIE(7)||isIE(6)||isIE(5));
+	</script>
+</html>

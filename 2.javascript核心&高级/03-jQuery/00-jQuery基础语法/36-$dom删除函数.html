@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>52-jQuery删除节点相关方法</title>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            /*
+			删除指定元素
+            $dom.remove() 
+			$dom.detach()
+            删除指定元素的内容和子元素, 指定元素自身不会被删除
+            empty()
+			
+			remove与detach的区别
+            remove删除后会返回一样的$dom,但数据和事件不会保留
+			detach删除后会返回一样的$dom,数据和事件变化会保留
+            */
+            $("button").click(function () {
+				// 删除所有div元素
+                // $("div").remove();
+				
+                // $("div").empty();
+                // $("li").remove(".item");
+
+                // 利用remove删除之后再重新添加,原有的事件无法响应
+                // var $div = $("div").remove();
+                // 利用detach删除之后再重新添加,原有事件可以响应
+                var $div = $("div").detach();
+				console.log($div)
+                // console.log($div);
+                $("body").append($div);
+            });
+            $("div").click(function () {
+                alert("div被点击了");
+            });
+        });
+    </script>
+</head>
+<body>
+<button>删除节点</button>
+<ul>
+    <li class="item">我是第1个li</li>
+    <li>我是第2个li</li>
+    <li class="item">我是第3个li</li>
+    <li>我是第4个li</li>
+    <li class="item">我是第5个li</li>
+</ul>
+<div>我是div
+    <p>我是段落</p>
+</div>
+</body>
+</html>

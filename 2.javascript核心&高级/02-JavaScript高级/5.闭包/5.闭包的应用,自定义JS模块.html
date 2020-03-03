@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			一、缺点
+				  函数执行完后，函数内的局部变量没有释放，占用内存时间会边长
+				  容易造成内存泄漏
+			二、解决
+			          能不用闭包就不用
+			          及时释放
+		-->
+	</body>
+	<script type="text/javascript">
+		function fn1 (){
+			var arr = new Array[100000]
+			function fn2(){
+				//闭包产生,导致arr10万个没有消失,储存在闭包内
+				console.log(arr.length)
+			}
+			return fn2
+		}
+		var f = fn1()
+		f()
+		f = null //释放闭包,内存空间释放
+		
+		//
+	</script>
+</html>

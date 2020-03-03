@@ -1,0 +1,49 @@
+//这是见不得人的注释
+/*这是想给人看见的注释*/
+
+//变量前面必须得加一个@
+@color:pink;
+@m:margin;
+@selector:#wrap;
+/* @变量名:颜色
+ * @变量名:css样式名字 例如margin
+ *      使用时需加花括号 例如@m:margin; 使用时则@{m}:0;
+ * @变量名:数值
+ * @变量名:选择器 例 @m:#wrap 将一个ID为wrap的元素赋值给@m变量
+ */
+
+@A: 0;
+.class{
+    @A:1;
+    .brass{
+        @A: 2;
+        three: @A; //3
+        @A: 3;
+    }
+    one: @A;
+}
+/* less加载变量是一个块一个块加载
+ * 以及是先读取,后加载
+ */
+* {
+    @{m}: 0;
+    padding: 0;
+}
+@{selector} {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border: 1px solid;
+    margin: 0 auto;
+    .inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: @color;
+        height: 100px;
+        width: 100px;
+    }
+}

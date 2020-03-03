@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>zepto_touch</title>
+  <style type="text/css">
+          #btn{
+              touch-action: none;
+          }
+    .box{
+      width: 100px;
+      height: 100px;
+      background: #FFFF00;
+      margin: 0 auto;
+      text-align: center;
+      line-height: 100px;
+    }
+    #btn{
+      width: 100px;
+      height: 50px;
+      background: #FF0000;
+      border-radius: 10px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body style="height: 1000px;">
+		<!--
+			 
+			* zepto touch方法
+				* tap()点击事件 利用在document上绑定touch事件来模拟tap事件的，并且tap事件会冒泡到document上
+				* singleTap()  点击事件
+				* doubleTap()  双击事件
+				* longTap()    当一个元素被按住超过750ms触发。
+				* swipe, swipeLeft, swipeRight, swipeUp, swipeDown — 当元素被划过(同一个方向滑动距离大于30px)时触发。(可选择给定的方向)
+				   在一个方向滑动大于30px即为滑动。否则算点击。
+		-->
+  <div id="box" class="box">按钮1</div>
+  <br />
+  <div id="box2" class="box">按钮2</div>
+  <br />
+  <div id="box3" class="box">按钮3</div>
+  <button id="btn" class="btn">button</button>
+  <script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/touch.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(function () {
+		$('#box').tap(function(){
+			alert('tap触发的事件')
+		})
+		$('#box2').singleTap(function(){
+			alert('单击触发的事件')
+		})
+		$('#box2').doubleTap(function(){
+			alert('双击触发的事件')
+		})
+		$('#box3').longTap(function(){
+			alert('我长按了一下')
+		})
+		$('#btn').swipe(function(){
+			alert('滑动事件')
+		})
+    });
+  </script>
+</body>
+</html>

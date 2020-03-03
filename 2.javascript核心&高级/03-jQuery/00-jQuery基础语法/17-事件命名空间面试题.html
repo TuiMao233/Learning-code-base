@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>26-jQuery事件冒泡和默行为</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+
+            $(".father").on("click.ls", function () {
+                alert("father click1");
+            });
+            $(".father").on("click", function () {
+                alert("father click2");
+            });
+            $(".son").on("click.ls", function () {
+                alert("son click1");
+            });
+            /*
+            利用trigger触发子元素带命名空间的事件, 
+			那么父元素带相同命名空间的事件也会被触发. 
+			而父元素没有命名空间的事件不会被触发
+			
+            利用trigger触发子元素不带命名空间的事件, 
+			那么子元素所有相同类型的事件和父元素所有相同类型的事件都会被触发
+            */
+            
+			setTimeout(()=>{
+				// $(".son").trigger("click.ls");
+				// $(".son").trigger("click");
+			},1000)
+        });
+    </script>
+</head>
+<body>
+<div class="father">
+    <div class="son"></div>
+</div>
+<a href="http://www.baidu.com"><span>注册</span></a>
+<form action="http://www.taobao.com">
+    <input type="text">
+    <input type="submit">
+</form>
+</body>
+</html>

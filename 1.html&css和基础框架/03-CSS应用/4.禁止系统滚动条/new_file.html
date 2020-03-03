@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{height: 100%;overflow: hidden;}
+			body{height: 100%;overflow: audo;}
+			#test{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				left: 50px;
+				top: 50px;
+				background: darkgray;
+			}
+			.max{
+				height: 2000px;
+			}
+			/*由于滚动条默认是给document
+			  把html的高度固定在视口窗
+			        在由body进行滚动操作
+			  
+			  将html的滚动条禁止，在将body
+			  的滚动条开启，就形成一个相反的状况
+			  这时候以body为父元素的绝对定位则拖动滚动条位置也不会改变
+			 	
+			 以此推测,其实fixed定位也是绝对定位
+			 	他是相对于document窗口定位的
+			  */
+		</style>
+	</head>
+	<body style="">
+		<div id="test">
+			
+		</div>
+		xxx
+		<div class="max"></div>
+	</body>
+</html>

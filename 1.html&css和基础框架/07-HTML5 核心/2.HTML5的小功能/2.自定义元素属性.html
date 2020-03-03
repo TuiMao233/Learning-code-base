@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			.box {
+				width: 500px;
+				height: 500px;
+				background-color: aqua;
+			}
+			.box.active {
+				border: solid 5px saddlebrown;
+			}
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	
+	</head>
+	<body>
+		<div class="box" data-sdl="sdl"></div>
+	</body>
+	<script>
+	 	var testNods = document.querySelector(".box");
+	 	console.log(testNods.dataset.sdl);
+	 	testNods.dataset.sdl = "@222";
+	</script>
+</html>

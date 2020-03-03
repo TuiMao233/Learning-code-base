@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<a href="">HelloAjax</a>
+	</body>
+	<script type="text/javascript">
+		function getHTTPObject(){
+			var xhr = false;
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+			}else if(window.ActiveXObject){
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			return xhr;
+		}
+		
+		
+		window.onload = function(){
+			//1.获取a节点，并为其添加onclick响应函数
+			document.querySelector("a").onclick = function(){
+				//3.创建一个XMLHttpRequest 对象
+				var request = getHTTPObject();
+				//4.准备发送请求的数据：url
+				var Url = 'data/helloAjax.txt' +"?time=" + new Date();
+				var method = 'GET';
+				//5.调用 XMLHttpRequest 对象的 open 方法 规定发送格式
+				request.open(method,Url);
+				//6.调用 XMLHttpRequest 对象的 send 方法 发送请求
+				request.send(null);
+				//7.为XMLHttpRequest 对象添加 onreadystatechange 响应函数
+				request.onreadystatechange = function(){
+					//8.判断响应是否完成：XMLHttpRequest 对象的 readyState 属性值为4的时候
+					if(request.readyState == 4){
+						//9.在判断响应是否可用：XMLHttpRequest 对象 status 属性值为 200 或者304
+						if(request.status == 200 || request.status == 304){
+							//10.打印响应结果：responseText
+							alert(request.responseText)
+						}
+					}
+				}
+				
+				//2.取消默认行为
+				return false;
+			}
+		}
+	</script>
+</html>

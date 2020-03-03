@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>33-jQuery移入移出事件</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+			$('.father > .son').click(function(){
+				console.log($(this).index())
+			})
+        });
+    </script>
+</head>
+<body>
+<div class="father">
+    <div class="son"></div>
+	<div class="son"></div>
+	<div class="son"></div>
+	<div class="son"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>53-jQuery替换节点相关方法</title>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            /*
+            替换
+            replaceWith(content|fn)
+            replaceAll(selector)
+            替换所有匹配的元素为指定的元素
+            */
+            $("button").click(function () {
+                // 1.新建一个元素
+                var $h6 = $("<h6>我是标题6</h6>");
+                // 2.替换元素
+                $("h1").replaceWith($h6);
+                // $h6.replaceAll("h1");
+            });
+        });
+    </script>
+</head>
+<body>
+<button>替换节点</button>
+<h1>我是标题1</h1>
+<h1>我是标题1</h1>
+<p>我是段落</p>
+</body>
+</html>

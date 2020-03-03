@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			html,body{
+				perspective: 100px;
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			#wrap{
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: gray;
+			}
+			#wrap > .inner {
+				text-align: center;
+			}
+			#wrap > .inner >span{
+				position: relative; 
+				font: 40px "微软雅黑";
+			}
+			@keyframes move{
+				from{top: 50px;}
+				to{top: -50px;}
+			}
+		</style>
+	</head>
+	<body>
+			<div id="wrap">
+				<div class="inner">
+					<span>几</span>
+					<span>百</span>
+					<span>斤</span>
+					<span>的</span>
+					<span>邓</span>
+					<span>志</span>
+					<span>龙</span>
+					<span>了</span>
+					<span>上</span>
+					<span>课</span>
+					<span>还</span>
+					<span>要</span>
+					<span>装</span>
+					<span>可</span>
+					<span>爱</span>
+				</div>
+			</div>
+	</body>
+	<script>
+		window.onload =function(){
+			var spanNode = document.querySelectorAll("#wrap > .inner >span");
+			var time = 0;
+			for (var i=0; i<spanNode.length; i++) {
+//			var c='#'+(Math.random()*0xffffff<<0).toString(16);	
+				time = time + 0.5;
+				spanNode[i].style.animation = "move .3s "+(i*50)+"ms linear alternate infinite both"
+//				spanNode[i].style.color = c;
+			}
+			
+		}
+	</script>
+</html>

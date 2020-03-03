@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" >
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			/* 首先让父元素(body)的高度撑开屏幕 */
+			html,body{height: 100%;}
+			
+			/* 设置样式 */
+			#footer {background: firebrick;text-align: center;line-height: 100px;}
+			#warp {background: darkkhaki;}
+			#warp .main {text-align: center;background: darkblue;}
+			
+/* 固定内容区的高度为100% */
+#warp{height: 100%; }
+#footer{
+	/* 固定footer的高度为200 */
+	height: 100px;
+	/* 由于这时内容区的高度是100%所以footer被挤下去了，但是我们可以利用margin负值来将footer拉上来 */
+	margin-top: -100px;
+}
+		</style>
+	</head>
+	<body>
+		<div id="warp">
+			<div class="main">
+				......
+			</div>
+		</div>
+		<div id="footer">
+			footer
+		</div>
+	</body>
+</html>

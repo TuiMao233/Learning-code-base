@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			body{
+				height: 60%;
+				width: 600px;
+				border: 1px solid;
+				margin: 100px auto;
+				position: relative;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 20px/200px "微软雅黑";
+				text-align: center;
+				background: sandybrown;
+				transition: 1s 1s width cubic-bezier(0,.79,1,.6),1s height;
+				/*过渡时间     延时过渡(不加默认为0s)  样式(可以是all)  过渡曲线*/
+			}
+			body:hover #test{
+				/*transition在元素首次渲染还没结束的情况下是不会被触发的*/
+				width: 300px;
+				height: 300px;
+				font:bold 50px/300px "微软雅黑";
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+	</body>
+</html>

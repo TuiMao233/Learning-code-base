@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>24-jQuery事件绑定</title>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+            /*
+            jQuery中有两种绑定事件方式
+            1.eventName(fn);
+            编码效率略高/ 部分事件jQuery没有实现,所以不能添加
+            2.on(eventName, fn);
+            编码效率略低/ 所有js事件都可以添加
+			3.one(eventName, fn);
+			// 只能执行一次的事件回调
+            注意点:
+            可以添加多个相同或者不同类型的事件,不会覆盖
+            */
+            $("button").click(function () {alert("hello lnj");});
+            $("button").click(function () {alert("hello 123");});
+            $("button").mouseleave(function () {alert("hello mouseleave");});
+            $("button").mouseenter(function () {alert("hello mouseenter");});
+            // $("button").on("click", function () { alert("hello click1");});
+            // $("button").on("click", function () { alert("hello click2");});
+            // $("button").on("mouseleave", function () {alert("hello mouseleave"); });
+            // $("button").on("mouseenter", function () {alert("hello mouseenter"); });
+        });
+    </script>
+</head>
+<body>
+<button>我是按钮</button>
+</body>
+</html>

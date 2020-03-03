@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	<script>
+	 		$.holdReady(true);/* 暂停ready的执行 */
+			$(document).ready(function () {
+				alert("ready");	
+			});
+			
+			setTimeout(()=>{ /* 启动暂停代码 */
+				$.holdReady(false)
+			},2000)
+	 	</script>
+	</head>
+	<body>
+		<div id="div"></div>
+	</body>
+</html>

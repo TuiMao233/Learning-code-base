@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>JavaSnake...</title>
+        <link rel="stylesheet" href="css/index.css">
+        <script type="text/javascript" src="./js/zepto.min.js"></script>
+        <script type="text/javascript" src="./js/touch.js"></script>
+</head>
+<body>
+        <section id="wrap">
+                <img src="./img/timg.gif" alt="" class="loading">
+                <canvas></canvas>
+                <header id="logo">
+
+                        <div class="audio paused">
+                                <audio src="img/ea7.mp3"></audio>
+                        </div>
+                        <h1>C-boyi68...</h1>
+                </header>
+                <ul id="viewList">
+                        <li class="view view1 active">
+                                <header class="upper">
+                                        <img src="./img/view-1/msg.jpg" alt="">
+                                        <img src="./img/view-1/2016.jpg" alt="">
+                                        <img src="./img/view-1/gnj.jpg" alt=""><br>
+                                        <img src="./img/view-1/wzxszx.jpg" alt="">
+                                </header>
+                                <section class="content">
+                                        <img src="img/view-1/saozi.jpg" class="view1-1">
+                                        <img src="img/view-1/1.left-per.jpg" class="view1-2">
+                                        <img src="img/view-1/1.right-person.jpg" class="view1-3">
+                                        <div class="mouth">
+                                                <img src="img/view-1/start.jpg" class="view1-4" >
+                                                <div class="mouthInner">
+                                                        <img src="img/view-1/mouse.jpg" alt="">
+                                                        <img src="img/view-1/mouse---2.jpg" alt="">
+                                                        <div class="tongue">
+                                                                <img src="img/view-1/shetou.jpg" class="view1-5">
+                                                                <img src="img/view-1/koushui.jpg" class="view1-6">
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <img src="./img/view-1/bottom.jpg" alt="">
+                                </section>
+                        </li>
+                        <li class="view view2">
+                                <header class="upper">
+                                        <img src="./img/view-2/aixiao.jpg" alt="" class="aixiao">
+                                        <img src="./img/view-2/ganxieaixiaode.jpg">
+                                        <img src="./img/view-2/rangwozhidao.jpg" class="view2-1">
+                                </header>
+                                <section class="middle">
+                                        <div class="content">
+                                                <img src="./img/view-2/nvren.jpg" class="view2-3">
+                                        </div>
+                                </section>
+                                <footer class="bottom">
+                                        <img src="./img/view-2/aixiaobingbuneng.jpg" class="view2-4">
+                                        <img class="zhang" src="./img/view-2/zhang.jpg" alt="">
+                                        <img class="zhihui" src="./img/view-2/zhihuigengduo.jpg">
+                                        <div class="yuweiwen">
+                                                        <img src="./img/view-2/yu.jpg" alt="">
+                                                        <img  src="./img/view-2/wei.jpg" alt="">
+                                                        <img src="./img/view-2/wen.jpg" alt="">
+                                                        <img class="line" src="./img/view-2/biaoji.jpg" alt="">
+                                        </div>
+                                </footer>
+                        </li>
+                        <li class="view view3">
+                                <header class="upper">
+                                        <img src="./img/view-3/ganxiezhong.jpg" class="view3-1" >
+                                        <img src="./img/view-3/mawo.jpg" class="view3-2" >
+                                        <img src="./img/view-3/lan.jpg" class="view3-3" >
+                                        <img src="./img/view-3/rangwoxiangxin.jpg" alt="" class="view3-4">
+                                        <img src="./img/view-3/lao.jpg" alt="" class="view3-5">
+                                        <img src="./img/view-3/ma-zi.jpg" alt="" class="view3-6">
+                                </header>
+                         <section class="middle">
+                                       <img src="./img/view-3/tuoxie.jpg" alt="" class="view3-7">
+                                        <img src="./img/view-3/chuifengji.jpg" alt="" class="view3-8">
+                                        <img src="./img/view-3/xiongzhao.jpg" alt="" class="view3-9">
+                                        <img src="./img/view-3/kouhong.jpg" alt="" class="view3-10">
+                                        <div class="content">
+                                                <img src="./img/view-3/ma.jpg"  class="view3-11">
+                                        </div>
+                                </section>
+                                    <footer class="bottom">
+                                       <img src="./img/view-3/haoxiangwoqinkuai.jpg" class="view3-12">
+                                       <img src="./img/view-3/jiukeyi.jpg" class="view3-13">
+                                       <div class="end">
+                                               <img src="./img/view-3/gan.jpg" class="view3-14">
+                                               <img src="./img/view-3/chu.jpg" class="view3-15">
+                                               <img src="./img/view-3/sha.jpg" class="view3-16">
+                                               <img src="./img/view-3/da.jpg" class="view3-17">
+                                               <img src="./img/view-3/shi.jpg" class="view3-18">
+                                       </div>
+                               </footer>
+                        </li>
+                        <li class="view view4">
+                                <div class="top">
+                                        <img src="./img/view-4/ganxiezhong.jpg" alt="" class="view4-1">
+                                        <div class="wanghong">
+                                                <img src="./img/view-4/wang.jpg" alt="" class="view4-2">
+                                                <img src="./img/view-4/hong.jpg" alt="" class="view4-3">
+                                                <img src="./img/view-4/face.jpg" alt="" class="view4-4">
+                                        </div>
+                                        <div class="kewan">
+                                                <img src="./img/view-4/ke.jpg" alt="" class="view4-5">
+                                                <img src="./img/view-4/wan.jpg" alt="" class="view4-6">
+                                        </div>
+                                        <img src="./img/view-4/lian.jpg" alt="" class="view4-7">
+                                </div>
+                                <div class="content">
+                                        <img src="./img/view-4/taozi.jpg" class="view4-8">
+                                        <img src="./img/view-4/girl3.jpg" class="view4-9">
+                                        <img src="./img/view-4/girl2.jpg" class="view4-10">
+                                        <img src="./img/view-4/girl1.jpg" class="view4-11">
+                                        <img src="./img/view-4/lian.jpg" class="view4-12">
+                                        <img src="./img/view-4/kan.jpg" class="view4-13">
+                                </div>
+                        </li>
+                        <li class="view view5">
+                                <header class="upper">
+                                        <div class="smt">
+                                                <img src="./img/view-5/sha.jpg" class="view5-3">
+                                                <img src="./img/view-5/ma.jpg" class="view5-4">
+                                                <img src="./img/view-5/te.jpg" class="view5-5">
+                                        </div>
+                                        <img src="./img/view-5/ganxie.jpg" class="view5-1">
+                                        <img src="./img/view-5/nimenrangwomingbai.jpg" class="view5-2">
+                                </header>
+                                <section class="middle">
+                                        <img src="./img/view-5/yanjiu.jpg" class="view5-6">
+                                        <div class="content">
+                                                <img src="./img/view-5/shamate.jpg" class="view5-7">
+                                                <img src="./img/view-5/bs.jpg" class="view5-8">
+                                        </div>
+                                </section>
+                                <footer class="bottom">
+                                        <img src="./img/view-5/yuanlai.jpg" class="view5-9">
+                                        <img src="./img/view-5/chouyan.jpg" class="view5-10">
+                                        <img src="./img/view-5/hejiu.jpg" class="view5-11">
+                                        <img src="./img/view-5/dajia.jpg" class="view5-12">
+                                        <img src="./img/view-5/mazhanghua.jpg" class="view5-13">
+                                        <img src="./img/view-5/doushi.jpg" class="view5-14">
+                                        <img src="./img/view-5/haoguniang.jpg" class="view5-15">
+                                </footer>
+                        </li>
+                        <li class="view view6">
+                                <header class="top">
+                                        <img src="./img/view-6/ganxie.jpg" class="view6-1">
+                                        <img src="./img/view-6/lv.jpg" class="view6-2">
+                                        <img src="./img/view-6/xing.jpg" class="view6-3">
+                                        <img src="./img/view-6/qiong.jpg" class="view6-4">
+                                        <img src="./img/view-6/cha.jpg" class="view6-5">
+                                        <img src="./img/view-6/chi.jpg" class="view6-6">
+                                        <img src="./img/view-6/tu.jpg" class="view6-7">
+                                </header>
+                                <section class="bottom">
+                                        <div class="content">
+                                                <img src="./img/view-6/turang.jpg" class="view6-10">
+                                                <img src="./img/view-6/ziyounvshen.jpg" class="view6-8">
+                                                <img src="./img/view-6/person.jpg" class="view6-9">
+                                        </div>
+                                </section>
+                        </li>
+                        <li class="view view7">
+                                <section class="content">
+                                        <header class="top">
+                                                <img src="./img/view-7/ganxie.jpg" class="view7-1">
+                                                <img src="./img/view-7/de.jpg" class="view7-11">
+                                                <img src="./img/view-7/wu.jpg" class="view7-2">
+                                                <img src="./img/view-7/mai.jpg" class="view7-3">
+                                                <img src="./img/view-7/tarangwo.jpg" class="view7-4"><br>
+                                                <img src="./img/view-7/maishi.jpg" class="view7-5"><br>
+                                                <img src="./img/view-7/gu.jpg" class="view7-6">
+                                                <img src="./img/view-7/xiang.jpg" class="view7-7">
+                                                <img src="./img/view-7/chun.jpg" class="view7-8">
+                                        </header>
+                                        <img src="./img/view-7/left.jpg" class="view7-9">
+                                        <img src="./img/view-7/right.jpg" class="view7-10">
+                                </section>
+                        </li>
+                        <li class="view view8">
+                                <section class="content">
+                                        <header class="top">
+                                                <img src="./img/view-8/ganxie.jpg" class="view8-1">
+                                                <img src="./img/view-8/gou.jpg" class="view8-2">
+                                                <img src="./img/view-8/qie.jpg" class="view8-3">
+                                                <img src="./img/view-8/yaganjiumeiyou.jpg" class="view8-4">
+                                                <div class="item">
+                                                        <img src="./img/view-8/shi.jpg" class="view8-5">
+                                                        <img src="./img/view-8/he.jpg" class="view8-6">
+                                                        <img src="./img/view-8/yuan.jpg" class="view8-7">
+                                                        <img src="./img/view-8/fang.jpg" class="view8-8">
+                                                </div>
+                                        </header>
+                                      <div class="bottom">
+                                              <img src="./img/view-8/shitu.jpg" class="view8-9">
+                                              <div class="main">
+                                                      <img src="./img/view-8/main.jpg" class="view8-10">
+                                              </div>
+                                      </div>
+                                </section>
+                        </li>
+                        <li class="view view9">
+                                <section class="content">
+                                        <header class="top">
+                                                <img src="./img/view-9/ganxie.jpg" class="view9-1">
+                                                <div class="didiao">
+                                                        <img src="./img/view-9/di.jpg" class="view9-2">
+                                                        <img src="./img/view-9/diao.jpg" class="view9-3">
+                                                        <img src="./img/view-9/de.jpg" class="view9-4">
+                                                        <img src="./img/view-9/shi.jpg" class="view9-5">
+                                                        <img src="./img/view-9/li.jpg" class="view9-6">
+                                                        <img src="./img/view-9/pai.jpg" class="view9-7">
+                                                </div>
+                                        </header>
+                                        <div class="bottom">
+                                                <img src="./img/view-9/start1.jpg" class="view9-8">
+                                                <div id="yelPer">
+                                                        <div class="body">
+                                                                <div class="hair"></div>
+                                                                <div class="eye eyeLeft">
+                                                                        <div class="ball">
+                                                                        </div>
+                                                                </div>
+                                                                <div class="eye eyeRight">
+                                                                        <div class="ball">
+                                                                        </div>
+                                                                </div>
+                                                                <div class="mouth">
+                                                                        <table class="innerMouth">
+                                                                                <tr>
+                                                                                        <td></td>
+                                                                                        <td ></td>
+                                                                                        <td ></td>
+                                                                                        <td></td>
+                                                                                </tr>
+                                                                        </table>
+                                                                </div>
+                                                                <div class="line lineLeft"></div>
+                                                                <div class="line lineRight"></div>
+                                                                <div class="arm armLeft"><div class="hand handLeft"></div></div>
+                                                                <div class="arm armRight"><div class="hand handRight"></div></div>
+                                                                <div class="belly">
+                                                                        <span class="clasp claspLeft"></span>
+                                                                        <span class="clasp claspRight"></span>
+                                                                        <div class="bag">
+                                                                                <span class="sign"></span>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="bottom">
+                                                                <span class="foot footLeft"></span>
+                                                                <span class="leg legLeft"></span>
+                                                                <span class="leg legRight"></span>
+                                                                <span class="foot footRight"></span>
+                                                        </div>
+                                                </div>
+                                                <div class="main">
+                                                        <img src="./img/view-9/lu.jpg" class="view9-9">
+                                                        <img src="./img/view-9/nihaixiang.jpg" class="view9-10">
+                                                </div>
+                                        </div>
+                                </section>
+                        </li>
+                </ul>
+                <footer id="footer">
+                        <img id="touchS" src="./img/view-1/next.jpg" alt="">
+                </footer>
+        </section>
+        <script type="text/javascript" src="./js/main.js"></script>
+</body>
+</html>

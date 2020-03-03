@@ -1,0 +1,29 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="windows" unicode="&#60547;" d="M426.276571 321.170286l0-372.004571-389.705143 53.686857 0 318.317714 389.705143 0zM426.276571 745.691429l0-376.539429-389.705143 0 0 322.852571zM987.428571 321.170286l0-449.170286-518.290286 71.460571 0 377.709714 518.290286 0zM987.428571 822.857143l0-453.705143-518.290286 0 0 382.317714z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>

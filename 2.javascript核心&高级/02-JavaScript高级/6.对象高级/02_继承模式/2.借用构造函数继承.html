@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			套路：
+			1.定义父类型构造函数
+			2.定义子类型构造函数
+			3.在子类型构造函数中调用父类型构造
+			关键：
+			在子类型构造函数中通用super()调用父类型构造函数
+		-->
+	</body>
+	<script type="text/javascript">
+		
+		
+		function Person(name,age){
+			this.name = name
+			this.age = age
+		}
+		
+		
+		function Student(name,age,price){
+			Person.call(this,name,age)
+			this.price = price
+		}
+		
+		
+		var b = new Student("DZL",50,"SB")
+		console.log(b)
+		</script>
+</html>

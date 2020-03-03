@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin:0;padding:0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#warp > img {
+				width: 64px;
+			}
+			#warp {
+				text-align: center;
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="warp">
+			<img src="img/1.png" alt="" />
+			<img src="img/2.png" alt="" />
+			<img src="img/3.png" alt="" />
+			<img src="img/4.png" alt="" />
+			<img src="img/5.png" alt="" />
+		</div>
+	</body>
+	<script>
+		window.onload = function (){
+			var onm = document.getElementById("onm");
+			var imgNodes = document.querySelectorAll("#warp > img")
+			var r = 300; // 开始变化的半径
+			document.onmousemove = function (event){
+				event = event || window.event;
+				for (var i=0; i<imgNodes.length; i++) {
+				/*	 元素的相对定位+元素宽度的一半 = 元素中心点
+					 元素中心点减去鼠标所在的位置 */
+					var a = imgNodes[i].getBoundingClientRect().left + imgNodes[i].offsetWidth / 2 - event.clientX;
+					var b = imgNodes[i].getBoundingClientRect().top + imgNodes[i].offsetHeight/ 2 - event.clientY;
+					var c = Math.sqrt(a*a+b*b); // 根据两个点算出半径
+					if(c<0){c = Math.abs(c)} // 获取绝对值
+					if(c>=r){c=r;}
+					console.log(c)
+					imgNodes[i].style.width = 128 - (c * 0.22-2) +"px";
+					// 需求: 半径减少时,64(原宽度)宽度变大为128, 半径变大时,宽度恢复原样
+					// 假如半径是300的时候开始缩小至0,那么宽度64就需要放大至128
+					// 第一步: 将300的值缩小至64   
+					// 300 * 0.21 + 1 = 64
+					// 第二步: 半径64缩小到0时 宽度64变大为128 
+					// 128 - 64-->0 = 64 --> 128
+				}
+			}
+			
+//			console.log(Math.sqrt(300*300+300*300));
+		}
+	</script>
+</html>

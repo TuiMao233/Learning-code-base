@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>Event</title>
+  <style type="text/css">
+    .btn{
+      width: 200px;
+      height: 200px;
+      background: #ff0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box" class="btn">Event</div>
+  <div id="box1">
+    <p>1111</p>
+    <p>2222</p>
+    <p>3333</p>
+  </div>
+  <div id="box2" class="btn"></div>
+  <script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/touch.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+/*
+ * zepto有自己的一套事件机制，并且对不同的浏览器做了兼容的内部封装处理。
+ * 1、像新版本的zepto中已经舍弃了bind，delegate，die，同样jquery中舍弃了live，die等。
+ * 2、现在统一使用on，off标准事件来绑定事件。
+ */
+  $(function(){
+    //简单绑定
+    $('#box').on('touchstart',function(){
+      alert('ddd');
+    });
+    //事件委托
+    $('#box1').on('touchstart','p',function(){
+      alert($(this).text());
+    });
+    //解除绑定事件
+    //$('#box').off('touchstart');
+
+    //一次函数
+    $('#box2').one('touchstart',function(){
+      alert('我就执行一次');
+    });
+  })
+</script>
+</body>
+</html>

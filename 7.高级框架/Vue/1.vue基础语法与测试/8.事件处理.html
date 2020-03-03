@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>07_事件处理</title>
+</head>
+<body>
+<!--
+1. 绑定监听:
+  v-on:xxx="fun"
+  @xxx="fun"
+  @xxx="fun(参数)"
+  默认事件形参: event
+  隐含属性对象: $event
+2. 事件修饰符:
+  .prevent : 阻止事件的默认行为 event.preventDefault()
+  .stop : 停止事件冒泡 event.stopPropagation()
+3. 按键修饰符
+  .keycode : 操作的是某个keycode值的健
+  .enter : 操作的是enter键
+-->
+
+<div id="example">
+
+  <h2>1. 绑定监听</h2>
+	<button @click="test1">test</button>
+	<button @click="test2('DZL')">test2</button>
+	
+	<!-- 如果调用执行事件的对象 -->
+	<button @click="test3">test3</button>
+	
+	<!-- 传入多个形参如何调用执行事件的对象 -->
+	<!-- 加入一个$event形参,会自动把执行事件的对象传入进$event形参 -->
+	<button @click="test4(123,$event)">test4</button>
+	
+	
+	
+  <h2>2. 事件修饰符</h2>
+	
+	<div style="width: 200px;height: 200px;background: red;" @click="test5">
+		<!-- vue冒泡事件如何阻止 -->
+		<!-- 在事件后面加上.stop,则不会向后级冒泡 -->
+		<div style="width: 100px;height: 100px;background: blue;" @click.stop="test6"></div>
+	</div>
+	
+	<!-- vue如何阻止默认行为 -->
+	<!-- 在事件后面加上.prevent,则阻止元素默认行为 -->
+	<a href="http://www.baidu.com" @click.prevent="test7">点击</a>
+	
+	
+	
+	
+  <h2>3. 按键修饰符</h2>
+	<!-- 按键松开事件 -->
+	<input type="text" @keyup="test8"/>
+	<!-- 特定keyCode按键触发,13是enter的keyCode -->
+	<input type="text" @keyup.13="test8"/>
+	<!-- 特殊按键触发,ctrl,shift..... -->
+	<input type="text" @keyup.enter="test8"/>
+</div>
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#example',
+    data: {
+
+    },
+    methods: {
+		test1(){
+			alert("test1")
+		},
+		test2(D){
+			alert(D)
+		},
+		test3(event){//在执行函数中event.target则是调用事件的元素
+			//event.target === <button @click="test3">test3</button>
+			console.log(event.target) 
+			alert(event.target.innerHTML)
+		},
+		test4(number,event){
+			alert(number+"  "+event.target.innerHTML)
+		},
+		
+		test5(){ 
+			alert('out')
+		},
+		test6(){
+			alert('inner')
+		},
+		test7(){
+			alert('点击了')
+		},
+		test8(event){
+			var input = event.target
+			if (event.keyCode === 13) {
+				alert(input.value)
+			}
+		}
+    }
+  })
+</script>
+</body>
+</html>

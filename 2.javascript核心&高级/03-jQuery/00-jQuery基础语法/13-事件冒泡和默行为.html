@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>26-jQuery事件冒泡和默行为</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+            /*
+			0.事件执行顺序
+				事件触发-> 从底层元素向上找到有事件的元素
+            1.什么是事件冒泡?
+				事件冒泡是指子元素事件触发往上冒泡 父级元素的事件也会触发
+            2.如何阻止事件冒泡
+				方法一：return false;
+				方法二：event.stopPropagation(); 子元素事件不再被分派到其他节点
+            3.什么是默认行为?
+				默认是指标签自带的行为
+					例如a标签点击会自动跳转href
+            4.如何阻止默认行为
+				return false;
+            */
+            
+            $(".son").click(function (event) {
+                alert("son");
+                // return false;
+                event.stopPropagation();
+            });
+            $(".father").click(function () {
+                alert("father");
+            });
+           
+            $("a").click(function (event) {
+                alert("弹出注册框");
+                // return false;
+                event.preventDefault();
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="father">
+    <div class="son"></div>
+</div>
+<a href="http://www.baidu.com">注册</a>
+<form action="http://www.taobao.com">
+    <input type="text">
+    <input type="submit">
+</form>
+</body>
+</html>

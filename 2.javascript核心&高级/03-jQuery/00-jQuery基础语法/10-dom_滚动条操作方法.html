@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>23-jQuery的scrollTop方法</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .scroll{
+            width: 100px;
+            height: 200px;
+            border: 1px solid #000;
+            overflow: auto;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+			/*
+				scrollTop: 获取元素内滚动的偏移位
+			 */
+            var btns = document.getElementsByTagName("button");
+			var scroll = $(".scroll")
+			var body = $('body')
+			var html = $('html')
+            btns[0].onclick = function () {
+                // 获取滚动的偏移位
+                console.log(scroll.scrollTop());
+                // 获取网页滚动的偏移位	注意点: 为了保证浏览器的兼容, 获取网页滚动的偏移位需要按照如下写法
+                console.log(body.scrollTop()+html.scrollTop());
+            }
+            btns[1].onclick = function () {
+                // 设置滚动的偏移位
+                $(".scroll").scrollTop(300);
+                // 设置网页滚动偏移位   注意点: 为了保证浏览器的兼容, 设置网页滚动偏移位的时候必须按照如下写法
+                $("html,body").scrollTop(100);
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="scroll">我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div我是div</div>
+<button>获取</button>
+<button>设置</button>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

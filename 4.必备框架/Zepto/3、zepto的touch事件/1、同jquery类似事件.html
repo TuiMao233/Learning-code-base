@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>同jquery类似事件</title>
+	<style type="text/css">
+		.btn2{
+			width: 100px;
+			height: 100px;
+			background: #f0f;
+		}
+	</style>
+</head>
+<body>
+	<!--
+		on()  绑定事件处理程序
+		off() 方法移除用目标oon绑定的事件处理程序。
+		bind()  为每个匹配元素的特定事件绑定事件处理函数，可同时绑定多个事件，也可以自定义事件。
+		one() 为每一个匹配元素的特定事件（像click）绑定一个一次性的事件处理函数。只执行一次。
+		trigger() 触发有bind定义的事件（通常是自定义事件）
+		unbind()  bind的反向操作，删除匹配元素所绑定的bind事件。
+	-->
+		
+	<button id="btn1">按钮1</button>
+	<div class="btn2">按钮2</div>
+	<button id="btn3">按钮3</button>
+
+<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/touch.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		// 点击事件
+		$('#btn1').on('touchstart',function(){
+			alert('on触发的事件')
+		})
+		$('#btn1').off()
+		
+		// 自定义事件
+		$('.btn2').bind('myTouch',function(){
+			alert('bind触发的事件')
+		})
+		$('.btn2').unbind()
+		$('.btn2').trigger('myTouch')
+		
+		// 一次事件
+		$('#btn3').one('touchstart',function(){
+			alert('one触发的事件')
+		})
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body ng-app="">
+<!--
+1. 使用Angular表达式:
+  * 语法: {{expression}}
+  * 作用: 显示表达式的结果数据
+  * 注意: 表达式中引用的变量必须是当前域对象有的属性(包括其原型属性)
+2. 操作的数据
+  * 基本类型数据: number/string/boolean
+  * undefined, Infinity, NaN, null解析为空串: "", 不显示任何效果
+  * 对象的属性或方法
+  * 数组
+-->
+
+<p>{{1}}</p>
+<p>{{'尚硅谷'}}</p>
+<p>{{undefined}}</p>
+<p>{{'atguigu'+3}}</p>
+<p>{{4+3}}</p>
+<p>{{true}}</p>
+
+<p ng-init="a=3;b=4">{{a+b}}</p>
+
+<p ng-init="p={name:'Tom',age:12};arr=[true, 3, 'atguigu']">{{p.name}}---{{p.age}}----{{arr[2]}}</p>
+
+</body>
+<script type='text/javascript' src="js/angular-1.5.5/angular.js"></script>
+</html>

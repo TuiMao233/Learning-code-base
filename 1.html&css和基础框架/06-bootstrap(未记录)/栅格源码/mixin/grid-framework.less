@@ -1,0 +1,182 @@
+// 列第一步
+.make-grid-columns() {
+   //.col(2,".col-xs-1, .col-sm-1, .col-md-1, .col-lg-1")
+  .col(@index) { 
+    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+    .col((@index + 1), @item);
+  }
+  
+  
+    /*  递归
+        .col(3,".col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2")
+            ....
+        .col(13,str)
+            str:
+                .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+                .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+                ...
+                .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
+    */
+  .col(@index, @list) when (@index =< @grid-columns) { 
+    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  
+    /*
+        .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+        .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
+        ...
+        .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+          position: relative;
+          min-height: 1px;
+          padding-left: 15px;
+          padding-right: 15px;
+        }
+    */
+  .col(@index, @list) when (@index > @grid-columns) { 
+    @{list} {
+      position: relative;
+      min-height: 1px;
+      padding-left:  ceil((@grid-gutter-width / 2));
+      padding-right: floor((@grid-gutter-width / 2));
+    }
+  }
+  
+  
+  .col(1); 
+}
+
+
+
+// 列第二步
+.make-grid(@class) {
+    //2.1
+  .float-grid-columns(@class);
+    //2.2
+  .loop-grid-columns(@grid-columns, @class, width);
+    //2.3(列排序)
+  .loop-grid-columns(@grid-columns, @class, pull);
+  .loop-grid-columns(@grid-columns, @class, push);
+    //2.4(列偏移)
+  .loop-grid-columns(@grid-columns, @class, offset);
+}
+
+
+
+//2.1
+/*
+ * .col-xs-1,.col-xs-2,.col-xs-3,.col-xs-4,...col-xs-12{
+ *     float: left;
+ * }
+ * */
+.float-grid-columns(@class) {
+  .col(@index) { 
+    @item: ~".col-@{class}-@{index}";
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index =< @grid-columns) { // general
+    @item: ~".col-@{class}-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  .col(@index, @list) when (@index > @grid-columns) { // terminal
+    @{list} {
+      float: left;
+    }
+  }
+  .col(1); 
+}
+
+//2.2（width） 2.3（pull push） 2.4（offset）的入口
+.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
+  .calc-grid-column(@index, @class, @type);
+  .loop-grid-columns((@index - 1), @class, @type);
+}
+
+
+// 2.2
+/*
+ * .col-xs-12{
+ *     width:12/12;
+ * }
+ * .col-xs-11{
+ *     width:11/12;
+ * }
+ * ...
+ * .col-xs-1{
+ *     width:1/12;
+ * } 
+ * */
+.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+  .col-@{class}-@{index} {
+    width: percentage((@index / @grid-columns));
+  }
+}
+
+
+
+
+
+
+//2.3
+/*push                  pull:
+ * .col-xs-push-12{         .col-xs-pull-12{      
+ *     left:12/12;              right:12/12;
+ * }                        }
+ * .col-xs-push-11{
+ *     left:11/12;
+ * }
+ * ...                      ...
+ * .col-xs-push-1{
+ *     left:1/12;
+ * } 
+ * .col-xs-push-0{           .col-xs-pull-0{
+ *     left:auto;               right:auto;
+ * }                         }
+ * */
+.calc-grid-column(@index, @class, @type) when (@type = push) and (@index > 0) {
+  .col-@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = push) and (@index = 0) {
+  .col-@{class}-push-0 {
+    left: auto;
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index > 0) {
+  .col-@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index = 0) {
+  .col-@{class}-pull-0 {
+    right: auto;
+  }
+}
+
+
+
+//2.4
+/*
+ * .col-xs-offset-12{
+ *     margin-left:12/12;
+ * }
+ * .col-xs-offset-11{
+ *     margin-left:11/12;
+ * }
+ * ...
+ * .col-xs-offset-1{
+ *     margin-left:1/12;
+ * } 
+ * .col-xs-offset-0{
+ *     margin-left:0;
+ * } 
+ * */
+.calc-grid-column(@index, @class, @type) when (@type = offset) {
+  .col-@{class}-offset-@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+}
+
+
+

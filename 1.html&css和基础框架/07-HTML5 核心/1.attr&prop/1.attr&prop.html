@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			.box {
+				width: 500px;
+				height: 500px;
+				background-color: aqua;
+			}
+			.box.active {
+				border: solid 5px saddlebrown;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<input type="checkbox" checked="checked" name="inp" />
+	</body>
+	<script>
+	 		/*
+	 		 * 布尔值属性:你的property是布尔值类型 ， 例如 checked
+	 		 * 非布尔值属性：你的property是非布尔值类型，例如 name
+	 		 */
+	 		var inpChecked = document.querySelector("input[type=checkbox]")
+	 		console.log(inpChecked)
+	 		debugger
+	 		inpChecked.setAttribute("name" , "inp1")
+	 		inpChecked.setAttribute("name" , "inp2")
+	 		inpChecked.setAttribute("name" , "inp3")
+	 		inpChecked.name = "inp4";
+	 		inpChecked.name = "inp5";
+	 		inpChecked.name = "inp6";
+	</script>
+</html>

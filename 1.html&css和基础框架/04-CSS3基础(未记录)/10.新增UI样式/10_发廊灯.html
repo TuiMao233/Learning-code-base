@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{
+				height:4000px
+			}
+			#wrap{
+				border: 1px solid #000;
+				height: 200px;
+				width: 600px;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+			#test{
+				height: 200px;
+				width: 1200px;
+				background-image: repeating-linear-gradient(-45deg,
+		      	#fff 0,
+		      	#fff 5%,
+		      	black 5%,
+		      	black 10%);
+		      	animation: anim 2s infinite linear;
+		      	background-position: 0 0;
+			}
+			@keyframes anim{
+				0%{background-position: 0 0;}
+				100%{background-position:-560px 0;}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="test"></div>
+		</div>
+		
+	</body>
+</html>

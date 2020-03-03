@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>48-jQuery的stop和delay方法</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .one{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+        .two{
+            width: 500px;
+            height: 10px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+            $("button").eq(0).click(function () {
+                
+                /* 
+				//	delay方法的作用就是用于告诉系统启动延迟时长
+				$(".one").delay(2000).animate({
+				    width: 500
+				}, 1000)
+				// 链式动画实现方法
+                $(".one").animate({
+                    width: 500
+                }, 1000).delay(2000).animate({
+                    height: 500
+                }, 1000);
+				 */
+			   
+			    /*在jQuery的{}中可以同时修改多个属性, 多个属性的动画会异步执行*/
+                $(".one").animate({width: 500}, 1000);
+                $(".one").animate({height: 500}, 1000);
+                $(".one").animate({width: 100}, 1000);
+                $(".one").animate({height: 100}, 1000);
+            });
+            $("button").eq(1).click(function () {
+                // 立即停止当前动画, 继续执行后续的动画
+                // $("div").stop(false);
+
+                // 立即停止当前和后续所有的动画
+                // $("div").stop(true);
+
+                // 立即完成当前的, 继续执行后续动画
+                // $("div").stop(false, true);
+
+                // 立即完成当前的, 并且停止后续所有的
+                // $("div").stop(true, true);
+            });
+        });
+    </script>
+</head>
+<body>
+<button>开始动画</button>
+<button>停止动画</button>
+<div class="one"></div>
+<div class="two"></div>
+</body>
+</html>

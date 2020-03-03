@@ -1,0 +1,143 @@
+﻿{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4ac"),
+  "empno" : 7369.0,
+  "ename" : "林冲",
+  "job" : "职员",
+  "mgr" : 7902.0,
+  "hiredate" : ISODate("1980-12-16T16:00:00Z"),
+  "sal" : 800.0,
+  "depno" : 20.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4ad"),
+  "empno" : 7499.0,
+  "ename" : "孙二娘",
+  "job" : "销售",
+  "mgr" : 7698.0,
+  "hiredate" : ISODate("1981-02-19T16:00:00Z"),
+  "sal" : 1600.0,
+  "comm" : 300.0,
+  "depno" : 30.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4ae"),
+  "empno" : 7521.0,
+  "ename" : "扈三娘",
+  "job" : "销售",
+  "mgr" : 7698.0,
+  "hiredate" : ISODate("1981-02-21T16:00:00Z"),
+  "sal" : 1250.0,
+  "comm" : 500.0,
+  "depno" : 30.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4af"),
+  "empno" : 7566.0,
+  "ename" : "卢俊义",
+  "job" : "经理",
+  "mgr" : 7839.0,
+  "hiredate" : ISODate("1981-04-01T16:00:00Z"),
+  "sal" : 2975.0,
+  "depno" : 20.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b0"),
+  "empno" : 7654.0,
+  "ename" : "潘金莲",
+  "job" : "销售",
+  "mgr" : 7698.0,
+  "hiredate" : ISODate("1981-09-27T16:00:00Z"),
+  "sal" : 1250.0,
+  "comm" : 1400.0,
+  "depno" : 30.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b1"),
+  "empno" : 7698.0,
+  "ename" : "西门庆",
+  "job" : "经理",
+  "mgr" : 7839.0,
+  "hiredate" : ISODate("1981-04-30T16:00:00Z"),
+  "sal" : 2850.0,
+  "depno" : 30.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b2"),
+  "empno" : 7782.0,
+  "ename" : "柴进",
+  "job" : "经理",
+  "mgr" : 7839.0,
+  "hiredate" : ISODate("1981-06-08T16:00:00Z"),
+  "sal" : 2450.0,
+  "depno" : 10.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b3"),
+  "empno" : 7788.0,
+  "ename" : "公孙胜",
+  "job" : "分析师",
+  "mgr" : 7566.0,
+  "hiredate" : ISODate("1987-07-12T16:00:00Z"),
+  "sal" : 3000.0,
+  "depno" : 20.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b4"),
+  "empno" : 7839.0,
+  "ename" : "宋江",
+  "job" : "董事长",
+  "hiredate" : ISODate("1981-11-16T16:00:00Z"),
+  "sal" : 5000.0,
+  "depno" : 10.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b5"),
+  "empno" : 7844.0,
+  "ename" : "阎婆惜",
+  "job" : "销售",
+  "mgr" : 7698.0,
+  "hiredate" : ISODate("1981-09-07T16:00:00Z"),
+  "sal" : 1500.0,
+  "comm" : 0.0,
+  "depno" : 30.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b6"),
+  "empno" : 7876.0,
+  "ename" : "李逵",
+  "job" : "职员",
+  "mgr" : 7902.0,
+  "hiredate" : ISODate("1987-07-12T16:00:00Z"),
+  "sal" : 1100.0,
+  "depno" : 20.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b7"),
+  "empno" : 7900.0,
+  "ename" : "武松",
+  "job" : "职员",
+  "mgr" : 7782.0,
+  "hiredate" : ISODate("1981-12-02T16:00:00Z"),
+  "sal" : 950.0,
+  "depno" : 10.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b8"),
+  "empno" : 7902.0,
+  "ename" : "吴用",
+  "job" : "分析师",
+  "mgr" : 7566.0,
+  "hiredate" : ISODate("1981-12-02T16:00:00Z"),
+  "sal" : 3000.0,
+  "depno" : 20.0
+}
+{
+  "_id" : ObjectId("5941f5bfc1bc86928f4de4b9"),
+  "empno" : 7934.0,
+  "ename" : "鲁智深",
+  "job" : "职员",
+  "mgr" : 7782.0,
+  "hiredate" : ISODate("1982-01-22T16:00:00Z"),
+  "sal" : 1300.0,
+  "depno" : 10.0
+}

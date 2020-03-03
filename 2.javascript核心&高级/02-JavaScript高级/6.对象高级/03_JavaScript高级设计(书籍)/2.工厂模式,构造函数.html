@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+</head>
+<html>
+	<body>
+		<center>
+</body>
+<script>
+	var time = document.getElementById("time");
+	var but  = document.getElementById("but");
+	var i = 0;
+	window.onload = function (){
+		console.log("----面向对象的程序设计----");
+		
+		
+		/*-----------------------------------工厂模式,构造函数----------------------------------*/
+		//工厂模式： 实际是调用Object方法创建一个可随意更改的对象函数
+		function createPerson (name , age , job){
+			var o = new Object();
+			o.name = name;
+			o.age  = age;
+			o.job  = job;
+			o.sayName = function(){
+				console.log(this.name); //这里指针指向o对象
+			}
+			return o ;
+		}
+		var person1 = createPerson("邓志龙" , 29 , "邓志龙是个地球人")
+		console.log(person1);
+		
+		
+		//构造函数： 自己调用方法自己创建一个可随意修改的函数对象
+		function Person(name , age , job){ //构造函数第一个字母惯例都为大写 
+			this.name = name;
+			this.age  = age;
+			this.job  = job;
+			this.sayName = function (){
+				console.log(this.name);
+			}
+		}
+		/* 
+		 * 1.创建一个新对象
+		 * 2.将构造函数的作用域赋给新对象（因此this就指向了这个新对象）
+		 * 3.执行构造函数中的代码（为这个新对象添加属性）
+		 * 4.返回新对象
+		 */
+		var person2 = new Person("邓志龙" , 99 , "邓志龙是个宇宙人");
+		//constructor(构造函数)该属性指向Person
+		console.log(person2.constructor == Person);  //true
+		//创建的所有对象即使Object的实例也是Person的实例
+		console.log(person2 instanceof Object);      //true
+		console.log(person2 instanceof Person);      //true
+		
+		
+		
+		/*任何函数，只要通过new操作符来调用，那它就可以作为构造函数，
+		而任何函数，如果不通过new操作符来调用，那他跟普通函数也不会有什么两样*/
+		//当做构造函数使用
+		var person = new Person("邓志龙" , 200 , "邓志龙是黑洞人");
+		person.sayName();   //邓志龙
+		//当做普通函数调用
+		Person("邓邓龙" , 300 , "邓志龙是聋人"); //添加到window
+		window.sayName();	//邓邓龙
+		//在另一个对象的作用域中调用
+		var o = new Object();
+		Person.call(o , "龙龙龙" , 25 , "Nurse");
+		o.sayName();
+		/*call语法：
+		 * fun.call(thisArg, arg1, arg2, ...)
+		 * thisArg
+		 *		在 fun 函数运行时指定的 this 值。需要注意的是，指定的 this 
+		 *  	值并不一定是该函数执行时真正的 this 值，如果这个函数在非严
+		 *  	格模式下运行，则指定为 null 和 undefined 的 this 值会自动指
+		 *  	向全局对象（浏览器中就是 window 对象），同时值为原始值（数字，
+		 *  	字符串，布尔值）的 this 会指向该原始值的自动包装对象。
+		 *	arg1, arg2, ...
+		 *		指定的参数列表。
+		 */
+		
+		
+		
+		/*构造函数的问题：
+		 * Person构造函数每次调用时都会重新实例化一个Function对象
+		 * 这样就会导致不同的作用域和标识符解析
+		 */
+		console.log("---------------------------------------------")
+		var person3 = new Person1("邓志龙" , 99 , "邓志龙是个宇宙人");
+		var person4 = new Person1("邓志龙" , 99 , "邓志龙是个宇宙人");
+		console.log(person3.sayName === person4.sayName); //false 代表并不是同一个function函数
+		function Person1(name , age , job){
+			this.name = name;
+			this.age = age;
+			this.job = job;
+			this.sayName = new Function ("console.log(this.name)") //与声明函数在逻辑下是等价的
+		}
+		
+		
+		//只要把sayName定义转移到构造函数外部即可解决问题:
+		function Person (name , age , job) {
+			this.name = name;
+			this.age = age;
+			this.job = job;
+			this.sayName = sayName;
+		}
+		function sayName (){
+			console.log(this.name);
+		}
+		var person3 = new Person("邓志龙" , 99 , "邓志龙是个宇宙人");
+		var person4 = new Person("邓志龙" , 99 , "邓志龙是个宇宙人");
+		console.log(person3.sayName == person4.sayName); //true
+		/*-------------------------------------------------------------------------------------*/
+		function PPerson (name , age , job) {
+			this.name = name;
+			this.age = age;
+			this.job = job;
+		}
+		PPerson.prototype.sayName = function(){
+			console.log(this.name);
+		}
+		var person3 = new PPerson("邓志龙" , 99 , "邓志龙是个宇宙人");
+		var person4 = new PPerson("邓志龙" , 99 , "邓志龙是个宇宙人");
+		console.log(person3.sayName == person4.sayName); //true
+	}
+</script>
+</html>

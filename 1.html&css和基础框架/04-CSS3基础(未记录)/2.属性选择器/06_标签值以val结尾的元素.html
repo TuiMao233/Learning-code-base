@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*属性选择器*/  /*div[自定义标签名]*/
+			#wrap{
+				width: 200px;
+				height: 200px;
+			}
+			div[name$="xx"]{ /*div内有标签名name的*/
+				border: 1px solid;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div>1
+				<div>1-1</div>
+			</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+		</div>
+		<div id="wrap2">
+			<div name="cm xx">cm xx</div>
+			<div name="cm-xx">cm-xx</div>
+			<div name="cm-xxd">cm-xxd</div>
+			<div name="xx">xx</div>
+		</div>
+	</body>
+</html>

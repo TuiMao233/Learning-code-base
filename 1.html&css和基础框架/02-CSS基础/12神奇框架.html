@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<style type="text/css">
+			/*medium 加粗 double 双层框架*/
+			p.no1 {border: medium 10px double rgb(250,0,255)}
+			p.no2 {border: 8px dotted #600 ;}
+			p.no3 {border: 8px dashed ;}
+			p.no4 {border: 8px solid ;}
+			/*也可用border-width:参数设置大小，前提是先用border-style设置边框*/
+			/*border-color可设置边框不同颜色*/   
+			                                                           /*+1=全部
+			                                                             +2=上下左右
+			                                                             +3=上→左右→下
+			                                                             +4=上→右→下→左
+			                                                             这里的方法同样适合不同方框样式和加粗不同边框*/
+			p.no5 {border-style: double;border-width:15px;border-color:#ff0000 #00ff00 #0000ff rgb(250,0,255) }
+			p.no6 {border-style: groove ; border-width:10px;border-color: #700}
+			p.no7 {border-style: ridge ; border-width:10px;border-color: #700}
+			p.no8 {border-style: inset ; border-width:10px;border-color: #700}
+			p.no9 {border-style: outset ; border-width:10px;border-color: #700}
+			p.no10 {{border-style: dotted dashed ; border-width:5px;border-color: #100}}
+			
+		</style>
+		</head>
+	<body>
+		<p class="no1">double:定义双线。双线的宽度等于 border-width 的值。</p>
+		<p class="no2">dotted:定义点状边框。在大多数浏览器中呈现为实线。</p>
+		<p class="no3">dashed:定义虚线。在大多数浏览器中呈现为实线。</p>
+		<p class="no4">solid: 定义实线。</p>
+		<p class="no5">double:定义双线。双线的宽度等于 border-width 的值。这里用了不同的加粗方法和方框颜色的使用方法</p>
+		<p class="no6">groove:定义 3D 凹槽边框。其效果取决于 border-color 的值。</p>
+		<p class="no7">ridge: 定义 3D 垄状边框。其效果取决于 border-color 的值。</p>
+		<p class="no8">inset: 定义 3D inset 边框。其效果取决于 border-color 的值。</p>
+		<p class="no9">outset:定义 3D outset 边框。其效果取决于 border-color 的值。</p>
+		<p class="no10">outset:定义 3D outset 边框。其效果取决于 border-color 的值。</p>
+	</body>
+	<html>

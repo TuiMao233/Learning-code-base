@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>26-jQuery事件冒泡和默行为</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            /*
+            trigger: 如果利用trigger自动触发事件,会触发
+			默认行为
+            triggerHandler: 如果利用triggerHandler自动触发事件, 不会触发默认行为
+            */
+			$("a").click(()=>{alert('a')})
+			// $("a").trigger("click");
+            setTimeout(()=>{
+				$("a").triggerHandler("click");
+			},2000)
+        });
+    </script>
+</head>
+<body>
+<a href="http://www.baidu.com"><span>注册</span></a>
+</body>
+</html>

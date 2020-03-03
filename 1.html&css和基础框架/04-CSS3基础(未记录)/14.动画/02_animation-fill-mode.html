@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			body{
+				perspective: 100px;
+				height: 100%;
+				overflow: hidden;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 40px/200px "微软雅黑";
+				text-align: center;
+				background: #E3E3E3;
+				animation-name:move;/*关键帧名字*/
+				animation-duration: 3s;/*时间*/
+				animation-iteration-count:3 ;/*动画次数*/
+				animation-fill-mode:backwards/*开始位置保持一致*//*forwards*//*结束的位置一致*/;
+				animation-fill-mode:both;	/*开始和结束的位置保持一致*/					
+			}
+			@keyframes move{
+				from{transform: translateY(-100px);} /*开始*/
+				to{transform: translateY(100px)}   /*结束*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">邓志龙</div>
+	</body>
+</html>

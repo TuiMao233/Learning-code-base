@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+</head>
+<body>
+<!--
+    1、serialize()
+        * 在Ajax post请求中将用作提交的表单元素的值编译成 URL-encoded 字符串。---key(name)/value
+    2、serializeArray()
+        * 将用作提交的表单元素的值编译成拥有name和value对象组成的数组。
+        * 不能使用的表单元素，buttons，未选中的radio buttons/checkboxs 将会被跳过。
+    3、submit()
+        * 为 "submit" 事件绑定一个处理函数，或者触发元素上的 "submit" 事件。
+        * 当参数function没有给出时，触发当前表单“submit”事件，并且执行默认的提交表单行为，除非阻止默认行为。
+-->
+<form>
+    <input type="password" name="pw" value="123"/>
+    <input type="text" name="val" value="kobe"/>
+    <input type="checkbox" checked="checked" name="rember"/>
+    <input type="button" value="按钮" name="anniu"/>
+</form>
+<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/touch.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    var result = $('form').serialize();
+    console.log(result);
+	var result2 = $('form').serializeArray();
+	console.log(result2);
+	
+	$('from').submit(function(event){
+		event.preventDefault()
+		alert('我暂时还不想提交')
+		return false;
+	})
+  })
+</script>
+</body>
+</html>

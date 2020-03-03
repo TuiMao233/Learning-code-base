@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>zepto_事件委托</title>
+  <style type="text/css">
+    #box{
+      width: 400px;
+      background: green;
+    }
+    .a{
+      width: 200px;
+      height: 200px;
+      background: #FF0000;
+    }
+    .b{
+      width: 100px;
+      height: 100px;
+      background: #F0f;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div class="a">a 的事件委托</div>
+    <br />
+    <br />
+    <br />
+    <div class="b">b的事件委托</div>
+    <br />
+    <br />
+    <br />
+    <div id="a">#a的事件委托</div>
+    <p>Click me!</p>
+  </div>
+<script src="../../../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/touch.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    //在zepto的官网表示已经废除了live，delegate等。
+//				$('.a').live('click',function(){
+//					alert('a')
+//				})
+    //* 坑！！！！
+    /*
+    * ---在zepto中事件委托
+    委托的事件先被依次放入数组队列里，然后由自身开始往后找直到找到最后，期间符合条件的元素委托的事件都会执行。
+    1、委托在同一个父元素,或者触发的元素的事件范围小于同类型事件(冒泡能冒到自身范围)
+    2、同一个事件
+    3、委托关联  操作的类要进行关联
+    4、绑定顺序---从当前的位置往后看
+    */
+    $('#box').on("click",'.a',function(){
+      alert('a事件');
+      $(this).removeClass('a').addClass('b');
+    });
+
+    $('#box').on("click",'.b',function(){
+      alert('b事件');
+      $(this).removeClass('b').addClass('a');
+    });
+
+
+    $('#box').append($('<p>我是新添加的p标签</p>',{class:'a'}));
+
+
+  })
+</script>
+</body>
+</html>

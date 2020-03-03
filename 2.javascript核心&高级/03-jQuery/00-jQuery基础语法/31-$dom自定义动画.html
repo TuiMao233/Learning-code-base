@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>47-jQuery自定义动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            background: red;
+        }
+        .two{
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+			/*
+				语法:
+				$(selector).animate(styles,speed,[,easing],[,callback])
+				$(dom).animate({
+					
+				}, 1000, 'linear', function(){
+					console.log('动画执行完毕')
+				})
+				第一个参数: 接收一个对象, 可以在对象中修改属性
+				第二个参数: 指定动画时长
+				第三个参数: 指定动画时间曲线, 默认就是swing
+				第四个参数: 动画执行完毕之后的回调函数
+			*/
+			var 操作属性 = $("button").eq(0)
+			var 累加属性 = $("button").eq(1)
+			var 关键字 = $("button").eq(2)
+            操作属性.click(function () {
+                $(".one").animate({
+                    marginLeft: 500
+                }, 5000);
+                $(".two").animate({
+                    marginLeft: 500
+                }, 5000, "linear", function () {
+                    alert("自定义动画执行完毕");
+                });
+            })
+			
+           累加属性.click(function () {
+                $(".one").animate({
+                    width: "+=100"
+                }, 1000, function () {
+                    alert("自定义动画执行完毕");
+                });
+            });
+			
+           关键字.click(function () {
+                $(".one").animate({
+                    width: "hide"
+                    // width: "toggle"
+                }, 1000, function () {
+                    alert("自定义动画执行完毕");
+                });
+            })
+        });
+    </script>
+</head>
+<body>
+<button>操作属性</button>
+<button>累加属性</button>
+<button>关键字</button>
+<div class="one"></div>
+<div class="two"></div>
+</body>
+</html>

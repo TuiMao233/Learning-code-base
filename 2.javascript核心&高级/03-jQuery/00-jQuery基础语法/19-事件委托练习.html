@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>32-jQuery事件委托练习</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+		span {
+			color: red;
+		}
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+			$("html").delegate("span", "click", function () {
+			     console.log($(this).html());
+			});
+        });
+    </script>
+</head>
+<body>
+	<div>
+		<span>hhh</span>我是段落我是段落我是段落我是段落我是段落我是段落我是段落我<span>hhh</span>是段落我是段落我是段落我是段落我是段落
+		我是段落我是段落我是段落我是段落我是段<span>aczxc</span>落我是段落<span>hhh</span>我是段落我是段落我是段落我是段落我是段落我是段落<span>www</span>
+		我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段<span>hhh</span>落我是段落我是段落我是段落我是段落
+		我是段落我是段落<span>sss</span>我是段落我是<span>asrqw</span>段落我是段落我是段<span>hhh</span>落我是段落我<span>hhh</span>是段落我是段落我是段落我是段落我是段落
+		我是段落<span>ggg</span>我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段落
+		我是段落我是段落我是段落我是段落我<span>xcf</span>是段落我是段落我是<span>hhh</span>段落我是段落我是段落我是段落我是段落我是段落
+		我是段落我是段落<span>hre</span>我是段落我是段<span>erty</span>落我是段落我是<span>hhh</span>段落我是段落我是段落我是段落我是段落我是段落我是段落
+		我是段落我是段落<span>qwe</span>我是段落我是段落我是段落我<span>hhh</span>是段落我是段落我是段落我是段落我是段落我是段落我是段落
+		我是段落我<span>asd</span>是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是段落我是<span>hhh</span>段落我是段落
+		我是段落我是段落我是<span>zxc</span>段落我是<span>ghj</span>段落我是段落<span>hhh</span>我是段落我是段落我是段落我是段落我是段落我是段落我是段落
+	</div>
+</body>
+</html>

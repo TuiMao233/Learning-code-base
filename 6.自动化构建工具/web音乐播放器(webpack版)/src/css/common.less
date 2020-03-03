@@ -1,0 +1,77 @@
+.overflowTest(){// 溢出文字处理
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.clearfix{ *zoom: 1;} 	// 清除浮动(IE6,IE7)
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}	
+hr { // hr默认样式
+	height: 1px;
+	margin-bottom: -1px;
+	background:#E6E3E3;
+	border:none;
+	opacity: 0.07;
+}
+@font-face { // 字体图标添加
+  font-family: 'iconfont';  /* project id 1642246 */
+  src: url('//at.alicdn.com/t/font_1642246_tk5ohvilb3.eot');
+  src: url('//at.alicdn.com/t/font_1642246_tk5ohvilb3.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1642246_tk5ohvilb3.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1642246_tk5ohvilb3.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1642246_tk5ohvilb3.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1642246_tk5ohvilb3.svg#iconfont') format('svg');
+}
+i {font-family:'iconfont';font-style:normal;} //字体图标设置
+* {margin:0;padding: 0;}
+
+body,html { // body默认样式
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	user-select: none;
+	a,span {
+		color: #fff;
+		font-family: '微软雅黑';
+		font-size: 14px;
+	}
+	a{
+		display: block;
+		text-decoration: none;
+		font-size: 14px;
+		cursor: pointer;
+	}
+}
+.undone{ // 功能未完成按钮
+	width: 400px;
+	height: 200px;
+	font-size: 50px;
+	line-height: 200px;
+	text-shadow:2px 2px 5px #333333;
+	color: #fff;
+	text-align: center;
+	position: absolute;
+	
+	top: 0;left: 0;right: 0;bottom: 0;margin: auto;
+}
+.addScroll() { // 滚动条样式
+	&::-webkit-scrollbar { // 滚动条整体部分
+		width: 8px;
+	}
+	&::-webkit-scrollbar-thumb{
+		// 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+		border-radius: 15px;  
+		background-color: rgba(0,0,0,.12);
+		&:hover{
+			background-color: rgba(0,0,0,.27);
+		}
+	}
+	// &::-webkit-scrollbar-track 滚动条的轨道（里面装有Thumb）
+	// &::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+	// &::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+	// &::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+	// &::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+}

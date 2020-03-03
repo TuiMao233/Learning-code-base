@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			#wrap{
+				width: 600px;
+				height: 600px;
+				border: 1px solid;
+				margin: 100px auto;
+				display: flex;
+			}
+			#wrap > .item {
+				width: 50px;
+				height: 50px;
+				background: darkgoldenrod;
+				text-align: center;
+				line-height: 50px;
+				-webkit-box-flex: 1;	/*弹性因子*/
+			}
+			#wrap >.item:nth-child(1){
+				-webkit-box-flex: 4;
+			}
+		</style>
+	</head>
+	<body>
+			<div id="wrap">
+				<div class="item">1</div>
+				<div class="item">2</div>
+				<div class="item">3</div>
+				<div class="item">4</div>
+				<div class="item">5</div>
+			</div>
+	</body>
+	<script src="data.js"></script> <!--拿到-->
+	<script>
+		
+	</script>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>25-jQuery事件移除</title>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            function test1() {alert("test1");}
+            function test2() {alert("test2");}
+            // 编写jQuery相关代码
+            $("button").click(test1);
+            $("button").click(test2);
+
+            // off方法如果不传递参数, 会移除所有的事件
+            // $("button").off();
+            // off方法如果传递一个参数, 会移除所有指定类型的事件
+            // $("button").off("click");
+            // off方法如果传递两个参数, 会移除所有指定类型的指定事件
+            $("button").off("click", test1);
+        });
+    </script>
+</head>
+<body>
+<button>我是按钮</button>
+</body>
+</html>

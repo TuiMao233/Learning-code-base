@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			/* 清除浮动 */
+			.clearfix{*zoom: 1;}
+			.clearfix:after{content: "";display: block;clear: both;}
+			/* 颜色设置 */
+			#left{background: #BDB76B;}
+			#center{background: tomato;}
+			#right{background: blueviolet;}
+			
+			/* 尺寸设置 */
+			/* 假设left为200px,right为150px */
+			#container{
+				padding-left: 200px;
+				padding-right: 150px;
+			}
+			#left{width: 200px;}
+			#right{width: 150px;}
+			#center{width: 100%;}
+			/* 为left和right和center设置浮动，更好的进行排序工作 */
+			#left,#right,#center{float: left;}
+			/* 由于浮动的特性，第一行宽度占据了100%，所以浮动元素会被挤下来 */
+			
+			/* 接下来的工作是把left排到center的左边 */
+			/* 使用负外边距，将元素往某个方向扯，简单点说，margin是控制元素的边界 */
+			#left{
+				width: 200px;
+				margin-left: -100%;
+			}
+			/*  利用margin负值调整#left超出父元素边界时，浮动元素边界的就会被拉回第一行
+				原因：
+					1. 上方#center盒子是浮动块的、所以并不是真正意义上的占据一行
+					2. 往回拉，超出父元素边界，其原理跟cneter腾出left的位置一样，只不过这种做法是强制的调整left的边界
+			*/
+		   
+		   /* 在利用相对定位，将left在往左边拉，跟父级元素padding重叠 */
+		   #left{
+			   position: relative;
+			   left: -200px;
+		   }
+		   /* right只要一条代码，将元素的右边界往左拉 */
+		   /* 原因：如果右边的边界超出了父元素左边的边界，就会掉上去
+					这时候，元素的左边界就会贴着center上
+						可以理解为 把父元素的padding-right的尺寸给削没了。
+			*/
+		   #right {margin-right: -150px}
+		</style>
+	</head>
+	<body>
+		<div id="container" class="clearfix">
+			<div id="center">center</div>
+			<div id="left">left</div>
+			<div id="right">right</div>
+		</div>
+	</body>
+</html>

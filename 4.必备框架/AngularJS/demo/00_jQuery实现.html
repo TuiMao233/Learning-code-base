@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+
+<input type="text" id="name">
+<p>您输入的内容是：<span id="contentSpan"></span></p>
+
+<script type="text/javascript" src="js/jquery/jquery-1.11.1.js"></script>
+<script type="text/javascript">
+  $(function () {
+      $('#name').keyup(function () {
+          var name = this.value;
+          $('#contentSpan').html(name);
+      })
+  })
+
+
+
+
+</script>
+</body>
+</html>

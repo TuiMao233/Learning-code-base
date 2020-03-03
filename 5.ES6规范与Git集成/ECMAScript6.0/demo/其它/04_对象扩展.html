@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>04_对象扩展</title>
+</head>
+<body>
+<!--
+1. Object.is(v1, v2)
+  * 判断2个数据是否完全相等
+2. Object.assign(target, source1, source2..)
+  * 将源对象的属性复制到目标对象上
+3. 直接操作 __proto__ 属性
+  let obj2 = {};
+  obj2.__proto__ = obj1;
+-->
+
+<script type="text/javascript">
+// 判断2个数据是否完全相等
+console.log(0 == -0)
+console.log(NaN == NaN)
+console.log(Object.is(0, -0))
+console.log(Object.is(NaN, NaN))
+
+// 将源对象的属性复制到目标对象上
+let obj = {}
+let obj1 = {username: '国中生', age: '50'}
+let obj2 = {sex: '女'}
+Object.assign(obj, obj1, obj2)
+console.log(obj)
+
+// 直接操作 __proto__ 属性
+let obj3 = {}
+let obj4 = {qian: 5000000000}
+obj3.__proto__ = obj4
+console.log(obj3.qian)
+</script>
+</body>
+
+</html>

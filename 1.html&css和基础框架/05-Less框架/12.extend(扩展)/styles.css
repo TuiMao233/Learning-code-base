@@ -1,0 +1,27 @@
+.sjx {
+  color: #00CCFF;
+}
+#wrap,
+.sjx {
+  background: darkblue;
+}
+.a {
+  color: #00CCFF;
+}
+#b,
+.a,
+.a {
+  background: darkblue;
+}
+.a {
+  color: #00CCFF;
+}
+#b,
+.a,
+.a {
+  background: darkblue;
+}
+#f,
+.a {
+  direction: down;
+}

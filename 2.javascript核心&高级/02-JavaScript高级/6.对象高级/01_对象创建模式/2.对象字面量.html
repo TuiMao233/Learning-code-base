@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		/*一个人：name：“Tom”，age：12*/
+		
+		/*
+		 方法二：对象字面量模式
+		 套路：使用{}创建对象，同时指定/方法
+		 适用场景：起始时内部数据是确定的
+		 问题：如果创建多个对象，有重复代码
+		 */
+		var p2 = {
+			p.name = "Tom",
+			p.age = 12,
+			p.setName = function (name){
+				this.name = name
+			}
+		}
+	</script>
+</html>

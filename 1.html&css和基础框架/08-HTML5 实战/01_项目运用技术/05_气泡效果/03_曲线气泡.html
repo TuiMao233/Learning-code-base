@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			html,
+			body {
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			body {
+				background: darkgray;
+			}
+			
+			canvas {
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				margin: auto;
+				background: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas width="150" height="400"></canvas>
+	</body>
+	<script type="text/javascript">window.onload=function(){
+		var oc = document.querySelector("canvas");
+		new canvaAnim({// 动画创建模型
+			el: oc,					 
+			quantity: 390, 		// 注入速度  1 -> 400	0或者空串是默认值340
+			frameNum: 60, 		// 动画速度  1 - 1000	0或者空串是默认值60
+			injection(arr) { // 注入器
+				var r =Math.random()*6+2;
+				var x = Math.random()*oc.width;
+				var y = oc.height - r;
+				var deg =0;
+				arr.push({// 往arr中注入新的随机圆的信息
+					alp: 1, // 初始透明度
+					r,x,y, // 初始半径 x坐标轴随机 y坐标轴随机
+					red: Math.round(Math.random() * 255), // 红
+					green: Math.round(Math.random() * 255), // 黄
+					blue: Math.round(Math.random() * 255), // 蓝
+					deg: 0,
+					startX: x, // 初始x
+					startY: y, // 初始y
+					step: Math.random()*20+10,
+				})
+			},
+			changer(arr) { // 变化器
+				// console.log(arr[1].dd)
+				for (var i = 0; i < arr.length; i++) { // 变化器:每次执行圆的信息都会发送改变
+					arr[i].deg+=5
+					arr[i].alp -= 0.006
+					// 正弦曲线 = sin(角度 * Math.PI/180) * 放大度
+					arr[i].x = arr[i].startX +  Math.sin( arr[i].deg*Math.PI/180 )*arr[i].step*2;
+					arr[i].y = arr[i].startY - (arr[i].deg*Math.PI/180)*arr[i].step;
+					// 清除器：当y圆为50以下的数时 清除数组的第i位
+					if (arr[i].y <= 50) {arr.splice(i, 1)}
+				}
+			},
+			plotter(ctx, arr) { // 绘制器
+				ctx.clearRect(0, 0, oc.width, oc.height);
+				for (var i = 0; i < arr.length; i++) {
+					ctx.save(); // 这里添加样式
+					ctx.fillStyle = `rgba(${arr[i].red},${arr[i].green},${arr[i].blue},${arr[i].alp})`
+					ctx.beginPath(); // 清空路径
+					ctx.arc(arr[i].x, arr[i].y, arr[i].r, 0, 2 * Math.PI); // 创建圆弧路径 
+					ctx.fill() // 进行绘制
+					ctx.restore();
+				}
+			}
+		})
+		// 动画功能函数
+		function canvaAnim({el, quantity, frameNum, injection, changer, plotter}) {
+			var ctx = el.getContext("2d");// 创建画笔
+			var arr = [] // 创建数组
+			if(quantity){quantity  = 400 - quantity}else{quantity = 60} // 定制注入时间
+			if(frameNum){frameNum = 1000 / frameNum}else{frameNum = 1000 / 60} // 定制速度
+			if (oc.getContext) { // 检测是否有canvas属性
+				setInterval(() => {injection(arr)}, quantity) // 注入器
+				setInterval(() => { // 变化器 与 绘制器
+					changer(arr)
+					plotter(ctx, arr)
+				}, frameNum)
+			}
+		}
+	}</script>
+</html>

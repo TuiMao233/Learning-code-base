@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		
+		/*将函数作为另一个函数的返回值*/
+		function fn(){
+			var a = 3
+			function fn2(){
+				a++
+				console.log(a)
+			}
+			return fn2
+		}
+		var fn2 = fn()
+		fn2()
+		fn2()
+		
+		/*将函数作为实参传递给另一个函数调用*/
+		function showDelay(msg,time){
+			setTimeout(function(){
+				alert(msg)
+			},time)
+		}
+		
+		showDelay("dzl",2000)
+	</script>
+</html>

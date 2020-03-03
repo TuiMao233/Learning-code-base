@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>zepto_selected</title>
+</head>
+<body>
+  <select>
+    <option value="name">科比</option>
+    <option value="name">韦德</option>
+    <option value="name" selected="selected">邓肯</option>
+    <option value="name">吉诺比利</option>
+    <option value="name" selected="selected">艾弗森</option>
+  </select>
+  <button id="btn">按钮</button>
+<script src="../../../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/touch.js"></script>
+<script type="text/javascript">
+    //在zepto中用attr也可以获取布尔值属性.
+    //prop在读取属性的时候优先级高于attr，布尔值属性的读取还是建议用prop
+    //坑！------zepto中removeProp()的方法。在1.2及以上才支持。
+    $(function () {
+      $('option').each(function (index, item) {
+          //console.log($(this).attr('selected'));
+          console.log($(this).prop('selected'));
+      });
+      $('#btn').click(function () {
+		  $(this).prop('disabled',true)
+          setTimeout(function () {
+              $('#btn').removeAttr('disabled');
+          }, 2000);
+      });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			
+			body{
+				height: 60%;
+				width: 600px;
+				border: 1px solid;
+				margin: 100px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 40px/200px "微软雅黑";
+				text-align: center;
+				background: #E3E3E3;
+				transition: 1s;
+				/*变换基点*/
+				/*左上角*/
+				transform-origin: left top;
+				/*右上角*/
+				transform-origin: right top;
+				/*左下角*/
+				transform-origin: 100% 100%;
+			}
+			body:hover #test{
+				transform: rotate(180deg);
+				transform: skew(30deg,30deg);
+				transform: scale(.6);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">邓志龙</div>
+	</body>
+</html>

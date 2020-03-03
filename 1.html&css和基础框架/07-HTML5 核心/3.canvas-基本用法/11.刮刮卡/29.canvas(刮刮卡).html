@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			canvas{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+			#warp,ul,ul>li{
+				height: 100%;
+			}
+			ul>li{
+				background:url(ggk.png);
+				background-size: 100% 100%;
+			}
+			canvas{
+				position: absolute;
+				left: 0;
+				top: 0;
+				display : block;
+				transition: 1.5s;
+				opacity: 1;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<div id="warp">
+			<canvas class="test" width="450" height="450">
+				<span>您的浏览器不支持画布元素,请您换成帅帅的谷歌浏览器</span>
+			</canvas>
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+		
+	</body>
+	<script>
+		/*
+		 * source:新的图像（源）
+		 * destination：已经绘制过的图像（目标）
+		 * 
+		 * globalCompositeOperation
+		 * 		source-over(默认值)	:源在上面,新的图像层次比较高
+		 * 		source-in		   	:只留下源和目标重叠的部分（源的那一部分）	
+		 * 		source-out			:只留下源超出目标的部分
+		 * 		source-atop			:砍掉源溢出的部分
+		 * 		
+		 * 		destination-over	:目标在上面，旧的图像层级比较高
+		 * 		destination-in		:只留下源于目标的重叠部分（目标的那一部分）
+		 * 		destination-out		:只留下目标超过源的部分.
+		 * 		destination-atop	:砍掉目标溢出的部分
+		 * 
+		 */
+		window.onload=function(){
+			var canvas = document.querySelector(".test");
+			var flag = 0;
+			function ang(d){return d*Math.PI/180;}
+			if(canvas.getContext){
+				var ctx = canvas.getContext("2d");
+				canvas.width = document.documentElement.clientWidth;
+				canvas.height =document.documentElement.clientHeight;
+				var img = new Image;
+				img.src = "ggk1.png";
+				img.onload = function(){
+					draw();
+				}
+				function draw(){
+				ctx.drawImage(img,0,0,canvas.width,canvas.height);
+				canvas.addEventListener("touchstart",function(ev){ //手指按下并移动事件
+					ev = ev||event;
+					/*手指第一根*/
+					var touchC = ev.changedTouches[0];
+					var x = touchC.clientX - canvas.offsetLeft;
+					var y = touchC.clientY - canvas.offsetTop;
+					ctx.globalCompositeOperation = "destination-out";
+					ctx.lineWidth = 50;
+					ctx.lineCap = "round";
+					ctx.lineJoin = "round"; //线与线对角显示的格式
+					ctx.save();
+					/*关于样式的设置*/
+					ctx.beginPath();
+					/*初始化路径*/
+					ctx.moveTo(x,y);
+					ctx.lineTo(x+1,y+1);
+					/*创建结构*/
+					ctx.stroke();
+					ctx.restore();
+					/*将样式站的样式压入容器*/
+				})
+				canvas.addEventListener("touchmove",function(ev){ //手指按下并移动事件
+					ev = ev||event;
+					/*手指第一根*/
+					var touchC = ev.changedTouches[0];
+					var x = touchC.clientX - canvas.offsetLeft;
+					var y = touchC.clientY - canvas.offsetTop;
+					ctx.save();
+					/*关于样式的设置*/
+					ctx.lineTo(x,y);
+					/*创建结构*/
+					
+					ctx.stroke();
+					ctx.restore();
+					/*将样式站的样式压入容器*/
+				})
+				
+				
+				canvas.addEventListener("touchend",function(ev){ //手指按下并移动事件
+					var imgData = ctx.getImageData(0,0,canvas.width,canvas.height);
+					var allPx = imgData.width * imgData.height; //像素数量
+					for (var i=0; i<allPx;i++) {
+						if(imgData.data[4*i+3]==0){
+							flag++;
+						}
+					}
+					if(flag > allPx/2){
+						canvas.style.opacity = 0;
+					}
+				})
+				/*当过度完后执行*/
+				canvas.addEventListener("transitionend",function(){
+					this.remove();
+				})
+			}}}
+	</script>
+</html>

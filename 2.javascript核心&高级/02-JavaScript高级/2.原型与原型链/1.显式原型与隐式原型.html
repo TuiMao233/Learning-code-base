@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			function Fn(){
+				//内部语句：this。prototype = {}
+			}
+			//1. 每个函数function都有一个protoype，即显式原型
+			console.log(Fn.prototype);
+			var fn = new Fn();
+			//2. 每个实例对象都有一个__proto__，可称为隐式原型
+			console.log(fn.__proto__);	//内部语句 this.__proto__ = Fnprototype
+			//3. 对象的隐式原型的值为其对应构造函数的显式原型的值
+			console.log(Fn.prototype === fn.__proto__);
+			
+			//给原型添加方法
+			Fn.prototype.test = function(){
+				console.log("test");
+			}
+			fn.test();
+		}
+	</script>
+</html>

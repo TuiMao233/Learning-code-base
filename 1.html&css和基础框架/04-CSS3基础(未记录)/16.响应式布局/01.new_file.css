@@ -1,0 +1,39 @@
+*{margin: 0;padding: 0;}
+html,body{
+	height: 100%;
+	overflow: hidden;
+}
+#wrap{
+	width: 100px;
+	height: 100px;
+	border: solid 5px;
+	margin: 100 auto; 
+} 
+@media screen {/*判断只有在屏幕的时候才执行*/
+	#wrap{
+		border: solid 15px;
+	}
+}
+
+@media print { /*判断打印的时候执行*/
+	
+}
+/* 媒体类型：
+ * @media all {}默认值
+ * @media screen {}  彩色屏幕
+ * 		  print      打印预览
+ * 		  projection 手持设备
+ *        tv         电视
+ * 		  braille  	  盲文触觉设备
+ * 		  embossed   盲文打印机
+ * 		  speech     “听觉”类似的媒体设备
+ * 		  tty    	 不适合像素的设备
+ * 	
+ * 媒体属性：
+ * width 		（可加max min 前缀）
+ * height  		（可加max min 前缀）
+ * device-width （可加max min 前缀）
+ * device-pixel-ratio （可加max min 前缀，需要加webkit前缀）
+ * orienttation  	portrait竖屏
+ * 					landscape横屏    
+ */

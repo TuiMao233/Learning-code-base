@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			body{
+				perspective: 100px;
+				height: 100%;
+				overflow: hidden;
+			}
+			#wrap{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 500px;
+				height: 500px;
+				border: 1px solid;
+				perspective: 200px;
+				/*transform-style: preserve-3d;*/
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 40px/200px "微软雅黑";
+				text-align: center;
+				background: #E3E3E3;
+				animation-name:move;/*关键帧名字*/
+				animation-duration: 3s;/*时间*/
+				animation-iteration-count:3;/*动画次数*/
+				animation-timing-function:steps(1) ;/*时间曲线*/
+				animation-fill-mode:both;	/*开始和结束的位置保持一致*/		
+				animation-direction:alternate ;	/*从开头到结尾,从结尾到开头*/
+			}
+			@keyframes move{
+				0%{transform: translateY(-100px);} /*开始*/
+				50%{transform: translateY(100px)}   /*结束*/
+				100%{transform: translateY(200px)}   /*结束*/
+			}
+			#wrap:hover #test{
+				animation-play-state:paused ;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="test">邓志龙</div>
+		</div>
+	</body>
+</html>

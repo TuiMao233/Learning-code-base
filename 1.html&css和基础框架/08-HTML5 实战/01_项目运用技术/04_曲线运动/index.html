@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body {
+				overflow: hidden;
+			}
+			#test{
+				position: absolute;
+				left: 200px;
+				top: 200px;
+				width: 10px;
+				height: 10px;
+				background: black;
+			}
+			
+			.box{
+				position: absolute;
+				border: 1px solid;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+	</body>
+	<script type="text/javascript">
+		
+		window.onload=function(){
+			var testNode = document.querySelector("#test");
+			var startX = testNode.offsetLeft;
+			var startY = testNode.offsetTop;
+			//角度
+			var deg = 0;
+			// 放大运动的轨迹
+			var step = 50;
+			setInterval(function(){
+				deg++;
+				
+				testNode.style.left = startX + (deg*Math.PI/180)*step/2 +'px';
+				// 正弦曲线 = sin(角度 * Math.PI/180) * 放大度
+				testNode.style.top = startY + Math.sin( deg*Math.PI/180 )*step*2+"px";
+				
+				var boxNode = document.createElement("div");
+				boxNode.classList.add("box");
+				boxNode.style.left=testNode.offsetLeft+"px";
+				boxNode.style.top=testNode.offsetTop+"px";
+				document.body.appendChild(boxNode);
+				
+				// document.documentElement.scrollLeft = testNode.getBoundingClientRect().x
+			},1000/60)
+		}
+		
+		
+	</script>
+</html>

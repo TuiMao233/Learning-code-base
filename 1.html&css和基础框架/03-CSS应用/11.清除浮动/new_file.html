@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			#wrap{
+				border: 1px solid;
+			}
+			#inner{
+				float: left;
+				width: 200px;
+				height: 200px;
+				background: darkgray;
+			}
+.clearfix{
+	*zoom: 1;
+	/*由于IE6,7需要开启布局才会撑开父元素
+	  zoom可以让父元素拥有布局
+	 */
+}
+.clearfix:after{
+	content: '';
+	display: block;
+	clear: both;
+}
+		</style>
+	</head>
+	<body>
+		<!--
+			清除浮动：
+				让浮动的子元素撑开父级的高度
+				
+				01.直接给父级元素加宽度
+				
+				02.通过开启BFC清浮动
+					父级元素开启BFC的方式如果是给父级添加浮动盒子相对定位的话
+						那么高与宽将由内容撑开
+					父级元素开启BFC的方式是overflow的话
+						则由高度由内容撑开，宽度默认100%
+				 
+				 03.br标签清浮动
+				 	在浮动内容下面添加<br clear="all" />
+				 	
+				 04.空标签清浮动
+				 	在浮动内容下面添加<div style="clear: both;"></div>
+				 	
+				 05.伪元素清浮动
+				 		
+		-->
+		<div id="wrap" class="clearfix">
+			<div id="inner"></div>
+			<!--<br clear="all" />-->
+			<!--<div style="clear: both;"></div>-->
+		</div>
+		
+	</body>
+</html>

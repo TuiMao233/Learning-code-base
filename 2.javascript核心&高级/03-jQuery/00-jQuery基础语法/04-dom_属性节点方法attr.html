@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	<script>
+	 		$(function(){
+	 			/*
+	 			 * 1.attr(name|pro|key,val|fn)
+	 			 * 作用：获取或者设置属性节点的值
+	 			 * 可以传递一个参数,也可以传递两个参数
+	 			 * 如果传递两个参数,第二个参数则是修改的值
+	 			 * 如果修改的属性节点不存在 则会创建一个属性节点
+	 			 */
+	 			
+				//传入一个参数是返回div的符合的属性节点的属性值
+				console.log($("div").attr("id"))  
+	 			
+				// 传入两个参数则是修改div中属性节点名为id的属性值为divxx
+	 			$("div").attr("id","divxx"); 
+				//返回div的id
+	 			console.log($("div").attr("id")); 
+	 			
+				//删除属性名为id的属性节点
+				$("div").removeAttr("id");
+				
+				// 如果属性名为www不存在 则创建一个属性名为www的属性节点
+				$("div").attr("www","nb"); 
+	 		})
+	 	</script>
+	</head>
+	<body>
+		<div id="div1"></div>
+	</body>
+</html>

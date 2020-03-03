@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style type="text/css">
+    #box{
+      display: none;
+      width: 200px;
+      height: 200px;
+      border:1px solid #ff0;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    jquery可以获取隐藏元素的宽高
+  -->
+  <div id="box"></div>
+  <script src="../../../js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(function () {
+      console.log($('#box').width());
+      console.log($('#box').height());
+    });
+  </script>
+</body>
+</html>

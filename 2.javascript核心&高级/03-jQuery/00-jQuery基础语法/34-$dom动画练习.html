@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>50-无限循环滚动</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 600px;
+            height: 161px;
+            border: 1px solid #000;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+        ul{
+            list-style: none;
+            width: 1800px;
+            height: 161px;
+            background: #000;
+        }
+        ul>li{
+            float: left;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+			var setLeft = 0 
+			var timer = 0;
+			// 定义一个动画开启函数
+			function animPlay () {
+				timer = setInterval(()=>{
+					setLeft -=2 // left 每次减10
+					//当减到-1200以下则恢复为0
+					setLeft = setLeft < -1200 ?0 : setLeft,
+					$('ul').css('marginLeft', setLeft)
+				},1000/60)
+			}animPlay()// 定义后自启动
+
+
+			$('li').hover(function(){  // 移入事件
+				// 关闭定时器
+				clearInterval(timer) 
+				// 将其他元素的透明度变为一半
+				$(this).siblings().fadeTo(300, 0.5)
+			},function(){ // 移出事件
+				animPlay()
+				// 将所有的透明度恢复为1
+				$('li').fadeTo(1, 1)
+			})
+        });
+    </script>
+</head>
+<body>
+<div>
+    <ul>
+        <li><img src="img/a.jpg" alt=""></li>
+        <li><img src="img/b.jpg" alt=""></li>
+        <li><img src="img/c.jpg" alt=""></li>
+        <li><img src="img/d.jpg" alt=""></li>
+        <li><img src="img/a.jpg" alt=""></li>
+        <li><img src="img/b.jpg" alt=""></li>
+    </ul>
+</div>
+</body>
+</html>

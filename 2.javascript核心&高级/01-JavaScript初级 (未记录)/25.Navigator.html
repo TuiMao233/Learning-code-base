@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script>
+		window.onload = function (){
+			/* 浏览器对象模型
+			 * BOM可以使我们通过JS来操作浏览器
+			 * 在BOM中为我们提供了一组对象，用来完成对浏览器的操作
+			 * BOM对象
+			 * 		window
+			 * 			-代表的是整个浏览器窗口，同时window也是网页中的全局对象
+			 * 		navigator
+			 * 			-代表的当前浏览器的信息，通过该对象可以来识别不同的浏览器
+			 * 		Location
+			 * 			-代表当前浏览器的地址信息栏，通过Location可以获取地址栏信息，或者操作浏览器跳转页面
+			 * 		History
+			 * 			-代表浏览器的历史记录,可以通过该对象来操作浏览器的历史记录
+			 * 				由于隐私原因，该对象不能获取到具体的历史记录，只能操作浏览器向前或向后翻页
+			 * 				而且该操作只能在当次访问时有效
+			 * 		Screen
+			 * 			-代表用户的屏幕信息，通过该对象可以获取到用户的显示器的相关的信息
+			 * 		
+			 * 		这些BOM对象在浏览器中都是作为window对象的属性保存的。
+			 * 				可以通过window对象来使用，也可以直接使用
+			 */
+			
+			
+				/*navigator
+			  		-代表的当前浏览器的信息，通过该对象可以来识别不同的浏览器
+					-由于历史原因,Navigator对象中的大部分属性都已经不能帮助我们识别浏览器了
+					一般我们只用userAgent来判断浏览器的信息
+					userAgent是一个字符串,这个字符串中包含用来描述浏览器信息的内容
+					不同的浏览器会有不同的userAgent
+					谷歌
+					Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.59 Safari/537.36
+					火狐
+					Mozilla/5.0 (Windows NT 6.1; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0
+					IE
+					Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Win64; x64; Trident/4.0; .NET CLR 2.0.50727; SLCC2; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; .NET4.0C; .NET4.0E; InfoPath.3)
+					IE11所以微软和IE相关的标示都已经去除了
+				*/var ua = navigator.userAgent;
+				var huohu = /firefox/i;
+				switch(true){
+				case /firefox/i.test(ua) :
+				console.log("你是火狐！！");
+				break;
+				case /Chrome/i.test(ua) :
+				console.log("你是谷歌！！");
+				break;
+				case /MSIE/i.test(ua) :
+				console.log("你是IE！！");
+				break;
+				case ("ActiveXObject" in window):
+				console.log("你是IE11，我要枪毙了你");
+				}
+//				如果通过UserAgent不能判断,还可以通过一些浏览器特有的对象,来判断浏览器的信息
+			
+				if(window.ActiveXObject){
+					alert("你是IE 我已经抓住你了~~~");
+				}else{
+					alert("你不是IE~~~");
+				}//但IE11此方法转换为布尔值为false
+				alert("ActiveXObject" in window);
+				
+				
+				/* History
+			 		-代表浏览器的历史记录,可以通过该对象来操作浏览器的历史记录
+			 		由于隐私原因，该对象不能获取到具体的历史记录，只能操作浏览器向前或向后翻页
+			 		而且该操作只能在当次访问时有效
+			 	*/
+			
+		}
+	</script>
+	<body>
+		
+	</body>
+</html>

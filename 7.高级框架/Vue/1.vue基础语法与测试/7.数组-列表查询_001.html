@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>06_列表渲染</title>
+</head>
+<body>
+
+<!--
+1. 列表显示
+  数组: v-for / index
+  对象: v-for / key
+2. 列表的更新显示
+  删除item
+  替换item
+-->
+
+<div id="demo">
+	<input type="text" v-model="seachName" />
+	<ul>
+		<li v-for="(p,index) in filterPersons" :key="index">
+			{{index}}----{{p.name}}----{{p.age}}
+		</li>
+	</ul>
+	<button @click="nb(1)">年龄升序</button>
+	<button @click="nb(2)">年龄降序</button>
+	<button @click="nb(0)">原本顺序</button>
+</div>
+
+<script src='js/vue.js'></script>
+<script type="text/javascript">
+  var vm = new Vue({
+    el: '#demo',
+    data: {
+		seachName:'',
+		orderType:8,	//0代表原本,1代表升序,2代表降序
+		persons: [
+			{name: 'Tom', age:18},
+			{name: 'Jack', age:17},
+			{name: 'Bob', age:19},
+			{name: 'Mary', age:16}
+		]
+    },
+	computed:{
+		filterPersons(){
+			const {seachName,persons,orderType} = this
+			let fPersons
+			fPersons = persons.filter(p => (p.name.indexOf(seachName)!==-1) )
+			if(orderType !==0) {
+				return	fPersons.sort((a,b)=>
+				(orderType == 1) ? (a.age-b.age) :
+				(orderType == 2) ? (b.age-a.age) : [])
+			}else{
+				this.orderType = 8
+				return this.persons
+			}
+			
+			return fPersons
+		}
+	},
+	methods:{
+		nb(n){
+			this.orderType = n
+		}
+	}
+  })
+  
+  
+  
+/*  
+  
+  var b = [
+	  {name: 'Tom', age:18},
+	  {name: 'Jack', age:17},
+	  {name: 'Bob', age:19},
+	  {name: 'Mary', age:16}
+  ]
+  var c = b.filter(r)
+  function r(age){
+  	  return  age.name.indexOf('o') !== -1;
+  }
+  console.log(c)
+ */
+  /*
+	filter是数组特有方法
+	语法:
+	filter内部部分代码:
+		for(var i=0; i<b.length; i++){
+			if(p => p.name.indexOf('o')!==-1){ //如果符合规则 则返回
+				c.push(b[i])
+			}
+		}
+  */
+	// arr.filter(fun(x){return bool})
+	
+  
+  
+</script>
+</body>
+</html>

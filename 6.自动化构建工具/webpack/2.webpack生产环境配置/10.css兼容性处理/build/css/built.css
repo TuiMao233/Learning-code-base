@@ -1,0 +1,14 @@
+#box1 {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+  display: -webkit-box;
+  display: flex;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+#box2 {
+  width: 200px;
+  height: 200px;
+  background-color: deeppink;
+}

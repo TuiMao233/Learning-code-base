@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#wrap{
+				width: 200px;
+				height: 200px;
+				background: #009EE0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="inner"></div>
+		</div>
+	</body>
+	
+	<script>
+	/*	ev||event
+		offsetParent
+		事件绑定(DOM2)
+			事件流：捕获  目标处理 冒泡
+				捕获 冒泡的前提：有嵌套的dom结构
+		鼠标滚轮*/	
+	function bian (obj,eventStr, callback){  //传递三个形参 1.元素对象，2.事件名（不要on），3.运行函数	
+			if(obj.addEventListener){	//IE没有此方法，所以检测是否有 有则使用			mouseout
+			obj.addEventListener(eventStr,callback,false);//							click
+			}else{					//IE特有的方法，如果上面方法没有 则使用下面方法		mousemove
+			obj.attachEvent("on"+eventStr,function(){ //IE的方法事件前面需要加on
+				callback.call(obj);	//attachEvent的this是window // 利用call绑定this
+			},false)}}
+	var warp = document.getElementById("wrap")
+	bian(warp,'click', function(){
+		console.log(this)
+	})
+	</script>
+</html>

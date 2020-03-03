@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script>
+		/*
+		 * 测试题一
+		 * 1.依次输出什么？
+		 * 2.整个过程中产生了几个执行上下文？
+		 */
+		console.log('gb: '+i) //undefined
+		var i = 1
+		foo(1)
+		function foo(i){
+			if(i == 4){
+				return
+			}
+			console.log('fb: '+i)
+			foo(i + 1)
+			console.log('fe: '+i)
+		}
+		console.log('ge: '+i) //1
+		
+
+
+
+		
+		/*测试题二 */
+		function a(){}
+		var a
+		console.log(typeof a) //是什么
+		
+		
+		
+		
+		
+		/*测试题三*/
+		if(!(b in window)){
+			var b = 1
+		}
+		console.log(b)
+		
+		
+		
+		
+		
+		/*测试题四*/
+		var c = 1
+		function c(c){
+			console.log(c)
+		}
+		c(2)
+	</script>
+</html>

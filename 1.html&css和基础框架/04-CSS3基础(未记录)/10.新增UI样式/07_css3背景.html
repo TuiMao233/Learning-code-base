@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{
+				height:4000px
+			}
+			#test{
+				margin: 20px auto;
+				width: 200px;
+				height: 200px;
+				border: rgba(0,0,0,.5) 30px solid;
+				/*背景图像默认由padding加内容区内开始绘制*/
+				padding: 50px;
+				background-image: url(tg.png);
+				color: #fff;
+				font: bold 50px "微软雅黑";
+			}
+			#test:nth-child(1){
+				background-repeat: no-repeat;
+			}
+			#test:nth-child(2){
+				background-repeat: no-repeat;
+				/*从内容区开始绘制*/
+				background-origin: content-box;
+			}
+			#test:nth-child(3){
+				/*从padding-box开始剪裁*/
+				background-clip: padding-box;
+			}
+			#test:nth-child(4){
+				/*从padding-box开始剪裁*/
+				background-clip: padding-box;
+			}
+			#test:nth-child(5){
+				/*从padding-box开始剪裁*/
+				background-clip: content-box;
+			}
+			#test:nth-child(6){
+				/*背景拉伸宽度到div边界,高度自适应*/
+				background-repeat: no-repeat;
+				background-size: 100%;
+			}
+			#test:nth-child(7){
+				/*背景拉伸宽度与高度到div边界*/
+				background-repeat: no-repeat;
+				background-size: 100% 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">1</div>
+		<div id="test">2</div>
+		<div id="test">3</div>
+		<div id="test">4</div>
+		<div id="test">5</div>
+		<div id="test">6</div>
+		<div id="test">7</div>
+	</body>
+</html>

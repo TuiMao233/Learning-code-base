@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			#box1 {
+				width: 200px;
+			 	height: 200px;
+			   	background-color: brown;
+				position: absolute;
+				cursor: pointer;
+			}
+			#box2 {
+				width: 200px;
+				height:200px;
+				background-color: seagreen;
+				position: absolute;
+				top: 300px;
+				cursor: pointer;
+			}
+			#span {
+				background-color: blue;	
+			}
+		</style>
+		<script type="text/javascript">
+		window.onload=	function () {
+			box = document.getElementById("box1");
+			box.onmousewheel = function (event){
+				event = event||window.event;
+				//event.wheelData谷歌有效
+				//event.wheelDelta火狐有效
+				//兼容火狐浏览器
+				var wheel = event.wheelDelta != undefined ? event.wheelDelta   : event.detail;
+				if(wheel == -120|| wheel == 3){//判断向上还是向下 这里是向下
+					box.style.height = box.clientHeight + 10  + "px"
+				}else{ 		
+					//这里是向下
+					box.style.height = box.clientHeight - 10  + "px"
+				}
+				//因为火狐是调用bian函数执行的 所以return false 不起效果
+				event.preventDefault && event.preventDefault();//火狐取消默认行为需要event.preventDefault()
+				return false;				   //取消谷歌的默认
+			}
+			bian(box ,"DOMMouseScroll" , box.onmousewheel);
+			//事件绑定兼容///////////////////////////////////////////////////////////
+		function bian (obj,eventStr, callback){  //传递三个形参 1.元素对象，2.事件名（不要on），3.运行函数
+			if(obj.addEventListener){	//IE没有此方法，所以检测是否有 有则使用
+			obj.addEventListener(eventStr,callback,false);
+			}else{					//IE特有的方法，如果上面方法没有 则使用下面方法
+			obj.attachEvent("on"+eventStr,function(){ //IE的方法事件前面需要加on
+				callback.call(obj);	//兼容this
+			},false)
+			}
+		}
+		////////////////////////////////////////////////////////////////////////
+		
+		}
+		
+		// 滚轮功能函数
+		function wheel(el, callback) {
+			// 火狐没有onmousewheel 只有addEventListener的DOMMouseScroll
+			if(el.addEventListener){el.addEventListener("DOMMouseScroll",fn)}
+			el.onmousewheel = fn;
+			var dir="";
+			function fn (ev){
+				ev = ev||event
+				// 火狐detail 上:正 下:负
+				// 非火狐wheelDelta  上:负 下:正
+				var wheel = ev.wheelDelta != undefined ? ev.wheelDelta : -ev.detail;
+				if(wheel > 0){dir="up"}else{dir="down"}
+				callback.call(el,dir)
+			} 	
+		}
+		
+		</script>
+		
+	</head>
+	<body style="height: 2000px;">
+		<div id="box1"></div>
+	</body>
+	
+	
+</html>

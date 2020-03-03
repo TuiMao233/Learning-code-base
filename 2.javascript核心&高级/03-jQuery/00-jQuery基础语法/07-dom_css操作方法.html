@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	<script>
+	 		$(function(){
+	 			
+	 			
+	 			
+				//逐个设置
+				var div = $("div")[0];
+	 			$(div).css("width","600px");
+	 		    $(div).css("height","600px");
+	 		    $(div).css("background","#000");
+	 		    
+	 		    //链式设置
+	 		    $(div).css("width","600px").css("height","600px").css("background","#000")
+	 		    
+	 		    //批量设置
+	 		    $(div).css({
+	 		    	width:"600px",
+	 		    	height:"600px",
+	 		    	background:"#000"
+	 		    })
+	 		    
+	 		    
+	 		    
+	 		    });
+	 	</script>
+	</head>
+	<body>
+		<div id="div"></div>
+	</body>
+</html>

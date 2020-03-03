@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<!--
+1. Angular指令
+	* Angular为HTML页面扩展的: 自定义标签属性或标签
+	* 与Angular的作用域对象(scope)交互,扩展页面的动态表现力
+2. 常用指令(一)
+  * ng-app: 指定模块名，angular管理的区域
+  * ng-model： 双向绑定，输入相关标签
+  * ng-init： 初始化数据
+  * ng-click： 调用作用域对象的方法（点击时）
+  * ng-controller: 指定控制器构造函数名，内部会自动创建一个新的子作用域（外部的）
+  * ng-bind： 解决使用{{}}显示数据闪屏（在很短时间内显示{{}}）
+  * ng-repeat： 遍历数组显示数据， 数组有几个元素就会产生几个新的作用域
+    * $index, $first, $last, $middle, $odd, $even
+  * ng-show: 布尔类型， 如果为true才显示
+  * ng-hide: 布尔类型， 如果为true就隐藏
+-->
+
+	<body ng-app="myApp">
+
+		<div ng-controller="MyCtrl" ng-init="age=12">
+
+			<div>
+				<h2>价格计算器(自动)</h2>
+
+				数量：<input type="number" ng-model="count1">
+
+				价格：<input type="number" ng-model="price1">
+
+				<p>总计：{{count1 * price1}}</p>
+			</div>
+
+			<div>
+				<h2>价格计算器(手动)</h2>
+
+				数量：<input type="number" ng-model="count2">
+
+				价格：<input type="number" ng-model="price2">
+				<button ng-click="getTotalPrice()">计算</button>
+
+				<p>总计：{{totalPrice}}</p>
+			</div>
+
+			<!--
+    * ng-repeat： 遍历数组显示数据， 数组有几个元素就会产生几个新的作用域
+        * $index, $first, $last, $middle, $odd, $even
+    -->
+			<h3>人员信息列表</h3>
+			<ul>
+				<li ng-repeat="person in persons">
+					第一个：{{$first}},第{{$index + 1}}个，
+					中间的：{{$middle}},最后一个：{{$last}},
+					偶数行：{{$even}},奇数行{{$odd}},
+					{{person.name}}----{{person.age}}
+				</li>
+			</ul>
+
+			<!--
+    * ng-bind： 解决使用{{}}显示数据闪屏（在很短时间内显示{{}}）
+    -->
+			<!--当使用ng-bind的时候表达式不在生效-->
+			<p ng-bind="count2">{{'asdfdsfds'}}</p>
+			<p>{{count2}}</p>
+			<!--
+      * ng-show: 布尔类型， 如果为true才显示
+      * ng-hide: 布尔类型， 如果为true就隐藏
+    -->
+			<!--<button ng-click="switch()">切换</button>-->
+			<!--<p ng-show="isLike">我爱范冰冰</p>-->
+			<!--<p ng-hide="isLike">范冰冰爱我</p>-->
+			<button ng-click="switch()">切换</button>
+			<p ng-show="isLike">我喜欢贾静雯</p>
+			<p ng-hide="isLike">贾静雯喜欢我</p>
+
+		</div>
+		<script type='text/javascript' src='js/angular-1.5.5/angular.js'></script>
+		<script type='text/javascript'>
+			/*
+			 * ng-app: 指定模块名，angular管理的区域
+			 * ng-model： 双向绑定，输入相关标签
+			 * ng-init： 初始化数据
+			 * ng-click： 调用作用域对象的方法（点击时）
+			 * ng-controller: 指定控制器构造函数名，内部会自动创建一个新的子作用域（外部的）
+			 * */
+			//创建模块对象
+angular.module('myApp', [])
+	.controller('MyCtrl', ['$scope', function($scope) {
+		$scope.count1 = 1;
+		$scope.price1 = 20;
+		$scope.count2 = 1;
+		$scope.price2 = 10;
+		$scope.getTotalPrice = function() {
+			$scope.totalPrice = this.count2 * this.count2;
+		};
+
+		$scope.persons = [
+			{name: 'kobe',age: 39},
+			{name: 'anverson',age: 41},
+			{name: 'weide',age: 38},
+			{name: 'tim',age: 40},
+			{name: 'curry',age: 29}
+		];
+		$scope.isLike = true;
+		$scope.switch = function() {
+			$scope.isLike = !$scope.isLike;
+		}
+}])
+		</script>
+
+	</body>
+</html>

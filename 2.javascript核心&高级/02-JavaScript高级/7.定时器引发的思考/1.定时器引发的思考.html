@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>启动定时器</button>
+		<!--
+			1.定时器真是定时执行的吗？
+				定时器并并能保证真正定时执行
+				一般会延迟一丁点（可以接受），也可能延迟很长时间（不能接受）
+			2.定时器回调函数是在分线程执行的吗？
+				在主线程执行，js是单线程
+			3定时器是如何实现的？
+				时间循环模型
+		-->
+	</body>
+	<script type="text/javascript">
+		var but = document.querySelector("button");
+		
+		but.onclick = function(){
+			var start = Date.now()
+			console.log('启动定时器前')
+			setTimeout(function(){
+				console.log(Date.now()-start) //1563 远远超过了200毫秒
+				console.log('启动定时器后')
+			},200)
+			
+			//做一个长时间的工作
+			for (var i=0; i < 1000000000; i++) {
+				
+			}
+		}
+		
+	</script>
+</html>

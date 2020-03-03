@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				background: #DC6C5F;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+	</body>
+	<script>
+		
+		window.onload = function(){
+			var testNode = document.getElementById("test");
+			
+			function wheel(el, callback) {
+				// 火狐没有onmousewheel 只有addEventListener的DOMMouseScroll
+				if(el.addEventListener){el.addEventListener("DOMMouseScroll",fn)}
+				el.onmousewheel = fn;
+				function fn (ev){
+					ev = ev||event
+					var dir="";
+					// 火狐detail 上:正 下:负
+					// 非火狐wheelDelta  上:负 下:正
+					var wheel = ev.wheelDelta != undefined ? ev.wheelDelta : -ev.detail;
+					if(wheel > 0){dir="up"}else{dir="down"}
+					callback.call(el,dir)
+				} 
+			}
+			wheel(testNode, function (dir) {
+				console.log(dir)
+			})
+		}
+	</script>
+</html>

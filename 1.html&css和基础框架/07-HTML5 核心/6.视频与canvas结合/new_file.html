@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			canvas{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+			button{
+				width: 200px;
+				height: 50px;
+				font-size: 20px;
+				align-items: center;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<button>点击画布播放</button>
+		<canvas  width="800" height="450"></canvas>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oc = document.querySelector("canvas");
+			var video = document.createElement("video");
+			var but = document.querySelector("button");
+			video.src = "../4.视频播放器/7.视频播放器布局/video/test.mp4";
+			if(oc.getContext){
+				var ctx = oc.getContext("2d");
+				video.addEventListener("loadeddata",function(){
+					setInterval(function(){
+						ctx.drawImage(video,0,0,oc.width,oc.height);
+					})
+				})
+				but.onclick = function(){
+					video.play();
+				}
+			}
+		}
+	</script>
+</html>

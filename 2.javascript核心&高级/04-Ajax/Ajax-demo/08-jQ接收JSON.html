@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-1.12.4.js"></script>
+	</head>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{
+			margin-left: 30px;
+			position: absolute;
+			top: 10px;
+			display: inline-block;
+			line-height: 35px;
+		}
+		ul>li>a{
+			color: green;
+		}
+		img{
+			width: 200px;
+		}
+		#details{
+			position: absolute;
+			left: 30px;
+		    margin:0px;
+		    padding:0px;
+		    font-family:"微软雅黑","黑体","宋体";
+		    font-size:30px;
+		    height:36px;
+		    color: lightblue;
+		}
+	</style>
+	<body>
+		<img src="data/psbw.gif"/>
+		<ul>
+			<li><a href="data/JSON/Andy.js">Andy</a></li>
+			<li><a href="data/JSON/Richard.js">Richard</a></li>
+			<li><a href="data/JSON/Jeremy.js">Jeremy</a></li>
+		</ul>
+		<div id="details"></div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			$("a").click(function(){
+				url = this.href;
+				args = {"time":new Date()};
+				//url:
+				//args:JSON格式
+				//function:回调函数：当响应结束时，回调函数被触发。响应结果在data中
+				$.getJSON(url,args,function(data){
+					var name = data.person.name;
+					var website = data.person.website;
+					var email = data.person.email;
+					$("#details").empty()
+								 .append("<h2>"+name+"<h2>")
+								 .append("<a href='"+website+"'>"+website+"</a>")
+								 .append("<p>"+email+"</p>")
+				})
+				return false;
+			})
+		})
+	</script>
+</html>

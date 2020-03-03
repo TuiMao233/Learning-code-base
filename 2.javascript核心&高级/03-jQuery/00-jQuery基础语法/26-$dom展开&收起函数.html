@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>41-jQuery展开和收起动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 300px;
+            background: red;
+            display: none;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+		/*
+			语法：time 显示/隐藏的时长, callback是动画执行完后的回调函数
+				展开:
+				$dom.slideDown(time, [,callback])
+				收起:
+				$dom.slideUp(time, [,callback])
+				切换:
+				$dom.toggle(time, [,callback])
+		 */
+        $(function () {
+            // 编写jQuery相关代码
+        $("button").eq(0).click(function () {
+            $("div").slideDown(1000, function () {
+                alert("展开完毕");
+            });
+        });
+        $("button").eq(1).click(function () {
+            $("div").slideUp(1000, function () {
+                alert("收起完毕");
+            });
+        });
+        $("button").eq(2).click(function () {
+            $("div").slideToggle(1000, function () {
+                alert("收起完毕");
+            });
+        });
+        });
+    </script>
+</head>
+<body>
+<button>展开</button>
+<button>收起</button>
+<button>切换</button>
+<div></div>
+</body>
+</html>

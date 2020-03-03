@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+			}
+			#wrap{
+				width: 500px;
+				height: 500px;
+				/*background: darkcyan;*/
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+			#wrap > div{
+				width: 50%;
+				height: 50%;
+				box-sizing: border-box;
+				border: 10px solid #fff;
+				float: left;
+				background: brown;
+				/*border-radius: 0 150px;*/
+			}
+			#wrap > div:nth-child(1),#wrap > div:nth-child(4){
+				border-radius: 0 150px;
+			}
+			#wrap > div:nth-child(2),#wrap > div:nth-child(3){
+				border-radius: 150px 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</body>
+</html>

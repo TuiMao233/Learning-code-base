@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>42-折叠菜单上</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            list-style: none;
+            width: 300px;
+            margin: 100px auto;
+            /*border: 1px solid #000;*/
+        }
+        .nav>li{
+            border: 1px solid #000;
+            line-height: 35px;
+            border-bottom: none;
+            text-indent: 2em;
+            position: relative;
+        }
+        .nav>li:last-child{
+            border-bottom: 1px solid #000;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .nav>li:first-child{
+            border-top-right-radius: 10px;
+            border-top-left-radius: 10px;
+        }
+        .nav>li>span{
+            background: url("img/arrow_right.png") no-repeat center center;
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            right: 10px;
+            top: 5px;
+        }
+		.nav> li > .down{
+			transform: rotate(90deg);
+		}
+        .sub{
+            display: none;
+        }
+        .sub>li{
+            list-style: none;
+            background: mediumpurple;
+            border-bottom: 1px solid white;
+        }
+        .sub>li:hover{
+            background: red;
+        }
+        .nav>.current>span{
+            transform: rotate(90deg);
+        }
+		
+    </style>
+</head>
+<body>
+<script src="jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.nav li').click(function(){
+			// 获取点击的li里的.sub元素
+			var $sub = $(this).children('.sub')
+			// 展开二级菜单
+			$sub.slideDown(1000);
+			
+			// 获取点击li其他兄弟元素
+			var $sibLi = $(this).siblings()
+			// 获取点击li其他兄弟元素的二级菜单
+			var $siblSub = $sibLi.children('.sub')
+			// 收起其他二级菜单
+			$siblSub.slideUp(1000)
+			
+			// 获取点击li其他兄弟元素的二级菜单
+			var $sibSpan = $sibLi.siblings().children('span')
+			// 将其他span移出down类名
+			$sibSpan.removeClass('down')
+			// 将点击的li的span添加类名down
+			$(this).children('span').addClass('down')
+		})
+	})
+</script>
+<ul class="nav">
+    <li>一级菜单<span></span>
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+	<li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+	<li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+	<li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+	<li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+	<li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+	<li>一级菜单<span></span>
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

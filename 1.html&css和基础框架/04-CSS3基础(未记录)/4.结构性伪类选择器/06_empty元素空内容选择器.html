@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			#wrap{
+				border: 2px solid;
+				overflow: hidden;
+			}
+			#wrap > div{
+				width: 200px;
+				height: 200px;
+				background: yellowgreen;
+				float: left;
+			}
+			#wrap > .A1:empty{ /*只有元素完全无内容才会被选中*/
+				background: darkkhaki;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="A1">xxxxx</div>
+			<div class="A1"></div>
+			<div class="A1">xxxxx</div>
+			<div class="A1"></div>
+			<div class="A1">xxxxx</div>
+			<div class="A1"></div>
+			<div class="A1">xxxxx</div>
+			<div class="A1"></div>
+		</div>
+		
+	</body>
+	<script src="../../less/less.min.js/"></script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			1.理解
+				自执行匿名函数 
+			2.作用
+				隐藏实现
+				局部变量环境
+				不会污染外部（全局）命名空间
+		-->
+		
+	</body>
+	<script type="text/javascript">
+		(function(){
+			console.log("邓子龙傻逼");
+		})();
+		
+		(function(){
+			var a = 1
+			function test(){
+				console.log(++a)
+			}
+			window.$ = function (){ //向外暴露一个全局函数
+				return  {test:test};
+			}
+		})();
+		
+		$().test();
+	</script>
+</html>

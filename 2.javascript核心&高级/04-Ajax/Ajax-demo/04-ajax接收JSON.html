@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{
+			margin-left: 30px;
+			position: absolute;
+			top: 10px;
+			display: inline-block;
+			line-height: 35px;
+		}
+		ul>li>a{
+			color: green;
+		}
+		img{
+			width: 200px;
+		}
+		#details{
+			position: absolute;
+			left: 30px;
+		    margin:0px;
+		    padding:0px;
+		    font-family:"微软雅黑","黑体","宋体";
+		    font-size:30px;
+		    height:36px;
+		    color: lightblue;
+		}
+	</style>
+	<body>
+		<img src="psbw.gif"/>
+		<ul>
+			<li><a href="data/JSON/Andy.js">Andy</a></li>
+			<li><a href="data/JSON/Richard.js">Richard</a></li>
+			<li><a href="data/JSON/Jeremy.js">Jeremy</a></li>
+		</ul>
+		<div id="details"></div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aNdos = document.querySelectorAll("a");
+			for (var i=0; i<aNdos.length; i++) {
+				aNdos[i].onclick = function (){
+					var request = new XMLHttpRequest();
+					var method ="GET";
+					var url = this.href;
+					
+					request.open(method,url);
+					request.send(null);
+					var w = new Date();
+					request.onreadystatechange = function(){
+						if(request.readyState == 4){
+							if(request.status == 200 || request.status == 304){
+								//1.结果为JSON格式，所以需要使用JSON.parse() 来转换为JS对象
+								var result = request.responseText;
+								var obj = JSON.parse(result);
+								
+								var name = obj.person.name;
+								var website = obj.person.website;
+								var email = obj.person.email;
+								var details = document.querySelector("#details");
+								var h2 = document.createElement("h2");
+								var a = document.createElement("a");
+								var em = document.createElement("p");
+								h2.innerText = name;
+								a.href = website;
+								a.innerText = website;
+								em.innerText = email;
+								details.innerHTML = "";
+								details.appendChild(h2);
+								details.appendChild(a);
+								details.appendChild(em);
+								
+							}
+						}
+					}
+					
+					return false;
+				}
+			}
+		}
+	</script>
+</html>

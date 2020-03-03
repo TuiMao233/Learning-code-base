@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{
+				height:4000px;
+			}
+			#wrap{
+				border: 1px solid #000;
+				height: 400px;
+				width: 700px;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+			#wrap:nth-child(1){
+				background-image: radial-gradient(circle at 100%,/*默认是椭圆*/
+				#333 30%,
+				#eee 50%,
+				#333 50%,
+				#333 100%);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap"></div>
+	</body>
+</html>

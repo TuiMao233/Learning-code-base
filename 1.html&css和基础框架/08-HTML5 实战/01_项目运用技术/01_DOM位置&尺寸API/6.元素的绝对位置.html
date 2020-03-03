@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				overflow: auto;
+			}
+			#warp{
+				position: absolute;
+				width: 150px;
+				height: 150px;
+				background: teal;
+				left: 120px;
+				top: 30px;
+			}
+			#inner1{
+				position: absolute;
+				width: 150px;
+				height: 150px;
+				background: darkgray;
+				left: 160px;
+				top: 120px;
+				border: 30px solid darkblue;
+			}
+			#but{
+				position: fixed;
+			}
+		</style>
+	</head>
+	<body id="body">
+		<div id="warp">wrap
+			<div id="inner1">inner1</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+
+		/*获取元素与body的x轴和y轴的偏移量*/
+		function getPointAb(el) {
+			var x = 0, y = 0
+			while(el) {// 执行到最后 父级等于null 则停止循环
+				x += el.offsetLeft + parseInt(getStyle(el,"borderWidth"))
+				y += el.offsetTop + parseInt(getStyle(el,"borderWidth"))
+				el = el.offsetParent // el = 父级
+			}
+			return {x:x,y:y} // 计算完成返回x与y值
+		}
+		function getStyle (obj , name){
+			return	window.getComputedStyle ?
+					getComputedStyle(obj,null)[name] :
+					obj.currentStyle[name];
+		}
+		
+		//拿取inner1的绝对位置
+		var warp = document.getElementById("warp");
+		var inner1 = document.getElementById("inner1");
+		console.log(inner1.offsetLeft)
+		console.log(getPointAb(inner1))
+		
+		
+		
+		
+		
+		
+	</script>
+</html>

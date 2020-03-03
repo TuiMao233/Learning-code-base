@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<style type="text/css">
+		*{
+			display: none;
+		}
+	</style>
+	<body>
+		<!--
+		1.条件渲染指令
+			v-if
+			v-else
+			v-show
+		2.比较v-if与v-show
+			如果需要频繁切换v-show
+		 -->
+		<div id="demo">
+			<p v-if="ok">成功了</p>
+			<p v-else>失败了</p>
+			<p v-show="ok">表白成功</p>
+			<p v-show="!ok">表白失败</p>
+			<button @click="ok=!ok">点击</button>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	var vm =new Vue({
+			el:'#demo',
+			data:{
+				ok:false
+			}
+		})
+		
+	</script>
+</html>

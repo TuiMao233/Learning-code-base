@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>39-jQuery显示和隐藏动画</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            display: none;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+			/*
+				语法：time 显示/隐藏的时长, callback是动画执行完后的回调函数
+					显示:
+					$dom.show(time, [,callback])
+					隐藏:
+					$dom.hide(time, [,callback])
+					切换:
+					$dom.toggle(time, [,callback])
+			 */
+			
+            $("button").eq(0).click(function () {
+                // $("div").css("display", "block");
+                // 注意: 这里的时间是毫秒
+                $("div").show(1000, function () {
+                    // 作用: 动画执行完毕之后调用
+                    alert("显示动画执行完毕");
+                });
+            });
+            $("button").eq(1).click(function () {
+                // $("div").css("display", "none");
+                $("div").hide(1000, function () {
+                    alert("隐藏动画执行完毕");
+                });
+            });
+            $("button").eq(2).click(function () {
+                $("div").toggle(1000, function () {
+                    alert("切换动画执行完毕");
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<button>显示</button>
+<button>隐藏</button>
+<button>切换</button>
+<div></div>
+</body>
+</html>

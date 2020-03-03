@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			div{
+				width: 200px;
+				height: 200px;
+			}
+			#test{ /*特殊性为0,1,0,0*/
+				background: deeppink;
+			}
+			.pink.pink.pink{ /*特殊性为0,0,3,0*/
+				
+			}
+		</style>
+	</head>
+	<body>					<!--style特殊性为0-->
+		<div class="pink" id="test"	style=""></div>
+	</body>
+</html>

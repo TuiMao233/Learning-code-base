@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			
+			/*三列的伪等高布局*/
+			#content{
+				overflow: hidden;
+			}
+			#content .middle,#content .left,#content .right{
+				padding-bottom: 10000px;
+				margin-bottom: -10000px;
+				float: left;
+			}
+			/* 设置颜色样式 */
+			#center{background: darkcyan;}
+			#left{background: aqua;}
+			#right{background: gold;}
+			/*头部 脚部样式*/
+			#header,#footer{
+				border: 1px solid darkgrey;
+				text-align: center;
+				clear: both;
+			}
+			/*双飞翼布局*/
+			
+			/* 假设left为200，right为150 */
+			#container {width: 100%;}
+			#center{margin-left: 200px;margin-right: 150px;}
+			
+			/* 设置两边样式 */
+			#left {width: 200px;}
+			#right {width: 150px;}
+			
+			/* 为三个元素进行浮动 */
+			#container, #left, #right{float: left;}
+			
+			/* 让left到位 */
+			#left {margin-left: -100%;}
+			
+			/* 让right到位 */
+			#right {margin-left: -150px;}
+		</style>
+	</head>
+	<body>
+	  <div id="header"></div>
+	  <div id="container">
+	    	<div id="center">center</div>
+	  </div>
+	  <div id="left">left</div>
+	  <div id="right">right</div>
+	  <div id="footer"></div>
+	<body>
+</html>

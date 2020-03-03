@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			a{
+				text-decoration: none;
+			}
+			input:enabled{ /*匹配可编辑的表单*/
+				background: yellowgreen;
+			}
+			input:disabled{ /*匹配被禁用的表单*/
+				background: pink;
+			}
+			input:checked{ /*匹配被选中的表单*/
+				width: 200px;
+				height: 200px;
+			}
+			input:focus{ /*匹配获取焦点的表单*/
+				background: #000000;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="text"  />
+		<input type="text" disabled="disabled" />
+		<input type="checkbox" />
+	</body>
+</html>

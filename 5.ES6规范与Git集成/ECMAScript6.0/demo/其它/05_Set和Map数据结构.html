@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_Set和Map数据结构</title>
+</head>
+<body>
+<!--
+1. Set容器 : 无序不可重复的多个value的集合体
+  * Set()
+  * Set(array)
+  * add(value)
+  * delete(value)
+  * has(value)
+  * clear()
+  * size
+2. Map容器 : 无序的 key不重复的多个key-value的集合体
+  * Map()
+  * Map(array)
+  * set(key, value)//添加
+  * get(key)
+  * delete(key)
+  * has(key)
+  * clear()
+  * size
+-->
+
+<script type="text/javascript">
+// 创建Set数据结构
+var set = new Set([1,1,1,1,2,3])
+// 添加数据
+set.add(4)
+console.log(set)
+
+// 是否有该value值
+console.log(set.has(4), set.has(5))
+
+// 清除容器
+set.clear()
+console.log(set)
+
+var map = new Map([['username', '当代大学生'],[60, 'age']])
+console.log(map)
+</script>
+</body>
+
+</html>

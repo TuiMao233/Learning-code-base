@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			一、内存溢出
+					一种程序运行出现的错误
+					当程序运行的内存超过剩余的内存时，就会抛出内存溢出的错误
+			二、内存泄漏
+					占用的内存没有及时释放
+					内存泄漏积累多了就容易导致内存溢出
+					常见的内存泄漏：
+						意外的全局变量
+						没有及时清理的计时器回调函数
+						闭包
+		-->
+	</body>
+	<script type="text/javascript">
+	
+	function x(){
+		var d = 0
+		function r(){
+			//产生闭包
+			d = 1
+		}
+		r()
+	}
+	x()
+	</script>
+</html>

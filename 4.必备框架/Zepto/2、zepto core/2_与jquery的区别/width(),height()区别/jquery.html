@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>jquery</title>
+<style type="text/css">
+  #box{
+    width: 200px;
+    height: 200px;
+    background: #f00;
+    margin: 10px;
+    padding: 10px;
+    border: 3px solid #f0f;
+  }
+</style>
+</head>
+<body>
+<div id="box"></div>
+<script src="../../../js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  /*
+   * jquery获取宽高的方法
+    1、width(),height()---content内容区的宽高，没有单位px;
+    2、.css('width')----可以获取content内容区的宽高，padding，border的值，有单位px;
+    3、innerHeight(),innerWidth()---outerHeight(),outerWidth()来获取
+   * */
+  $(function(){
+    //jquery中width(),height(),.css()返回的始终是content区域的宽高
+    console.log($('#box').width());
+    console.log($('#box').height());
+    console.log($('#box').css('width'));
+    //可以通过css（）获取padding，border的值
+    console.log($('#box').css('padding'));
+    console.log($('#box').css('border-width'));
+    //也可以利用innerHeight(),outerHeight(),innerWidth(),outerWidth()等来获取padding和border的值
+    console.log($('#box').innerHeight());
+    console.log($('#box').outerHeight()+'outerHeight');
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>jquery_offset的区别</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #box{
+      width: 200px;
+      height: 200px;
+      position: relative;
+      left: 50px;
+      top: 100px;
+      font-size: 22px;
+      background: #ff0;
+      text-align: center;
+      line-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    1、获取匹配元素在当前视口的相对偏移。
+    2、返回的对象包含两个整型属性：top 和 left。此方法只对可见元素有效。
+  -->
+  <div id="box">新年快乐，大吉大利</div>
+<script src="../../../js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    var $offset = $('#box').offset();
+    console.log($offset);
+    console.log($offset.top);
+    //获取width，height时为undefined
+    console.log($offset.width);
+  })
+</script>
+</body>
+</html>

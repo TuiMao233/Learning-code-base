@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			
+			body{
+				height: 60%;
+				width: 600px;
+				border: 1px solid;
+				margin: 100px auto;
+				position: relative;
+				overflow: hidden;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 40px/200px "微软雅黑";
+				text-align: center;
+				background: #E3E3E3;
+				transition: 1s;
+			}
+			/*缩放*/
+			body:hover #test{
+				/*要缩小,值设0.01~0.99之间*/
+				/*要放大,设超过1的值*/
+				/*缩小*/
+				transform: scale(.5);
+				/*放大*/
+				transform: scale(2);
+				/*X轴缩小*/
+				/*transform: scaleY(.5);*/
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">邓志龙</div>
+	</body>
+</html>

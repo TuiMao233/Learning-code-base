@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			.box {
+				width: 500px;
+				height: 500px;
+				background-color: aqua;
+			}
+			.box.active {
+				border: solid 5px saddlebrown;
+			}
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	<script>
+	 		$(function(){
+	 		    var but = document.getElementsByTagName("button");
+	 		    but[0].onclick = function (){
+	 		    	$("div").addClass("box");		//添加单个类名
+	 		    	$("div").addClass("active");	//可以叠加
+	 		    }
+	 		    but[1].onclick = function (){
+	 		    	$("div").removeClass("active");	//去除单个类名active
+	 		    }
+	 		    but[2].onclick = function (){
+	 		    	$("div").toggleClass("box active"); //有则添加，没有则去除
+	 		    }
+	 		    });
+	 	</script>
+	</head>
+	<body>
+		<button>写入类名</button>
+		<button>删除类名</button>
+		<button>切换类名</button>
+		<div></div>
+	</body>
+</html>

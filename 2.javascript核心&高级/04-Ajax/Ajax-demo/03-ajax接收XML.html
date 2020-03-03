@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{
+			margin-left: 30px;
+			position: absolute;
+			top: 10px;
+			display: inline-block;
+			line-height: 35px;
+		}
+		ul>li>a{
+			color: green;
+		}
+		img{
+			width: 200px;
+		}
+		#details{
+			position: absolute;
+			left: 30px;
+		    margin:0px;
+		    padding:0px;
+		    font-family:"微软雅黑","黑体","宋体";
+		    font-size:30px;
+		    height:36px;
+		    color: lightblue;
+		}
+	</style>
+	<body>
+		<img src="psbw.gif"/>
+		<ul>
+			<li><a href="data/XML/Andy.xml">Andy</a></li>
+			<li><a href="data/XML/Richard.xml">Richard</a></li>
+			<li><a href="data/XML/Jeremy.xml">Jeremy</a></li>
+		</ul>
+		<div id="details"></div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aNdos = document.querySelectorAll("a");
+			for (var i=0; i<aNdos.length; i++) {
+				aNdos[i].onclick = function (){
+					var request = new XMLHttpRequest();
+					var method ="GET";
+					var url = this.href;
+					
+					request.open(method,url);
+					request.send(null);
+					var w = new Date();
+					request.onreadystatechange = function(){
+						if(request.readyState == 4){
+							if(request.status == 200 || request.status == 304){
+								//1.结果为XML格式，所以需要使用responseXML 来获取
+								var result = request.responseXML;
+								//2.结果不能直接使用，必须先创建对应的节点，在把节点加入#details中
+								var name = result.getElementsByTagName("name")[0].firstChild.nodeValue;
+								var website = result.getElementsByTagName("website")[0].firstChild.nodeValue;
+								var email = result.getElementsByTagName("email")[0].firstChild.nodeValue;
+								
+								var details = document.querySelector("#details");
+								var h2 = document.createElement("h2");
+								var a = document.createElement("a");
+								var em = document.createElement("p");
+								h2.innerText = name;
+								a.href = website;
+								a.innerText = website;
+								em.innerText = email;
+								details.innerHTML = "";
+								details.appendChild(h2);
+								details.appendChild(a);
+								details.appendChild(em);
+								
+							}
+						}
+					}
+					
+					return false;
+				}
+			}
+		}
+	</script>
+</html>

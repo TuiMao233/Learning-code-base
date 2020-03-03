@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>zu cool PC项目</title>
+		<style type="text/css">
+			/*重置样式*/
+			html,body{height: 100%;overflow: hidden;}
+			html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin: 0px;padding: 0px;font: 14px "微软雅黑";}
+			a{text-decoration: none;display: block;color: white;}
+			li{list-style: none;}
+			img{display: block;}
+				
+			/*头部*/	
+			#head{position: absolute; width: 100%;height: 60px;background: rgba(0,0,0,0.8);overflow: hidden; z-index: 2;}
+			#head .wrap{width: 980px;height: 60px;margin: auto;}
+			#head .wrap .logo{float: left;margin: 16px 20px 0 0;}
+			#head .wrap .nav{float: right;}
+			#head .wrap .nav > li{float: left;width: 90px; line-height: 60px;text-align: center;white-space: nowrap;}
+			#head .wrap .nav > .active a{background:#fc0;color: black;}
+			#head .wrap .nav > li a:hover{background:#fc0;color: black;}
+			
+			/*右侧点击栏*/	
+			#content .point{position: fixed;width: 10px;top: 50%;right: 15px;z-index: 3;}
+			#content .point > li a{float: left;width: 10px;height: 10px;border: 1px solid black;border-radius: 50%;margin-bottom: 7px;transition: 1s background;}
+			#content .point > .active a{background: black;} 
+			#content .point > li a:hover{background: black;}
+			
+			/*第一页*/	
+			#content{position: absolute;top: 60px; width: 100%;backgroundover:#fc0; overflow: hidden; }
+			#content .list{position: absolute;left: 0;top: 0;width: 100%;height: 100%; transition:1s top;}
+			#content .list > li{position: relative; width: 100%;height:100%; background-position:50% 50% !important;overflow: hidden;}
+			#content .list > .home1{width: 100%;height: 100%;background:url(img/s1.jpg) center;}
+			#content .list > .home1 img{position:absolute; top: 50%; left: 50%; margin-left: -545px; margin-top: -260px;
+										transition: 1s opacity;}
+			
+			/*第二页*/
+			#content .list > .home2{background: url(img/s2.jpg);width: 100%;height: 100%;}
+			#content .list > .home2 .left{position: absolute; width: 837px;height: 437px;left: 3%;margin-top: 3%;z-index: 1;}
+			#content .list > .home2 .left .pics{width: 100%;height: 100%;}
+			#content .list > .home2 .left .pics li{float: left;margin-left: 20px;transition: 1s;}
+			#content .list > .home2 .left .pics li:nth-child(1){transform: translateY(0px);}
+			#content .list > .home2 .left .pics li:nth-child(2){transform: translateY(0px);}
+			#content .list > .home2 .left .pics li:nth-child(3){transform: translateY(0px);}
+			#content .list > .home2 .left .pics li p{font-size: 18px;text-align: center;margin: 20px 0;}
+			#content .list > .home2 .left .pics li a{position: relative;width: 98px;height: 36px;left: 80px; background: url(img/buy.jpg) no-repeat;}
+			#content .list > .home2 .right{position: absolute;right: 3%;border-right:2px solid;padding-right: 10px; text-align: right; top: 10%;transition: 1s; z-index: 1;}
+			#content .list > .home2 .right h1{font-size:34px; color:#333; font-weight:100;}
+			#content .list > .home2 .right p{font-size:18px; color:#333; line-height:1.5em;margin-top:20px; margin-bottom:10px; }
+			#content .list > .home2 .right a{color:#333;text-decoration:underline; cursor: pointer }
+			#content .list > .home2 .right a:hover{ text-decoration:none;}
+			#content .list > .home2 .bg{ position: absolute; bottom: 0; right: 0;}
+			
+			/*第三页*/
+			#content .list > .home3{background: url(img/s3.jpg) center;}
+			#content .list > .home3 .left{position: absolute; width: 837px;height: 437px;left: 3%;margin-top: 3%;z-index: 1;}
+			#content .list > .home3 .left {width: 100%;height: 100%;}
+			#content .list > .home3 .left li{float: left;margin-left: 20px;transition: 1s;}
+			#content .list > .home3 .left li:nth-child(2){transform: translateX(0px);}
+			#content .list > .home3 .left li:nth-child(3){transform: translateX(0px);}
+			#content .list > .home3 .left li p{font-size: 18px;text-align: center;margin: 20px 0;}
+			#content .list > .home3 .left li a{position: relative;width: 98px;height: 36px;left: 80px; background: url(img/buy.jpg) no-repeat;}
+			#content .list > .home3 .right{position: absolute;right: 3%;border-right:2px solid;padding-right: 10px; text-align: right; top: 10%;transition: 1s;z-index: 1;}
+			#content .list > .home3 .right h1{font-size:34px; color:#333; font-weight:100;}
+			#content .list > .home3 .right p{font-size:18px; color:#333; line-height:1.5em;margin-top:20px; margin-bottom:10px; }
+			#content .list > .home3 .right a{color:#333;text-decoration:underline; cursor: pointer }
+			#content .list > .home3 .right a:hover{ text-decoration:none;}
+			#content .list > .home3 .bg{ position: absolute; bottom: 0; right: 0;}
+			
+			/*第四页*/
+			#content .list > .home4{background: url(img/s4.jpg) center;}
+			#content .list > .home4 .left{position: absolute; width: 837px;height: 437px;left: 3%;margin-top: 3%;z-index: 1;}
+			#content .list > .home4 .left {width: 100%;height: 100%;}
+			#content .list > .home4 .left li{float: left;margin-left: 20px;transition: 2s ;}
+			#content .list > .home4 .left li p{font-size: 18px;text-align: left;margin: 20px 0;}
+			#content .list > .home4 .left li a{width: 98px;height: 36px;left: 80px; background: url(img/buy.jpg) no-repeat;}
+			#content .list > .home4 .right{position: absolute;right: 3%;border-right:2px solid;padding-right: 10px; text-align: right; top: 10%;transition: 1s;z-index: 1;}
+			#content .list > .home4 .right h1{font-size:34px; color:#333; font-weight:100;}
+			#content .list > .home4 .right p{font-size:18px; color:#333; line-height:1.5em;margin-top:20px; margin-bottom:10px; }
+			#content .list > .home4 .right a{color:#333;text-decoration:underline; cursor: pointer }
+			#content .list > .home4 .right a:hover{ text-decoration:none;}
+			#content .list > .home4 .bg{ position: absolute; bottom: 0; right: 0;}
+			
+			/*第五页*/
+			#content .list > .home5{background: url(img/s5.jpg) center;}
+			#content .list > .home5 .left{position: absolute; width: 837px;height: 437px;left: 3%;margin-top: 3%;z-index: 1;}
+			#content .list > .home5 .left {width: 100%;height: 100%;}
+			#content .list > .home5 .left li{float: left;margin-left: 20px;transition: 1s;transform: translate3d(-1000px,-800px,-500px) rotateX(145deg)}
+			#content .list > .home5 .left li p{font-size: 18px;text-align: left;margin: 20px 0;}
+			#content .list > .home5 .left li a{width: 98px;height: 36px; background: url(img/buy.jpg) no-repeat;}
+			#content .list > .home5 .right{position: absolute;right: 3%;border-right:2px solid;padding-right: 10px; text-align: right; top: 10%;transition: 1s;z-index: 1;}
+			#content .list > .home5 .right h1{font-size:34px; color:#333; font-weight:100;}
+			#content .list > .home5 .right p{font-size:18px; color:#333; line-height:1.5em;margin-top:20px; margin-bottom:10px; }
+			#content .list > .home5 .right a{color:#333;text-decoration:underline; cursor: pointer }
+			#content .list > .home5 .right a:hover{ text-decoration:none;}
+			#content .list > .home5 .bg{ position: absolute; bottom: 0; right: 0;}
+			
+			@keyframes move1 {
+            0%{ transform: translate(330px,-1000px) }
+            20%{ transform: translate(330px,0) }
+            40%{ transform: translate(330px,-50px) }
+            60%{ transform: translate(330px,0px) }
+            100%{ transform: translate(0,0) }
+	        }
+	        @keyframes move2 {
+	            0%{ transform: translate(0,-1000px) }
+	            20%{ transform: translate(0,0) }
+	            40%{ transform: translate(0,-50px) }
+	            60%{ transform: translate(0,0px) }
+	            100%{ transform: translate(0,0) }
+	        }
+	        @keyframes move3 {
+	            0%{ transform: translate(-330px,-1000px) }
+	            20%{ transform: translate(-330px,0) }
+	            40%{ transform: translate(-330px,-50px) }
+	            60%{ transform: translate(-330px,0px) }
+	            100%{ transform: translate(0,0) }
+	        }
+		</style>
+	</head>
+	<body>
+		<header id="head">
+			<section class="wrap">
+				<h1 class="logo">
+					<a href="javascript:;"><img src="img/logo.png"/></a>
+				</h1>
+				<ul class="nav">
+					<li class="active"><a href="javascript:;">首页</a></li>
+					<li><a href="javascript:;">抽象派</a></li>
+					<li><a href="javascript:;">人物油画</a></li>
+					<li><a href="javascript:;">绽放</a></li>
+					<li><a href="javascript:;">植物景观</a></li>
+				</ul>
+			</section>
+		</header>
+		<section id="content">
+			<ul class="list">
+				<li class="home1">
+					<img src="img/wenzi.png"/>
+				</li>
+				<li class="home2">
+					<div class="left">
+						<ul class="pics">
+							<li>
+								<img src="img/img1.png"/>
+								<p>望<br />30*40cm / 40*50cm</p>
+								<a href="javascript:;"></a>
+							</li>
+							<li>
+								<img src="img/img2.png"/>
+								<p>听<br />30*40cm / 40*50cm</p>
+								<a href="javascript:;"></a>
+							</li>
+							<li>
+								<img src="img/img3.png"/>
+								<p>悟<br />30*40cm / 40*50cm</p>
+								<a href="javascript:;"></a>
+							</li>
+						</ul>
+					</div>
+					<div class="right">
+						<h1>观止</h1>
+						<p>价格：99元起<br />
+						艺术家：吉祥物语</p>
+						<a href="javascript:;">酷站主页</a>
+					</div>
+					<div class="bg"><img src="img/sc2.png"></div>
+				</li>
+				<li class="home3">
+					<div class="left">
+		                <ul>
+		                    <li>
+		                        <img src="img/img4.png">
+		                        <p>Love<br>50*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                    <li>
+		                        <img src="img/img5.png">
+		                        <p>Filial and eros aw<br>50*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                    <li>
+		                        <img src="img/img6.png">
+		                        <p>Good Time<br>50*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                </ul>
+            		</div>
+		            <div class="right">
+		                <h1>KIDS</h1>
+		                <p>价格：249元<br>艺术家：Chow-Lee</p>
+		                <a>站酷主页</a>
+		            </div>
+            		<div class="bg"><img src="img/sc3.png"></div>
+				</li>
+				<li class="home4">
+					<div class="left">
+		                <ul>
+		                    <li>
+		                        <img src="img/img7.png">
+		                        <p>绽放2009<br>60*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                    <li>
+		                        <img src="img/img8.png">
+		                        <p>绽放2010<br>60*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                    <li>
+		                        <img src="img/img9.png">
+		                        <p>绽放2011<br>60*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="right">
+		                <h1>绽放</h1>
+		                <p>价格：269元<br>艺术家：北邦</p>
+		                <a>站酷主页</a>
+		            </div>
+		            <div class="bg"><img src="img/sc4.png"></div>
+				</li>
+				<li class="home5">
+					<div class="left">
+		                <ul>
+		                    <li>
+		                        <img src="img/img10.png">
+		                        <p>栖息<br>50*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                    <li>
+		                        <img src="img/img11.png">
+		                        <p>惊蛰<br>50*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                    <li>
+		                        <img src="img/img12.png">
+		                        <p>恬静<br>50*60cm</p>
+		                        <a href="#"></a>
+		                    </li>
+		                </ul>
+		            </div>
+		            <div class="right">
+		                <h1>沉睡的森林</h1>
+		                <p>价格：249元<br>艺术家：赵娜</p>
+		                <a>站酷主页</a>
+		            </div>
+		            <div class="bg"><img src="img/sc5.png"></div>
+				</li>
+			</ul>
+			<ul class="point">
+				<li class="active"><a  href="javascript:;"title="首页"></a></li>
+				<li><a href="javascript:;"title="抽象派"></a></li>
+				<li><a href="javascript:;"title="人物油画"></a></li>
+				<li><a href="javascript:;"title="绽放"></a></li>
+				<li><a href="javascript:;"title="植物景观"></a></li>
+			</ul>
+		</section>
+	</body>
+	<script type="text/javascript">
+		window.onload = function (){
+			var content = document.querySelector("#content");
+			var cList = document.querySelector("#content .list");
+			var cLiNodes = document.querySelectorAll("#content .list > li");
+			var head = document.querySelector("#head");
+			var nList = document.querySelectorAll("#head .wrap .nav > li");
+			var pList = document.querySelectorAll("#content .point > li");
+			
+			var now = 0;
+			var index = 0;
+			var timer = 0;
+			var preIndex = 0;
+//			出入场动画
+			
+			var animationAttr = [
+				{
+					inAn:function(){
+						var img = document.querySelector("#content .list > .home1 img");
+						setTimeout(function(){
+							img.style.opacity = 1;
+						},1000)
+					},
+					outAn:function(){
+						var img = document.querySelector("#content .list > .home1 img");
+						setTimeout(function(){
+							img.style.opacity = 0;
+						},1000)
+					}
+				},
+				{
+					inAn:function(){
+						var li1 = document.querySelector("#content .list > .home2 .left .pics li:nth-child(1)");
+						var li2 = document.querySelector("#content .list > .home2 .left .pics li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home2 .left .pics li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home2 .right");
+						
+						setTimeout(function(){
+							li1.style.transform = "translateY(0px)";
+						},800);
+						setTimeout(function(){
+							li2.style.transform = "translateY(0px)";
+						},1000);
+						setTimeout(function(){
+							li3.style.transform = "translateY(0px)";
+							right.style.transform = "translateY(0px)";
+						},1200);
+						
+					},
+					outAn:function(){
+						var li1 = document.querySelector("#content .list > .home2 .left .pics li:nth-child(1)");
+						var li2 = document.querySelector("#content .list > .home2 .left .pics li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home2 .left .pics li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home2 .right");
+						
+						setTimeout(function(){
+							li1.style.transform = "translateY(600px)";
+						},800);
+						setTimeout(function(){
+							li2.style.transform = "translateY(600px)";
+						},1000);
+						setTimeout(function(){
+							li3.style.transform = "translateY(600px)";
+							right.style.transform = "translateY(-300px)";
+						},1200);
+					}
+				},
+				{
+					inAn:function(){
+						var li2 = document.querySelector("#content .list > .home3 .left li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home3 .left li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home3 .right");
+						
+						setTimeout(function(){
+							li2.style.transform = "translateX(0px)";
+							li3.style.transform = "translateX(0px)";
+							right.style.transform = "translateX(0px)";
+						},1000)
+					},
+					outAn:function(){
+						var li2 = document.querySelector("#content .list > .home3 .left li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home3 .left li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home3 .right");
+						
+						setTimeout(function(){
+							li2.style.transform = "translateX(-279px)";
+							li3.style.transform = "translateX(-558px)";
+							right.style.transform = "translateX(200px)";
+						},500)
+						
+					}
+				},
+				{
+					inAn:function(){
+						var li1 = document.querySelector("#content .list > .home4 .left li:nth-child(1)");
+						var li2 = document.querySelector("#content .list > .home4 .left li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home4 .left li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home4 .right");
+						
+						li1.style.display = "initial";
+						li2.style.display = "initial";
+						li3.style.display = "initial";
+				
+						li1.style.animation = "move1 2s 0.8s ";
+						li2.style.animation = "move2 2s 0.8s ";
+						li3.style.animation = "move3 2s 0.8s ";
+						
+						
+						setTimeout(function(){
+							li1.style.transform = "translate(0px,0px)";
+							li2.style.transform = "translate(0px,0px)";
+							li3.style.transform = "translate(0px,0px)";
+							right.style.opacity = 1;
+						},2000)
+						
+					
+					},
+					outAn:function(){
+						var li1 = document.querySelector("#content .list > .home4 .left li:nth-child(1)");
+						var li2 = document.querySelector("#content .list > .home4 .left li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home4 .left li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home4 .right");
+						
+						
+						li1.style.display = "none";
+						li2.style.display = "none";
+						li3.style.display = "none";
+						li1.style.transform = "translate(330px,-1000px)";
+						li2.style.transform = "translate(0,-1000px)";
+						li3.style.transform = "translate(-330px,-1000px)";
+						right.style.opacity = 0;
+					}
+				},
+				{
+					inAn:function(){
+						var li1 = document.querySelector("#content .list > .home5 .left li:nth-child(1)");
+						var li2 = document.querySelector("#content .list > .home5 .left li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home5 .left li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home5 .right");
+						
+						setTimeout(function(){
+							li1.style.transform = "translate3d(0,0,0) rotateX(0deg)";
+						},800)
+						setTimeout(function(){
+							li2.style.transform = "translate3d(0,0,0) rotateX(0deg)";
+						},1000)
+						setTimeout(function(){
+							li3.style.transform = "translate3d(0,0,0) rotateX(0deg)";
+							right.style.opacity = 1;
+						},1200)
+						
+					},
+					outAn:function(){
+						var li1 = document.querySelector("#content .list > .home5 .left li:nth-child(1)");
+						var li2 = document.querySelector("#content .list > .home5 .left li:nth-child(2)");
+						var li3 = document.querySelector("#content .list > .home5 .left li:nth-child(3)");
+						var right = document.querySelector("#content .list > .home5 .right");
+						
+						setTimeout(function(){
+							li1.style.transform = "translate3d(-1000px,-800px,-500px) rotateX(145deg) ";
+						},800)
+						setTimeout(function(){
+							li2.style.transform = "translate3d(-1000px,-800px,-500px) rotateX(145deg) ";
+						},1000)
+						setTimeout(function(){
+							li3.style.transform = "translate3d(-1000px,-800px,-500px) rotateX(145deg) ";
+							right.style.opacity = 0;
+						},1200)
+						
+					}
+				}
+			]
+			
+			for(var i=1;i<animationAttr.length;i++){
+				
+				animationAttr[i]["outAn"]();
+				
+			};
+			
+//			鼠标滚轮
+			if(content.addEventListener){
+				content.addEventListener("DOMMouseScroll",function(ev){
+					clearTimeout(timer);
+					timer = setTimeout(function(){
+						fn(ev);
+					},200)
+				});
+			}
+			
+			content.onmousewheel = function(ev){
+				clearTimeout(timer);
+					timer=setTimeout(function(){
+							fn(ev);
+						},200)
+			};
+			
+			function fn(ev){
+				ev = ev||event;
+				var flag ="";
+				if(ev.detail){
+					flag = ev.detail>0?"down":"up";
+				}else if(ev.wheelDelta){
+					flag = ev.wheelDelta<0?"down":"up";
+				}
+				
+				if((now==0&&flag=="up")||(now==cLiNodes.length-1&&flag=="down")){
+						return;
+				}
+				preIndex =now;
+				
+				switch (flag){
+					case "up":
+						if(now>0){
+							now--;
+						}
+						move(now);
+						break;
+					case "down":
+						if(now<cLiNodes.length-1){
+							now++;
+						}
+						move(now);
+						break;
+				}
+				
+				if(ev.preventDefault){
+					ev.preventDefault();
+				}
+				
+				return false;
+			}
+			
+//			头部导航
+			headBind();
+			function headBind(){
+				for (var i=0;i<nList.length;i++) {
+					nList[i].index = i;
+					nList[i].onclick = function(){
+						preIndex =now;
+						move(this.index);
+						now = this.index;
+					}
+				}
+				
+				for (var i=0;i<pList.length;i++) {
+					pList[i].index = i;
+					pList[i].onclick = function(){
+						preIndex =now;
+						move(this.index);
+						now = this.index;
+					}
+				}
+			}
+			
+//			同步主导航及侧边导航
+			function move(index){
+				for(var i=0;i<nList.length;i++){
+					nList[i].className = "";
+				}
+				nList[index].className = "active";
+				
+				for(var i=0;i<pList.length;i++){
+					pList[i].className = "";
+				}
+				pList[index].className = "active";
+				
+				cList.style.top = -index *(document.documentElement.clientHeight - head.offsetHeight) + "px";
+				
+				//出入场逻辑
+				if(animationAttr[index]&&animationAttr[index]["inAn"]){
+					animationAttr[index]["inAn"]();
+				}
+				if(animationAttr[preIndex]&&animationAttr[preIndex]["outAn"]){
+					animationAttr[preIndex]["outAn"]();
+				}
+			}
+			
+//			窗口重置
+			window.onresize = function (){
+				contentBind();
+			}
+			//内容区的高度 
+			contentBind();
+			function contentBind(){
+				
+					content.style.height = document.documentElement.clientHeight - head.offsetHeight + "px";
+					
+					for(var i=0;i<cLiNodes.length;i++){
+						cLiNodes[i].style.height = document.documentElement.clientHeight - head.offsetHeight + "px";
+						 
+					}
+				}
+			
+			
+		}
+	</script>
+</html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          

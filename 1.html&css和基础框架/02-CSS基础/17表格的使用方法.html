@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+	<style type="text/css">
+		table.no1 {border-collapse: separate;border-spacing: 50px }
+		/*这里不同于颜色设置 先左右在上下*/
+		table.no2 {border-collapse: separate;border-spacing: 20px 15px }
+		caption {caption-side:bottom}
+		h1{font-size:16px;font-family:Arial;}
+		.separate{border-collapse:separate;}
+		.collapse{border-collapse:collapse;}
+	</style>
+</head>
+<body>
+<h1>separate: 边框独立</h1>
+<table class="separate" border="1">
+	<tr>
+		<td>独立边框</td>
+		<td>独立边框</td>
+		<td>独立边框</td>
+	</tr>
+	<tr>
+		<td>独立边框</td>
+		<td>独立边框</td>
+		<td>独立边框</td>
+	</tr>
+</table>
+
+<h1>collapse: 相邻边被合并</h1>
+<table border="1" class="collapse">
+	<tr>
+		<td>合并边框</td>
+		<td>合并边框</td>
+		<td>合并边框</td>
+	</tr>
+	<tr>
+		<td>合并边框</td>
+		<td>合并边框</td>
+		<td>合并边框</td>
+	</tr>
+</table>
+</br>
+<table class="no1" border="1">
+	<tr>
+		<td>边框空白</td>
+		<td>边框空白</td>
+	</tr>
+	<tr>
+		<td>边框空白</td>
+		<td>边框空白</td>
+	</tr>
+</table>
+</br>
+<table class="no2" border="1">
+	<tr>
+		<td>边框空白</td>
+		<td>边框空白</td>
+	</tr>
+	<tr>
+		<td>边框空白</td>
+		<td>边框空白</td>
+	</tr>
+</table>
+</br>
+<table class="no3" border="1">
+	<caption>This is a caption</caption>
+	<tr>
+		<td>表格标题</td>
+		<td>表格标题</td>
+	</tr>
+	<tr>
+		<td>表格标题</td>
+		<td>表格标题</td>
+	</tr>
+</table>
+</body>
+</html>

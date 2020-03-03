@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				overflow: auto;
+			}
+			#warp{
+				position: absolute;
+				width: 150px;
+				height: 150px;
+				background: teal;
+				left: 120px;
+				top: 60px;
+			}
+			#inner1{
+				position: absolute;
+				width: 150px;
+				height: 150px;
+				background: darkgray;
+				left: 160px;
+				top: 120px;
+			}
+		</style>
+	</head>
+	<body id="body">
+		<div id="warp">wrap
+			<div id="inner1">inner1</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function (){
+			var inner1 = document.getElementById("inner1");
+			var point = inner1.getBoundingClientRect();
+			console.log(point);
+			
+		/*	
+		   getBoundingClientRect:一个元素四个角的相对位置
+		  	代表元素border-box的尺寸
+		  	height:150
+			width:150
+			
+			元素左上角的相对位置
+			left:280
+			top:180
+			
+			元素右下角的相对位置
+			right:430
+			bottom:330	*/
+
+		}
+	</script>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>11_Promise对象</title>
+</head>
+<body>
+<!--
+1. 理解:
+  * Promise对象: 代表了未来某个将要发生的事件(通常是一个异步操作)
+  * 有了promise对象, 可以将异步操作以同步的流程表达出来, 避免了层层嵌套的回调函数(俗称'回调地狱')
+  * ES6的Promise是一个构造函数, 用来生成promise实例
+2. 使用promise基本步骤(2步):
+  * 创建promise对象
+    let promise = new Promise((resolve, reject) => {
+        //初始化promise状态为 pending
+      //执行异步操作
+      if(异步操作成功) {
+        resolve(value);//修改promise的状态为fullfilled
+      } else {
+        reject(errMsg);//修改promise的状态为rejected
+      }
+    })
+  * 调用promise的then()
+    promise.then(function(
+      result => console.log(result),
+      errorMsg => alert(errorMsg)
+    ))
+3. promise对象的3个状态
+  * pending: 初始化状态
+  * fullfilled: 成功状态
+  * rejected: 失败状态
+4. 应用:
+  * 使用promise实现超时处理
+
+  * 使用promise封装处理ajax请求
+    let request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+    }
+    request.responseType = 'json';
+    request.open("GET", url);
+    request.send();
+-->
+
+<script type="text/javascript">
+/* 	// 新建promise
+let promise = new Promise((resolve, reject)=>{
+	// 初始化 pending
+	// 执行异步代码
+	setInterval(()=>{
+		if(true) { // 当数据接收成功时, 运行resolve,传入的参数则是data, fullfilled: 成功状态
+			resolve('数据接收成功')
+		}else { // 当数据接收失败时, 运行resolve,传入的参数则是error, rejected: 失败状态
+			reject('数据接收失败')
+		}
+	}, 1000)
+})
+promise.then((data)=>{ // 成功的回调
+			console.log(data)
+		},(error)=>{ // 失败的回调
+			console.log(error)
+		}) */
+		
+// 利用promise封装ajex原生回调函数
+		function getHTTPObject(){ // 兼容XMLHttpRequest请求方法
+			var xhr = false;
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+			}else if(window.ActiveXObject){
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			return xhr;
+		}
+		
+		function getNews (method, url) {
+			// 创建promise实例
+			let promise = new Promise((resolve, reject)=>{
+				// 创建一个XMLHttpRequest 对象
+				let request = getHTTPObject();
+				request.open(method,url); // 规定发送格式
+				request.send(null); // 发送请求
+				request.onreadystatechange = () => { // 响应函数
+					if(request.readyState == 4) { // 判断响应是否完成
+						if(request.status == 200 || request.status == 304){// 在判断响应是否可用
+							// 响应可用,将数据传入promise的回调函数resolve中
+							resolve(request.responseText)
+						}else{
+							// 响应不可用,将数据传入promise的回调函数reject中
+							reject('暂时不存在此信息')
+						}
+					}
+				}
+			})
+			return promise
+		}
+		
+		getNews('GET', 'http://localhost:3000/news?id=2')
+			.then((data)=>{
+				console.log(JSON.parse(data))
+				let url = JSON.parse(data).commentsUrl
+				return getNews('GET', `http://localhost:3000${url}`)
+			}, (error)=>{
+				console.log(error)
+			})
+			.then((data)=>{
+				console.log(JSON.parse(data))
+			},(error)=>{
+				console.log(error)
+			})
+</script>
+
+</body>
+
+</html>

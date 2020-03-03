@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			body{
+				height: 60%;
+				width: 600px;
+				border: 1px solid;
+				margin: 100px auto;
+				position: relative;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border-radius: 50%;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 20px/200px "微软雅黑";
+				text-align: center;
+				background: sandybrown;
+				/*指定过渡的样式*/
+				/*默认是all,所有样式都会改变*/
+				transition-property:width,height; 
+				/*过渡的时间*/
+				transition-duration:1s,5s;
+			}
+			body:hover #test{
+				width: 300px;
+				height: 300px;
+				font:bold 50px/300px "微软雅黑";
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">邓志龙</div>
+	</body>
+</html>

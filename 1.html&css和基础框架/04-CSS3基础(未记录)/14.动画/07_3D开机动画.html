@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			#wrap{
+				height: 100%;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			#wrap > .inner {
+				text-align: center;
+				perspective: 600px;
+			}
+			#wrap > .inner >span{
+				position: relative; 
+				font: 40px "微软雅黑";
+			}
+			#wrap > .inner > img {
+				width: 250px;
+				margin-bottom: 20px;
+				animation:move 2s linear infinite;
+			}
+			@keyframes move{
+				0%{transform: rotateY(0deg);}
+				100%{transform: rotateY(360deg);}
+			}
+		</style>
+	</head>
+	<body>
+			<div id="wrap">
+				<div class="inner">
+					<img src="logo3.png"/><br/>
+					<span>正在载入</span>
+					<span class="x">0%</span>
+				</div>
+			</div>
+	</body>
+	<script src="data.js"></script> <!--拿到-->
+	<script>
+		
+		window.onload =function(){
+			var spanNods = document.querySelector("#wrap > .inner > .x");
+			/*拿出imgData所有数组 并且拼接在一个数组里*/
+			var arr =[];
+			var item ='';
+			var	flag = 0;
+			for (item in imgData) {
+				arr = arr.concat(imgData[item])/*连接数组为一个数组*/
+			}
+			for(var i=0; i<arr.length; i++){
+				var img = new Image; /*创建一个img构造函数 这个构造函数可以用来做页面图片加载是否完毕的功能*/
+				img.src = arr[i];
+				img.onload = function(){ /*每次new Image获取完毕一个图片时执行一次*/
+					flag++;
+					spanNods.innerHTML =Math.round(flag*(100/71))+"%";
+				}
+				img.onerror = function(){ /*地址错误时执行*/
+					console.log("加载地址错误");
+				}
+			}
+		}
+	</script>
+</html>

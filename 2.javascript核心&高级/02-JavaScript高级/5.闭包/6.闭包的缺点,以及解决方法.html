@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>测试</button>
+	</body>
+	<script type="text/javascript">
+		var but = document.querySelector("button");
+		(function(w){
+			var msg = "dzlSB" //内部封闭数据
+			w.$ = {
+				doSome:function(){
+					//产生闭包（msg变量）
+					console.log("doSme"+msg)
+				},
+				doOther:function(){
+					//产生闭包（msg变量）
+					console.log("doOther"+msg)
+				},
+				click:function(obj,fun){
+					//没有产生闭包
+					obj.onclick = fun
+				}
+			}
+		})(window)
+		$.click(but,function(){
+			console.log("测试")
+		})
+		$.doSome()
+		$.doOther()
+	</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	<script>
+	 		$(function(){
+	 			/*
+	 			 * 1.prop方法
+	 			 * 2.removeProp方法
+	 			 */
+				var div1 = $("div").eq(0)
+				var div2 = $("div").eq(1)
+	 			div1.prop("demo","it666"); // 相当于dom.demo = 'it666'
+	 			div1.removeProp("demo"); // 相当于dom.demo = undefined
+				
+				
+				
+	 			$("div").prop("id","box"); // 相当于dom.id = 'box'
+				
+				// prop于attr的不同：在打印iput标签的伪元素时
+				//	attr显示字符串值 (str) 
+				//	 prop显示行为值 (fool)
+	 			console.log($("input").prop("checked")); //true / flase
+	 			console.log($("input").attr("checked")); //checkbox / un
+	 			
+				// prop改变行为值会发生行为改变
+	 			$("input").prop("checked",false);
+	 		})
+	 	</script>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<div id="div2"></div>
+		<input type="checkbox" checked />
+	</body>
+</html>

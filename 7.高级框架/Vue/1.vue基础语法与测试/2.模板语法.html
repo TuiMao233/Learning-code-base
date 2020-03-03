@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/vue.js"></script>
+	</head>
+	<body>
+		<!-- 
+			1.模板的理解：
+			动态的html页面
+			包含了一些JS语法代码
+				双大括号表达式
+				指令(以v-开头的自定义标签属性)
+			2.双大括号表达式
+				语法：{{exp}}或{{{exp}}}
+				功能：向页面输出数据
+				可以调用对象的方法
+			3.指令一：强制数据绑定
+				功能：指定变换的属性值
+				完整写法：
+					v-bind:xxx='yyy' //yyy会作为表达式解析执行
+				简洁写法:xxx='yyy'
+			4.指令二：绑定事件监听
+				功能：绑定指定事件名的回调函数
+				完整写法：
+					v-on:click='xxx'
+				简洁写法
+		 -->
+		
+		<div id="app">
+			<h2>双大括号表达式</h2>
+			<p>{{msg}}</p>				<!-- I Will Back!! -->
+			<p>{{msg.toUpperCase()}}</p><!-- 嵌套js代码：全部大写 -->
+			<p v-html="msge"></p>		<!-- innerHTML -->
+			<p v-text="msge"></p>		<!-- innerText -->
+			
+			<br />
+			
+			<h2>2.指令一：强制数据绑定</h2>
+			<img width="20" src="imgUrl" /><br />
+			<img width="20" v-bind:src="imgUrl" /><br />
+			<img width="20" :src="imgUrl" />
+			
+			<h2>3.指令二：绑定事件监听</h2>
+			<button v-on:click="test">点击</button>
+			<button @click="test('abc')">点击</button>
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		new Vue({
+			el:"#app",
+			data:{
+				msg:"I Will Back!!",
+				msge:"<a href='http://www.baidu.com'>I Will Back!!</a>",
+				imgUrl:"https://cn.vuejs.org/images/logo.png"
+			},
+			methods:{
+				test(a) {
+					a.isTrusted ? alert("我没传入形参啦") : alert(a);;
+				}
+			}
+		})
+		
+	</script>
+</html>

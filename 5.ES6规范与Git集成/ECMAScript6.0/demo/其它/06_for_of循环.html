@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>06_for_of循环</title>
+</head>
+<body>
+
+<!--
+for(let value of target){}循环遍历
+  1. 遍历数组
+  2. 遍历Set
+  3. 遍历Map
+  4. 遍历字符串
+  5. 遍历伪数组
+-->
+
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+
+<script type="text/javascript">
+	let arr = [1,3,4,5,6,7,7,7,7,7]
+	let set = new Set(arr)
+	for (let item of set) {
+		console.log(item)
+	}
+</script>
+</body>
+
+</html>

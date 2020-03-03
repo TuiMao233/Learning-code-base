@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body id="body">
+		<ul class="list">
+			<li>xfz<a href="javascript:;">删除</a></li>
+			<li>xfzxxxx<a href="javascript:;">删除</a></li>
+			<li>xfzxxxxx<a href="javascript:;">删除</a></li>
+			<li>xfzxxxxxx<a href="javascript:;">删除</a></li>
+			<li>xfzxxxxxxx<a href="javascript:;">删除</a></li>
+			<li>xfzxxxxxxxx<a href="javascript:;">删除</a></li>
+		</ul>
+	</body>
+	<script type="text/javascript">
+		//假删除
+		var aNodes = document.querySelectorAll(".list > li > a");
+		for (var i=0; i<aNodes.length; i++) {
+			aNodes[i].onclick = function (){
+				this.parentNode.style.display = "none";
+			}
+		}
+	</script>
+</html>

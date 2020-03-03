@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*
+			 * 景深：让3D场景有近大远小的效果
+			 * 			是一个不可继承属性，但他可以作用于子元素
+			 * 灭点: 
+			 * 		景深越大 灭点越远 元素变形更小
+			 * 		景深越小 灭点更近 元素变形更大
+			 * 
+			 * 	transform-style：
+			 * 		营造有层级的3d舞台
+			 * 			作用于子元素 不可继承
+			 * 	
+			 * 	
+			 */
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			#wrap{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 300px;
+				height: 300px;
+				border: 1px solid;
+				perspective: 200px;
+				transform-style: preserve-3d;
+			}
+			#wrap .box{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 100px;
+				height: 100px;
+				text-align: center;
+				font: 20px/100px "微软雅黑";
+				transform-style: preserve-3d;
+				transition: 1s;
+			}
+			#wrap > .box > div{
+				transform-style: preserve-3d;
+				/*transform-origin:center center -28.867513459481287px;*/
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background: palegreen;
+				text-align: center;
+				font: 20px/100px "微软雅黑";
+				box-sizing: border-box;
+				border: 1px solid;
+			}
+			#wrap:hover .box {
+				/*x,y,z*/
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+			</div>
+		</div>
+		<script type="text/javascript">
+					/*n ：棱数*/
+				function createLZ (n){
+						var boxNode = document.querySelector("#wrap > .box");
+						
+						var styleNode = document.createElement("style");
+						var divNode =[];
+						//外角
+					  	var degOut = 160/n;
+					  	//内角
+						var degIn = 180 - 360/n
+						//棱长
+						var length = boxNode.offsetWidth;
+						console.log(degOut,degIn,length);
+						var text ="";
+						var cssText = "";
+						for(var i=0;i<n; i++){
+							divNode[i] = document.createElement("div");
+							divNode[i].style.transform = "rotateY("+(i*degOut)+"deg)";
+							divNode[i].style.transformOrigin = "center center -"+((length/2) * Math.tan((degIn/2)*Math.PI/180))+"px";
+							boxNode.style.transformOrigin = "center center -"+((length/2) * Math.tan((degIn/2)*Math.PI/180))+"px";
+							boxNode.appendChild(divNode[i]);
+						}
+					}
+				createLZ(3);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<!--
+常用指令(二)
+  * ng-class: 动态引用定义的样式  {aClass:true, bClass:false}
+  * ng-style: 动态引用通过js指定的样式对象   {color:'red', background:'blue'}
+  * ng-click: 点击监听, 值为函数调用, 可以传$event
+  * ng-mouseenter: 鼠标移入监听, 值为函数调用, 可以传$event
+  * ng-mouseleave: 鼠标移出监听, 值为函数调用, 可以传$event
+-->
+	<style>
+		.evenB {
+    background-color: grey;
+  }
+
+  .oddB {
+    background-color: green;
+  }
+</style>
+	<body ng-app="myApp" ng-controller="MyController">
+
+		<div style="width: 100px;height: 100px;background-color: red" ng-mouseover="over()" ng-mouseleave="leave()" ng-style="myStyle">
+		</div>
+		<div>
+			<ul>
+				<li ng-repeat="p in persons" ng-class="{evenB:$even, oddB:$odd}">
+					{{p.name}}---{{p.age}}
+				</li>
+			</ul>
+		</div>
+
+		<script type='text/javascript' src="js/angular-1.5.5/angular.js"></script>
+		<script type="text/javascript">
+			angular.module('myApp', [])
+				.controller('MyController', function($scope) {
+					$scope.over = function() {
+						$scope.myStyle = {
+							background: 'blue'
+						};
+					};
+					$scope.leave = function() {
+						$scope.myStyle = {
+							background: 'green'
+						};
+					};
+				});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>17_插件</title>
+</head>
+<body>
+
+<div id="test">
+  <p v-my-upper="msg"></p>
+</div>
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript" src="js/vue-myPlugin.js"></script>
+<script type="text/javascript">
+	
+  // 声明使用插件(安装插件: 调用插件的install())
+	
+
+  const vm = new Vue({
+    el: '#test',
+    data: {
+      msg: 'i LOve U'
+    },
+	mounted() {//添加的实例方法
+		this.$myMethod()
+	}
+  })
+  
+  //添加的全局方法
+  Vue.ZdyWenFun('全局方法阿nmd');
+  //添加的实例方法
+  vm.$myMethod()
+</script>
+</body>
+</html>

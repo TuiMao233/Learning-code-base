@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="todoApp" >
+
+<div ng-controller="TodoControl">
+    <h2>我的备忘录</h2>
+    <div>
+        <input type="text" ng-model="text">
+        <butto ng-click='addTodo()'>新增</button>
+    </div>
+    <div ng-repeat="todo in todos">
+        <input type="checkbox"  ng-model="todo.ischeck">
+        <span>{{todo.todo}}</span>
+    </div>
+    <button ng-click='delTodo()'>删除选中的记录</button>
+</div>
+
+
+
+<script type="text/javascript" src="js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+	angular.module('todoApp', [])
+			.controller('TodoControl',['$scope',function ($scope) {
+				$scope.todos =[
+					{todo:'吃饭',ischeck:true},
+					{todo:'吃饭',ischeck:true},
+					{todo:'睡觉',ischeck:false}
+				]
+				$scope.addTodo = function () {
+					var obj  = {todo:$scope.text,ischeck:true}
+					$scope.todos.push(obj)
+				}
+				$scope.delTodo = function () {
+					$scope.todos.forEach(function(item,index){
+						if(item.ischeck) {
+							$scope.todos.splice(index,1)
+							$scope.delTodo()
+						}
+					})
+				}
+			}])
+</script>
+</body>
+</html>

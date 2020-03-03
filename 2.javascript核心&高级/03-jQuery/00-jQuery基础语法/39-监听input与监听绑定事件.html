@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<textarea class="comment"></textarea><br>
+		<button type="button">点击添加</button>
+		<div>我是div</div>
+		<script type="text/javascript">
+			// 监听input的输入与删除
+			$('.comment').on('propertychange input',function(){
+				console.log(this.value)
+			})
+			
+			
+			
+			// 监听现在以及以后出现在body的div 并绑定事件
+			$('body').delegate('div', 'click', function(){
+				alert('我是div的点击事件')
+			})
+			$('button').click(function(){ // 添加新的div
+				$('body').append($('<div>我是新的div</div>'))
+			})
+		</script>
+	</body>
+</html>

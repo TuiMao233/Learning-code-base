@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			1.读取对象的属性值时：会自动从原型链中查找
+			2.设置对象的属性值时，不会查找原型链，如果当前对象没有此属性，直接添加此属性并赋值
+		-->
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			function Fn() {
+				
+			}
+			Fn.prototype.a = "xxx";
+			var fn = new Fn();
+			//1.读取对象的属性值时：会自动从原型链中查找
+			console.log(fn.a);
+			var fn2 = new Fn();
+			//2.设置对象的属性值时，不会查找原型链，如果当前对象没有此属性，直接添加此属性并赋值
+			fn2.a = "yyy";
+			console.log(fn2.a,fn2);
+			
+			function Person(name,age){
+				this.name = name;
+				this.age = age;
+			}
+			console.log(Person.prototype)
+			Person.prototype.setName = function(name){
+				this.name = name;
+			}
+			
+			var p1 = new Person("Tom",16);
+			p1.setName("Tom")
+			var p2 = new Person("jack",12);
+			pageXOffset.setName("Cat");
+			console.log(p1.__proto__ === p2.__proto__);
+		}
+	</script>
+</html>

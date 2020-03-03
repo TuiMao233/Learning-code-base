@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<center>
+		<br />
+		<video src="video/test.mp4" controls="controls" width="1000" height="500" ></video><br />
+		<audio src="audio/EastNewSound - noise canceller.mp3" controls="controls"></audio>
+	</body>
+	
+	<script type="text/javascript">
+		window.onload=function(){
+			var viDeo = document.querySelector("video");
+			var auDio = document.querySelector("audio");
+			
+			
+			setTimeout(function(){
+				viDeo.play();//媒体播放
+				
+				setTimeout(function(){
+					viDeo.pause();//媒体暂停
+					
+					setTimeout(function(){
+						viDeo.load();//媒体重新加载
+					},2000)
+					
+				},10000)
+				
+			},2000)
+			
+			
+		}
+	</script>
+</html>

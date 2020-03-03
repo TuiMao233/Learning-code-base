@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{
+				height:4000px
+			}
+			#test{
+				font: bold 50px "微软雅黑";
+				border: 1px solid #000;
+				margin: 0 auto;
+				width: 200px;
+				height: 200px;
+			}
+			#test:nth-child(1){
+				background:transparent;/*背景为透明*/
+			}
+			#test:nth-child(2){
+				background:pink;
+				/*图片背景可以多个设置,第一个优先绘制*/
+				background-image: url(border-image.png),url(tg.png);
+			}
+			#test:nth-child(3){
+				background:pink;
+				background-image: url(tg.png);
+				background-position: 10% 10%; /*等于-200*0.1px与-200*0.1px*/
+			}
+			#test:nth-child(4){
+				width: 600px;
+				height: 600px;
+				background:pink;
+				background-image: url(tg.png);
+				overflow: auto; 
+				color: #fff;
+				/*背景图片定位根据浏览器窗口定位*/
+				background-attachment: fixed;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">1</div>
+		<div id="test">2</div>
+		<div id="test">3</div>
+		<div id="test">4</div>
+	</body>
+</html>

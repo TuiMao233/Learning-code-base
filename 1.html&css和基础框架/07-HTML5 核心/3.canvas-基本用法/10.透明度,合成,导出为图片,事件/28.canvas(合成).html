@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				background: darkcyan;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+		<canvas class="test" width="450" height="450">
+			<span>您的浏览器不支持画布元素,请您换成帅帅的谷歌浏览器</span>
+		</canvas>
+	</body>
+	<script>
+		/*
+		 * source:新的图像（源）
+		 * destination：已经绘制过的图像（目标）
+		 * 
+		 * globalCompositeOperation
+		 * 		source-over(默认值)	:源在上面,新的图像层次比较高
+		 * 		source-in		   	:只留下源和目标重叠的部分（源的那一部分）	
+		 * 		source-out			:只留下源超出目标的部分
+		 * 		source-atop			:砍掉源溢出的部分
+		 * 		
+		 * 		destination-over	:目标在上面，旧的图像层级比较高
+		 * 		destination-in		:只留下源于目标的重叠部分（目标的那一部分）
+		 * 		destination-out		:只留下目标超过源的部分.
+		 * 		destination-atop	:砍掉目标溢出的部分
+		 * 
+		 */
+		window.onload=function(){
+			var canvas = document.querySelector(".test");
+			function ang(d){return d*Math.PI/180;}
+			if(canvas.getContext){
+				var ctx = canvas.getContext("2d");
+				ctx.fillStyle =  "red"
+				ctx.fillRect(0,0,100,100);
+				ctx.globalCompositeOperation = "destination-in";
+				ctx.fillStyle = "#008000";
+				ctx.fillRect(50,50,100,100);
+			}}
+	</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+	<script type="text/javascript">
+		var i = 0;
+		function myFun(callback){
+			if(i == 1){
+		   	return callback
+		   }
+		   setTimeout(function(){    
+		      callback('555');
+		   }, 1000);
+		}
+		function r(result){
+			i++
+			myFun.call(this,result)
+		}
+		
+		setTimeout(function(){
+			console.log(box);
+		},1000)
+		
+	</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    textarea{
+      resize: none;
+    }
+  </style>
+</head>
+<body ng-app="MyApp" ng-controller='MyCtrl' 
+ ng-init="data='';text=''">
+
+<h2>我的笔记</h2>
+<textarea cols="30" rows="10" ng-model='text'></textarea>
+<div>
+  <button ng-click='save()'>保存</button>
+  <button ng-click='lood()'>读取</button>
+  <button ng-click='del()'>删除</button>
+</div>
+<p>剩余字数：{{getTextLength()}}</p>
+
+<script type="text/javascript" src="js/angular-1.5.5/angular.js"></script>
+<script type="text/javascript">
+	
+	angular.module('MyApp',[])//模块对象的方法执行完返回的就是模块对象本身
+		.controller('MyCtrl',['$scope',function ($scope) {
+			$scope.text = ''
+			$scope.getTextLength = function () {
+				if($scope.text.length >100) {
+					$scope.text = $scope.text.slice(0,100)
+				}
+				return 100 - $scope.text.length 
+			}
+			$scope.save = function () {
+				sessionStorage.setItem('note_key', JSON.stringify($scope.text));
+				$scope.data = $scope.text
+				$scope.text = ''
+			}
+			$scope.lood = function () {
+				 $scope.text = JSON.parse(sessionStorage.getItem('note_key') || '[]');//对读取null做了处理
+			}
+			$scope.del = function () {
+				$scope.text = ''
+				sessionStorage.removeItem('note_key');
+			}
+		}])
+</script>
+</body>
+
+</html>

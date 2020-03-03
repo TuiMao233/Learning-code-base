@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>jquery_事件委托</title>
+  <style type="text/css">
+    #box{
+      width: 400px;
+      background: green;
+    }
+    .a{
+      width: 200px;
+      height: 200px;
+      background: #FF0000;
+    }
+    .b{
+      width: 100px;
+      height: 100px;
+      background: #F0f;
+    }
+  </style>
+</head>
+<body>
+  <div id="box">
+    <div class="a">a的事件委托</div>
+    <br />
+    <br />
+    <br />
+    <div class="b">b的事件委托</div>
+    <br />
+    <br />
+    <br />
+    <div id="a">#a事件委托</div>
+    <p>Click me!</p>
+  </div>
+<script src="../../../js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    console.log($('.a').length);
+    //1.7以后已经不 支持live了。
+//				$('#a').live('click',function(){
+//					alert('a');
+//				})
+//				$('#box').delegate('.a','click',function(){
+//					alert('delegate');
+//				})
+    //在jquery中事件委托只是找相应的event.target触发元素进行的回调函数执行,其他的并不关心。
+    $('#box').on("click",'.a',function(){
+      alert('a事件');
+      $(this).removeClass('a').addClass('b');
+    });
+    $('#box').on("click",'.b',function(){
+      alert('b事件');
+      $(this).removeClass('b').addClass('a');
+    });
+    $('#box').append('<div class="a" style="font-size: 30px;">我是新添加的div</div>')
+  })
+</script>
+</body>
+</html>

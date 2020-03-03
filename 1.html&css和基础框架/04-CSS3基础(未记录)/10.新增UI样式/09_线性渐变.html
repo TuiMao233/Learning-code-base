@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{
+				height:4000px
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				margin: 30px auto;
+				color: #fff;
+				font: bold 50px "微软雅黑";
+				border: 1px solid #000;
+			}
+			#test:nth-child(1){
+				/*默认渐变是从上往下开始渐变*/
+				/*background-image: linear-gradient(red,yellow,green);*/
+				background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.5));
+			}
+			#test:nth-child(2){
+				/*从右边开始渐变*/
+				background-image: linear-gradient(to right,red,yellow,green);
+			}
+			#test:nth-child(3){
+				/*使用度数开始渐变*/
+				background-image: linear-gradient(-45deg,red,yellow,green);
+			}
+			#test:nth-child(4){
+				/*第一个值是纯色多少,第二个值是渐变多少？*/
+				width: 600px;
+				background-image: linear-gradient(to right,red 100px,yellow 180px);
+			}
+			#test:nth-child(5){
+				/*透明的渐变*/
+				width: 600px;
+				background-image: linear-gradient(to right,rgba(0,0,0,0),rgba(167,178,222,1));
+			}
+			#test:nth-child(6){
+				/*重复的渐变*/
+				width: 600px;
+				background-image: repeating-linear-gradient(90deg,red 0%,blue 20%);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">1</div>
+		<div id="test">2</div>
+		<div id="test">3</div>
+		<div id="test">4</div>
+		<div id="test">5</div>
+		<div id="test">6</div>
+	</body>
+</html>

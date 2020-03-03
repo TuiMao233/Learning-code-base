@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			#header,#footer{
+				height: 20px;
+				text-align: center;
+				border: 1px solid deeppink;
+				background: gray;
+			}
+			body{
+				min-width: 800px;
+			}
+			#content{padding: 0 200px;overflow: hidden;}
+			#content .middle{
+				background: pink;
+				width: 200px;
+				float: left;
+				width: 100%;
+			}
+			#content .left,#content .right,#content .middle{
+				padding-bottom: 10000px;
+				margin-bottom: -10000px;
+			}
+			#content .left{
+				float: left;
+				background: yellow;
+				width: 200px;
+				margin-left: -100%;
+				position: relative;
+				left: -200px;
+			}
+			#content .right{
+				background: darkgray;
+				width: 200px;
+				float: left;
+				margin-left: -200px;
+				position: relative;
+				right: -200px;
+			}
+			.clearfix{
+				*zoom: 1;
+			}
+			.clearfix:after{
+				content: "";
+				display: block;
+				clear: both;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div id="content" class="clearfix">
+			<div class="middle">center</div>
+			<div class="left">lef
+			<br>
+			<br>
+			<br>
+			<br><br>
+			<br><br><br>
+			<br>
+			t</div>
+			<div class="right">right</div>
+		</div>
+		<div id="footer"></div>
+	</body>
+</html>

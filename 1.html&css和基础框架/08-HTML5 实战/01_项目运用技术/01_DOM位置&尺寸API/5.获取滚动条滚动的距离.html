@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			body{
+				width: 3000px;
+				height: 3000px;
+			}
+			
+			#but{
+				position: fixed;
+			}
+		</style>
+	</head>
+	<body id="body">
+		<button id="but">点击</button>
+		
+	</body>
+	<script type="text/javascript">
+		
+		var but = document.getElementById("but");
+		but.onclick = function(){
+			//获取浏览器滚动条的偏移值
+				var L = document.documentElement.scrollLeft || document.body.scrollLeft;
+				var T = document.documentElement.scrollTop || document.body.scrollTop;
+			console.log(L,T);
+		}
+		
+	</script>
+</html>

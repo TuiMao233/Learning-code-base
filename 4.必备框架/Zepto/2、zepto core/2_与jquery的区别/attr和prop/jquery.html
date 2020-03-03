@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>jquery</title>
+	</head>
+	<body>
+		<select style="font-size: 25px;">
+			<option value="name">科比</option>
+			<option value="name">韦德</option>
+			<option value="name" selected="selected">邓肯</option>
+			<option value="name">吉诺比利</option>
+			<option value="name" selected="selected">艾弗森</option>
+		</select>
+
+<script src="../../../js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    //attr与prop的区别
+    /*
+     * 1、prop多用在标签的固有属性，布尔值属性。比如：a标签的href，class，selected等。
+     * 2、attr多用在自定义属性上。
+     * 3、在jquery中如果用attr去获取布尔值属性且该布尔值属性在标签体内没有定义的时候，会返回undefined
+     */
+    $('option').each(function (index, item) {
+       //console.log(index, item.innerHTML);
+		//没有定义获取到的是undefined
+        // console.log($(this).attr('selected'));
+        console.log($(this).prop('selected'));//4false  1true
+    });
+  });
+</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+			}
+			#wrap{
+				position: absolute;
+				width: 500px;
+				height: 300px;
+				text-align: center;
+				font: 35px "微软雅黑";
+				line-height: 300px;
+				border: 1px solid;
+				border-radius: 50%;
+			}
+			#wrap::before{
+				content: '';
+				position: absolute;
+				width: 30%;
+				height: 30%;
+				border: 1px solid;
+				border-radius: 50%;
+				bottom: -22%;
+				right: -20%;
+			}
+			#wrap::after{
+				content: '';
+				position: absolute;
+				width: 10%;
+				height: 10%;
+				border: 1px solid;
+				border-radius: 50%;
+				bottom: -35%;
+				right: -35%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			我是蔡徐坤
+		</div>
+	</body>
+</html>

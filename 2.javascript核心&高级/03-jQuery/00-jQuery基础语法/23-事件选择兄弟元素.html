@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>36-TAB选项卡上</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 440px;
+            height: 298px;
+            border: 1px solid #000;
+            margin: 50px auto;
+        }
+        .nav>li{
+            list-style: none;
+            width: 110px;
+            height: 50px;
+            background: orange;
+            text-align: center;
+            line-height: 50px;
+            float: left;
+        }
+        .nav>.current{
+            background: #ccc;
+        }
+        .content>li{
+            list-style: none;
+            display: none;
+        }
+        .content>.show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <ul class="nav">
+        <li class="current">H5+C3</li>
+        <li>jQuery</li>
+        <li>C语言</li>
+        <li>Go语言</li>
+    </ul>
+    <ul class="content">
+        <li class="show"><img src="img/11.jpg" alt=""></li>
+        <li><img src="img/12.jpg" alt=""></li>
+        <li><img src="img/13.jpg" alt=""></li>
+        <li><img src="img/14.jpg" alt=""></li>
+    </ul>
+</div>
+<script src="jquery-1.12.4.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+	$('.nav > li').mouseenter(function(){// 移入事件
+		// 清除兄弟元素类名
+		$(this).siblings().removeClass('current')
+		// 修改移入元素类名
+		$(this).addClass('current')
+		
+		// 获取图片li
+		var $contLi = $('.content > li') 
+		// 获取当前选中的索引
+		var index = $(this).index()
+		// 清除选中索引的兄弟元素类名
+		$contLi.eq(index).siblings().removeClass('show') 
+		// 修改选中索引的元素类名
+		$contLi.eq(index).addClass('show')	
+	})
+</script>
+</body>
+</html>

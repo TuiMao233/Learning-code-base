@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body id="body">
+		<div class="warp">
+			<div id="inner1">
+				<div id="inner2"></div>
+			</div>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		var inner1 = document.getElementById("inner1");
+		var inner2 = document.getElementById("inner2");
+		console.log(inner2.parentNode.id)
+		//parentNode指针指向的是上级元素，和定位无关
+	</script>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="test">DZL</div>
+		<ul>
+			<li>test1</li>
+			<li>test2</li>
+			<li>test3</li>
+		</ul>
+		<!--
+		1. [].slice.call(lis): 将伪数组转换为真数组
+		2. node.nodeType: 得到节点类型
+		3. Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符)
+		4. Object.keys(obj): 得到对象自身可枚举属性组成的数组
+		5. obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+		6. DocumentFragment: 文档碎片(高效批量更新多个节点)
+		-->
+	</body>
+	<script type="text/javascript">
+		const lis = document.querySelectorAll('li')
+		console.log(lis instanceof Object )
+		/* ------------------------- 转换伪数组 ------------------------- */
+		/* ES5转换真数组 */
+		const lisAll = [].slice.call(lis)
+		// const lisAll = Array.prototype.slice.call(lis)
+		console.log(lisAll)
+		
+		/* ES6转换真数组 */
+		const lisAll2 = Array.from(lis)
+		console.log(lisAll2)
+		
+		
+		/* ------------------------- 得到节点类型 ------------------------- */
+		const el = document.getElementById('test') // 获取元素节点
+		const attrNode = el.getAttributeNode('id') // 获取标签节点
+		const textNode = el.firstChild // 获取文本节点
+		console.log(el.nodeType, attrNode.nodeType, textNode.nodeType)
+		// 元素节点显示1 标签节点显示2 文本节点显示3
+		
+		
+		/* Object.defineProperty(obj, propertyName, {}): 给对象添加属性(指定描述符) */
+		const obj = { firstName: 'A', lastName: 'B' }
+		Object.defineProperty(obj, 'fullName', {
+			get: function () {
+				return this.firstName + '-' +this.lastName
+			},
+			set: function (value) {
+				const names = value.split('-')
+				this.firstName = names[0]
+				this.lastName = names[1]
+			}
+		})
+		console.log(obj.fullName)
+		obj.firstName = 'D'
+		obj.lastName = 'W'
+		console.log(obj.fullName)
+		obj.fullName = 'Y-G'
+		console.log(obj.firstName, obj.lastName)
+		
+		Object.defineProperty(obj, 'fullName2', {
+			configurable: true, //是否可修改
+			enumerable: true, // 是否可枚举
+			value: 'fullName2222' ,// 初始值 可以是任何有效的javascript值
+			writable: false
+		})
+		obj.fullName2 = 'www'
+		console.log(obj.fullName2)
+		
+		
+		/* ------------------ 得到对象自身可枚举属性组成的数组 ------------- */
+		const ObjNames = Object.keys(obj)
+		console.log(ObjNames)
+		
+		
+		/* -------------------- 判断prop是否是obj自身的属性 --------------------- */
+		// obj.hasOwnProperty(prop): 判断prop是否是obj自身的属性
+		console.log(obj.hasOwnProperty('fullName2'), obj.hasOwnProperty('www'))
+	
+	
+		/* ------------- DocumentFragment(高效批量更新多个节点) -------------- */
+		// document：对应显示的页面，包含n个elment 一旦更新document内部的每个元素界面更新
+		// documentFragment：内存中保存n个elment 的容器对象(不与界面关联)，如果更新framgnet中的每个elment界面不会发生改变
+		const ul = document.querySelector('ul')
+		// 1. 创建fragment
+		const fragment = document.createDocumentFragment()
+		// 2. 取出ul中所有子节点取出保存到fragment
+		let child
+		while (child = ul.firstChild) {
+			 fragment.appendChild(child)
+		}
+		// 3. 更新fragment中的所有li文本
+		Array.prototype.slice.call(fragment.childNodes).forEach(node => {
+			if (node.nodeType === 1) {
+				node.innerText = 'WWWW'
+			}
+		})
+		console.log(fragment)
+		// 4. 将fragment插入ul
+		ul.appendChild(fragment)
+	</script>
+</html>

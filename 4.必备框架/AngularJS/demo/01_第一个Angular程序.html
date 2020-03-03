@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body ng-app>
+
+<!--
+  ng-app(指令) : 告诉angular核心它管理当前标签所包含的整个区域,并且会自动创建$rootScope根作用域对象
+  ng-model : 将当前输入框的值与谁关联(属性名:属性值), 并作为当前作用域对象($rootScope)的属性
+  {{}} (表达式) : 显示数据,从作用域对象的指定属性名上取
+
+  1、表达式：通常有一个返回值，可以放在任何需要值得地方，比如函数调用的参数，一个变量名，一个运算，
+
+  2、语句：通常表示一个完整的执行单位，一段完整的js可执行的代码，有的语句也可以用表达式来执行，叫做表达式语句。
+
+  3、区别：语句用封号结尾，有些语句我们没有加封号，比如console.log虽然我们没有加封号，但也是语句，因为js引擎会自动解析并且加上封号。
+  js引擎在解析的时候会自动的加上封号
+
+  4、特例：if语句，就不用加封号  可也是完整的语句。
+-->
+
+<input type="text" ng-model="username">
+<p>您输入的内容是：<span>{{username}}</span></p>
+<script src="js/angular-1.2.29/angular.js"></script>
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
+
+
+
+
+
+

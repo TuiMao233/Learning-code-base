@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<style type="text/css">
+			#wrap{
+				height: 100px;
+				background: rgba(0,0,0,.5);
+				position: relative;
+			}
+			#wrap > #bg{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background: url(../0.尚硅谷css3资料/code/pre/01_css3/03_新的UI方案/01_文本新增属性/img/avatar.jpg) no-repeat;
+				background-size: 100% 100%;
+				z-index: -1;
+				filter: blur(50px); /*背景模糊*/
+			}
+			#wrap > img{
+				width: 64px;
+				margin: 18px 0 0 18px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<img src="../../其他/CSS3动画/fonts/关联设备.svg"/>
+			<div id="bg"></div>
+		</div>
+	</body>
+</html>

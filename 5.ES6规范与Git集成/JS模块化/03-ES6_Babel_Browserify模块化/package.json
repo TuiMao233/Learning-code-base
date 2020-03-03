@@ -1,0 +1,10 @@
+{
+  "name": "es6_bable-browserify",
+  "version": "1.0.0",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "dependencies": {
+    "jquery": "^1.12.4"
+  }
+}

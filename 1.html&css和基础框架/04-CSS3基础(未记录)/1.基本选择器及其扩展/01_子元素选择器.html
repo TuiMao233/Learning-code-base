@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			/*	通配符选择器 *{margin:0;}
+			 * 	元素选择器 body{}
+			 * 	类选择器 .list{}
+			 * 	id选择器 #list{}
+			 * 	分组选择器 .list,#wrap{}
+			 * 	后代选择器 .list li{}    会选中孙子的li
+			 * 	子元素选择器 .wrap>li{}  不会选中孙子的li
+			 * 	兄弟选择器 #wrap #first + inner{}
+			 */
+			#wrap{
+				width: 200px;
+				height: 200px;
+			}
+			#wrap > div { /*子元素选择器,也叫做直接后代选择器*/
+				border: 1px solid;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div>1
+				<div>1-1</div>
+			</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+		</div>
+	</body>
+</html>

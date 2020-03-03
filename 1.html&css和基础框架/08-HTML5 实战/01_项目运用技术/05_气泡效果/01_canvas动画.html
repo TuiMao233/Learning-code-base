@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				background: white;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas width="400" height="400"></canvas>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oc = document.querySelector("canvas");
+			if(oc.getContext){
+				var ctx = oc.getContext("2d");
+				var flag =0;
+				setInterval(function(){
+					ctx.clearRect(0,0,oc.width,oc.height);
+					//动画
+					flag++;
+					
+					//绘制
+					ctx.save();
+					ctx.beginPath();
+					ctx.strokeRect(flag,flag,100,100);
+					ctx.restore();
+				},1000/60);
+			}
+		}
+		
+		
+	</script>
+</html>

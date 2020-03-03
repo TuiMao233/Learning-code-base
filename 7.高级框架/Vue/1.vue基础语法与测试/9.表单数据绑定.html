@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>08_表单输入绑定</title>
+</head>
+<body>
+<!--
+1. 使用v-model(双向数据绑定)自动收集数据
+  text/textarea
+  checkbox
+  radio
+  select
+-->
+<div id="demo">
+  <form action="/xxx" @submit.prevent="handleSubmit">
+	  <!-- @submit.prevent -->
+	  
+    <span>用户名: </span>
+	<input type="text" v-model="userName"><br>
+    <span>密の码: </span>
+    <input type="password" v-model="pwd" ><br>
+
+
+
+    <span>性别: </span>
+    <input type="radio" id="female" value="女" v-model="sex">
+    <label for="female">女</label>
+    <input type="radio" id="male" value="男" v-model="sex">
+    <label for="male">男</label><br>
+
+
+
+    <span>爱好: </span>
+    <input type="checkbox" id="basket" value="basket" v-model="likes">
+    <label for="basket">篮球</label>
+	
+    <input type="checkbox" id="foot" value="foot" v-model="likes">
+    <label for="foot">足球</label>
+	
+    <input type="checkbox" id="pingpang" value="pingpang" v-model="likes">
+    <label for="pingpang">乒乓</label><br>
+
+
+
+    <span>城市: </span>
+    <select v-model="cityID">
+      <option  value="">未选择</option>
+      <option :value="city" v-for="(city,index) in allCitys" :key="index">
+		  {{city.name}} 
+	  </option>
+    </select><br>
+	
+	
+	
+    <span>介绍: </span><br>
+    <textarea rows="4" style="width: 220px;" v-model="desc"></textarea><br>
+
+
+
+    <input type="submit" value="注册">
+	
+	
+	
+  </form>
+</div>
+
+<script type="text/javascript" src="js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+	  
+    el: '#demo',
+	
+    data: {
+		userName:'',
+		pwd:'',
+		sex:'女',
+		likes:['basket'],
+		allCitys:[
+			{id:1,name:'北京'},
+			{id:2,name:'上海'},
+			{id:3,name:'广东'},
+			],
+		cityID:'',
+		desc:''
+    },
+	
+    methods: {
+		handleSubmit(){
+			var io = {
+				userName : this.userName,
+				password : this.pwd,
+				sex : this.sex,
+				likes : this.likes,
+				cityID : this.cityID,
+				desc : this.desc
+			}
+			console.log(io)
+			return false
+		}
+    },
+	
+  })
+</script>
+</body>
+</html>

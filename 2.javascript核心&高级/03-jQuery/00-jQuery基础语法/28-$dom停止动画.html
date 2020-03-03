@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>44-下拉菜单</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .nav{
+            list-style: none;
+            width: 300px;
+            height: 50px;
+            background: red;
+            margin: 100px auto;
+        }
+        .nav>li{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            float: left;
+        }
+        .sub{
+            list-style: none;
+            background: mediumpurple;
+            display: none;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            /*
+            在jQuery中如果需要执行动画, 建议在执行动画之前先调用stop方法,然后再执行动画
+            */
+            // 1.监听一级菜单的移入事件
+            $(".nav>li").mouseenter(function () { // 所有li的移入事件
+				var $sub = $(this).children('.sub')
+				$sub.stop()	// 停止当前动画
+				$sub.slideDown(1000) // 收起
+            });
+            // 2.监听一级菜单的移出事件
+            $(".nav>li").mouseleave(function () { // 所有li的移出事件
+				var $sub = $(this).children('.sub')
+				$sub.stop()	// 停止当前动画
+				$sub.slideUp(1000)	// 收起
+            });
+
+        });
+    </script>
+</head>
+<body>
+<ul class="nav">
+    <li>一级菜单
+        <ul class="sub">
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+            <li>二级菜单</li>
+        </ul>
+    </li>
+    <li>一级菜单
+		<ul class="sub">
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		    <li>二级菜单</li>
+		</ul>
+	</li>
+    <li>一级菜单
+		<ul class="sub">
+			<li>二级菜单</li>
+			<li>二级菜单</li>
+			<li>二级菜单</li>
+			<li>二级菜单</li>
+			<li>二级菜单</li>
+			<li>二级菜单</li>
+			<li>二级菜单</li>
+		</ul>
+	</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				height: 750px;
+				border: solid 1px darkcyan;
+				position: relative;
+			}
+			#px{
+				position: absolute;
+				font-size: 250%;
+			}
+			#box1 {
+				width: 100px;
+				height: 100px;
+				background: gold;
+				position: absolute;
+				left: 0;
+				top: 0;
+				/*transition: 0.01s linear;*/
+			}
+		</style>
+		<script>
+			window.onload = function(event) {
+				var event = event || window.event;
+				var box1 = document.getElementById("box1");
+				var spaed = 10;
+				var keyCode = 0;
+				var px = document.getElementById("px");
+				var ti = 0;
+				var body = document.body;
+				var bodyWidth = body.clientWidth;
+				var bodyHeight = body.clientHeight;
+				var boxK = parseInt(getStyle(box1 , "width"));
+				var FanX = "无";
+				function move () {
+					ti++;
+					switch(keyCode) {
+
+						case 37:
+							FanX ="左";
+							if(box1.offsetLeft < 5) {
+								box1.style.left = 8 + "px";
+								clearInterval(timer);
+								ix = 0;ti = 0;
+								keyCode = 0;
+								}
+							if(box1.offsetLeft > 0){
+								box1.style.left = box1.offsetLeft - spaed + "px";
+								}
+							break;
+
+						case 38:
+							FanX ="上";
+							if(box1.offsetTop < 5) {
+								box1.style.top = 8 + "px";
+								clearInterval(timer);
+								ix = 0;ti = 0;
+								keyCode = 0;
+								}
+							if(box1.offsetTop > 0){
+							box1.style.top = box1.offsetTop - spaed + "px";
+							}
+							break;
+
+						case 39:
+							FanX ="右";
+							if(box1.offsetLeft > document.body.clientWidth - boxK) {
+								box1.style.left = document.body.clientWidth - boxK + "px";
+								clearInterval(timer);
+								ix = 0;ti = 0;
+								keyCode = 0;}
+							if(box1.offsetLeft < document.body.clientWidth - boxK){
+								box1.style.left = box1.offsetLeft + spaed + "px";}
+							break;
+
+						case 40:
+							FanX ="下";
+							if(box1.offsetTop > document.body.clientHeight - boxK) {
+								box1.style.top = document.body.clientHeight - boxK + "px";
+								clearInterval(timer);
+								ix = 0;ti = 0;
+								keyCode = 0;}
+							if(box1.offsetTop < document.body.clientHeight - boxK){
+							box1.style.top = box1.offsetTop + spaed + "px";}
+							break;
+					}
+					px.innerHTML = "X："+ box1.offsetLeft+"px <br /> " +
+								   "Y："+ box1.offsetTop+ "px <br /> " +
+								   "方向："+FanX +"<br />"+
+								   "定时器："+ti;
+					console.log("ss")
+				}
+				var timer = setInterval(function(){move()}, 10);
+
+				clearInterval(timer);
+					
+				var ix = 0;  
+				document.onkeydown = function(event) {
+					var event = event || window.event;
+					ix++;
+					if (ix == 1){timer = setInterval(function(){move()}, 10);}
+					keyCode = event.keyCode;
+					if(keyCode < 37 || keyCode > 40){
+						ix = 0;
+						ti = 0;
+						clearInterval(timer);
+					}
+					if(event.ctrlKey){
+			 		spaed = 50;}
+//			 		document.onkeyup = function(event){
+//			 			ix = 0;
+//			 			clearInterval(timer)
+//			 		}
+				}
+				/* 37左
+				 * 38上
+				 * 39右
+				 * 40下 */
+						function getStyle (obj , name ){
+						if (window.getComputedStyle){
+		//					其他浏览器获取样式方法
+							return getComputedStyle(obj,null)[name];
+						}else{
+							//IE8获取元素宽度样式方法
+							return obj.currentStyle[name];
+						}
+					}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="box1"></div>
+		<p id="px"></p>
+	</body>
+
+</html>

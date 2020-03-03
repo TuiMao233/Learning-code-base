@@ -1,0 +1,24 @@
+﻿{
+  "_id" : ObjectId("5941f2bac1bc86928f4de49a"),
+  "deptno" : 10.0,
+  "dname" : "财务部",
+  "loc" : "北京"
+}
+{
+  "_id" : ObjectId("5941f2bac1bc86928f4de49b"),
+  "deptno" : 20.0,
+  "dname" : "办公室",
+  "loc" : "上海"
+}
+{
+  "_id" : ObjectId("5941f2bac1bc86928f4de49c"),
+  "deptno" : 30.0,
+  "dname" : "销售部",
+  "loc" : "广州"
+}
+{
+  "_id" : ObjectId("5941f2bac1bc86928f4de49d"),
+  "deptno" : 40.0,
+  "dname" : "运营部",
+  "loc" : "深圳"
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*
+			 * 景深：让3D场景有近大远小的效果
+			 * 			是一个不可继承属性，但他可以作用于子元素
+			 * 灭点: 
+			 * 		景深越大 灭点越远 元素变形更小
+			 * 		景深越小 灭点更近 元素变形更大
+			 * 
+			 * 	transform-style：
+			 * 		营造有层级的3d舞台
+			 * 			作用于子元素 不可继承
+			 * 	
+			 * 	
+			 */
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			#wrap{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 400px;
+				height: 400px;
+				border: 1px solid;
+				perspective: 200px;
+				/*transform-style: preserve-3d;*/
+				background: url(../../1.CSS与HTML的链接练习/网页背景/psb5_爱奇艺.jpg) no-repeat;
+				background-position: -30%;
+				background-size: 100%;
+			}
+			#wrap .box{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				width: 200px;
+				height: 200px;
+				text-align: center;
+				transform-style: preserve-3d;
+				transform-origin:center center -100px;
+				transition: 1s;
+				transform: rotateY(0deg);
+				animation: anim 5s infinite linear;
+			}
+			#wrap > .box > div{
+				position: absolute;
+				width: 200px;
+				height: 200px;
+				background: rgba(150,255,151,.5);
+				text-align: center;
+				font: 50px/200px "微软雅黑";
+				box-sizing: border-box;
+				border: 1px solid #007788;
+				transform-origin: center center -100px;
+				backface-visibility: hidden;
+			}
+			#wrap > .box > div:nth-child(5){
+				transform: rotateX(90deg);
+			}
+			#wrap > .box > div:nth-child(6){
+				transform: rotateX(-90deg);
+			}
+			#wrap > .box > div:nth-child(3){
+				transform: rotateY(-90deg);
+			}
+			#wrap > .box > div:nth-child(4){
+				transform: rotateY(90deg);
+			}
+			#wrap > .box > div:nth-child(2){
+				transform: rotateY(180deg);
+			}
+			#wrap > .box > div:nth-child(1){
+			}
+			#wrap:hover .box {
+				/*x,y,z*/
+				transform: rotate3d(0.3,1,0,180deg);
+				/*rotate3d(Y,X,Z)*/
+			}
+			@keyframes  anim {
+				0%{transform: rotate3d(0.3,1,0,0deg)}
+				100%{transform: rotate3d(0.3,1,0,360deg)}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="box">
+				<div>前</div>
+				<div>后</div>
+				<div>左</div>
+				<div>右</div>
+				<div>上</div>
+				<div>下</div>
+			</div>
+		</div>
+		
+	</body>
+</html>

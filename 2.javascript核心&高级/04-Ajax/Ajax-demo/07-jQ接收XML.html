@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/jquery-1.12.4.js"></script>
+	</head>
+	<style type="text/css">
+		*{margin: 0;padding: 0;}
+		ul{
+			margin-left: 30px;
+			position: absolute;
+			top: 10px;
+			display: inline-block;
+			line-height: 35px;
+		}
+		ul>li>a{
+			color: green;
+		}
+		img{
+			width: 200px;
+		}
+		#details{
+			position: absolute;
+			left: 30px;
+		    margin:0px;
+		    padding:0px;
+		    font-family:"微软雅黑","黑体","宋体";
+		    font-size:30px;
+		    height:36px;
+		    color: lightblue;
+		}
+	</style>
+	<body>
+		<img src="psbw.gif"/>
+		<ul>
+			<li><a href="data/XML/Andy.xml">Andy</a></li>
+			<li><a href="data/XML/Richard.xml">Richard</a></li>
+			<li><a href="data/XML/Jeremy.xml">Jeremy</a></li>
+		</ul>
+		<div id="details"></div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			$("a").click(function(){
+				url = this.href;
+				args = {"time":new Date()};
+				//url:
+				//function:回调函数：当响应结束时，回调函数被触发。响应结果在data中
+				$.get(url,args,function(data){
+					var name = $(data).find("name").text();
+					var website = $(data).find("website").text();
+					var email = $(data).find("email").text();
+					$("#details").empty()
+								 .append("<h2>"+name+"<h2>")
+								 .append("<a href='"+website+"'>"+website+"</a>")
+								 .append("<p>"+email+"</p>")
+				})
+				
+				return false;
+			})
+		})
+	</script>
+</html>

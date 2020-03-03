@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>ajax容易忽视的重点</title>
+		<style type="text/css">
+			#btn {
+				width: 200px;
+				height: 200px;
+				background: red;
+				border-radius: 20px;
+				text-align: center;
+				line-height: 200px;
+				font-size: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<!--
+    * 如何废除一个ajax请求 ----abort()方法
+    需求：点击获取验证码的按钮，用户十秒时候可以再次获取，当十秒过后第一次请求没有返回，用户再次点击获取
+    然后因为网速好或者其他原因，两次请求同时返回，该怎么解决
+
+    * disabled属性   设置表单项或者按钮不可再点击或者操作；但是只是针对click事件，而并没有针对touch事件作出处理。
+  -->
+		<button id="btn">按钮</button>
+		<script src="../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/touch.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var xmlHttp = null; //初始化xmlHttp对象
+				var isSend = false; //初始化判断按钮是否可以点击
+				$('#btn').on('touchstart', function() {
+					if (isSend) {return}
+					$(this).css('background', 'gray')
+					isSend = true
+					
+					setTimeout(function() {
+						$('#btn').css('background', 'red')
+						isSend = false
+					}, 2000)
+					if(xmlHttp){
+						xmlHttp.abort();
+					}
+					xmlHttp = sendXml()
+
+				})
+
+				function sendXml() {
+					return $.ajax({
+						method: "GET",
+						url: 'http://localhost:3000/',
+						dataType: 'json',
+						success: function(data) {
+							console.log(data)
+						},
+						error: function(error) {
+							console.log(error)
+						}
+					})
+				}
+			});
+		</script>
+	</body>
+</html>

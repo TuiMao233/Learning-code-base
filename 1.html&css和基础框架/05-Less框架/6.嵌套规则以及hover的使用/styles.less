@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+@color:darkgray;
+#wrap {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    border: 1px solid;
+    margin: 0 auto;
+    .inner {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        background: @color;
+        height: 100px;
+        width: 100px;
+      /*
+       * 默认情况下添加:hover编译时会认为这个是inner的子元素
+       *    例.inner :hover{}
+       * 加上&后让:hover{}可以让前面的空格不保留
+       *    例.inner:hover{}
+       */
+        &:hover{
+            background: pink;
+        }
+    }
+}

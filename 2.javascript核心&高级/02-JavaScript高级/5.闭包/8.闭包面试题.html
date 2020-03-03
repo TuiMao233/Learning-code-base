@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			一、内存溢出
+					一种程序运行出现的错误
+					当程序运行的内存超过剩余的内存时，就会抛出内存溢出的错误
+			二、内存泄漏
+					占用的内存没有及时释放
+					内存泄漏积累多了就容易导致内存溢出
+					常见的内存泄漏：
+						意外的全局变量
+						没有及时清理的计时器回调函数
+						闭包
+		-->
+	</body>
+	<script type="text/javascript">
+		//例题一
+		var name = "The DZL"
+		var obj = {
+			name: "My Object",
+			getNameFunc: function(){
+				return function(){
+					return this.name
+				}
+			}
+		}
+		alert(obj.getNameFunc()) // ??
+		
+		//例题二
+		var name2 = "The DZL"
+		var obj2 = {
+			name2: "My Object",
+			getNameFunc: function(){
+				that = this
+				return function(){
+					return that.name2
+				}
+			}
+		}
+		alert(obj2.getNameFunc()) // ??
+		
+		//例题三
+		function fun(n,o){
+			console.log(o)
+			return {
+				fun:function(m){
+					return fun(m,n)
+				}
+			}
+		}
+		var a = fun(0);
+		a.fun(1)
+		a.fun(2)   	 //undefined ? ? ?
+		a.fun(3)
+		
+		var b = fun(0).fun(1).fun(2).fun(3) 	 //undefined ? ? ?
+		var c = fun(0),fun(1); c.fun(2); c.fun(3)//undefined ? ? ?
+	</script>
+</html>

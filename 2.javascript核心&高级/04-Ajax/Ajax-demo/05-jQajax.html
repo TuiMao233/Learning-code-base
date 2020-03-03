@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery-1.12.4.js"></script>
+	</head>
+	<body>
+		<a href="data/helloAjax.txt">HelloAjax</a>
+		<div id="content">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		$(function(){
+			$("a").click(function(){
+				var url = this.href;
+				$("#content").load(url)
+				return false;
+			})
+		})
+	</script>
+</html>

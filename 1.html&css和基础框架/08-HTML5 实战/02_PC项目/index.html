@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/new_file.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			/*css reset 开始*/
+			html,body{height:100%;overflow:hidden}
+			html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin:0px;padding:0px;font:14px "微软雅黑";}
+			a{text-decoration:none;display:block}
+			li{list-style:none;}
+			img{display:block;}
+			/*css reset 结束*/
+			
+			/*common css 开始*/
+			/*common css 结束*/
+			
+			/* 开机动画 开始 */
+			#warp #mask {width: 100%;height: 100%;position: absolute;z-index: 100;background: deepskyblue;}
+			#warp #mask .up {width: 100%;height: 50%;background: deepskyblue;
+								transition: 1s all;position: absolute;top: 0;}
+			#warp #mask .sched {width: 0;height: 10px;background: #fff;position: absolute;
+									transition: 1s all;top: 0;bottom: 0;left: 0;margin: auto;}
+			#warp #mask .down {width: 100%;height: 50%;background: deepskyblue;
+								transition: 1s all;position: absolute;bottom: 0;}
+			/* 开机动画 结束 */
+			
+			/* 右侧导航样式 开始 */
+			#warp > #navul{position: fixed;top: 50% ;right: 5px;z-index: 1000;}
+			#warp > #navul > li{width: 12px;height: 12px;border-radius: 50%;box-sizing: border-box;
+									border: #fff solid 1px;margin-top: 10px;cursor: pointer;}
+			#warp > #navul > .active{background: #fff;}
+			/* 右侧样式 结束 */
+			
+			/*头部样式 开始*/
+			#warp > #header {background: #fff;position: relative;z-index: 10;}
+			#warp > #header > .headerMain {width: 1100px;height: 80px;background: #fff;
+											margin: 0 auto;z-index: 1;position: relative;}
+			#warp > #header > .headerMain .logo{float: left;margin-top: 30px; position: relative;}
+			#warp > #header > .headerMain .logo .music{position: absolute;bottom: 0;right: -15px;
+												width: 14px;height: 14px;background: url(img/musicoff.gif);}
+			
+			#warp > #header > .headerMain .right{margin-top: 50px;float: right;}
+			#warp > #header > .headerMain .right li{float: left;margin-left: 40px;overflow: hidden;position: relative;}
+			#warp > #header > .headerMain .right > li > a > .up{position: absolute;overflow: hidden;/* 超出不显示 */
+																color: #000000;width: 0%;transition: 1s width;}
+			#warp > #header > .headerMain .right > li.active > a > .up{width: 100%;}
+			#warp > #header > .headerMain .right> li:hover .up{width: 150%;}
+			#warp > #header > .headerMain > .arrow {width: 0;height: 0;border: 10px solid transparent;
+													border-top-color: #fff;position: absolute;bottom: -20px;
+													transition: 1s;}
+			/*头部样式 结束*/
+			
+			
+			/* 内容样式 开始 */
+			
+			#warp > #cont > #book_box {height: 100%;position: relative;transition: 0.5s;top: -1px;}
+			#warp > #cont > #book_box > li {width:100%;height: 100%;background-position: 50% 50%;
+												overflow: hidden;position: relative;}
+			#warp > #cont > #book_box > li > div{ width: 1100px; height: 520px;
+													position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;}
+			#warp > #cont > #book_box > .home{background-image: url(img/bg1.jpg);}
+			#warp > #cont > #book_box > .course{background-image: url(img/bg2.jpg);}
+			#warp > #cont > #book_box > .works{background-image: url(img/bg4.jpg);}
+			#warp > #cont > #book_box > .about{background-image: url(img/bg3.jpg);}
+			#warp > #cont > #book_box > .team{background-image: url(img/bg5.jpg);}
+			
+			/* 第一屏 */
+			.home .main {position: relative;}
+			/* 轮播图 */
+			.container{position: relative;width: 1100px;height: 520px;}
+			.container > .warpper {width: 100%;height: 100%;position: relative;perspective: 1200px;
+							transform-style: preserve-3d;}
+			.container > .warpper .slide{width: 700px;height: 440px;transition: 0.3s;z-index: 0;background-position: 15% 15%;
+											 color: white;text-align: center;font-size: 80px;line-height: 440px;user-select: none; 
+											position: absolute;left: 0;top:-80px;right: 0;bottom: 0;margin: auto;cursor:pointer;
+											-moz-box-shadow:3px 8px 20px #333333; -webkit-box-shadow:3px 8px 20px #333333;
+											 box-shadow:3px 8px 20px #333333;}
+			.container > .warpper .slide:nth-child(1){background-color: #dc6c5f;}
+			.container > .warpper .slide:nth-child(2){background-color: #95dc84;}
+			.container > .warpper .slide:nth-child(3){background-color: #64b9d2;}
+			.container > .warpper .slide:nth-child(4){background-color: darkkhaki;}
+			.container > .warpper .slide:nth-child(5){background-color: #55ffff}
+			.paginAtion{width: 280px;height: 52px;;position: absolute;left: 0;right:0;bottom: 10px;margin: auto;}
+			.paginAtion > div {float: left;width: 30px;height: 30px;margin: 13px;border-radius: 50%;z-index: 5;
+								-moz-box-shadow:0px 0px 8px #333333; -webkit-box-shadow:0px 0px 8px #333333; box-shadow:0px 0px 8px #333333;
+								background-color: #fff;opacity: 0.3;cursor: pointer;}
+			.paginAtion> div.active{opacity: 1;}
+			
+			
+			
+			/* 第二屏 */
+			.course .main .left{width: 400px;margin: 50px;float: left;z-index: 5;position: relative;}
+			.course > .main > .left > .title{margin-bottom: 50px;}
+			.course > .main > .left > .title span{color: #009ee0;font-size: 80px;line-height: 65px;}
+			.course .main .left > p{color: #fff;}
+			.course > .main > .right{width: 480px;position: absolute;right: 50px;top: 70px;z-index: 5;  }
+			.course > .main > .right > .item {width: 120px;height: 132px;position: relative;
+						float: left;transform-style: preserve-3d;perspective: 500px;transition: 1s;}
+			.course > .main > .right > .item:hover .posi {transform: rotateY(180deg);}
+			.course > .main > .right > .item:hover .anti {transform: rotateY(0deg);}
+			.course > .main > .right > .item > .posi, .course > .main > .right > .item > .anti{
+				width: 100%;height: 100%;position: absolute;
+				transform-origin: center center;transition: 1s;}
+			.course > .main > .right > .item > .anti {
+				line-height: 132px;text-align: center;color: #fff; font-size: 20px;
+				transform: rotateY(-180deg);
+				backface-visibility: hidden; /* 指定当元素背面朝向观察者时是否可见 */}
+			.course > .main > .right > .item > .posi{background-repeat: no-repeat;
+												background-position: 50% 50%;backface-visibility: hidden; 
+												/* 指定当元素背面朝向观察者时是否可见 */}
+			.course > .main > .right > .item:nth-child(1) .posi{background-image: url(img/apcoa.png);}
+			.course > .main > .right > .item:nth-child(2) .posi{background-image: url(img/binoli.png);}
+			.course > .main > .right > .item:nth-child(3) .posi{background-image: url(img/bks.png);}
+			.course > .main > .right > .item:nth-child(4) .posi{background-image: url(img/gu.png);}
+			.course > .main > .right > .item:nth-child(5) .posi{background-image: url(img/hlx.png);}
+			.course > .main > .right > .item:nth-child(6) .posi{background-image: url(img/lbs.png);}
+			.course > .main > .right > .item:nth-child(7) .posi{background-image: url(img/leonberg.png);}
+			.course > .main > .right > .item:nth-child(8) .posi{background-image: url(img/pcwelt.png);}
+			.course > .main > .right > .item:nth-child(9) .posi{background-image: url(img/tata.png);}
+			.course > .main > .right > .item:nth-child(10) .posi{background-image: url(img/apcoa.png);}
+			.course > .main > .right > .item:nth-child(11) .posi{background-image: url(img/hlx.png);}
+			.course > .main > .right > .item:nth-child(12) .posi{background-image: url(img/apcoa.png);}
+			
+			.course > .main .plane_1 {width: 359px;height: 283px;background: url(img/plane1.png) no-repeat;
+									position: absolute;left: 300px;top: -100px;}
+			.course > .main .plane_2 {width: 309px;height: 249px;background: url(img/plane2.png) no-repeat;
+									position: absolute;left: -200px;top: 200px;}
+			.course > .main .plane_3 {width:230px;height: 182px;background: url(img/plane3.png) no-repeat;
+									position: absolute;left: 300px;top: 400px;}
+			/* 第三屏 */
+			.works > .main{position: relative;}
+			.works > .main > .robot {position: absolute;top: 170px; left: 896.3px;z-index: 5;
+						animation-name: move;/*关键帧名字*/
+						animation-duration: 3s;/*时间*/
+						animation-timing-function: linear;/*时间曲线*/
+						animation-direction: reverse ;/*逆向动画 */
+						animation-delay: 1s;/*延时开始*/
+						animation-iteration-count: infinite;/*动画次数*/
+			}@keyframes move{
+				0%{transform: rotateY(180deg);}
+				49%{transform: rotateY(180deg);}
+				50%{transform: rotateY(0deg);left: 470px;}
+				100%{transform: rotateY(0deg);}
+			}
+			.works > .main > .top{margin: 50px;margin-bottom: 100px; position: relative;z-index: 5;}
+			.works > .main > .top > .title{color: #009ee0;font-size: 80px;line-height: 65px;width: 50%;}
+			.works > .main > .bottom{width: 100%;height: 132.99px;margin-left: 50px;position: relative;z-index: 5;}
+			.works > .main > .bottom > .item{width: 220px;height: 100%;float: left;position: relative;overflow: hidden;}
+			.works > .main > .bottom > .item:nth-child(4){width: 332px;}
+			.works > .main > .bottom > .item > .backgr{height: 100%;background-repeat: no-repeat;transition: 0.5s;}
+			.works > .main > .bottom > .item:nth-child(1) .backgr{background: url(img/worksimg1.jpg);}
+			.works > .main > .bottom > .item:nth-child(2) .backgr{background: url(img/worksimg2.jpg);}
+			.works > .main > .bottom > .item:nth-child(3) .backgr{background: url(img/worksimg3.jpg);}
+			.works > .main > .bottom > .item:nth-child(4) .backgr{background: url(img/worksimg4.jpg);}
+			.works > .main > .bottom > .item:hover .backgr{transform: rotate(20deg) scale(1.3);}
+			.works > .main > .bottom > .item > .occl{width: 100%;height: 100%;position: absolute;top: 0;background: rgb(0,0,0,0);transition: 1s;}
+			.works > .main > .bottom > .item:hover .occl{background: rgb(0,0,0,.8);}
+			.works > .main > .bottom > .item > .occl > .magn{height: 34px;width: 32px;overflow: hidden;opacity: 0;transition: 1s;
+															position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;}
+			.works > .main > .bottom > .item > .occl > .magn > img{transition: 0.3s;}
+			.works > .main > .bottom > .item > .occl:hover > .magn {opacity: 1;}
+			.works > .main > .bottom > .item > .occl > .magn:hover img{margin-top: -35.5px;}
+			
+			.works > .main > .pen_1 {width: 180px;height: 79px;background: url(img/pencel1.png) no-repeat;
+										position: absolute;left: 500px;top: 0px;}
+			.works > .main > .pen_2 {width: 268px;height: 38px;background: url(img/pencel2.png) no-repeat;
+										position: absolute;left: 300px;top: 250px;}
+			.works > .main > .pen_3 {width: 441px;height: 231px;background: url(img/pencel3.png) no-repeat;
+										position: absolute;left: 650px;top: 300px;}
+			
+			
+			/* 第四屏 */
+			.about > .main > .left {height: 100%;width: 400px;margin: 50px;z-index: 5;}
+			.about > .main > .left > .title {margin-bottom: 100px;}
+			.about > .main > .left > .title > span{color: #009ee0;font-size: 80px;line-height: 65px;}
+			.about > .main > .left > p {color: #fff;}
+			.about > .main > .spider_1 ,.spider_2{width: 260px;height: 200px;position: absolute;transition: 1s;
+													background-position: 50% 50%;background-size: 130% 130%;
+													border: 5px solid rgba(202, 189, 189, 0.5);border-radius: 15px;}
+			.about > .main > .spider_1{left: 750px;top: 50px;background-image: url(img/about2.jpg);}
+			.about > .main > .spider_2{left: 600px;top: 290px;background-image: url(img/about4.jpg);}
+			.about > .main > .spider_1 div,
+			.about > .main > .spider_2 div {width: 50%;height: 50%;overflow: hidden;float: left;position: relative;}
+			.about > .main > .spider_1 div img,
+			.about > .main > .spider_2 div img {position: absolute;transition: 1s;}
+			.about > .main > .spider_1 div:nth-child(1) img,
+			.about > .main > .spider_2 div:nth-child(1) img {left: 0px; top: 0;} 
+			.about > .main > .spider_1 div:nth-child(2) img,
+			.about > .main > .spider_2 div:nth-child(2) img {left:-130px; top: 0;} 
+			.about > .main > .spider_1 div:nth-child(3) img,
+			.about > .main > .spider_2 div:nth-child(3) img {left: 0;top:-100px} 
+			.about > .main > .spider_1 div:nth-child(4) img,
+			.about > .main > .spider_2 div:nth-child(4) img {left:-130px;top: -100px;} 
+			.about > .main > .spider_1:hover,
+			.about > .main > .spider_2:hover {background-size: 100% 100%;}
+			.about > .main > .spider_1:hover div:nth-child(1) img,
+			.about > .main > .spider_2:hover div:nth-child(1) img {left: 0;top: 100px}
+			.about > .main > .spider_1:hover div:nth-child(2) img,
+			.about > .main > .spider_2:hover div:nth-child(2) img {left:-260px;top: 0;}
+			.about > .main > .spider_1:hover div:nth-child(3) img,
+			.about > .main > .spider_2:hover div:nth-child(3) img {left: 130px;top: -100;}
+			.about > .main > .spider_1:hover div:nth-child(4) img,
+			.about > .main > .spider_2:hover div:nth-child(4) img{left:-130px;top: -200px;}
+			
+			/* 第五屏 */
+			.team > .main > .title {margin: 50px;float: left;width: 460px;}
+			.team > .main > .title span {color: #009ee0;font-size: 80px;line-height: 65px;}
+			.team > .main > .content {width: 400px;height: 200px;margin:50px;float: right;}
+			.team > .main > .content p{color: white;line-height: 1.5;font-size: 15px;}
+			.team > .main > .bottom {width: 944px;height: 448px;position: absolute;top: 57%;left: 0;right: 0;margin: auto;z-index: 5;}
+			.team > .main > .bottom .item{width: 118px;height: 100%;background-image: url(img/team.png);
+										float: left;opacity: 1;transition: 0.7s;}
+			.team > .main > .bottom .item:nth-child(2){background-position: -118px 0;}
+			.team > .main > .bottom .item:nth-child(3){background-position: -236px 0;}
+			.team > .main > .bottom .item:nth-child(4){background-position: -346px 0;}
+			.team > .main > .bottom .item:nth-child(5){background-position: -463px 0;}
+			.team > .main > .bottom .item:nth-child(6){background-position: -581px 0;}
+			.team > .main > .bottom .item:nth-child(7){background-position: -699px 0;}
+			.team > .main > .bottom .item:nth-child(8){background-position: -817px 0;}
+			
+			/* 内容样式 结束 */
+			
+			/* 滚轮动画原点位置 */
+			.home .main .warpper,
+			.home .main .paginAtion,
+			.course > .main .plane_1,
+			.course > .main .plane_2,
+			.course > .main .plane_3,
+			.works > .main > .pen_1,
+			.works > .main > .pen_2,
+			.works > .main > .pen_3,
+			.about > .main > .spider_1 ,
+			.about > .main > .spider_2 ,
+			.team > .main > .title ,
+			.team > .main > .content{
+				transform: translate(0,0);
+				transition: 1s;
+				opacity: 0;
+			}
+			.home .main .warpper {transform: translate(0px, -400px);}
+			.home .main .paginAtion {transform: translate(0px, 100px);}
+		</style>
+		<!--分辨率范围:1200 - 2000-->
+	</head>
+	<body>
+		<section id="warp">
+			<!-- 开机动画 -->
+			<div id="mask"> 
+				<div class="up"></div>
+				<div class="sched"></div>
+				<div class="down"></div>
+			</div>
+			<!-- 头部 -->
+			<div id="header">
+				<div class="headerMain">
+					<div class="logo">
+						<a href="javascript:;"><img src="img/logo.png" ></a>
+						<a href="javascript:;" class="music" >
+							<audio src='mp3/www.mp3' loop autoplay="autoplay" controls="controls" style="height: 0"></audio>
+						</a>
+						
+					</div>
+					<ul class="right">
+						<li class="active">
+							<a href="javascript:;">
+								<div class="up"><img src="img/home_gruen.png"></div>
+								<div class="down"><img src="img/home.png"></div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="up">Course</div>
+								<div class="down">Course</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="up">Works</div>
+								<div class="down">Works</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="up">About</div>
+								<div class="down">About</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">
+								<div class="up">Team</div>
+								<div class="down">Team</div>
+							</a>
+						</li>
+					</ul>
+					<div class="arrow"></div>
+					
+				</div>
+			</div>
+			<!-- 内容区 -->
+			<div id="cont">
+				<ul id="book_box">
+					<li class="home"> <!-- 第一屏 -->
+						<div class="main"> <!-- 固定布局 -->
+							<div class="container">
+								<div class="warpper anim">
+									<div class="slide" style="transform: translate3d(0px,    0px,    0px);z-index: 5;">one Player</div>
+									<div class="slide" style="transform: translate3d(150px,  0px, -200px);z-index: 4;">two Player</div>
+									<div class="slide" style="transform: translate3d(300px,  0px, -400px);z-index: 3;">three Player</div>
+									<div class="slide" style="transform: translate3d(-300px, 0px, -400px);z-index: 3;">four Player</div>
+									<div class="slide" style="transform: translate3d(-150px, 0px, -200px);z-index: 4;">Fives Player</div>
+								</div>
+								<div class="paginAtion anim">
+										<div class="item active" ></div>
+										<div class="item" ></div>
+										<div class="item" ></div>
+										<div class="item" ></div>
+										<div class="item" ></div>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="course"> <!-- 第二屏 -->
+						<div class="main"><!-- 固定布局 -->
+								<div class="left">
+									<div class="title">
+										<span>EINIGE</span>
+										<span>UNSERER</span>
+										<span>KUNDEN</span>
+									</div>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus fugit reprehenderit doloribus esse natus adipisci quidem voluptatibus ut eveniet officia quibusdam repudiandae ad aliquid expedita repellat autem numquam ex provident.
+										<br>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores modi quam neque non similique ea qui officiis laborum repellat cupiditate blanditiis praesentium officia eligendi voluptates veniam iure est quidem.
+									</p>
+								</div>
+								<div class="right">
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+									<div class="item">
+										<div class="posi"></div>
+										<div class="anti">test line</div>
+									</div>
+								</div>
+								<div class="plane_1 anim"></div>
+								<div class="plane_2 anim"></div>
+								<div class="plane_3 anim"></div>
+						</div>	
+					</li>
+					<li class="works"> <!-- 第三屏 -->
+						<div class="main">
+							<div class="top">
+								<div class="title">
+									<span>EINBLICK</span>
+									<span>ERKENNITNIS</span>
+									<span>ERGEBNIS</span>
+								</div>
+							</div>
+							<img src="img/robot.png" class="robot" >
+							<div class="bottom">
+								<div class="item">
+									<div class="backgr"></div>
+									<div class="occl">
+										<div class="magn"><img src="img/zoomico.png" ></div>
+										
+									</div>
+								</div>
+								<div class="item">
+									<div class="backgr"></div>
+									<div class="occl">
+										<div class="magn"><img src="img/zoomico.png" ></div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="backgr"></div>
+									<div class="occl">
+										<div class="magn"><img src="img/zoomico.png" ></div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="backgr"></div>
+									<div class="occl">
+										<div class="magn"><img src="img/zoomico.png" ></div>
+									</div>
+								</div>
+							</div>
+							<div class="pen_1 anim"></div>
+							<div class="pen_2 anim"></div>
+							<div class="pen_3 anim"></div>
+						</div>	<!-- 固定布局 -->
+					</li>
+					<li class="about"> <!-- 第四屏 -->
+						<div class="main">
+							<div class="left">
+								<div class="title">
+									<span>DIE</span>
+									<span>SPEZIELLE</span>
+									<span>VIELFALT</span>
+								</div>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam debitis, earum esse molestiae sint. Autem eligendi fuga, in labore natus non numquam pariatur porro quas quisquam quo repellendus, sequi?
+								</p>
+							</div>
+							<div class="right"></div>
+							<div class="spider_1 anim">
+								<div><img src="img/about1.jpg" ></div>
+								<div><img src="img/about1.jpg" ></div>
+								<div><img src="img/about1.jpg" ></div>
+								<div><img src="img/about1.jpg" ></div>
+							</div>
+							<div class="spider_2 anim">
+								<div><img src="img/about3.jpg" ></div>
+								<div><img src="img/about3.jpg" ></div>
+								<div><img src="img/about3.jpg" ></div>
+								<div><img src="img/about3.jpg" ></div>
+							</div>
+						</div>	<!-- 固定布局 -->
+					</li>
+					<li class="team"> <!-- 第五屏 -->
+						<div class="main">
+							<div class="title anim">
+								<span>WIR SIND</span>
+								<span>VOXELATR</span>
+							</div>
+							<div class="content anim">
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, eius quod? Aperiam dolorem eligendi enim explicabo hic itaque libero minus natus, non odio possimus quibusdam quisquam quod sapiente sint voluptatibus!</p>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, eius quod? Aperiam dolorem eligendi enim explicabo hic itaque libero minus natus, non odio possimus quibusdam quisquam quod sapiente sint voluptatibus!</p>
+							</div>
+							<div class="bottom">
+								<div class="item"></div>
+								<div class="item"></div>
+								<div class="item"></div>
+								<div class="item"></div>
+								<div class="item"></div>
+								<div class="item"></div>
+								<div class="item"></div>
+								<div class="item"></div>
+							</div>
+						</div>	<!-- 固定布局 -->
+					</li>
+				</ul>
+			</div>
+			<!-- 导航 -->
+			<ul id="navul">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</section>
+	</body>
+</html>

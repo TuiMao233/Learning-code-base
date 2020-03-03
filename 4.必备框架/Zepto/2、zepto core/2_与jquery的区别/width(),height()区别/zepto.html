@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>zepto</title>
+  <style type="text/css">
+    #box{
+      width: 200px;
+      height: 200px;
+      background: #f00;
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ff0;
+    }
+  </style>
+</head>
+<body>
+  <div id="box"></div>
+  <script src="../../../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(function(){
+      //zepto用width(),height()是根据盒模型决定的，并且不包含单位PX
+      //包含padding的值,border的值
+      //zepto中没有innerHeight(),innerWidth()---outerHeight(),outerWidth()
+      console.log($('#box').width());
+      console.log($('#box').height());
+      //用.css('width')获取的是content的宽高。
+      console.log($('#box').css('width'));
+      //* 单独获取padding，border的值
+      console.log($('#box').css('padding'));
+      console.log($('#box').css('border-width')+'border');
+    })
+  </script>
+</body>
+</html>

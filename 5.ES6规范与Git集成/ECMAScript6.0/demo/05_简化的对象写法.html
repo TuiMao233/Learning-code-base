@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>05_简化的对象写法</title>
+</head>
+<body>
+<!--
+简化的对象写法
+* 省略同名的属性值
+* 省略方法的function
+* 例如:
+  let x = 1;
+  let y = 2;
+  let point = {
+    x,
+    y,
+    setX (x) {this.x = x}
+  };
+-->
+<script type="text/javascript">
+let username = '弟兄姐妹'
+let age = 410
+// let obj = {
+// 	username: username,
+// 	age: age,
+// 	getName: function () {
+// 		return this.username
+// 	}
+// }
+
+let obj = {
+	username,
+	age,
+	getName() {
+		return this.username
+	}
+}
+console.log(obj)
+</script>
+</body>
+</html>

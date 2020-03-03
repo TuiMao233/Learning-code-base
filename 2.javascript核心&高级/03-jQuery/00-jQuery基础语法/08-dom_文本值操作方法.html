@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		 <meta name="viewport" content="width=device-width, initial-scale=1">
+ 		 <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+  		<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+		<style>
+			body {
+				margin-top: 20px;
+			}
+			div{
+				margin-top: 20px;
+				width: 200px;
+				height: 200px;
+				border: solid saddlebrown 6px ;
+			}
+			input{
+				margin-top: 20px;
+				width: 200px;
+			}
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	<script>
+	 		$(function(){
+	 			/*
+	 			 1.html(val|fn)
+	 			 和原生的innerHTML一样
+	 			 2.text(val|fn)
+	 			  和原生的innerText一样
+	 			 3.value(val|fn)
+	 			 和原生的value一样*/
+	 			
+	 		    var but = document.getElementsByTagName("button");
+	 		    but[0].onclick = function () {   //设置HTML代码
+	 		    	$("div").html("<p>我是段落</p>");
+	 		    }
+	 		    but[1].onclick = function () {	 //获取HTML代码
+	 		    	console.log($("div").html());
+	 		    }
+	 		    but[2].onclick = function () {	 //设置text
+	 		    	$("div").text("<p>我是段落</p>");
+	 		    }
+	 		    but[3].onclick = function () {	 //获取text
+	 		    	console.log($("div").text());
+	 		    }
+	 		    but[4].onclick = function () {	 //设置value
+	 		    	$("input").val("输入你马的内容");
+	 		    }
+	 		    but[5].onclick = function () {   //获取value
+	 		    	console.log($("div").val());
+	 		    }
+	 		    console.log($("div"))
+	 		    });
+	 	</script>
+	</head>
+	<body>
+		<button>设置html</button>
+		<button>获取html</button>
+		<button>设置text</button>
+		<button>获取text</button>
+		<button>设置value</button>
+		<button>获取value</button>
+		<div></div>
+		<input type="text" />
+	</body>
+</html>

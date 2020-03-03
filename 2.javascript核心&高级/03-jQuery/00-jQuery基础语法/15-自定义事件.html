@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>26-jQuery事件冒泡和默行为</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            // 编写jQuery相关代码
+            // $("a").myClick(function (event) {
+            //     alert("son");
+            // });
+            /*
+            想要自定义事件, 必须满足两个条件
+            1.事件必须是通过on绑定的
+            2.事件必须通过trigger来触发
+            */
+            $("a").on("myClick", function () {
+                alert("son");
+            });
+           setTimeout(()=>{
+			    $("a").triggerHandler("myClick");
+		   },1000)
+        });
+    </script>
+</head>
+<body>
+<a>注册</a>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>zepto_offset的区别</title>
+  <style type="text/css">
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    #box{
+      width: 200px;
+      height: 200px;
+      position: relative;
+      left: 50px;
+      top: 50px;
+      font-size: 22px;
+      background: #FF0000;
+      text-align: center;
+      line-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    * offset()
+    1、获得当前元素相对于视口的位置。
+    2、返回一个对象含有： top, left, width和height(获取的宽高是盒模型可见区域的宽高)
+  -->
+  <div id="box">新年快乐，大吉大利</div>
+  <script src="../../../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(function(){
+      var $offset = $('#box').offset();
+      console.log($offset);
+      console.log($offset.left);
+      console.log($offset.width);
+    })
+  </script>
+</body>
+</html>

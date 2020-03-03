@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    background: url("../images/body_bg.jpg") no-repeat center 0;
+}
+.nav{
+    width: 100%;
+    height: 48px;
+}
+.nav>img{
+    width: 100%;
+}
+.content{
+    width: 1000px;
+    height: auto;
+    overflow: hidden;
+    background: #ebdbd4;
+    margin: 200px auto 0 auto;
+}
+.content>.left{
+    float: left;
+    width: 150px;
+}
+.content>.right{
+    float: right;
+    width: 240px;
+}
+.content>.center{
+    float: left;
+    width: 600px;
+    height: 168px;
+    background: url("../images/comment.png") no-repeat 0 0;
+    background-size: 600px 168px;
+}
+.center>.comment{
+    width: 570px;
+    height: 73px;
+    margin-top: 45px;
+    margin-left: 15px;
+    /*background: red;*/
+    resize: none;
+    border: none;
+    outline: none;
+}
+.center>.send{
+    width: 82px;
+    height: 30px;
+    margin-top: 4px;
+    margin-left: 506px;
+    border: none;
+    background: #fd8040;
+    color: white;
+}
+.content>.messageList{
+    width: 600px;
+    background: white;
+    float: left;
+}
+.messageList>.info{
+    padding: 10px 20px;
+    border-bottom: 2px solid #ccc;
+}
+.info>.infoText{
+    line-height: 25px;
+    margin-bottom: 10px;
+}
+.info>.infoOperation{
+    width: 100%;
+    overflow: hidden;
+}
+.infoOperation>.infoTime{
+    float: left;
+    font-size: 13px;
+    color: #ccc;
+}
+.infoOperation>.infoHandle{
+    float: right;
+    font-size: 13px;
+}
+.infoHandle>a{
+    text-decoration: none;
+    color: #ccc;
+    background: url("../images/icons.png") no-repeat 0 0;
+    padding-left: 25px;
+    margin-left: 10px;
+}
+.infoHandle>a:nth-child(2){
+    background-position: 0 -17px;
+}
+.infoHandle>a:nth-child(3){
+    background-position: 0 -33px;
+}
+.page{
+    width: 1000px;
+    height: 40px;
+    background: #9f5024;
+    margin: 0 auto;
+    text-align: right;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.page>a{
+    text-decoration: none;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 20px;
+    color: #2b2b2b;
+}

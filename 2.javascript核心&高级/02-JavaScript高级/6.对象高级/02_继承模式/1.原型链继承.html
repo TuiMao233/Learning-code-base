@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			套路：
+			1.定义父类型构造函数
+			2.给父类型的原型添加方法
+			3.定义子类型的构造函数
+			4.创建父类型的对象赋值给予类型的原型
+			5.将子类型原型的构造属性设置为子类型
+			6.给予类型添加方法
+			7.创建子类型对象：可以调用父类型的方法
+			关键
+			1.子类型的原型为父类型的一个实例对象
+		-->
+	</body>
+	<script type="text/javascript">
+		//父类型
+		  function Supper() {
+		    this.supProp = 'Supper property'
+		  }
+		  Supper.prototype.showSupperProp = function () {
+		    console.log(this.supProp)
+		  }
+		//子类型
+		function Sub(){
+			this.supProp = 'Sub property'
+		}
+		Sub.prototype = new Supper() // 子类型的原型为父类型的一个实例对象
+		Sub.prototype.constructor = Sub// 让子类型的原型的constructor指向子类型
+		Sub.prototype.showSubProp = function(){
+			console.log(this.supProp)
+		}
+		var sub = new Sub()
+		sub.showSupperProp() //Supper property
+		sub.showSubProp()	 //Sub property
+		</script>
+</html>

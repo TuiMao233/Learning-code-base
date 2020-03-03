@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>zepto</title>
+  <style type="text/css">
+
+    #insert{
+      background: #ff0;
+    }
+    .insert{
+      width:200px;
+    }
+  </style>
+</head>
+<body>
+  <!--
+    插入DOM元素的时候添加配置对象的时候可以添加进去，并且添加的配置对象的内容会直接反应在标签属性内，且可以操作，影响对应的DOM元素。
+  -->
+  <div id="box"></div>
+<script src="../../../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function () {
+    var $insert = $('<p>我是新添加的p标签</p>', {
+      id:'insert',
+      class:'insert'
+    });
+    $('#box').append($insert)
+  });
+</script>
+</body>
+</html>

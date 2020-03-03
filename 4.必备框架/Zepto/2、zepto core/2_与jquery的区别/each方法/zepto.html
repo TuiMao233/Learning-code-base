@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>zepto_each</title>
+</head>
+<body>
+<script src="../../../js/zepto.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    //$.each(collection, function(index, item){ ... })
+    //可以遍历数组,以index，tiem的形式，
+    //可以遍历对象，以key-value的形式，
+    //可以遍历字符串。
+    var arr = [1,'a',3,'b',5];
+    var obj = {name:'tom',age:13};
+    $.each(arr, function(index,item) {
+      console.log(index + '-' + item);
+    });
+    $.each(obj, function(key,value) {
+      console.log(key + '-' + value);
+    });
+
+
+    var str = 'abcdef';
+    //可以遍历字符串，同对数组的遍历方法一样以index-item的形式。
+    $.each(str, function(index,item) {
+      console.log(index + '-' + item);
+    });
+  })
+</script>
+	</body>
+</html>

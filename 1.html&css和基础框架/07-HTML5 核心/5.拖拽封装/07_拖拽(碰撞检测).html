@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#test{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 200px;
+				height: 200px;
+				background: pink;
+			}
+			
+			#zaw{
+				position: absolute;
+				left: 600px;
+				top: 200px;
+				width: 200px;
+				height: 200px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+		<img src="img/tg.png" id="zaw" />
+	</body>
+	<script type="text/javascript">
+		
+		/*
+		 拖拽的思路:
+			1.拿到鼠标点击元素时，元素一开始的位置
+			2.拿到鼠标移动的距离
+				鼠标点击的位置
+				鼠标移动时，实时的位置
+				鼠标移动实时的距离=(鼠标移动时，实时的位置 - 鼠标点击的位置)
+			3.确定鼠标移动后,元素的位置
+				元素一开始的位置+鼠标移动的距离
+		*/
+		
+		window.onload=function(){
+			var testNode = document.querySelector("#test");
+			var imgNode = document.querySelector("img");
+			//拿到鼠标点击元素时，元素一开始的位置
+			var startPoint = {x:0,y:0};
+			var mouseDownPoint ={x:0,y:0}
+			
+			testNode.onmousedown=function(ev){
+				ev= ev||event;
+				startPoint.x = this.offsetLeft;
+				startPoint.y = this.offsetTop;
+				mouseDownPoint.x=ev.clientX;
+				mouseDownPoint.y=ev.clientY;
+				
+				//曲线救国
+				if(this.setCapture){
+					this.setCapture();
+				}
+				
+				document.onmousemove=function(ev){
+					ev= ev||event;
+					var mouseMovePoint ={x:0,y:0}
+					mouseMovePoint.x=ev.clientX;
+					mouseMovePoint.y=ev.clientY;
+					
+					var dis={x:0,y:0};
+					dis.x = mouseMovePoint.x - mouseDownPoint.x;
+					dis.y = mouseMovePoint.y - mouseDownPoint.y;
+					
+					
+					var L = startPoint.x + dis.x;
+					var T = startPoint.y + dis.y;
+					
+					//限制范围  磁性吸附
+					if(L<10){
+						L=0;
+					}else if(L>(document.documentElement.clientWidth- testNode.offsetWidth -10)){
+						L=(document.documentElement.clientWidth- testNode.offsetWidth)
+					}
+					
+					if(T<10){
+						T=0;
+					}else if(T>(document.documentElement.clientHeight - testNode.offsetHeight -10)){
+						T=(document.documentElement.clientHeight - testNode.offsetHeight)
+					}
+					
+					testNode.style.left = L +"px";
+					testNode.style.top =  T+"px";
+					
+					//碰撞检测
+					var T1 = testNode.offsetTop;
+					var B1 = testNode.offsetTop + testNode.offsetHeight;
+					var R1 = testNode.offsetLeft + testNode.offsetWidth
+					var L1 = testNode.offsetLeft;
+					
+					var T2 = imgNode.offsetTop;
+					var B2 = imgNode.offsetTop + imgNode.offsetHeight;
+					var R2 = imgNode.offsetLeft + imgNode.offsetWidth
+					var L2 = imgNode.offsetLeft;
+					
+					if(R1<L2||B1<T2||L1>R2||T1>B2){
+						//没有撞到
+						imgNode.src="img/tg.png";
+					}else{
+						imgNode.src="img/xfz.png";
+					}
+					
+					
+				}
+				
+				document.onmouseup=function(){
+					document.onmousemove = document.onmouseup = null;
+					if(document.releaseCapture){
+						document.releaseCapture();
+					}
+				}
+				
+				
+				//禁止不了ie8以下浏览器事件的默认行为   匠心
+				return false;
+			}
+		}
+		
+	</script>
+</html>

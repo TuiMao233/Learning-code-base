@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>26-jQuery事件冒泡和默行为</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            background: blue;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+
+            /*
+            想要事件的命名空间有效,必须满足两个条件
+            1.事件是通过on来绑定的
+            2.通过trigger触发事件
+            */
+            $(".son").on("click.zs", function () {
+                alert("click1");
+            });
+            $(".son").on("click.ls", function () {
+                alert("click2");
+            });
+			setTimeout(()=>{
+				$(".son").trigger("click.zs");
+				$(".son").trigger("click.ls");
+			},1000)
+        });
+    </script>
+</head>
+<body>
+<div class="father">
+    <div class="son"></div>
+</div>
+<a href="http://www.baidu.com"><span>注册</span></a>
+<form action="http://www.taobao.com">
+    <input type="text">
+    <input type="submit">
+</form>
+</body>
+</html>

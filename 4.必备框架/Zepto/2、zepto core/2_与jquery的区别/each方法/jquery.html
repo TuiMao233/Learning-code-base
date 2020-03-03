@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>jquery_each</title>
+	</head>
+<body>
+  <script src="../../../js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(function(){
+      //$.each(collection, function(index, item){ ... })
+      //可以遍历数组,以index，item的形式，
+      //可以遍历对象，以key-value的形式
+      //不可以遍历字符串。
+      //不可以遍历json字符串
+      var arr = [1,'a',3,'b',5];
+      var obj = {name:'tom',age:13};
+      //遍历数组，
+      $.each(arr, function(index,item) {
+        console.log(index + '-' + item);
+      });
+      // $.each(obj, function(key,value) {
+      //   console.log(key + '-' + value);
+      // });
+
+
+      //不可以遍历字符串。
+      // var str = 'adfdfdf';
+      // $.each(str,function(index){
+      //   console.log(index);
+      // })
+    })
+  </script>
+</body>
+</html>

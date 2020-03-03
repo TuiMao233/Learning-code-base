@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			body{
+				height:4000px;
+			}
+			#wrap{
+				border: 1px solid #000;
+				height: 300px;
+				width: 550px;
+				overflow: hidden;
+				margin: 0 auto;
+			}
+			#wrap:nth-child(1){
+				background-image: radial-gradient(
+				/*默认是椭圆*/
+				yellow 30%,
+				green 70%);
+			}
+			#wrap:nth-child(2){
+				background-image: radial-gradient(
+				circle,/*变成圆*/
+				yellow 30%,
+				green 70%);
+			}
+			#wrap:nth-child(3){
+				background-image: radial-gradient(
+				/*默认是离最远的边百分比来分*/
+				circle at 0px 0px,/*at是圆的中心点 X与Y*/
+				yellow 30%,
+				green 70%);
+			}
+			#wrap:nth-child(4){
+				background-image: radial-gradient(
+				closest-side circle,/*离最近的边百分比来分*/
+				yellow 30%,
+				green 70%);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap"></div>
+		<div id="wrap"></div>
+		<div id="wrap"></div>
+		<div id="wrap"></div>
+	</body>
+</html>

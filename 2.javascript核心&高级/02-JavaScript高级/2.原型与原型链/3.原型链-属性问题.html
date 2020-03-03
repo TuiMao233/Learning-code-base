@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script type="text/javascript">
+		window.onload = function(){
+			/*
+			 * 1.原型链
+			 * 		访问一个对象属性时
+			 * 			先在自身属性中查找 
+			 * 			如果没有，在沿着__proto__这条链向上查找，找到返回
+			 * 			如果最终没有找到，返回undfined
+			 * 		别名：隐式原型链
+			 * 		作用：查找对象的属性（方法）
+			 */
+			function Fn (){
+				this.test1 = function(){
+					console.log("test1");
+				}
+			}
+			Fn.prototype.test2 = function(){
+				console.log("test2");
+			}
+			var fn = new Fn();
+			fn.test1();
+			fn.test2();
+			console.log(fn.toString());
+//			fn.test3();
+			/*
+			 * 1.函数的显式原型指向的	对象默认是空的Object实例对象（但Object不满足）
+			 */
+			// instanceof 用于检测构造函数prototype属性是否出现某个实例对象
+			console.log(Fn.prototype instanceof Object);
+			console.log(Object.prototype instanceof Object);
+			console.log(Function.prototype instanceof Object);
+			/*
+			 * 2.所有函数都是Function的实例（包括Function本身）
+			 */
+			console.log(Function.__proto__ === Function.prototype);
+			/*
+			 * 3.Object的显式原型是原型链的尽头
+			 */
+		}
+	</script>
+</html>

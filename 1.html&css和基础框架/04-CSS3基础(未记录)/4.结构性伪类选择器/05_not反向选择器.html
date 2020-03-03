@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			#wrap{
+				border: 2px solid;
+				position: absolute;
+			}
+			#wrap div{
+				font: "微软雅黑";
+				float: left;
+				font-size: 50px;
+			}
+			#wrap > div:last-child{ /*选中最后一个*/
+				color: darkgoldenrod;
+			}
+			#wrap > div:not(:last-child){ /*除了最后一个*/
+				border-right: 3px solid;
+			}
+			#wrap >div:not(:first-child){ /*除了前面第一个*/
+				padding-left:20px;
+			}
+			#wrap >div:not(:last-child){ /*除了后面第一个*/
+				padding-right:20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div>1</div>
+			<div>2</div>
+			<div>3</div>
+			<div>4</div>
+			<div>5</div>
+			<div>6</div>
+			<div>7</div>
+			<div>8</div>
+		</div>
+		
+	</body>
+	<script src="../../less/less.min.js/"></script>
+</html>

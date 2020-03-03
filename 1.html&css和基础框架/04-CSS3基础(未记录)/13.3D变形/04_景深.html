@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*
+			 * 景深：让3D场景有近大远小的效果
+			 * 			是一个不可继承属性，但他可以作用于子元素
+			 * 灭点: 
+			 * 		景深越大 灭点越远 元素变形更小
+			 * 		景深越小 灭点更近 元素变形更大
+			 * 景深基点:
+			 * 		视角的基点
+			 * 			perspective-orgin:50% 50%;(默认值)
+			 */
+			*{margin: 0;padding: 0;}
+			html{
+				height: 100%;
+			}
+			body{
+				/*景深*/
+				perspective: 300px;
+				perspective-origin:left top;
+				height: 100%;
+				overflow: hidden;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				border: 1px solid;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+				font: 40px/200px "微软雅黑";
+				text-align: center;
+				background: #E3E3E3;
+				transition: 1s;
+				transform: rotateY(150deg);
+			}#test:hover{
+				/*景深*/
+				/*transform:perspective(300px) translateZ(100px);*/
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="test">邓志龙</div>
+	</body>
+</html>

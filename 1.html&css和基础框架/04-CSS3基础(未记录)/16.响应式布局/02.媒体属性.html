@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#wrap{
+				width: 100px;
+				height: 100px;
+				border: solid 5px;
+				margin: 100 auto;
+			} 
+			/* 
+			 * and 是“与”的意思 也就是js的 &&
+			 * ,  是“或”的意思 也就是js的||
+			 * not 是“取反”的意思 也就是js的！
+			 * only 和浏览器兼容性有关
+			 * 			老版本的浏览器只支持媒体类型,不支持带有媒体属性的查询
+			 * 
+			 * 
+			 */
+			@media screen and (-webkit-device-pixel-ration:3.5) and (min-width:800px){/*判断只有在屏幕的时候才执行,并且浏览器视口宽度大于等于800px*/
+				#wrap{
+					border: solid 15px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap"></div>
+	</body>
+	<script>
+		
+	</script>
+</html>

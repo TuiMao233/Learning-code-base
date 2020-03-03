@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>common</title>
+		<style type="text/css">
+			.box1{
+				width: 200px;
+				height: 200px;
+				background:#FF0000;
+			}
+			.box2{
+				width: 200px;
+				height: 200px;
+				background:#FF00FF;
+			}
+			.box3{
+				width: 200px;
+				height: 200px;
+				background: green;
+			}
+
+            #dis{
+                display: none;
+            }
+		</style>
+	</head>
+	<body>
+		<!--
+			* 共同点：
+			    jquery:
+			    * 核心函数$
+			    	1、作为函数使用（参数）
+			    	    1.function
+			    	    2.html字符串
+			    	    3.DOM code
+			    	    4.选择器字符串
+            2、作为对象调用(方法)
+                1.$.ajax()  $.get() $.post()
+                2.$.isArray()
+                  $.each()
+                  $.isFunction()
+                  $.trim()
+                ......
+            * jquery对象
+            概念：jquery核心函数$()调用返回的对象就是jquery对象的数组（可能有只有一个）；
+            使用：
+                 1.addClass()
+                 2.removeClass()
+                 3.show()
+                 4.find()
+           zepto:
+              以上jquery的特性zepto同样适用
+		-->
+		<div class="box1">我是box1</div>
+		<div class="box2">我是box2</div>
+		<div class="box3">
+			<p>111</p>
+			<p>222</p>
+			<p>333</p>
+		</div>
+    <div id="dis">隐藏的元素</div>
+
+<script src="/js/zepto.js"></script>
+<script src="/js/touch.js"></script>
+<script type="text/javascript">
+    $(function(){
+		var arr = [1,2,3]
+		console.log($.isArray(arr))
+		$.each(arr,function(index, item){
+			console.log(index,item)
+		})
+		$('.box1').on("touchstart",function(){
+			$('.box1').append("<p>我是新添加的元素</p>")
+		})
+		$('.box3').on('touchstart',function(){
+			$(this).find("p").css('background','red');
+		})
+		$('.box2').on('touchstart',function(){
+			$('#dis').show()
+		})
+	})
+</script>
+</body>
+</html>

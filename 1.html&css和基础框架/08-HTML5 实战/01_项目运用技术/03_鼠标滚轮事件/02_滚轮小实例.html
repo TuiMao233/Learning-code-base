@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				width: 100%;
+				height: 200px;
+				background: pink;
+			}
+			
+		</style>
+	</head>
+	<body style="height: 3000px;">
+		<div id="test"></div>
+	</body>
+	<script type="text/javascript">
+		
+		window.onload=function(){
+			function wheel(el, callback, bool) {
+				bool = bool || false // 默认禁止默认行为false
+				// 火狐没有onmousewheel 只有addEventListener的DOMMouseScroll
+				if(el.addEventListener){el.addEventListener("DOMMouseScroll",fn)}
+				el.onmousewheel = fn;
+				function fn (ev){
+					ev = ev||event
+					var dir="";
+					// 火狐detail 上:正 下:负
+					// 非火狐wheelDelta  上:负 下:正
+					var wheel = ev.wheelDelta != undefined ? ev.wheelDelta : -ev.detail;
+					if(wheel > 0){dir="up"}else{dir="down"}
+					callback.call(el,dir) // 调用回调 绑定this ,传入滚动结果
+					//禁止事件的默认行为
+					if(ev.preventDefault && bool){ev.preventDefault()}
+					//禁止事件的默认行为
+					return bool;
+				}
+			}
+			var testNode = document.querySelector("#test");
+			
+			wheel(testNode, function (dir) {
+				switch(dir) {
+					case 'up': 
+					this.style.height = test.offsetHeight - 10 + 'px'
+					break;
+					case 'down':
+					this.style.height = test.offsetHeight + 10 + 'px'
+					break;
+				}
+			})
+		}
+		
+		
+	</script>
+</html>

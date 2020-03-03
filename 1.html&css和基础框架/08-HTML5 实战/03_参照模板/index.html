@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			/*css reset开始*/
+			html,body{height:100%;overflow:hidden}
+			html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin:0px;padding:0px;font:14px "微软雅黑";}
+			a{text-decoration:none;display:block}
+			li{list-style:none;}
+			img{display:block;}
+			/*css reset结束*/
+			
+			/*common css开始*/
+			.clearfix{*zoom:1;}
+			.clearfix:after{content:"";display:block;clear:both;}
+			.commonTitle{color: #009ee0;font-size: 80px;line-height: 0.8;
+				font-weight: bold;letter-spacing: -5px;
+			}
+			.commonText{color: white;line-height: 1.5;font-size: 15px;}
+			/*common css结束*/
+			
+			/*头部样式  开始*/
+			#head{background: white !important;width: 100%;}
+			#head .headMain{width: 1100px;height: 80px;margin: 0 auto;position: relative;}
+			#head .headMain > .logo{float: left;margin-top: 30px;}
+			#head .headMain > .nav{float: right;margin-top: 50px;}
+			#head .headMain > .nav >.list >li{float: left;margin-left: 40px;position: relative;}
+			#head .headMain > .nav >.list >li .up{color: #000000;position: absolute;width: 0px; overflow: hidden;
+												transition: 1s width;}
+			#head .headMain > .nav >.list >li:hover .up{width: 100%;}
+			#head .headMain > .arrow{width: 21px;height: 11px;background: url(img/menuIndicator.png);
+									position: absolute;bottom: -11px; left: 50%;transition: 1s left;z-index: 2;}
+			/*头部样式 结束*/
+			
+			
+			/*content start*/
+			#content{background: grey;position: relative;overflow: hidden;width: 100%;}
+			#content > .list{position: absolute;left: 0;top: 0;width: 100%; transition: 1s top;}
+			#content > .list >li{position: relative;background-position:50% 50%!important;overflow: hidden;}
+			#content > .list > li > section{width: 1100px; height: 520px;
+								position: absolute; left: 0;right: 0;left: 0; top: 0; bottom: 0;margin: auto;
+																	}
+			#content > .list > .home{background: url(img/bg1.jpg) no-repeat;}												
+				/*第二屏*/
+				#content > .list > .course{background: url(img/bg2.jpg) no-repeat;}	
+				#content > .list > .course .course1{margin: 50px;position: relative;z-index: 2}
+				#content > .list > .course .course2{margin-left: 50px;width: 400px;position: relative;z-index: 2}
+				#content > .list > .course .course3{width: 480px; position: absolute;right: 50px; top: 70px;z-index: 2;}
+				#content > .list > .course .course3 .line{position: absolute; height: 410px;width: 9px;background: url(img/plus_row.png) no-repeat;top: -7px;}
+				#content > .list > .course .course3 .line:nth-of-type(1){left: -5px;}
+				#content > .list > .course .course3 .line:nth-of-type(2){left: 115px;}
+				#content > .list > .course .course3 .line:nth-of-type(3){left: 235px;}
+				#content > .list > .course .course3 .line:nth-of-type(4){left: 355px;}
+				#content > .list > .course .course3 .line:nth-of-type(5){left: 475px;}
+				#content > .list > .course .course3 .item{float: left;width: 120px;height:132px;position: relative;perspective: 500px;transform-style: preserve-3d;}
+				#content > .list > .course .course3 .item .face ,#content > .list > .course .course3 .item .backFace
+				{position: absolute;left: 0;top: 0;width: 100%;height: 100%;box-sizing: border-box;padding: 15px;transition: 1s transform;}
+				#content > .list > .course .course3 .item .backFace{background-position: 50% 50%!important;}
+				#content > .list > .course .course3 .item:nth-of-type(1) .backFace{background: url(img/apcoa.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(2) .backFace{background: url(img/binoli.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(3) .backFace{background: url(img/bks.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(4) .backFace{background: url(img/gu.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(5) .backFace{background: url(img/hlx.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(6) .backFace{background: url(img/lbs.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(7) .backFace{background: url(img/pcwelt.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(8) .backFace{background: url(img/tata.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(9) .backFace{background: url(img/leonberg.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(10) .backFace{background: url(img/bks.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(11) .backFace{background: url(img/bks.png) no-repeat}
+				#content > .list > .course .course3 .item:nth-of-type(12) .backFace{background: url(img/bks.png) no-repeat}
+				#content > .list > .course .course3 .item .face{transform: rotateY(180deg);backface-visibility:hidden ;background: #009EE0;color: white;}
+				#content > .list > .course .course3 .item:hover .face{transform: rotateY(360deg);}
+				#content > .list > .course .course3 .item:hover .backFace{transform: rotateY(180deg);}
+			
+			
+				/*第三屏start*/
+				#content > .list > .works{background: url(img/bg4.jpg) no-repeat;}	
+				#content > .list > .works .works1{margin: 50px 0 100px 50px;position: relative;z-index: 2;}
+				#content > .list > .works .works2{margin-left: 50px;position: relative;z-index: 2;}
+				#content > .list > .works .works2 > .item{float: left;width: 220px; height: 133px;margin: 0 1px;
+													position: relative; overflow: hidden;}
+				#content > .list > .works .works2 > .item:last-child{width: 332px;}
+				#content > .list > .works .works2 > .item .mask{position: absolute;left: 0;right: 0;top: 0;bottom: 0;
+													box-sizing: border-box;padding: 10px;background: #000000;opacity:0;
+													color: white;transition: 1s opacity;}	
+				#content > .list > .works .works2 > .item .mask .icon{width: 32px;height: 34px;margin: 0 auto;
+											margin-top: 10px; background: url(img/zoomico.png) no-repeat;transition: 0.5s background-position;}
+				#content > .list > .works .works2 > .item img{transition: 0.5s transform;}						
+											
+											
+				#content > .list > .works .works2 > .item .mask .icon:hover{background-position:0 -35px;}
+				#content > .list > .works .works2 > .item:hover .mask{opacity: 0.8;}	
+				#content > .list > .works .works2 > .item:hover img{transform: rotate(30deg) scale(1.5);}
+				
+				#content > .list > .works .works3{width: 167px; height: 191px; background: url(img/robot.png) no-repeat;
+													position: absolute; left: 900px; top: 170px;animation: works3Move 5s linear infinite;z-index: 2}
+				@keyframes works3Move{
+					0%{transform: translateX(0px) rotateY(0deg);}
+					49%{transform: translateX(-490px) rotateY(0deg);}
+					50%{transform: translateX(-500px) rotateY(180deg);}
+					100%{transform: translateX(0px) rotateY(180deg);}
+				}																
+
+			/*thredScreen end*/
+
+			/*firstCreen start*/
+                #content > .list >.home .home1{width: 100%;height:100%;perspective: 1000px;;transform-style: preserve-3d}
+                #content > .list >.home .home1 li{position:absolute;left:0;right:0;top:0;bottom:0;visibility: hidden;}
+                #content > .list >.home .home1 > li:nth-child(1){background:#dc6c5f;}
+                #content > .list >.home .home1 > li:nth-child(2){background:#95dc84;}
+                #content > .list >.home .home1 > li:nth-child(3){background:#64b9d2;}
+                #content > .list >.home .home1 > li:nth-child(4){background:#000000;}
+                #content > .list >.home .home1 > li >div{color:white;text-align: center;margin-top: 200px}
+                #content > .list >.home .home1 li.active{visibility: visible}
+
+                #content > .list >.home .home2{position: absolute;left: 0;right: 0;bottom: 0; text-align: center;}
+                #content > .list >.home .home2 > li{border-radius: 50%;width: 20px;height: 20px;
+                    background: rgba(255,255,255,0.5);display: inline-block;box-shadow: 0 0 4px rgba(25,25,25,0.8);cursor: pointer;}
+                #content > .list >.home .home2 > li.active{background: white;cursor: default}
+                /*从左往右leftHide rightShow*/
+                #content > .list >.home .home1 > li.leftHide{visibility: hidden;animation: 1s leftHide 1 linear}
+                #content > .list >.home .home1 > li.rightShow{visibility: visible;animation: 1s rightShow 1 linear}
+                @keyframes leftHide {
+                    0%{visibility: visible;}
+                    50%{transform:translateX(-40%) rotateY(30deg) scale(.8)}
+                    100%{transform: translateZ(-200px);}
+                }
+                @keyframes rightShow {
+                    0%{visibility: hidden;transform: translateZ(-200px);}
+                    50%{transform: translateX(40%) rotateY(-30deg) scale(.8)}
+                    100%{}
+                }
+                /*从右向左rightHide leftShow*/
+                #content > .list >.home .home1 > li.leftShow{visibility: visible;animation: 1s leftShow 1 linear}
+                #content > .list >.home .home1 > li.rightHide{visibility: hidden;animation: 1s rightHide 1 linear}
+                @keyframes leftShow {
+                    0%{visibility: hidden;transform: translateZ(-200px);}
+                    50%{transform: translateX(-40%) rotateY(30deg) scale(.8)}
+                    100%{}
+                }
+                @keyframes rightHide {
+                    0%{visibility: visible;}
+                    50%{transform:translateX(40%) rotateY(-30deg) scale(.8)}
+                    100%{transform: translateZ(-200px);}
+                }
+			/*firstCreen end*/
+
+			/*fourthScreen start*/
+			#content > .list > .about{background: url(img/bg3.jpg) no-repeat;}
+			#content > .list > .about .about1{margin: 50px 0 100px 50px;}
+			#content > .list > .about .about2{margin-left: 50px;width: 400px;}
+			#content > .list > .about .about4{width: 357px;height: 998px;position:absolute;
+				left: 50%;top: -150px; background:url(img/greenLine.png) no-repeat; }
+			#content > .list > .about .about3 > .item{width: 260px;height: 200px;border:5px solid rgba(255,255,255,0.5);
+				border-radius: 8px;position: absolute;z-index: 2;overflow: hidden}
+			#content > .list > .about .about3 > .item:nth-child(1){left: 750px;top: 50px;}
+			#content > .list > .about .about3 > .item:nth-child(2){left: 600px;top: 290px;}
+			#content > .list > .about .about3 > .item > span,#content > .list > .about .about3 > .item > ul{
+				position: absolute;left: 0;right: 0;top: 0;bottom: 0;}
+			#content > .list > .about .about3 > .item:nth-child(1) > span{background: url(img/about2.jpg) no-repeat; transform: scale(1.5);
+												transition: 1s transform;}
+			#content > .list > .about .about3 > .item:nth-child(2) > span{background: url(img/about4.jpg) no-repeat; transform: scale(1.5);
+												transition: 1s transform;}
+			#content > .list > .about .about3 > .item:hover span{transform: scale(1);}
+			#content > .list > .about .about3 > .item > ul >li{float: left;position: relative; overflow: hidden}
+			#content > .list > .about .about3 > .item > ul >li > img{float: left;position: absolute;transition: 1s top,1s left; }
+			/*fourthScreen end*/
+
+			/*fiveScreen start*/
+			#content > .list > .team{background: url(img/bg5.jpg) no-repeat;}
+			#content > .list > .team .team1{width: 400px;margin: 50px;float: left;}
+			#content > .list > .team .team2{width: 400px;margin: 50px;float: right;}
+			#content > .list > .team .team3{width: 944px;height: 448px;position: absolute;
+								left: 50%;top:300px; margin-left: -472px;}
+			#content > .list > .team .team3 ul{position: relative;height: 100%;}
+			#content > .list > .team .team3 ul>li{width: 118px;height: 100%;background: url(img/team.png) no-repeat;float: left;transition: 1s opacity;}
+			#content > .list > .team .team3 ul>li:nth-child(1){background-position: 0,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(2){background-position: -118px,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(3){background-position: -236px,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(4){background-position: -354px,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(5){background-position: -472px,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(6){background-position: -590px,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(7){background-position: -708px,0 ;}
+			#content > .list > .team .team3 ul>li:nth-child(8){background-position: -826px,0 ;}
+			#content > .list > .team canvas{position: absolute;top:0px;}
+			/*fiveScreen end*/
+
+
+			/*small dot start*/
+			#content > .dot{position: fixed;top: 50%;right: 5px;}
+			#content > .dot >li{ width: 10px;height: 10px;border: 1px solid white;margin-top: 10px; border-radius: 50%}
+			#content > .dot >li.active{background: white}
+			/*small dot end*/
+
+
+			/*入场动画 start*/
+			#content > .list >.home .home1,#content > .list >.home .home2{transition: 1s transform,1s opacity;}
+			#content  .course .plane1{width: 359px;height: 283px;background: url(img/plane1.png) no-repeat; position: absolute; left: 300px;top: -100px;transition: 1s;}
+			#content  .course .plane2{width: 309px;height: 249px;background: url(img/plane2.png) no-repeat; position: absolute; left: -100px;top: 200px;transition: 1s;}
+			#content  .course .plane3{width: 230px;height: 182px;background: url(img/plane3.png) no-repeat; position: absolute; left: 300px;top: 400px;transition: 1s;}
+
+			#content .works .pancel1{width: 180px;height: 97px;background: url(img/pencel1.png) no-repeat;position: absolute;transition: 1s;left: 500px;top: 0;}
+			#content .works .pancel2{width: 268px;height: 38px;background: url(img/pencel2.png) no-repeat;position: absolute;transition: 1s;left: 300px;top: 250px;}
+			#content .works .pancel3{width: 441px;height: 231px;background: url(img/pencel3.png) no-repeat;position: absolute;transition: 1s;left: 650px;top: 300px;}
+
+			#content > .list > .about .about3 > .item,#content > .list > .team .team1,#content > .list > .team .team2{transition: 1s transform;}
+
+
+			/*入场动画 end*/
+
+			/*音频*/
+			#head > .headMain .music{width: 14px;height: 14px;background: url(img/musicon.gif) no-repeat;float: left;margin: 50px 0 0 5px;cursor: pointer;}
+			/*content end*/
+
+			/*开机动画 start*/
+			#mask{height: 100%;width:100%;position: absolute;z-index: 4}
+			#mask .up{width: 100%;height: 50%;background: deepskyblue;transition: 1s height;}
+			#mask .down{width: 100%;height: 50%;background: deepskyblue;transition: 1s height;position: absolute;bottom: 0;
+									}
+			#mask .line{height: 4px;width: 0;background: white;position: absolute; z-index: 5;left: 0;top: 50%; margin-top: -2px;transition: 1s width;}
+			/*开机动画 end*/
+		</style>
+	</head>
+	<body>
+		<section id="wrap">
+			<div id="mask">
+				<div class="up"></div>
+				<div class="down"></div>
+				<span class="line"></span>
+			</div>
+			<!--流体布局-->
+			<header id="head">
+				<!--固定布局-->
+				<div class="headMain">
+					<h1 class="logo">
+						<a href="javascript:;">
+							<img src="img/logo.png"/>
+						</a>
+					</h1>
+					<div class="music">
+						<audio src="img/audio.mp3" loop></audio>
+						<div></div>
+					</div>
+					<nav class="nav">
+						<ul class="list clearfix">
+							<li>
+								<a href="javascript:;">
+									<div class="up"><img src="img/home_gruen.png"/></div>
+									<div class="down"> <img src="img/home.png"/></div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<div class="up">Course</div>
+									<div class="down">Course</div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<div class="up">Works</div>
+									<div class="down">Works</div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<div class="up">About</div>
+									<div class="down">About</div>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<div class="up">Team</div>
+									<div class="down">Team</div>
+								</a>
+							</li>
+						</ul>
+					</nav>
+					<div class="arrow"></div>
+				</div>
+			</header>
+		</section>
+		<section id="content">
+			<ul class="list">
+				<li class="home">
+					<section>
+						<ul class="home1">
+							<li class="commonTitle active">
+								<div class="item">one Player</div>
+							</li>
+							<li class="commonTitle">
+								<div class="item">two Player</div>
+							</li>
+							<li class="commonTitle">
+								<div class="item">three Player</div>
+							</li>
+							<li class="commonTitle">
+								<div class="item">four Player</div>
+							</li>
+						</ul>
+						<ul class="home2">
+							<li class="active"></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</section>
+				</li>
+				<li class="course">
+					<section>
+						<header class="course1 commonTitle">
+							<span>EINIGE</span><br />
+							<span>UNSERER</span><br />
+							<span>KUNDEN</span>
+						</header>
+						<div class="course2 commonText">
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus fugit reprehenderit doloribus esse natus adipisci quidem voluptatibus ut eveniet officia quibusdam repudiandae ad aliquid expedita repellat autem numquam ex provident.
+								<br>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur maiores modi quam neque non similique ea qui officiis laborum repellat cupiditate blanditiis praesentium officia eligendi voluptates veniam iure est quidem.</span>
+							</p>
+						</div>
+						<div class="course3">
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+							<div class="item">
+								<class class="backFace"></class>
+								<class class="face">test line</class>
+							</div>
+						</div>
+						<div class="plane1"></div>
+						<div class="plane2"></div>
+						<div class="plane3"></div>
+					</section>
+				</li>
+				<li class="works">
+					<section>
+						<header class="works1 commonTitle">
+							<span>EINBLICK</span><br>
+							<span>ERKENNITNIS</span><br>
+							<span>ERGEBNIS</span>
+						</header>
+						<div class="works2">
+							<div class="item">
+							<img src="img/worksimg1.jpg" alt="" />
+							<div class="mask">
+								<span>我有一头阳光辉</span>
+								<div class="icon"></div>
+							</div>
+						</div>
+						<div class="item">
+							<img src="img/worksimg2.jpg" alt="" />
+							<div class="mask">
+								<span>我有一头阳光辉</span>
+								<div class="icon"></div>
+							</div>
+						</div>
+						<div class="item">
+							<img src="img/worksimg3.jpg" alt="" />
+							<div class="mask">
+								<span>我有一头阳光辉</span>
+								<div class="icon"></div>
+							</div>
+						</div>
+						<div class="item">
+							<img src="img/worksimg4.jpg" alt="" />
+							<div class="mask">
+								<span>我有一头阳光辉</span>
+								<div class="icon"></div>
+							</div>
+						</div>
+						</div>
+						<div class="works3"></div>
+						<div class="pancel1"></div>
+						<div class="pancel2"></div>
+						<div class="pancel3"></div>
+					</section>
+				</li>
+				<li class="about">
+					<section>
+						<header class="about1 commonTitle">
+							<span>DIE</span><br>
+							<span>SPEZIELLE</span><br>
+							<span>VIELFALT</span><br>
+						</header>
+						<div class="about2">
+							<p class="commonText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aperiam debitis, earum esse molestiae sint. Autem eligendi fuga, in labore natus non numquam pariatur porro quas quisquam quo repellendus, sequi?</p>
+						</div>
+						<div class="about3">
+							<div class="item">
+								<span></span>
+								<ul data-src="img/about1.jpg"></ul>
+							</div>
+							<div class="item">
+								<span></span>
+								<ul data-src="img/about3.jpg"></ul>
+							</div>
+						</div>
+						<div class="about4"></div>
+					</section>
+				</li>
+				<li class="team">
+					<section>
+						<header class="team1 commonTitle">
+							<span>WIR SIND</span><br>
+							<span>VOXELATR</span><br>
+						</header>
+						<div class="team2">
+							<p class="commonText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, eius quod? Aperiam dolorem eligendi enim explicabo hic itaque libero minus natus, non odio possimus quibusdam quisquam quod sapiente sint voluptatibus!</p>
+							<p class="commonText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, eius quod? Aperiam dolorem eligendi enim explicabo hic itaque libero minus natus, non odio possimus quibusdam quisquam quod sapiente sint voluptatibus!</p>
+						</div>
+						<div class="team3">
+							<ul>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+								<li></li>
+							</ul>
+						</div>
+					</section>
+				</li>
+			</ul>
+			<ul class="dot">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</section>
+	</body>
+	
+	<script type="text/javascript">
+		window.onload = function(){
+			//获取dom元素
+			var arrowEl = document.querySelector("#head .headMain > .arrow");
+			var liNodes = document.querySelectorAll("#head .headMain > .nav >.list >li");
+			var upNodes = document.querySelectorAll("#head .headMain > .nav >.list >li .up");
+			var firstLiNode = liNodes[0];
+			var firstUpNode = firstLiNode.querySelector(".up");
+			
+			
+			var head = document.querySelector("#head");
+			var content = document.querySelector("#content");
+			var cLiNodes = document.querySelectorAll("#content .list > li ");
+			var cList = document.querySelector("#content .list");
+
+			var home2LiNodes = document.querySelectorAll("#content > .list >.home .home2 > li");
+			var home1LiNodes = document.querySelectorAll("#content > .list >.home .home1 > li");
+			var home1 = document.querySelector("#content > .list >.home .home1");
+
+			var aboutULs = document.querySelectorAll("#content > .list > .about .about3 > .item > ul");
+			//同步当前屏的索引  this.index--同步--now  now---不同步---this.index
+
+			var dotLis = document.querySelectorAll("#content > .dot >li")
+
+			var team3 = document.querySelector("#content > .list > .team  .team3")
+			var team3UL = document.querySelector("#content > .list > .team .team3 ul")
+			var team3LiNodes = document.querySelectorAll("#content > .list > .team .team3 ul>li")
+			var now =0;
+			var timer = 0;
+			var music = document.querySelector("#head > .headMain .music");
+			var audio = document.querySelector("#head > .headMain .music audio");
+			var mask = document.querySelector("#mask")
+			var line = document.querySelector("#mask .line");
+			var pages = document.querySelectorAll("#mask div");
+
+			loadingAn();
+			function loadingAn(){
+                var arr = ['bg1.jpg','bg2.jpg','bg3.jpg','bg4.jpg','bg5.jpg','about1.jpg','about2.jpg','about3.jpg','about4.jpg','worksimg1.jpg','worksimg2.jpg','worksimg3.jpg','worksimg4.jpg','team.png','greenLine.png'];
+				var flag = 0;
+				for(var i = 0;i<arr.length;i++){
+				    var img = new Image();
+				    img.src = "img/" + arr[i];
+				    img.onload = function(){
+				        flag++;
+				        line.style.width = flag/arr.length*100+"%";
+					}
+				}
+				line.addEventListener("transitionend",function(){
+                    if(flag === arr.length){
+                        for(var i=0;i<pages.length;i++){
+                            pages[i].style.height = 0+"px";
+                        }
+                        this.style.display = "none"
+                    }
+				})
+				pages[0].addEventListener("transitionend",function(){
+				    mask.remove();
+				    audio.play();
+				    home3D();
+				})
+			}
+
+
+			//音频
+			music.onclick = function(){
+					if(audio.paused){
+					    audio.play()
+						music.style.background = "url(img/musicon.gif)"
+					}else{
+					    audio.pause()
+						music.style.background = "url(img/musicoff.gif)"
+					}
+			}
+
+			var preIndex=0;
+			//调整屏幕大小
+			window.onresize = function(){
+				contentBind();
+				cList.style.top =  -now*(document.documentElement.clientHeight - head.offsetHeight) +"px"
+				arrowEl.style.left = liNodes[now].offsetLeft + liNodes[now].offsetWidth/2 - arrowEl.offsetWidth/2 +"px"
+			}
+			//第五屏气泡效果
+            qipao();
+			function qipao(){
+			    var oc = null;
+			    var timer1 = 0;
+			    var timer2 = 0;
+			    for(var i=0;i<team3LiNodes.length;i++){
+			        team3LiNodes[i].onmouseenter = function(){
+			            for(var i=0;i<team3LiNodes.length;i++){
+			                team3LiNodes[i].style.opacity = .5;
+						}
+						this.style.opacity = 1;
+			            addCanvas();
+			            oc.style.left = this.offsetLeft +"px";
+					}
+				}
+				function addCanvas(){
+			        if(!oc){
+			            oc = document.createElement("canvas");
+			            oc.width = team3LiNodes[0].offsetWidth;
+			            oc.height = team3LiNodes[0].offsetHeight*2/3;
+			            oc.onmouseleave = function(){
+                            for(var i=0;i<team3LiNodes.length;i++){
+                                team3LiNodes[i].style.opacity = 1;
+                            }
+                            removeCanvas();
+						}
+			            team3.appendChild(oc)
+						Qipao();
+					}
+				}
+
+				function removeCanvas(){
+			        oc.remove();
+			        oc = null;
+			        clearInterval(timer1);
+			        clearInterval(timer2);
+				}
+
+				function Qipao(){
+			        if(oc.getContext){
+			            var ctx = oc.getContext("2d");
+			            var arr = [];
+			            timer1 = setInterval(function(){
+			                ctx.clearRect(0,0,oc.width,oc.height);
+			                for(var i=0;i<arr.length;i++){
+			                    arr[i].deg+=10;
+			                    arr[i].x = arr[i].startX + Math.sin(arr[i].deg*Math.PI/180)*arr[i].step;
+			                    arr[i].y = arr[i].startY - (arr[i].deg*Math.PI/180)*arr[i].step;
+
+			                    if(arr[i].y<=50){
+			                        arr.splice(i,1)
+								}
+							}
+							//绘制
+							for(var i=0;i<arr.length;i++){
+			                    ctx.save();
+			                    ctx.fillStyle = "rgba("+arr[i].red+","+arr[i].green+","+arr[i].blue+","+arr[i].alp+")";
+			                    ctx.beginPath();
+			                    ctx.arc(arr[i].x,arr[i].y,arr[i].r,0,2*Math.PI);
+			                    ctx.fill();
+			                    ctx.restore();
+							}
+						},1000/60)
+
+						//往arr中注入随机圆的信息
+						timer2 = setInterval(function(){
+						    var r = Math.random()*6 + 2;
+						    var x = Math.random()* oc.width;
+						    var y = oc.height -r;
+						    var red = Math.round(Math.random()*255);
+						    var green = Math.round(Math.random()*255);
+						    var blue = Math.round(Math.random()*255);
+						    var alp = 1;
+
+						    var deg = 0;
+						    var startX = x;
+						    var startY = y;
+						    var step = Math.random()*20 +10;
+						    arr.push({
+								x:x,
+								y:y,
+								r:r,
+								red:red,
+								green:green,
+								blue:blue,
+								alp:alp,
+								deg:deg,
+								startX:startX,
+								startY:startY,
+								step:step
+							})
+						},50)
+                    }
+				}
+			}
+
+
+			//第一屏3D效果
+			var oldIndex = 0;
+			var timer3D = 0;
+			var autoIndex = 0;
+
+			function home3D(){
+			    for(var i=0;i<home2LiNodes.length;i++) {
+                    home2LiNodes[i].index = i;
+                    home2LiNodes[i].onclick = function () {
+                        clearInterval(timer3D)
+                        for (var i = 0; i < home2LiNodes.length; i++) {
+                            home2LiNodes[i].classList.remove("active")
+                        }
+                        this.classList.add("active");
+                        //	从左往右 当前索引大于上一次索引 rightShow leftHide
+                        if (this.index > oldIndex) {
+                            home1LiNodes[this.index].classList.remove("leftHide");
+                            home1LiNodes[this.index].classList.remove("leftShow");
+                            home1LiNodes[this.index].classList.remove("rightHide");
+                            home1LiNodes[this.index].classList.add("rightShow");
+
+                            home1LiNodes[oldIndex].classList.remove("leftShow");
+                            home1LiNodes[oldIndex].classList.remove("rightHide");
+                            home1LiNodes[oldIndex].classList.remove("rightShow");
+                            home1LiNodes[oldIndex].classList.add("leftHide");
+                        }
+                        //	从右往左 当前索引小于上一次索引rightHide leftShow
+                        if (this.index < oldIndex) {
+                            home1LiNodes[this.index].classList.remove("leftHide")
+                            home1LiNodes[this.index].classList.remove("rightShow")
+                            home1LiNodes[this.index].classList.remove("rightHide")
+                            home1LiNodes[this.index].classList.add("leftShow")
+
+                            home1LiNodes[oldIndex].classList.remove("rightShow")
+                            home1LiNodes[oldIndex].classList.remove("leftHide")
+                            home1LiNodes[oldIndex].classList.remove("leftShow")
+                            home1LiNodes[oldIndex].classList.add("rightHide")
+                        }
+                        oldIndex = this.index;
+                        autoIndex  = this.index;
+                    }
+                }
+				move();
+				function move(){
+				    clearInterval(timer3D);
+			         timer3D = setInterval(function(){
+						 autoIndex++;
+
+						 //无缝
+						 if(autoIndex == home1LiNodes.length){
+						     autoIndex = 0;
+						 }
+                         for(var i=0;i<home2LiNodes.length;i++){
+                             home2LiNodes[i].classList.remove("active")
+                         }
+                         home2LiNodes[autoIndex].classList.add("active");
+
+						 home1LiNodes[autoIndex].classList.remove("leftHide");
+						 home1LiNodes[autoIndex].classList.remove("leftShow");
+						 home1LiNodes[autoIndex].classList.remove("rightHide");
+						 home1LiNodes[autoIndex].classList.add("rightShow");
+
+						 home1LiNodes[oldIndex].classList.remove("leftShow");
+						 home1LiNodes[oldIndex].classList.remove("rightHide");
+						 home1LiNodes[oldIndex].classList.remove("rightShow");
+						 home1LiNodes[oldIndex].classList.add("leftHide");
+
+						//自动轮播的同步
+						 oldIndex = autoIndex;
+					 },2000)
+				}
+				home1.onmouseenter = function () {
+                    clearInterval(timer3D)
+                }
+                home1.onmouseleave = function(){
+				    move();
+                }
+			}
+
+			//第四屏图片炸裂效果
+			picBoom();
+			function picBoom(){
+				for(var i=0;i<aboutULs.length;i++){
+				    change(aboutULs[i]);
+				}
+				function change(UL) {
+				    var src = UL.dataset.src;
+				    var w = UL.offsetWidth/2;
+				    var h = UL.offsetHeight/2;
+				    for(var i=0;i<4;i++){
+				        var liNode = document.createElement("li");
+				        liNode.style.width = w + "px";
+				        liNode.style.height = h + "px"
+				        var imgNode = document.createElement("img");
+
+                        // 1.left:0 top:0
+						// 2.left:-w top:0
+						// 3.left:0 top:-h
+						// 4.left:-w top:-h
+						imgNode.style.left = -(i%2)*w + "px";
+						imgNode.style.top = -Math.floor(i/2)*h + "px";
+						imgNode.src = src
+				        liNode.appendChild(imgNode);
+				        UL.appendChild(liNode);
+					}
+                    UL.onmouseenter = function(){
+                        // 1.left:0 top:h
+                        // 2.left:-2w top:0
+                        // 3.left:w top:-h
+                        // 4.left:-w top:-2h
+                        var imgNodes =this.querySelectorAll(" li > img")
+						imgNodes[0].style.top = h+"px";
+						imgNodes[1].style.left = -2*w+"px";
+						imgNodes[2].style.left =w+"px";
+						imgNodes[3].style.top = -2*h + "px";
+
+                    }
+                    UL.onmouseleave = function(){
+                        var imgNodes =this.querySelectorAll(" li > img")
+                        imgNodes[0].style.top = 0+"px";
+                        imgNodes[1].style.left = -w+"px";
+                        imgNodes[2].style.left = 0+"px";
+                        imgNodes[3].style.top = -h + "px";
+                    }
+                }
+			}
+
+
+			//内容区交互
+			contentBind();
+			function contentBind(){
+				content.style.height = document.documentElement.clientHeight - head.offsetHeight +"px"
+				for(var i=0;i<cLiNodes.length;i++){
+					cLiNodes[i].style.height = document.documentElement.clientHeight - head.offsetHeight +"px"
+				}
+			}
+			
+			//滚轮事件
+			if(content.addEventListener){
+				content.addEventListener("DOMMouseScroll",function(ev){
+					ev = ev||event;
+					
+					//让fn 的逻辑在DOMScroll事件被频繁触发的时候只执行一次
+					clearTimeout(timer);
+					timer = setTimeout(function(){
+						fn(ev)
+					},200)
+				});
+			}
+			content.onmousewheel = function(ev){
+				ev = ev||event;
+				clearTimeout(timer);
+				timer = setTimeout(function(){
+					fn(ev)
+				},200)
+			};
+			function fn(ev){
+				ev = ev||event;
+				var dir = ""
+				if(ev.wheelDelta){
+					dir = ev.wheelDelta>0?"up":"down";
+				}else if(ev.detail){
+					dir = ev.wheelDelta<0?"up":"down";
+				}
+
+				preIndex = now;
+				switch (dir){
+					case "up":
+						if(now>0){
+							now--;
+							move(now);
+						}
+						break;
+					case "down":
+						if(now<cLiNodes.length-1){
+							now++;
+							move(now)
+						}
+						break;
+					}
+				}
+			
+			//头部交互
+			headBind();
+			function headBind(){
+				firstUpNode.style.width = "100%";
+				arrowEl.style.left = firstLiNode.offsetLeft + firstLiNode.offsetWidth/2 - arrowEl.offsetWidth/2 +"px"
+				for(var i=0;i<liNodes.length;i++){
+					//转绑
+					liNodes[i].index =i;
+					liNodes[i].onclick = function(){
+					    preIndex = now;
+						move(this.index);
+						now = this.index;
+					}
+				}
+                for(var i=0;i<dotLis.length;i++){
+                    //转绑
+                    dotLis[i].index =i;
+                    dotLis[i].onclick = function(){
+                        move(this.index);
+                        now = this.index;
+                    }
+                }
+			}
+			//动画的核心函数
+			function move(index){
+				for(var i=0;i<upNodes.length;i++){
+						upNodes[i].style.width = ""
+					}
+				upNodes[index].style.width = "100%"
+				arrowEl.style.left = liNodes[index].offsetLeft + liNodes[index].offsetWidth/2 - arrowEl.offsetWidth/2 +"px"
+				cList.style.top = -index*(document.documentElement.clientHeight - head.offsetHeight) +"px"
+
+                for(var i=0;i<dotLis.length;i++){
+                    dotLis[i].className = "";
+                }
+                dotLis[index].className = "active";
+
+				//出入场
+				if(anArr[index]&&typeof anArr[index]["inAn"] === "function"){
+                    anArr[index]["inAn"]();
+				}
+                if(anArr[preIndex]&&typeof anArr[preIndex]["inAn"] === "function"){
+                    anArr[preIndex]["outAn"]();
+                }
+			}
+
+		//	出入场
+			var anArr = [
+				{
+				    inAn:function(){
+                        var home1 = document.querySelector("#content > .list >.home .home1");
+                        var home2 = document.querySelector("#content > .list >.home .home2");
+
+                        home1.style.transform = "translateY(0px)";
+                        home2.style.transform = "translateY(0px)";
+                        home1.style.opacity = 1;
+                        home2.style.opacity = 1;
+					},
+					outAn:function(){
+                        var home1 = document.querySelector("#content > .list >.home .home1");
+                        var home2 = document.querySelector("#content > .list >.home .home2");
+
+                        home1.style.transform = "translateY(-400px)";
+                        home2.style.transform = "translateY(100px)";
+                        home1.style.opacity = 0;
+                        home2.style.opacity = 0;
+					}
+				},
+				{
+				    inAn:function(){
+				        var plane1 = document.querySelector("#content  .course .plane1")
+				        var plane2 = document.querySelector("#content  .course .plane2")
+				        var plane3 = document.querySelector("#content  .course .plane3")
+
+                        plane1.style.transform = "translate(0px,0px)";
+                        plane2.style.transform = "translate(0px,0px)";
+                        plane3.style.transform = "translate(0px,0px)";
+					},
+					outAn:function(){
+                        var plane1 = document.querySelector("#content  .course .plane1")
+                        var plane2 = document.querySelector("#content  .course .plane2")
+                        var plane3 = document.querySelector("#content  .course .plane3")
+
+						plane1.style.transform = "translate(-200px,-200px)";
+						plane2.style.transform = "translate(-200px,200px)";
+						plane3.style.transform = "translate(200px,-200px)";
+					}
+				},
+                {
+                    inAn:function(){
+                        var pencel1 = document.querySelector("#content .works .pancel1")
+                        var pencel2 = document.querySelector("#content .works .pancel2")
+                        var pencel3 = document.querySelector("#content .works .pancel3")
+
+                        pencel1.style.transform = "translateY(0)";
+                        pencel2.style.transform = "translateY(0)";
+                        pencel3.style.transform = "translateY(0)";
+					},
+                    outAn:function(){
+                        var pencel1 = document.querySelector("#content .works .pancel1")
+                        var pencel2 = document.querySelector("#content .works .pancel2")
+                        var pencel3 = document.querySelector("#content .works .pancel3")
+
+                        pencel1.style.transform = "translateY(-200px)";
+                        pencel2.style.transform = "translateY(200px)";
+                        pencel3.style.transform = "translateY(200px)";
+					}
+                },
+                {
+                    inAn:function(){
+                        var rec1 = document.querySelector(" #content > .list > .about .about3 > .item:nth-child(1)")
+                        var rec2 = document.querySelector(" #content > .list > .about .about3 > .item:nth-child(2)")
+                        rec1.style.transform = "rotate(0deg)";
+                        rec2.style.transform = "rotate(0deg)";
+					},
+                    outAn:function(){
+
+                        var rec1 = document.querySelector(" #content > .list > .about .about3 > .item:nth-child(1)")
+                        var rec2 = document.querySelector(" #content > .list > .about .about3 > .item:nth-child(2)")
+
+                        rec1.style.transform = "rotate(45deg)";
+                        rec2.style.transform = "rotate(-45deg)";
+					}
+                },
+                {
+                    inAn:function(){
+                        var rec1 = document.querySelector("#content > .list > .team .team1");
+                        var rec2 = document.querySelector("#content > .list > .team .team2");
+                        rec1.style.transform = "translateX(0px)";
+                        rec2.style.transform = "translateX(0px)";
+
+					},
+                    outAn:function(){
+                        var rec1 = document.querySelector("#content > .list > .team .team1");
+                        var rec2 = document.querySelector("#content > .list > .team .team2");
+                        rec1.style.transform = "translateX(-200px)";
+                        rec2.style.transform = "translateX(200px)";
+					}
+                },
+			]
+			/*测试
+			anArr[4].outAn();
+			setTimeout(function(){
+			    anArr[4].inAn();
+			},2000)
+			*/
+			for(var i=0;i<anArr.length;i++){
+			    anArr[i]["outAn"]();
+			}
+            setTimeout(function(){
+                anArr[0].inAn();
+            },2000)
+		}
+			
+	</script>
+</html>

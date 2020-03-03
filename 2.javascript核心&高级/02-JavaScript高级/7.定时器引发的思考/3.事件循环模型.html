@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button>启动定时器</button>
+		<!--
+			1.所有代码分类
+				初始化执行（同步代码）：包含绑定dom时间监听,设置定时器,发送ajax请求的代码
+				回调执行代码（异步代码）：处理回调逻辑
+			2.js引擎执行代码的基本流程：
+				初始化代码===>回调代码
+			3.模型的2个重要组成部分：
+				时间管理模块
+				回调队列
+			4.模型的运转流程
+				执行初始化代码，将时间回调函数交给对应模块管理
+				当事件发生时，管理模块会将回调函数及其数据添加到回调列队中
+				只有当初始化代码执行完后（可能要一定时间）才会遍历读取回调队列中的回调函数执行
+		-->
+	</body>
+	<script type="text/javascript">
+		var but = document.querySelector("button");
+		but.onclick = function(){
+			var start = Date.now()
+			console.log('启动定时器前')
+			setTimeout(function(){
+				console.log(Date.now()-start) //1563 远远超过了200毫秒
+				console.log('启动定时器后')
+			},200)
+			
+			//做一个长时间的工作
+			for (var i=0; i < 1000000000; i++) {
+				
+			}
+		}
+		
+	</script>
+</html>
