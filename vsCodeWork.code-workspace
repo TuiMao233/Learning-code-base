@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "7.高级框架\\React"
 		}
 	]
 }
