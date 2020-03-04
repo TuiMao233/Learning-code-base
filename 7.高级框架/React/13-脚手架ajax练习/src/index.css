@@ -1,0 +1,36 @@
+
+.container.app{
+    min-width: 700px;
+}
+.container.app .title {
+    background-color: rgba(0, 0, 0, .15);
+    padding: 40px; width: 100%;
+}
+.container.app .title h1{
+    margin-bottom: 20px;
+}
+.form-control.searchTextInput {
+    width: 200px;
+    display: inline-block;
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+.userLists:after{content: '';display: block;clear: both;}
+.userLists .item{
+    float: left;
+    width: 33.33333%;
+    min-width: 20px;
+    height: 220px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    box-sizing: border-box;
+}
+
+.userLists .item img{
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.userLists .item p{text-align: center;}

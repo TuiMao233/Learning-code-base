@@ -8,7 +8,7 @@ XMLHttpRequest在不同浏览器上的实现是兼容的，所以可以用同样
 
 ## Ajax工作原理
 
-![](\img\Ajax工作原理.png)
+![](.\img\Ajax工作原理.png)
 
 Ajax并不是一项新技术，它实际上是几种技术，每种技术各尽其职，以一种全新的方式聚合在一起
 服务器端语言：服务器需要具备向浏览器发送特定信息的能力。Ajax与服务器端语言无关。
@@ -244,7 +244,7 @@ request.onreadystatechange = function () {
 }
 ~~~
 
-## ajax构造函数封装
+# ajax 获取数据(原生)
 
 ~~~javascript
 function Ajax() {}
@@ -336,7 +336,7 @@ var ajax = new Ajax()
 // ajax.post(url, [,obj], [,timeout], success, [,error])
 ~~~
 
-# jQyery写ajax
+# jQyery-ajax 获取数据(框架)
 
 ## 返回结果替换元素文字
 
@@ -355,7 +355,7 @@ var ajax = new Ajax()
 `$.ajax({settings});`
 
 | 参数                  | 类型     | 属性                                                         |
-| --------------------- | -------- | ------------------------------------------------------------ |
+| --------------------- | -------- | :----------------------------------------------------------- |
 | **url**               | String   | 默认值: 当前页地址。发送请求的地址。                         |
 | **data**              | String   | 发送到服务器的数据。将自动转换为请求字符串格式。GET 请求中将附加在 URL 后。查看 processData 选项说明以禁止此自动转换。必须为 Key/Value 格式。如果为数组，jQuery 将自动为不同值对应同一个名称。如 {foo:["bar1", "bar2"]} 转换为 '&foo=bar1&foo=bar2'。 |
 | **success**           | Function | 请求成功后的回调函数。                                       |
@@ -380,4 +380,78 @@ var ajax = new Ajax()
 | **complete(XHR, TS)** | Function | 请求完成后回调函数 (请求成功或失败之后均调用)。参数： XMLHttpRequest 对象和一个描述请求类型的字符串。这是一个 Ajax 事件。 |
 | **global**            | Boolean  | 是否触发全局 AJAX 事件。默认值: true。设置为 false 将不会触发全局 AJAX 事件，如 ajaxStart 或 ajaxStop 可用于控制不同的 Ajax 事件。 |
 | **beforeSend(XHR)**   | Function | 发送请求前可修改 XMLHttpRequest 对象的函数，如添加自定义 HTTP 头。XMLHttpRequest 对象是唯一的参数。这是一个 Ajax 事件。如果返回 false 可以取消本次 ajax 请求。 |
+
+# axios-ajax 获取数据(框架)
+
+Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中。
+
+## 执行 `GET` 请求
+
+```js
+// 为给定 ID 的 user 创建请求
+axios.get('/user?ID=12345')
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+// 可选地，上面的请求可以这样做
+axios.get('/user', {
+    params: {
+      ID: 12345
+    }
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+## 执行 `POST` 请求
+
+```js
+axios.post('/user', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+```
+
+## 执行多个并发请求
+
+```js
+function getUserAccount() {
+  return axios.get('/user/12345');
+}
+
+function getUserPermissions() {
+  return axios.get('/user/12345/permissions');
+}
+
+axios.all([getUserAccount(), getUserPermissions()])
+  .then(axios.spread(function (acct, perms) {
+    // 两个请求现在都执行完成
+  }));
+```
+
+# fetch 获取数据(原生)
+
+~~~js
+fetch('url').then(function(response) {return response.json();})
+.then(function (data) {
+    console.log(data);
+})
+ .catch(function (myJson) {
+  	console.log(myJson)
+});
+~~~
 

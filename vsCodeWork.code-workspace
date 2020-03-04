@@ -1,10 +1,27 @@
 {
 	"folders": [
 		{
+			"name": "web学习库",
 			"path": "."
 		},
 		{
-			"path": "7.高级框架\\React"
+			"name": "React-demo",
+			"path": "7.高级框架\\React\\React-demo"
+		},
+		{
+			"name": "13-脚手架ajax练习",
+			"path": "7.高级框架\\React\\13-脚手架ajax练习"
+		},
+		{
+			"name": "src",
+			"path": "7.高级框架\\React\\13-脚手架ajax练习\\src"
+		},
+		{
+			"name": "code",
+			"path": "C:\\Users\\Administrator\\Desktop\\React课件\\code"
 		}
-	]
+	],
+	"settings": {
+		"favorites.resources": []
+	}
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>02_JSX_DEMO</title>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    // ES6类组件(复杂组件)
+    class MyComponent extends React.Component {
+      constructor (props) {
+          super(props)
+
+          this.showInput = this.showInput.bind(this)
+          this.hadeleBlur = this.hadeleBlur.bind(this)
+      }
+      render() {
+        //! 第一种方式：ref="content"  官方不建议
+        //! 第二种方式：ref={input => this.input = input}  官方建议
+        return ( //* 注意,只能返回一个虚拟对象,不能是多个结构
+          <div>
+            <input type="text" ref="content"/> 
+            <input type="text" ref={input => this.input = input}/> 
+
+            <button onClick={this.showInput}>提示输入数据</button>
+
+            <input type="text" placeholder="失去焦点提示内容" onBlur={this.hadeleBlur}/>
+          </div>
+        )
+      }
+      showInput () {
+          //! 第一种方式获取
+          const input = this.refs.content
+          console.log(input.value);
+
+          //! 第二种方式获取
+          console.log(this.input.value);
+          
+      }
+      hadeleBlur (event) {
+        alert(event.target.value)
+      }
+    }
+
+    // 2. 渲染组件标签
+    ReactDOM.render(<MyComponent />, document.querySelector('#example'));
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+.title { 
+    height: 200px;
+}
+.title h1 {
+    line-height: 200px;
+    font-size: 5rem;
+}
+.title-box {
+    background-color: rgba(0,0,0,.1);
+    overflow: hidden;
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+.contact {
+    height:100%
+}
+.warp {
+    padding: 0;
+}

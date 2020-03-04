@@ -204,7 +204,8 @@ class Like extends React.Component {
 
 ## 组件三大属性
 
-**state 状态机**
+### state 状态机
+
 用于保存动态数据的一个容器，通常定义在constructor中
 
 ~~~jsx
@@ -214,7 +215,8 @@ constructor(props) {
 }
 ~~~
 
-**props 参数接收功能模块**
+### props 参数接收功能模块
+
 用于外部接收参数的容器，通常在渲染组件时定义在标签中，内部拿取参数就在组件的this.props中，如果是简单组件，则在函数参数中
 
 ~~~jsx
@@ -228,7 +230,8 @@ class Person extends React.Component {
 ReactDOM.render(<Person name={'nmd'} />, ...);
 ~~~
 
-**refs 标识元素**
+### refs 标识获取元素
+
 标记获取元素的容器，通常定义在虚拟DOM上，用于获取指定的虚拟DOM
 
 ~~~jsx
@@ -280,7 +283,7 @@ class List extends React.Component {render() {return <div>List</div>}}
 
 子组件中不能直接改变父组件的状态。数据状态在哪个组件，更新状态的行为就应该定义在哪个组件
 
-# 表单数据绑定
+# 表单数据绑定状态数据
 
 1. **绑定动态数据：**![1](.\img\input\1.jpg)![2](.\img\input\2.jpg)*（此时input的值是固定的）*
 2. **input绑定输入事件：**![3](.\img\input\3.jpg)
@@ -332,4 +335,42 @@ componentWillReceiveProps(): ......
 React 只会匹配相同 class 的 component（这里面的 class 指的是组件的名字），选择性子树渲染。
 
 开发人员可以重写shouldComponentUpdate 提高 diff 的性能。
+
+# React 脚手架搭建环境
+
+**安装`create-react-app`脚手架模块**
+
+`cnpm i create-react-app -g`
+
+**运行命令生成项目基础结构**
+
+`create-react-app react-demo`
+
+**脚手架入口js基本设置**`(src/index.js)`
+
+~~~js
+//? 引入组件
+import App from './components/app';
+//? 渲染组件
+ReactDOM.render(<App />, document.getElementById('root'));
+~~~
+
+**运行开发环境：**`npm start`
+**生产环境打包：**`npm build`
+
+# 子组件间通信
+
+![子组件传递数据](.\img\子组件传递数据.jpg)
+
+**发送方：子组件A**
+**接收方：子组件B**
+
+## 通信流程
+
+1. **父组件定义状态数据**
+   **父组件定义改变状态数据方法**
+2. **父组件传递状态数据给子组件B**
+   **父组件传递改变状态数据方法给子组件A**
+3. **子组件A调用方法改变父组件状态数据**
+   **子组件B自动调用`componentWillReceiveProps()`方法并接收状态数据**
 

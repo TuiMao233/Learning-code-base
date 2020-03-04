@@ -32,7 +32,10 @@ dom.classList.remove('dl') // --> <dom class="">
 dom.classList.toggle('dl') // --> <dom class="dl">
 dom.classList.toggle('dl') // --> <dom class="">
 ~~~
-
+## 阻止默认行为	
+~~~js
+el.preventDefault()
+~~~
 ## 自定义元素属性
 
 ### 创建

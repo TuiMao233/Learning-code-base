@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>10_ComponentLife</title>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/javascript" src="./js/react.development.js"></script>
+<script type="text/javascript" src="./js/react-dom.development.js"></script>
+<script type="text/javascript" src="./js/babel.min.js"></script>
+<script type="text/babel">
+  /*
+  需求: 自定义组件
+    1. 让指定的文本做显示/隐藏的动画
+    2. 切换时间为2S
+    3. 点击按钮从界面中移除组件界面
+   */
+  class Fade extends React.Component {
+    constructor (props) { //! 组件对象初始化
+      super(props)
+      console.log('constructor(): 创建组件对象')
+      this.state = {opacity: 1}
+
+      this.delInter = this.delInter.bind(this)
+    }
+    render() { //! 渲染组件回调
+      console.log('render() 渲染组件')
+      return (
+        <div>
+          <h2 style={{opacity:this.state.opacity}}>{this.props.content}</h2>
+          <button onClick={this.delInter}>不活了</button>
+        </div>
+      )
+    }
+    delInter () { //! 卸除组件
+      ReactDOM.unmountComponentAtNode(document.querySelector('#example'))
+    }
+    componentDidMount() { //! 组件已经挂载完毕
+      console.log('componentDidMount() 组件已经挂载完毕');
+      let opacity = 1
+      this.timer = setInterval(() => {
+        console.log('定时器执行中.....');
+        opacity = this.state.opacity - 0.1
+        if(opacity <0){opacity=1}
+        this.setState({opacity})
+      }, 200);
+    }
+    componentWillUnmount() { //! 组件即将销毁
+      clearInterval(this.timer)
+    }
+  }
+  ReactDOM.render(<Fade content="react学不会, 怎么办?"/>, document.getElementById('example'))
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>02_JSX_DEMO</title>
+</head>
+<body>
+  <div id="test1"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+    <script  type="text/babel">
+      var names = ['jquery','zeptoo','angular','raect全家桶','vue全家桶']
+      //? 创建虚拟dom
+      var ul = (//! 将数组虚拟dom插入虚拟ul-dom中，顺序会按照key值排序
+        <ul>{ //! 在创建数组虚拟dom时，需要指定key值，key值代表元素排列的顺序
+          names.map((item, index)=> <li key={index}>{item}</li>)
+        }</ul>
+      )
+      
+      //? 虚拟dom进行渲染到页面#test1中
+      ReactDOM.render(ul, document.querySelector('#test1'))
+    </script>
+</body>
+</html>
