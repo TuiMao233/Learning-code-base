@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>02_JSX_DEMO</title>
+</head>
+
+<body>
+  <div id="example"></div>
+  <div id="example2"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script type="text/javascript" src="./js/prop-types.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    //  1. 定义组件标签
+    function Person(props) {
+      return (
+        <ul>
+          <li>姓名：{props.name}</li>
+          <li>年龄：{props.age}</li>
+          <li>性别：{props.sex}</li>
+        </ul>
+      )
+    }
+
+    const p1 = { name: 'Tom', age: 18, sex: '女' }
+    // 2. 渲染组件标签
+    ReactDOM.render(<Person {...p1} />, document.querySelector('#example'));
+
+    // 指定属性默认值
+    Person.defaultProps = { sex: '男', age: 18 }
+    // 数值设置必要性
+    Person.propTypes = {
+      name: PropTypes.string.isRequired, // isRequired 属性必须要
+      age: PropTypes.number, // 数值指定必须得是数值
+      sex: PropTypes.string
+    }
+    ReactDOM.render(<Person name={'nmd'} />, document.querySelector('#example2'));
+
+    // 类组件接收参数
+     // 1.定义类组件
+    /*   class Person extends React.Component {
+        render() {
+          return (
+            <ul>
+              <li>姓名：{this.props.name}</li>
+              <li>年龄：{this.props.age}</li>
+              <li>性别：{this.props.sex}</li>
+            </ul>
+          )
+        }
+      }
+      const p1 ={name: 'Tom',age: 18,sex: '女'}
+      ReactDOM.render(<Person {...p1}/>, document.querySelector('#example')); */
+  </script>
+</body>
+
+</html>
