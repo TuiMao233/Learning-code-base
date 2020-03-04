@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>02_JSX_DEMO</title>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/javascript" src="./js/react.development.js"></script>
+  <script type="text/javascript" src="./js/react-dom.development.js"></script>
+  <script src="./js/prop-types.js"></script>
+  <script type="text/javascript" src="./js/babel.min.js"></script>
+  <script type="text/babel">
+    /* 问题：数据保存在哪个组件？
+              看数据是某个组件需要（给他），还是某些组件需要（给共同的父组件） 
+       问题：需要在子组件中改变父组件的状态
+              子组件中不能直接改变父组件的状态
+              数据状态在哪个组件，更新状态的行为就应该定义在哪个组件
+        功能组件流程：
+          1. 拆分组件
+          2. 实现静态组件(只有静态界面，没有动态数据和交互)
+          3. 实现动态组件
+              1. 实现初始化数据动态显示
+              2. 实现交互功能
+     */
+
+    // 1.定义组件
+
+    // 父组件
+    class App extends React.Component {
+      constructor (props) {
+        super(props)
+        // 初始化状态
+        this.state={todos: ['吃饭', '睡觉', '打代码']}
+
+        this.addTodo = this.addTodo.bind(this)
+      }
+      render() {
+        return (
+          <div>
+            <h1>Simple TODO List</h1>
+            <Add length={this.state.todos.length} addTodo={this.addTodo}/>
+            <List todos={this.state.todos}/>
+          </div>
+      )}
+      addTodo (todo) {
+        // this.state.unshift(todo) 不能这么做
+        const {todos} = this.state
+        todos.unshift(todo)
+        this.setState({todos})
+      }
+    }
+
+    // 子组件(添加组件)
+    class Add extends React.Component {
+      constructor (props) {
+        super(props)
+        // 自定义事件绑定this
+        this.addTodo = this.addTodo.bind(this)
+      }
+      render() {
+        console.log(this.props);
+        
+        return (
+          <div>
+            <input type="text" ref={input => this.input = input}/>
+            <button onClick={this.addTodo}>add #{this.props.length}</button>
+          </div>
+      )}
+      addTodo () {
+        const todo = this.input.value.trim()
+        if(!todo) {return}
+        this.props.addTodo(todo)
+        this.input.value  = ''
+      }
+    }
+
+    // 子组件(显示组件)
+    class List extends React.Component {
+      render() {
+        // 显示父元素的数组数据
+        const {todos} = this.props
+        return (
+          <ul>{
+            todos.map((item, index)=>
+              <li key={index}>{item}</li>
+            )
+          }</ul>
+      )}
+    }
+
+    // 限制数据必要性
+    List.propTypes = {todos: PropTypes.array.isRequired}
+    Add.propTypes = {length: PropTypes.number.isRequired
+                    ,addTodo: PropTypes.func.isRequired}
+    // 2.渲染组件
+    ReactDOM.render(<App />, document.querySelector('#example'))
+  </script>
+</body>
+
+</html>
