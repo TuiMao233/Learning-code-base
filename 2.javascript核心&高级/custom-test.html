@@ -1,0 +1,19 @@
+<script>
+    Object.prototype.map = function (func) {
+        var obj = {}
+        for (var key in this) {
+            if (key !== 'map') {
+                let result = func(key, this[key])
+                obj[result[0]] = result[1]
+            }
+        }
+        return obj
+    }
+    //! 对象map方法
+    let obj = { a: 6, b: 6 }
+    let newobj = obj.map((key, val) => {
+        return [key, val+6]
+    });
+    console.log(newobj);
+    //? {a: 12, b: 12}
+</script>

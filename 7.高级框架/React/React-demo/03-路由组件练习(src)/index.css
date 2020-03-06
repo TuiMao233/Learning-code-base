@@ -1,0 +1,30 @@
+.clearfix{*zoom: 1;}
+.clearfix:after{content: '';display: block;clear: both;}
+.container.app{margin-top: 50px; padding: 0 100px;}
+.container.app .content {position: relative;}
+.container.app .content .content-button-box {margin-bottom: -20px;position: absolute;top: 50px;}
+.container.app .content .content-button-box a {
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    border: solid 1px rgba(0, 0, 0, .2);
+}
+.container.app .content .content-button-box a:nth-child(1) {margin-bottom: -1px;}
+.container.app .content .content-button-box .active {color: red;}
+.container.app .router {margin-left: 110px;}
+
+.container.app .router.home .button-box a{
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: blue;
+    cursor: pointer;
+    display: inline-block;
+}
+.container.app .router.home .button-box a:hover{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.active{
+    color: red !important;
+}
