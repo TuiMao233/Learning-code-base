@@ -9,8 +9,10 @@
     "bootstrap": "^4.4.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-redux-subscript": "^1.2.0",
     "react-scripts": "3.4.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -34,6 +36,8 @@
     ]
   },
   "devDependencies": {
-    "bootstrap": "^4.4.1"
+    "bootstrap": "^4.4.1",
+    "redux-devtools-extension": "^2.13.8",
+    "thunk": "^0.0.1"
   }
 }

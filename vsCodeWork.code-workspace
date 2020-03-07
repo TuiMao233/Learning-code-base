@@ -1,22 +1,7 @@
 {
 	"folders": [
 		{
-			"name": "web学习库",
 			"path": "."
-		},
-		{
-			"name": "React-demo",
-			"path": "7.高级框架\\React\\React-demo"
-		},
-		{
-			"name": "code",
-			"path": "C:\\Users\\Administrator\\Desktop\\React课件\\code"
-		},
-		{
-			"path": "7.高级框架\\React\\00-脚手架基本架构"
-		},
-		{
-			"path": "7.高级框架\\React\\00-脚手架基本架构\\src"
 		}
 	],
 	"settings": {

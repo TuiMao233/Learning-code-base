@@ -575,78 +575,111 @@ import { Button } from 'antd-mobile'
 
 Redux 是 JavaScript 状态容器，提供可预测化的状态管理。它可以用在 react, angular, vue 等项目中, 但基本与 react 配合使用，作用: 集中式管理 react 应用中多个组件共享的状态
 
-## react&redux数据绑定流程
+## react&redux 数据绑定流程
 
-**1.定义指定储存库(store)与改变数据方法(reducer)**
+### 1.定义储存库
+
+`redux/reducers.js`
 
 ~~~js
-// 定义改变类型名action-types
-const IN_CREMENT = 'IN_CREMENT'
-const DE_CREMENT = 'DE_CREMENT'
-// store储存库默认值是 0 
-// action.type是改变数据的类型
-// action可以携带任意数据, 用于改变储存值状态
-export const store = createStore((state = 0, action) => {
-    //? 根据类型调用对应的改变方法
-    switch (action.type) {
+//! 引入方法常量命名
+import {IN_CREMENT, DE_CREMENT} from './action-types'
+//! 引入redux创建储存库方法(store)
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+const store = (reducer) => createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
+// 创建一个count储存库，并暴露出去
+export const count = store((count=0, action)=>{
+    switch (action.type) {//? 定义改变数据的方法
         case IN_CREMENT:
-            return state + action.data
+            return count + action.data
         case DE_CREMENT:
-            return state - action.data
-        default:
-            return state
+            return count - action.data
+        default:return count
     }
 })
 ~~~
 
-**2.react组件中引入**
+### 2.定义方法命名空间
 
-~~~jsx
-import { store } from '../redux/reducers'
-~~~
-
-**3.react-state绑定数据**
-
-~~~jsx
-...
-constructor(props) {
-    super(props);
-  	// 初始化显示数据
-  	this.state = {store: store.getState()}
-  	// 订阅储存值，并改变state
-  	store.subscribe(()=>{
-      this.setState = {store: store.getState()}
-    })
-}
-...
-~~~
-
-**3.stateSubs自定义函数绑定数据**
-
-~~~jsx
-import { store } from '../redux/reducers'
-import stateSubs from '../redux/react-redux-sub'
-...
-constructor(props) {
-   	super(props);
-  	// 指定组件this,与redux储存值
-   	stateSubs(this,{store})
-}
-...
-~~~
-
-**stateSubs源码**
+`redux/action-type.js`
 
 ~~~js
-export default function (comThis,keyVal) {
-    let obj = {}
-  	for (const key in keyVal) {
-        obj[key] = keyVal[key].getState()
-        keyVal[key].subscribe(()=>{
-            comThis.setState({[key] : keyVal[key].getState()})
-        })
-    }
-    comThis.state = obj
+//? 加减方法
+export const IN_CREMENT = 'IN_CREMENT'
+export const DE_CREMENT = 'DE_CREMENT'
+~~~
+
+### 3.定义调用方法库
+
+`redux/actions.js`
+
+~~~js
+// 引入储存库
+import {store} from './reducers'
+// 引入方法常量
+import {IN_CREMENT, DE_CREMENT} from './action-types'
+// 将储存库和方法暴露
+export const inCrement = (number)=>{store.dispatch({ type: IN_CREMENT, data: number })}
+export const deCrement = (number)=>{store.dispatch({ type: DE_CREMENT, data: number })}
+~~~
+
+### 4.定义redux接口
+
+`redux/index.js`
+
+~~~js
+import stateSubs from 'react-redux-subscript'
+import {count} from './reducers'
+import {inCrement, deCrement, inCrementAsync} from './actions'
+
+export const AppStateSus = stateSubs({count},{
+    inCrement, deCrement, inCrementAsync
+})
+~~~
+
+
+
+### 4.react使用redux储存
+
+~~~jsx
+//! 1.获取AppState绑定方法
+import {AppStateSus} from '../redux'
+class App extends Component {
+	constructor(props) {
+ 	super(props);
+ 	 //! 绑定this.state数据
+ 	 AppStateSus(this)
+    
+ 	 console.log(this.state.store) // 0
+ 	 this.inCrement(6)
+ 	 console.log(this.state.store) // 6
+	}
+  render(){return<div></div>}
 }
 ~~~
 
+## redux 开发者工具
+
+### 1.浏览器安装扩展插件
+
+`Redux DevTools`
+
+### 2.下载对应npm包
+
+`npm i redux-thunk redux-devtools-extension -D`
+
+### 3.在创建储存库时传入第二个参数
+
+~~~js
+import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+// composeWithDevTools(applyMiddleware(thunk))
+const store = createStore(councer,  composeWithDevTools(applyMiddleware(thunk))  )
+~~~
+
+### 4.浏览器查看调试工具
+
+![rudex调试工具](D:\web学习库\7.高级框架\React\img\rudex调试工具.jpg)
