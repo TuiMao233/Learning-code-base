@@ -1,52 +1,45 @@
+//! 7. 页面中定义引入类型，并使用储存库
+
 import React, { Component } from 'react';
+//? 引入限制传入类型方法库
+import  PropTypes  from 'prop-types'
 
-//! 1.获取AppState绑定方法
-import {AppStateSus} from '../redux'
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        //! 2.绑定this.state数据
-        this.state = {
-            a:6
-        }
-        AppStateSus(this)
+
+class Counter extends Component {
+    static propTypes = { // 定义静态对象 ==> App.PropTypes = {...}
+        count: PropTypes.number.isRequired,       //? 必要，并且是一个数值
+        inCrement: PropTypes.func.isRequired, //? 必要，并且是函数
+        inCrementAsync: PropTypes.func.isRequired
     }
-    //? 加减方法
-    inAndDe(str) {
+    inAndDe(str) { // 相加通知
         //? 获取select的值
-        let number = this.select.value * 1
-        //? 判断+还是-
-        if (str === '+') {
-            this.inCrement(number)
-        } else {
-            this.deCrement(number)
-        }
+        let number = this.select.value*1
+        //? 调用相加通知
+        this.props.inCrement(number)
 
     }
-    //? 奇数相加方法
-    incrementIfOdd = () => {
+    incrementIfOdd = () => { // 奇数相加通知
         //? 获取select的值
         let number = this.select.value * 1
-        //? 获取储存库count的值
-        let count = this.state.count
+        //? 获取储存库的值
+        let count = this.props.count
         //? 判断是否是奇数
         if ((count % 2) === 1) {
-            this.inCrement(number)
+            this.props.inCrement(number)
         }
     }
-    //? 异步相加方法
-    incrementAsync = () => {
+    incrementAsync = () => { // 异步相加通知
         //? 获取select的值
         let number = this.select.value * 1
-        //? 调用count的相加方法
-        this.inCrementAsync(number)
+        //? 调用储存库的相加通知
+        this.props.inCrementAsync(number)
     }
     render() {
-        
+
         return (
             <div>
-                <h4>click {this.state.count} times</h4>
+                <h4>click {this.props.count} times</h4>
                 <select ref={select => this.select = select}>
                     <option value="1"> 1</option>
                     <option value="2">2</option>
@@ -61,4 +54,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default Counter
