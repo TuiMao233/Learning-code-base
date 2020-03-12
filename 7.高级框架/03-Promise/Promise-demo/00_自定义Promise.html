@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<!-- <script src="./lib/Promise.exercise.js"></script> -->
+<script src="./lib//Promise_class.js"></script>
+<script>
+    /* const p = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            reject(2)
+        }, 100);
+
+    })
+    p.then(
+        value => {console.log('onResolved()1', value)},
+        reason => {console.log('onRejected()1', reason)}
+    )
+    p.then(
+        value => {console.log('onResolved()1', value)},
+        reason => {console.log('onRejected()1', reason)}
+    ) */
+</script>
+<script>
+    //! 测试链式调用
+    /* new Promise((resolve, reject) => {
+        reject(6)
+    }).then(
+        value => { console.log('onResolved()1', value) },
+        reason => { console.log('onRejected()1', reason); throw 6 } //! 向下传递异常
+    ).then(
+        value => { console.log('onResolved()2', value) },
+        reason => { console.log('onRejected()2', reason); throw 6 } //! 向下传递异常
+    ).catch(
+        reason => {
+            console.log('onRejected()3', reason)
+            return new Promise(()=>{}) //! 中断promise异常链
+        }
+    ).then(
+        value => { console.log('onResolved()4', value) },
+        reason => { console.log('onRejected()4', reason) }
+    ) */
+
+    //! 测试resolve reject
+    const p1 = Promise.resolve(1)
+    const p2 = Promise.resolve(new Promise((resolve, reject) => resolve(6)))
+    const p3 = Promise.resolve(new Promise((resolve, reject) => reject(7)))
+    const p4 = new Promise((resolve, reject)=>{
+        setTimeout(()=>resolve(10),1000)
+    })
+    // p1.then(value => { console.log('onResolved()1', value) })
+    // p2.then(value => { console.log('onResolved()2', value) })
+    // p3.catch(reason => console.log('onRejected()3',reason))
+    //! 测试all和race
+    /* const pAll = Promise.all([p4, 7 , p1, p2])
+    pAll.then(
+        values => console.log('all onResolved()', values),
+        reason => console.log('all onRejected()', reason)
+    ) */
+    //! 测试race
+    /* const pRule = Promise.rule([p4,p1, p2])
+    pRule.then(
+        values => console.log('all onResolved()', values),
+        reason => console.log('all onRejected()', reason)
+    ) */
+    //! 测试自定义方法
+    const p5 = Promise.resolveDelay(60,1000)
+    const p6 = Promise.rejectDelay(70,3000)
+    p5.then(value => console.log(value))
+    p6.catch(reason=> console.log(reason))
+</script>
+
+</html>

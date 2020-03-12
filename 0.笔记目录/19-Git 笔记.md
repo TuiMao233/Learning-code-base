@@ -356,7 +356,7 @@ Git 并不会在你输入部分命令时自动推断出你想要的命令。 如
 [进行提交] $ git config --global alias.ci commit				
 [查看状态] $ git config --global alias.st status			  
 [查看暂存] $ git config --global alias.lifs "ls-files -s"   
-[分叉历史] $ git config --global alias.brlog "log --oneline --decorate --graph --all`"
+[分叉历史] $ git config --global alias.brlog "log --oneline --decorate --graph --all"
 ~~~
 
 # Git 高层命令（CRUD）

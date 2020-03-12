@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>04_promise基本使用</title>
+</head>
+
+<body>
+  <script>
+    //! 1. 创建一个新的promise对象
+    const p = new Promise((resolve, reject) => {
+      //! 2. 执行异步任务
+      setTimeout(() => {
+        const time = Date.now() // 如果当前时间是偶数代表成功，否则失败
+        if (time % 2 === 0) {
+          //? 如果成功，调用resolve(value)
+          resolve('成功' + time)
+        } else {
+          //? 如果失败，调用reject(reason)
+          reject('失败' + time)
+        }
+      }, 1000);
+
+    })
+    p.then(
+      value => {  // onResolved
+        //! 接受得到成功的value数据
+        console.log(value);
+      },
+      reason => { // onRejected
+        //! 接受得到失败的reason数据
+        console.log(reason);
+      }
+    )
+  </script>
+</body>
+
+</html>

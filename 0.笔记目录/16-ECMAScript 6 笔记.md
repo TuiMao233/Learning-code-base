@@ -1,4 +1,4 @@
-# ECMAScript6常用语法
+# ECMAScript6 常用语法
 
 ## let关键字
 
@@ -116,9 +116,9 @@ function point(x=0, y=0) {
 };point() // 0 0
 ~~~
 
-# ECMAScript6深入语法
+# ECMAScript6 高级语法
 
-## Promise对象
+## Promise 对象
 
 代表了未来某个将要发生的事件(通常是一个异步操作)，有了promise对象, 可以将异步操作以同步的流程表达出来, 避免了层层嵌套的回调函数(俗称'回调地狱')
 
@@ -173,7 +173,7 @@ getNews('GET', 'http://localhost:3000/news?id=2')
 			},(error)=>{console.log(error)})
 ~~~
 
-## 原始数据类型symbol
+## symbol 原始数据类型
 
 Symbol属性对应的值是唯一的
 Symbol值不能与其他数据进行计算，包括同字符串拼串
@@ -195,7 +195,7 @@ let s5 = Symbol.for('test') // 没有这个变量则声明一个
 let s6 = Symbol.for('test') // 如果已经存在了.则获取这个sym
 ~~~
 
-## symbol.iterator遍历器
+## symbol.iterator 遍历器
 
 iterator是一种接口机制，为各种不同的数据结构提供统一的访问机制，使得数据结构的成员能够按某种自定义次序排列
 
@@ -221,7 +221,7 @@ myIterable[Symbol.iterator] = function* () {
 
 ~~~
 
-## generator状态机函数
+## generator 状态机函数
 
 ~~~javascript
 function* myGenerator () {
@@ -239,7 +239,7 @@ console.log(MG.next('aaaaaaaaaaaaaaaaaaaaa'))
 console.log(MG.next())
 ~~~
 
-## async同步流程表达异步操作函数
+## async 同步流程表达异步操作函数
 
 ~~~javascript
 function foo() {return new Promise(resolve => {setTimeout(resolve, 2000)})}
@@ -251,7 +251,7 @@ async function test() {
 
 ~~~
 
-## class类定义构造方法
+## class 类定义构造方法
 
 ~~~javascript
 class Person {
@@ -281,5 +281,18 @@ class StarPerson extends Person {
 	}
 }
 let p1 = new StarPerson('小学生', 70, 3000000000)
+~~~
+
+**class static 定义静态方法**
+
+~~~js
+class ClassWithStaticMethod {
+  static staticMethod() {
+    return 'static method has been called.';
+  }
+}
+
+console.log(ClassWithStaticMethod.staticMethod());
+// expected output: "static method has been called."
 ~~~
 

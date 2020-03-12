@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "web学习库",
+			"path": "."
+		},
+		{
+			"name": "vs-code-deom",
+			"path": "D:\\vs-code-deom"
+		},
+		{
+			"path": "D:\\web学习库\\7.高级框架\\01-React"
+		}
+	],
+	"settings": {
+		"favorites.resources": [
+			"c:\\Users\\Administrator\\Desktop\\React课件\\code"
+		]
+	}
+}
