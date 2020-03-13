@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="./js/axios.custom.js"></script>
+
+<body>
+    <div>
+        <button onclick="testGet()">GET请求</button>
+        <button onclick="testPost()">POST请求</button>
+        <button onclick="testPut()">PUT请求</button>
+        <button onclick="testDelete()">DELETE请求</button>
+    </div>
+</body>
+<script>
+    /* 
+    1.函数的返回值为promise, 成功的结果为response, 失败的结果为error
+    2.能处理多种类型的请求: GET/POST/PUT/DELETE
+    3.函数的参数为一个配置对象
+      {
+        url: '',   // 请求地址
+        method: '',   // 请求方式GET/POST/PUT/DELETE
+        params: {},  // GET/DELETE请求的query参数
+        data: {}, // POST或DELETE请求的请求体参数 
+      }
+    4.响应json数据自动解析为js的对象/数组
+*/
+    function testGet() {
+        //! 查询posts所有josn对象
+        // axios.get('http://localhost:3000/posts')
+        //! 查询posts值为1的所有josn对象
+        // axios.get('http://localhost:3000/posts/1')
+        //! 查询posts一个id属性为1的josn对象
+        axios({
+            url: 'http://localhost:3000/posts',
+            method: 'GET',
+            params: {"author": "typicode3---"}
+        }).then(
+            response => console.log(response),
+            error => console.log(error)
+        )
+    }
+    function testPost() {
+        //! 往posts添加一个josn对象，id会自动生成
+        axios({
+            url: 'http://localhost:3000/posts',
+            method: 'POST',
+            data: { "title": "json-server3---", "author": "typicode3---" }
+        }).then(
+            response => console.log(response),
+            error => console.log(error)
+        )
+    }
+    function testPut() {
+        axios({//! 修改posts的josn对象
+            url: 'http://localhost:3000/posts/1',
+            method: 'put',
+            data: { "title": "json-server3---", "author": "typicode3---" }
+        }).then(
+            response => console.log(response),
+            error => console.log(error)
+        )
+    }
+    function testDelete() {
+        //! 往posts添加一个josn对象，id会自动生成
+        axios({
+            url: 'http://localhost:3000/posts/2',
+            method: 'delete',
+        }).then(
+            response => console.log(response),
+            error => console.log(error)
+        )
+    }
+</script>
+
+</html>

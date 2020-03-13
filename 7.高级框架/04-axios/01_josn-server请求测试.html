@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <button onclick="testGet()">GET请求</button>
+        <button onclick="testPost()">POST请求</button>
+        <button onclick="testPut()">PUT请求</button>
+        <button onclick="testDelete()">DELETE请求</button>
+    </div>
+</body>
+<script src="https://cdn.bootcss.com/axios/0.19.2/axios.js"></script>
+<script src="../../js/Ajax函数封装.js"></script>
+<script>
+    function testGet() {
+        //! 查询posts所有josn对象
+        // axios.get('http://localhost:3000/posts')
+        //! 查询posts值为1的所有josn对象
+        // axios.get('http://localhost:3000/posts/1')
+        //! 查询posts一个属性为1的josn对象
+        axios.get('http://localhost:3000/posts?id=1')
+        .then(response =>console.log(response.data))
+    }
+    function testPost() {
+        //! 往posts添加一个josn对象，id会自动生成
+        axios.post('http://localhost:3000/posts', { "title": "json-server3", "author": "typicode3" })
+        .then(response => console.log(response.data))
+    }
+    function testPut() {
+        //! 修改posts对象的数据
+        axios.put('http://localhost:3000/posts/3', { "title": "json-server...", "author": "typicode..." })
+        .then(response => console.log(response.data))
+    }
+    function testDelete() {
+        //! 删除posts对象的数据
+        axios.delete('http://localhost:3000/posts/3')
+        .then(response => console.log(response.data))
+    }
+
+</script>
+
+</html>

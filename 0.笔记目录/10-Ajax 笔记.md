@@ -1,34 +1,180 @@
+# HTTP 响应协议
+
+## HTTP 概念
+
+**HTTP是一种能够获取如 HTML 这样的网络资源的 [protocol](https://developer.mozilla.org/en-US/docs/Glossary/protocol)(通讯协议)。它是在 Web 上进行数据交换的基础，是一种 client-server 协议，也就是说，请求通常是由像浏览器这样的接受方发起的。一个完整的Web文档通常是由不同的子文档拼接而成的，像是文本、布局描述、图片、视频、脚本等等。**
+
+## HTTP 请求交互的基本过程
+
+![请求流程](D:\web学习库\0.笔记目录\img\axios\请求流程.png)
+
+1. 前后应用从浏览器端向服务器发送 HTTP 请求(请求报文)
+2. 后台服务器接收到请求后, 调度服务器应用处理请求, 向浏览器端返回 HTTP 响应(响应报文)
+3. 浏览器端接收到响应, 解析显示响应体/调用监视回调
+
+## HTTP 请求报文
+
+**请求行:** `method url`
+			 `GET /product_detail?id=2`
+			 `POST /login`
+**多个请求头:** `Host: www.baidu.com`
+				    `Cookie: BAIDUID=AD3B0FA706E; BIDUPSID=AD3B0FA706;`
+					`Content-Type: application/x-www-form-urlencoded 或者 application/json`
+**请求体:** `username=tom&pwd=123`
+		    `{"username": "tom", "pwd": 123}`
+
+## HTTP 响应报文
+
+**响应状态行:** `status statusText`
+**多个响应头:** `Content-Type: text/html;charset=utf-8` 
+					`Set-Cookie: BD_CK_SAM=1;path=/`
+**响应体:** `html 文本/json 文本/js/css/图片...`
+
+## post 请求体参数格式
+
+`Content-Type: application/x-www-form-urlencoded;charset=utf-8`
+**用于键值对参数，参数的键值用=连接, 参数之间用&连接**
+例如: `name=%E5%B0%8F%E6%98%8E&age=12`
+
+`Content-Type: application/json;charset=utf-8`
+**用于 json 字符串参数**
+例如: {"name": "%E5%B0%8F%E6%98%8E", "age": 12}
+
+`Content-Type: multipart/form-data`
+**用于文件上传请求**
+
+## 常见的响应状态码
+
+| 响应码 | 状态                  | 状态详情                            |
+| ------ | --------------------- | ----------------------------------- |
+| 200    | OK                    | 请求成功。一般用于 GET 与 POST 请求 |
+| 201    | Created               | 已创建。成功请求并创建了新的资源    |
+| 401    | Unauthorized          | 未授权/请求要求用户的身份认证       |
+| 404    | Not Found             | 服务器无法根据客户端的请求找到资源  |
+| 500    | Internal Server Error | 服务器内部错误，无法完成请求        |
+
+## 不同类型的请求及其作用
+
+1. GET: 从服务器端读取数据
+2. POST: 向服务器端添加新数据
+3. PUT: 更新服务器端已经数据
+4. DELETE: 删除服务器端数据
+
+## API 的分类
+
+### REST API
+
+发送请求进行 CRUD 哪个操作由请求方式来决定
+同一个请求路径可以进行多个操作
+请求方式会用到 GET/POST/PUT/DELETE
+
+### 非 REST API
+
+请求方式不决定请求的 CRUD 操作
+一个请求路径只对应一个操作
+一般只有 GET/POST
+
+# json-server
+
+JSON-Server 是一个 Node 模块，运行 Express 服务器，可以指定一个 json 文件作为 api 的数据源。
+
+## 安装 json-server
+
+```sh
+npm install -g json-server
+npm i cors express --save
+```
+
+## 启动 json-server
+
+`json-server`可以直接把一个`json`文件托管成一个具备全`RESTful`风格的`API`,并支持跨域、`jsonp`、路由订制、数据快照保存等功能的 web 服务器。
+
+db.json文件的内容：
+
+```json
+{
+  "course": [
+    {
+      "id": 1000,
+      "course_name": "马连白米且",
+      "autor": "袁明",
+      "college": "金并即总变史",
+      "category_Id": 2
+    },
+    {
+      "id": 1001,
+      "course_name": "公拉农题队始果动",
+      "autor": "高丽",
+      "college": "先了队叫及便",
+      "category_Id": 2
+    }
+  }
+}
+```
+
+例如以下命令，把`db.json`文件托管成一个 web 服务。
+
+```sh
+$ json-server --watch --port 53000 db.json
+```
+
+输出类似以下内容，说明启动成功。
+
+```
+\{^_^}/ hi!
+
+Loading db.json
+Done
+
+Resources
+http://localhost:53000/course
+
+Home
+http://localhost:53000
+
+Type s + enter at any time to create a snapshot of the database
+Watching...
+```
+
+此时，你可以打开你的浏览器，然后输入：http://localhost:53000/course
+
+### 使用浏览器进行访问
+
+~~~sh
+http://localhost:53000/course/1000
+~~~
+
 # XMLHttpRequest的概述
 
-XMLHttpRequest 最早是在IE5中以ActiveX组件的形式实现的。非 W3C 标准.
-创建XMLHttpRequest对象（由于非标准所以实现方法不统一）
-Internet Explorer把XMLHttpRequest实现为一个ActiveX对象
-其他浏览器（Firefox、Safari、Opera…）把它实现为一个本地的JavaScript对象。
-XMLHttpRequest在不同浏览器上的实现是兼容的，所以可以用同样的方式访问XMLHttpRequest实例的属性和方法，而不论这个实例创建的方法是什么。
+`XMLHttpRequest` 最早是在IE5中以ActiveX组件的形式实现的。非 `W3C` 标准.
+创建`XMLHttpRequest`对象（由于非标准所以实现方法不统一）
+`Internet Explorer`把`XMLHttpRequest`实现为一个`ActiveX`对象
+其他浏览器`（Firefox、Safari、Opera…）`把它实现为一个本地的`JavaScript`对象。
+`XMLHttpRequest`在不同浏览器上的实现是兼容的，所以可以用同样的方式访问`XMLHttpRequest`实例的属性和方法，而不论这个实例创建的方法是什么。
 
 ## Ajax工作原理
 
 ![](.\img\Ajax工作原理.png)
 
-Ajax并不是一项新技术，它实际上是几种技术，每种技术各尽其职，以一种全新的方式聚合在一起
+`Ajax`并不是一项新技术，它实际上是几种技术，每种技术各尽其职，以一种全新的方式聚合在一起
 服务器端语言：服务器需要具备向浏览器发送特定信息的能力。Ajax与服务器端语言无关。
-XML (eXtensible Markup Language，可扩展标记语言) 是一种描述数据的格式。Aajx 程序需要某种格式化的格式来在服务器和客户端之间传递信息，XML 是其中的一种选择
-XHTML（eXtended Hypertext Markup Language,使用扩展超媒体标记语言）和 CSS（Cascading Style Sheet,级联样式单）标准化呈现；
-DOM（Document Object Model,文档对象模型）实现动态显示和交互；
-使用XMLHTTP组件XMLHttpRequest对象进行异步数据读取
-使用JavaScript绑定和处理所有数据
+`XML (eXtensible Markup Language，可扩展标记语言)` 是一种描述数据的格式。`Aajx` 程序需要某种格式化的格式来在服务器和客户端之间传递信息，`XML` 是其中的一种选择
+`XHTML（eXtended Hypertext Markup Language）`,使用扩展超媒体标记语言）和 `CSS（Cascading Style Sheet,级联样式单）`标准化呈现；
+`DOM（Document Object Model,文档对象模型）`实现动态显示和交互；
+使用`XMLHTTP`组件`XMLHttpRequest`对象进行异步数据读取
+使用`JavaScript`绑定和处理所有数据
 
 ## Ajax的缺陷
 
-AJAX不是完美的技术。使用AJAX，它的一些缺陷不得不权衡一下：
-由 Javascript 和 AJAX 引擎导致的浏览器的兼容
+`AJAX`不是完美的技术。使用`AJAX`，它的一些缺陷不得不权衡一下：
+由 `Javascript` 和 `AJAX` 引擎导致的浏览器的兼容
 页面局部刷新，导致后退等功能失效。
-对流媒体的支持没有FLASH、Java Applet好。
-一些手持设备（如手机、PDA等）支持性差。
+对流媒体的支持没有`FLASH`、`Java Applet`好。
+一些手持设备（如手机、`PDA`等）支持性差。
 
 # 创建XMLHttpRequest对象
 
-为了每次写Ajax的时候都节省一点时间，可以把对象检测的内容打包成一个可复用的函数：
+为了每次写`Ajax`的时候都节省一点时间，可以把对象检测的内容打包成一个可复用的函数：
 
 ~~~javascript
 function getHTTPObject(){
@@ -41,7 +187,7 @@ if(window.XMLHttpRequest){
 }
 ~~~
 
-[^说明]:对window.XMLHttpRequest的调用会返回一个对象或null，if语句会把调用返回的结果看作是true或false**（如果返回对象则为true，返回null则为false）。**如果XMLHttpRequest对象存在，则把 xhr 的值设为该对象的新实例。如果不存在，就去检测 ActiveObject 的实例是否存在，如果答案是肯定的，则把微软 XMLHTTP 的新实例赋给 xhr
+[^说明]: 对window.XMLHttpRequest的调用会返回一个对象或null，if语句会把调用返回的结果看作是true或false**（如果返回对象则为true，返回null则为false）。**如果XMLHttpRequest对象存在，则把 xhr 的值设为该对象的新实例。如果不存在，就去检测 ActiveObject 的实例是否存在，如果答案是肯定的，则把微软 XMLHTTP 的新实例赋给 xhr
 
 ## XMLHttpRequest的方法
 
@@ -71,30 +217,33 @@ if(window.XMLHttpRequest){
 
 ## open(method, url, asynch)
 
-- XMLHttpRequest 对象的 open 方法允许程序员用一个Ajax调用向服务器发送请求。
-  **method**：
-  请求类型，类似 “GET”或”POST”的字符串。若只想从服务器检索一个文件，而不需要发送任何数据，使用GET(可以在GET请求里通过附加在URL上的查询字符串来发送数据，不过数据大小限制为2000个字符)。若需要向服务器发送数据，用POST。
-  在某些情况下，有些浏览器会把多个XMLHttpRequest请求的结果缓存在同一个URL。如果对每个请求的响应不同，就会带来不好的结果。在此将时间戳追加到URL的最后，就能确保URL的唯一性，从而避免浏览器缓存结果。(“?time=”+new Date());
-  **url：**路径字符串，指向你所请求的服务器上的那个文件。可以是绝对路径或相对路径。
-  **asynch**：
-  表示请求是否要异步传输，默认值为true。指定true，在读取后面的脚本之前，不需要等待服务器的相应。指定false，当脚本处理过程经过这点时，会停下来，一直等到Ajax请求执行完毕再继续执行。
+`XMLHttpRequest` 对象的 `open` 方法允许程序员用一个`Ajax`调用向服务器发送请求。
+
+**method**
+请求类型，类似 `“GET”`或`”POST”`的字符串。若只想从服务器检索一个文件，而不需要发送任何数据，使用GET(可以在GET请求里通过附加在URL上的查询字符串来发送数据，不过数据大小限制为2000个字符)。若需要向服务器发送数据，用POST。
+在某些情况下，有些浏览器会把多个XMLHttpRequest请求的结果缓存在同一个URL。如果对每个请求的响应不同，就会带来不好的结果。在此将时间戳追加到URL的最后，就能确保URL的唯一性，从而避免浏览器缓存结果。`(“?time=”+new Date());`
+
+**url：**路径字符串，指向你所请求的服务器上的那个文件。可以是绝对路径或相对路径。
+
+**asynch**
+表示请求是否要异步传输，默认值为true。指定true，在读取后面的脚本之前，不需要等待服务器的相应。指定false，当脚本处理过程经过这点时，会停下来，一直等到Ajax请求执行完毕再继续执行。
 
 ## send(data)
 
-- open 方法定义了 Ajax 请求的一些细节。send 方法可为已经待命的请求发送指令
-  **data**：将要传递给服务器的字符串。
-  当向send()方法提供参数时，要确保open()中指定的方法是POST，如果没有数据作为请求体的一部分发送，则使用null.
+`open` 方法定义了 Ajax 请求的一些细节。send 方法可为已经待命的请求发送指令
+**data**：将要传递给服务器的字符串。
+当向`send()`方法提供参数时，要确保open()中指定的方法是`POST`，如果没有数据作为请求体的一部分发送，则使用`null`.
 
-  ~~~javascript
-  var request = getHTTPObject()
-  request.open("GET","file.txt",true)
-  request.send(null)
-  request.onreadystatechange = doSomeThing
-  ~~~
+~~~javascript
+var request = getHTTPObject()
+request.open("GET","file.txt",true)
+request.send(null)
+request.onreadystatechange = doSomeThing
+~~~
 
 ## onreadystatechange
 
-- 该事件处理函数由服务器触发，而不是用户
+该事件处理函数由服务器触发，而不是用户
 
 # 接收响应
 
@@ -103,43 +252,43 @@ if(window.XMLHttpRequest){
 
 ## readyState
 
-- readyState 属性表示Ajax请求的当前状态。它的值用数字代表。
-  0 代表未初始化。 还没有调用 open 方法
-  1 代表正在加载。 open 方法已被调用，但 send 方法还没有被调用
-  2 代表已加载完毕。send 已被调用。请求已经开始
-  3 代表交互中。服务器正在发送响应4 代表完成。响应发送完毕
+**readyState 属性表示Ajax请求的当前状态。它的值用数字代表。**
+0 代表未初始化。 还没有调用 open 方法
+1 代表正在加载。 open 方法已被调用，但 send 方法还没有被调用
+2 代表已加载完毕。send 已被调用。请求已经开始
+3 代表交互中。服务器正在发送响应4 代表完成。响应发送完毕
 
-  每次 readyState 值的改变，都会触发 readystatechange 事件。如果把 onreadystatechange 事件处理函数赋给一个函数，那么每次 readyState 值的改变都会引发该函数的执行。
-  readyState 值的变化会因浏览器的不同而有所差异。但是，当请求结束的时候，每个浏览器都会把 readyState 的值统一设为 4
+每次 `readyState` 值的改变，都会触发 `readystatechange` 事件。如果把 `onreadystatechange` 事件处理函数赋给一个函数，那么每次 `readyState` 值的改变都会引发该函数的执行。
+`readyState` 值的变化会因浏览器的不同而有所差异。但是，当请求结束的时候，每个浏览器都会把 readyState 的值统一设为 4
 
 ## status
 
-- 服务器发送的每一个响应也都带有首部信息。三位数的状态码是服务器发送的响应中最重要的首部信息，并且属于超文本传输协议中的一部分。
+服务器发送的每一个响应也都带有首部信息。三位数的状态码是服务器发送的响应中最重要的首部信息，并且属于超文本传输协议中的一部分。
 
-  常用状态码及其含义：
-  404 没找到页面(not found)
-  403 禁止访问(forbidden)
-  500 内部服务器出错(internal service error)
-  200 一切正常(ok)
-  304 没有被修改(not modified)
+常用状态码及其含义：
+404 没找到页面(not found)
+403 禁止访问(forbidden)
+500 内部服务器出错(internal service error)
+200 一切正常(ok)
+304 没有被修改(not modified)
 
-  在 XMLHttpRequest 对象中，服务器发送的状态码都保存在 status 属性里。通过把这个值和 200 或 304 比较，可以确保服务器是否已发送了一个成功的响应
+在 XMLHttpRequest 对象中，服务器发送的状态码都保存在 status 属性里。通过把这个值和 200 或 304 比较，可以确保服务器是否已发送了一个成功的响应
 
 ## responseText
 
-- XMLHttpRequest 的 responseText 属性包含了从服务器发送的数据。它是一个HTML,XML或普通文本，这取决于服务器发送的内容。
+XMLHttpRequest 的 responseText 属性包含了从服务器发送的数据。它是一个HTML,XML或普通文本，这取决于服务器发送的内容。
 
-  当 readyState 属性值变成 4 时, responseText 属性才可用，表明 Ajax 请求已经结束。
+当 readyState 属性值变成 4 时, responseText 属性才可用，表明 Ajax 请求已经结束。
 
-  ~~~javascript
-  request.onreadystatechange = function(){
-    if(request.readyState == 4){
-  		if(request.status == 200 || request.status == 304){
-  			alert(request.responseText)
-  		}
-  	}
-  }
-  ~~~
+~~~javascript
+request.onreadystatechange = function(){
+  if(request.readyState == 4){
+		if(request.status == 200 || request.status == 304){
+			alert(request.responseText)
+		}
+	}
+}
+~~~
 
 ## responseXML
 
@@ -205,20 +354,20 @@ HTML 由一些普通文本组成。如果服务器通过 XMLHttpRequest 发送 H
 如果数据需要重用, JSON 文件是个不错的选择, 其在性能和文件大小方面有优势
 当远程应用程序未知时, XML 文档是首选, 因为 XML 是 web 服务领域的 “世界语”
 
-# 原生请求流程与兼容封装
+# 原生Ajax请求流程
 
 ## 封装兼容其他浏览器  getHTTPObject 对象
 
 ~~~javascript
 function getHTTPObject(){
-			var xhr = false;
-			if(window.XMLHttpRequest){
-				xhr = new XMLHttpRequest();
-			}else if(window.ActiveXObject){
-				xhr = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			return xhr;
-		}
+var xhr = false;
+if(window.XMLHttpRequest){
+	xhr = new XMLHttpRequest();
+}else if(window.ActiveXObject){
+	xhr = new ActiveXObject("Microsoft.XMLHTTP");
+}
+return xhr;
+}
 ~~~
 
 ## 原生 Ajax  发送请求流程
@@ -238,102 +387,10 @@ request.onreadystatechange = function () {
 	// 6. 判断响应是否完成：XMLHttpRequest 对象的 readyState 属性值为4的时候
   // 7. 在判断响应是否可用：XMLHttpRequest 对象 status 属性值为 200 或者304
 	if(request.readyState == 4 && request.status == 200 || request.status == 304){
-			// 8. 打印输出结果 request
+		// 8. 打印输出结果 request
     	console.log(request)
 	}
 }
-~~~
-
-# ajax 获取数据(原生)
-
-~~~javascript
-function Ajax() {}
-Ajax.prototype = {
-	timer: 0,
-	getHTTPObject: function() {
-		var xhr = false;
-		if(window.XMLHttpRequest){
-			xhr = new XMLHttpRequest();
-		}else if(window.ActiveXObject){
-			xhr = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		return xhr;
-	}, 
-	get: function (url, obj, timeout, success, error) {
-		if(Object.prototype.toString.call(obj) === '[object Object]'){
-			if(typeof timeout === "function"){
-				error = success
-				success = timeout;
-			}
-		}else if(typeof obj === 'number' && !isNaN(obj)){
-			error = success
-			success = timeout
-			timeout = obj
-		}else if(typeof obj === "function"){
-			error = success
-			success = obj
-		}
-		var request = this.getHTTPObject();
-		var xhrHeadStr = this.xhrHeadPars(obj)
-		request.open("GET", url+"?"+xhrHeadStr, true);
-		request.send();
-		request.onreadystatechange = function(){
-			if(request.readyState == 4){
-				clearTimeout(this.timer)
-				if(request.status >= 200 && request.status < 300 ||
-				request.status === 304){success(request)}else{error(request)}
-			}
-		};this.judgTimeout(request, timeout)
-	},
-	post: function (url, obj, timeout, success, error) {
-		if(Object.prototype.toString.call(obj) === '[object Object]'){
-			if(typeof timeout === "function"){ 
-				error = success
-				success = timeout;
-			}
-		}else if(typeof obj === 'number' && !isNaN(obj)){
-			error = success
-			success = timeout
-			timeout = obj
-		}else if(typeof obj === "function"){
-			error = success
-			success = obj
-		}
-		var request = this.getHTTPObject();
-		var xhrHeadStr = this.xhrHeadPars(obj)
-		request.open('POST', url, true);
-		request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-		request.send(xhrHeadStr);
-		request.onreadystatechange = function(){
-			if(request.readyState == 4){
-				clearTimeout(this.timer)
-				if(request.status >= 200 && request.status < 300 ||
-					request.status === 304){success(request)}else{error(request)}
-			}
-		};this.judgTimeout(request, timeout)	
-	},
-	xhrHeadPars: function (obj) { // 对象转请求头字符串
-		obj = obj || {}; 
-		obj.t = new Date().getTime();
-		var res = [];
-		for(var key in obj){
-		    res.push(encodeURIComponent(key)+"="+encodeURIComponent(obj[key])); // [userName=lnj, userPwd=123456];
-		}
-		return res.join("&"); // userName=lnj&userPwd=123456
-	},
-	judgTimeout: function (reques, timeout) { // 判断是否请求超时
-		if(typeof timeout === 'number' && !isNaN(timeout)){
-		    this.timer = setTimeout(function () {
-		        console.log("中断请求");
-		        reques.abort();
-		    }, timeout);
-		}
-	}
-}
-var ajax = new Ajax()
-// url 传输的数据 超时时间是多少 成功的回调 失败的回调
-// ajax.get(url, [,obj], [,timeout], success, [,error])
-// ajax.post(url, [,obj], [,timeout], success, [,error])
 ~~~
 
 # jQyery-ajax 获取数据(框架)
