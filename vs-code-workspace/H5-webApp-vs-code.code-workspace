@@ -1,0 +1,34 @@
+{
+	"folders": [
+		{
+			"name": "web学习库",
+			"path": "D:\\web学习库"
+		},
+		{
+			"name": "谷粒音乐源码",
+			"path": "C:\\Users\\Information Center\\Desktop\\谷粒音乐源码"
+		},
+		{
+			"name": "H5 原生APP开发(谷粒音乐)",
+			"path": "D:\\web学习库\\8.项目实战\\H5 原生APP开发(谷粒音乐)"
+		},
+		{
+			"name": "07-谷粒音乐",
+			"path": "D:\\web学习库\\8.项目实战\\H5 原生APP开发(谷粒音乐)\\07-谷粒音乐"
+		},
+		{
+			"name": "src",
+			"path": "D:\\web学习库\\8.项目实战\\H5 原生APP开发(谷粒音乐)\\07-谷粒音乐\\src"
+		},
+		{
+			"name": "vs-code-deom",
+			"path": "D:\\vs-code-deom"
+		},
+		{
+			"path": "D:\\webpack 生产环境"
+		}
+	],
+	"settings": {
+		"px-to-rem.px-per-rem": 26
+	}
+}

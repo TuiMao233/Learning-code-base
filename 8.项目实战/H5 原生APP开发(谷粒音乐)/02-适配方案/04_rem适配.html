@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+		<title></title>
+		<style type="text/css">
+			/*
+			 * 	rem：相当于根标签的fontsize
+			 * 	根标签的fontsize = 1rem
+			 * 
+			 *  适配：实现页面在不同设备上等比
+			*/
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				width: 8rem;
+				height: 1rem;
+				background: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">test</div>
+	</body>
+	<script type="text/javascript">
+		var html = document.querySelector("html");
+		//1rem  = html.style.fontSize
+		//布局视口的宽度就是16rem
+		//设计图的高宽就是16rem
+		html.style.fontSize = document.documentElement.clientWidth/16+"px";
+	</script>
+</html>

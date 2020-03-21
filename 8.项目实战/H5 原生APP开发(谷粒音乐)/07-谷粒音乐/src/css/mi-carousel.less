@@ -1,0 +1,49 @@
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.mi-carousel {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.mi-carousel>.wrapper>.slide,
+.mi-carousel>.wrapper>.slide>a>img {
+    width: 100%;
+    display: inline-block;
+}
+.mi-carousel>.wrapper>.slide {
+    float: left;
+}
+
+.mi-carousel>.pagination {
+    position: absolute;
+    bottom: 0.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+.mi-carousel>.pagination div {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    margin-right: 0.3rem;
+    background-color: rgba(43, 42, 42, 0.301);
+
+}
+
+.mi-carousel>.pagination div:last-child {
+    margin-right: 0rem;
+}
+
+.mi-carousel>.pagination .active {
+    background: rgb(255,49,48) !important;
+}

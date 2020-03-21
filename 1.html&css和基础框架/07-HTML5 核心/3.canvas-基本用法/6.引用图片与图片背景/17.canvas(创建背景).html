@@ -51,8 +51,7 @@
 				draw();
 				}
 				function draw(){
-					var pettern =  ctx.createPattern(img,"no-repeat");
-					ctx.fillStyle = pettern;
+					ctx.fillStyle = ctx.createPattern(img,"no-repeat");
 					ctx.fillRect(0,0,600,600)
 				}
 		}}

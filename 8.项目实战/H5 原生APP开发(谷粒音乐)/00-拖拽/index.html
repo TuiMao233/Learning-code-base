@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .test{
+            margin-left: 50px;
+            width: 50%;
+            height: 400px;
+            background-color: royalblue;
+        }
+    </style>
+    <script src="./reusable-drag.js"></script>
+</head>
+<body>
+    <div class='test'></div>
+</body>
+<script>
+    var div = document.querySelector('.test')
+    var drag =new ReusableDrag({
+        touchstart: function (ev) {
+            // console.log(ev)
+        },
+        touchmove: function (ev) {
+            // console.log(ev)
+        },
+        touchend: function (ev) {
+            // console.log(ev)
+        }
+    })
+    drag.touchEv(div/* {私用钩子} */)
+    // 公用钩子
+    drag.hook = {
+        touchstart: function (rects) {
+            // console.log(rects)
+        },
+        touchmove: function (rects) {
+            // console.log(rects)
+        },
+        touchend: function (rects) {
+            console.log(rects)
+        }
+    }
+</script>
+</html>

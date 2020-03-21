@@ -39,7 +39,7 @@
 				callback.call(obj);	//兼容this
 			},false)}
 		}
-		
+		// removeEventListener(ev,'functionName')  移除事件
 		function mouseWheel(obj, callback){
 			if(obj.onmousewheel){
 					obj.addEventListener("onmousewheel",callback,false);

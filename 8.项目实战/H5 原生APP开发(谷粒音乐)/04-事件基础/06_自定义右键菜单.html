@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#wrap{
+				position: absolute;
+				width: 200px;
+				height:400px;
+				background: pink;
+				display: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.oncontextmenu=function(ev){
+				ev = ev||event;
+				var x = ev.clientX;
+				var y = ev.clientY;
+				
+				var wrap =document.querySelector("#wrap");
+				wrap.style.display="block";
+				wrap.style.left = x+"px";
+				wrap.style.top = y+"px";
+				
+				return false;
+			}
+			
+			document.onclick=function(){
+				var wrap =document.querySelector("#wrap");
+				wrap.style.display="none";
+			}
+		}
+		
+		
+	</script>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.item{
+				width: 200px;
+				height:200px;
+				background: pink;
+				font-size: 30px;
+				text-align: center;
+				line-height: 200px;
+				overflow: auto;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="item">
+			hdkjahdkjashdkjas
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			/*
+				1.meta标签
+				2.全面阻止事件的默认行为
+					隐患:页面上所有的滚动条失效
+					---> 自定义更牛逼的滚动条！
+				3.一个适配方案
+				
+				
+			*/
+			document.addEventListener("touchstart",function(ev){
+				ev=ev||event;
+				ev.preventDefault();
+			})
+			
+			!(function(){
+				var styleNode = document.createElement("style");
+				var w = document.documentElement.clientWidth/16;
+				styleNode.innerHTML="html{font-size:"+w+"px!important}"
+				document.head.appendChild(styleNode);
+			})()
+		}
+		
+		
+	</script>
+</html>

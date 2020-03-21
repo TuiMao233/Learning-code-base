@@ -46,17 +46,16 @@
 			
 			if(testNode.getContext){
 				var ctx = testNode.getContext("2d");
-				ctx.moveTo(100,100);
-				ctx.lineTo(200,100);
-				ctx.lineTo(200,200);
 				ctx.stroke();
 				
 				ctx.beginPath();
 				/*清空路径*/
+
 				ctx.moveTo(150,100);
 				/*创建起点*/
-				ctx.arcTo(200,100,200,200,50);
+				ctx.arcTo(200, 100, 200, 200, 50);
 				/*创建圆弧路径*/
+				
 				ctx.stroke();
 			}
 		}

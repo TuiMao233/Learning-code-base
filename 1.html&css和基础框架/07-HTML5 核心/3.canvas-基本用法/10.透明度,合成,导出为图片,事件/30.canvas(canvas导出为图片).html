@@ -70,10 +70,10 @@
 					canvas.width = img.width;
 					canvas.height = img.height;
 					ctx.drawImage(img,0,0,canvas.width,canvas.height);
+					//! 谷歌不能导出跨域的画布
 					var result = canvas.toDataURL();
 					but.onclick = function(){
 						window.open(result);
-						
 					}
 				}
 				

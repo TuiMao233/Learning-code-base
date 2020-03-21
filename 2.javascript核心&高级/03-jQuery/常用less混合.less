@@ -1,25 +1,55 @@
-/* 初始化 */
+/* ---------------------------初始化样式--------------------------- */
 .reset() {
 	html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
 	// 禁止文字选中
 	body{-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
 }
-/* 常用功能 */
+/* ---------------------------初始化样式--------------------------- */
+
+
+
+
+
+
+
+
+
+/* ---------------------------常用功能--------------------------- */
 user-select:none; //文字不可选
 cursor:-webkit-grab; //拖拽小手手
-hr { // hr分线栏样式
+
+// hr分线栏样式
+hr {
 	height: 1px;
-	margin-bottom: -1px;
 	background:#E6E3E3;
 	border:none;
 	opacity: 0.3;
+	@media only screen and (-webkit-device-pixel-ratio:2 ) {.uivew{transform: scaleY(.5);}}
+	@media only screen and (-webkit-device-pixel-ratio:3) {.uivew {transform: scaleY(.33333333333);}}
 }
-i {//字体图标设置
-	// 字体图标设置为i标签
-	font-family:'iconfont';
-	// 字体倾斜去除
-	font-style:normal;
-}
+
+//字体图标设置
+i {font-family:'iconfont';font-style:normal;}
+
+// 文字溢出处理
+.overflowTest(){ overflow: hidden; text-overflow:ellipsis; white-space: nowrap;}
+
+// 清楚浮动
+.clearfix() {*zoom: 1;&:after{content: '';display: block;clear: both;}}
+
+/* ---------------------------常用功能--------------------------- */
+
+
+
+
+
+
+
+
+
+/* ---------------------------语法参考--------------------------- */
+
+/* flex语法 */
 .flex(){/* 注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。 */
 	// 行内flex布局
 	display: inline-flex;
@@ -37,33 +67,15 @@ i {//字体图标设置
 		space-between：两端对齐，项目之间的间隔都相等。
 		space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。 */
 }
-.overflowTest(){ // 文字溢出处理
-	overflow: hidden;
-	text-overflow:ellipsis;
-	white-space: nowrap;
-}
-/* 清除浮动 */
-.clearfix() {
-	*zoom: 1;
-	&:after{
-		content: '';
-		display: block;
-		clear: both;
-	}
-}
-
-
-
-
 /* less语法 */
-// hover事件
-div {
+div {// hover事件
 	&:hover{
 		
 	}
 }
-// 媒体查询
-div {
+div {// 媒体查询
 	width: 1200px;
 	@media (max-width: 1100px){width: 1000px;}
 }
+
+/* ---------------------------语法参考--------------------------- */

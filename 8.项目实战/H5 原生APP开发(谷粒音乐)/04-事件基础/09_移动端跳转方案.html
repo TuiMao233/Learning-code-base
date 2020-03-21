@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<a href="http://www.atguigu.com">回娘家</a>
+		<a href="http://www.atguigu.com">回娘家</a>
+		<a href="http://www.atguigu.com">回娘家</a>
+		<a href="http://www.atguigu.com">回娘家</a>
+		<a href="http://www.atguigu.com">回娘家</a>
+		<a href="http://www.atguigu.com">回娘家</a>
+		<a href="http://www.atguigu.com">回娘家</a>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.addEventListener("touchstart",function(ev){
+				ev=ev||event;
+				ev.preventDefault();
+			})
+			
+			
+			//移动端a标签的跳转方案  解决误触
+			var aNodes = document.querySelectorAll("a");
+			for(var i=0;i<aNodes.length;i++){
+				aNodes[i].addEventListener("touchstart",function(){
+					this.isMoved=false;
+				})
+				
+				
+				aNodes[i].addEventListener("touchmove",function(){
+					this.isMoved=true;
+				})
+				
+				
+				aNodes[i].addEventListener("touchend",function(){
+					if(!this.isMoved){
+						location.href=this.href;
+					}
+				})
+			}
+		}
+		
+		
+	</script>
+</html>

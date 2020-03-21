@@ -41,7 +41,7 @@
 			var testNode = document.querySelector(".test");
 			
 			/*角度转弧度函数*/
-			function ang(d){return d*Math.PI/180;}
+			function ang(d){return d*Math.PI/180}
 			
 			if(testNode.getContext){
 				var ctx = testNode.getContext("2d");
@@ -53,13 +53,11 @@
 				ctx.beginPath();
 				
 				/*创建起点*/
-				ctx.moveTo(150,150);
 				
 				/*创建圆弧路径*/
 				ctx.arc(150,150,100,0,ang(360));
 				
 				/*自动寻回起点*/
-				ctx.closePath();
 				
 				/*进行绘制*/
 				ctx.stroke();

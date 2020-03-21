@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.item{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 200px;
+				height:200px;
+				background: pink;
+				opacity: .5;
+				display: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<!--<div class="item"></div>-->
+		<a href="http://www.atguigu.com">回娘家</a>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			/*
+				1.pc端的事件可以在移动端触发
+				2.PC端事件有300毫秒延迟
+				3.移动端事件不会有延迟
+			*/
+			var item = document.querySelector(".item");		
+			var a = document.querySelector("a");		
+			/*item.addEventListener("click",function(){
+				console.log("click");
+			})
+			item.addEventListener("touchstart",function(){
+				console.log("touchstart");
+			})*/
+			item.addEventListener("touchstart",function(){
+				//console.log("touchend");
+				this.style.display="none";
+			})
+			a.addEventListener("click",function(){
+				console.log("click");
+			})
+			
+		}
+		
+		
+	</script>
+</html>

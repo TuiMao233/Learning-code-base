@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width"/>
+		<script>
+			/* 
+			!	当写入meta标签，width=device-width，则css像素与设备独立像素关联起来
+			!	也就是说，css像素=设备独立像素，独立设备像素=4个设备物理像素
+			 */
+		</script>
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				width: 490px;
+				height: 200px;
+				background: pink;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+	</body>
+</html>

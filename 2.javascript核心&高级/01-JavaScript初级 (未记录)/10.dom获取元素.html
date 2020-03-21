@@ -84,16 +84,15 @@
 		var head = document.head;
 		//使用CSS选择器选择节点 但总是单个识别
 		var calsx = document.querySelector(".box")
-		//使用CSS选择器选择节点 会封装为数组
+		//使用CSS选择器选择节点 会封装为数组 注意：一旦元素结构发生改变 querySelectorAll 就会失效
 		var calsx2 = document.querySelectorAll(".box");
 		console.log(calsx2[1]);
-	var documWidth = document.documentElement.clientWidth || document.body.clientWidth;       //  获取当前屏幕宽度和高度，
-    var documHeight = document.documentElement.clientHeight || document.body.clientHeight;     // 顺序不能变。
+		var documWidth = document.documentElement.clientWidth || document.body.clientWidth;       //  获取当前屏幕宽度和高度，
+    	var documHeight = document.documentElement.clientHeight || document.body.clientHeight;     // 顺序不能变。
 		console.log(documWidth , documHeight)
 		
 		function $ (obj){
 			return document.querySelectorAll(obj)
 		}
-		
 	</script>
 </html>

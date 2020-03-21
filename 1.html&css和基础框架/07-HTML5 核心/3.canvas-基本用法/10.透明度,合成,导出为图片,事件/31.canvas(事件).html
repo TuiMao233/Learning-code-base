@@ -39,14 +39,12 @@
 				
 				ctx.arc(150,150,50,ang(0),ang(360));
 				ctx.fill();
-				ctx.arc(250,250,50,ang(0),ang(360));
-				ctx.fill();
 				
 				canvas.onclick =function(ev){
 					ev = ev||event;
 					var x = ev.clientX - canvas.offsetLeft;
 					var y = ev.clientY - canvas.offsetTop;
-					if(ctx.isPointInPath(x,y)){
+					if(ctx.isPointInPath(x,y)){ //! 判断在图像是否在canvas的x,y当中 
 						alert("adasd");
 					}
 				}

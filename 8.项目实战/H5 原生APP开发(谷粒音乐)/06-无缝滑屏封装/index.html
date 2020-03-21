@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,body {height: 100%;overflow: hidden;}
+        .clearfix {*zoom: 1;}
+        .clearfix:after {content: '';display: block;clear: both;}
+        .mi-carousel {position: relative;width: 100%;overflow: hidden;}
+
+        .mi-carousel>.wrapper>.slide,
+        .mi-carousel>.wrapper>.slide>a>img {width: 100%;display: inline-block;}
+        .mi-carousel>.wrapper>.slide {float: left;}
+        .mi-carousel>.pagination {position: absolute;bottom: 0.5rem;width: 100%;text-align: center;}
+        .mi-carousel>.pagination div { display: inline-block;width: 0.5rem;height: 0.5rem;
+            border-radius: 50%;margin-right: 0.3rem;background-color: rgba(43, 42, 42, 0.301);}
+
+        .mi-carousel>.pagination div:last-child {margin-right: 0rem;}
+        .mi-carousel>.pagination .active {background-color: #ff2b2bf8;}
+    </style>
+</head>
+
+<body>
+    <div class="mi-carousel">
+        <div class="wrapper clearfix"></div>
+        <div class="pagination clearfix">
+            <!--是否需要导航按钮显示-->
+        </div>
+    </div>
+</body>
+<script>
+    (function () {
+        var styleNode = document.createElement("style");
+        var w = document.documentElement.clientWidth / 16;
+        styleNode.innerHTML = "html{font-size:" + w + "px!important}";
+        document.head.appendChild(styleNode);
+    })()
+</script>
+<script src="./js/resusable-drag.js"></script>
+<script src="./js/mobile-carousel.js"></script>
+<script>
+    window.onload = function () {
+        //! 关闭所有默认事件
+        /* document.addEventListener('touchstart', function (ev) {
+            ev || event; ev.preventDefault()
+        }) */
+        //! 获取图片信息, 并添加对应轮播图项目结构
+        var arr = ["img/01.jpg", "img/02.jpg", "img/03.jpg", "img/04.jpg", "img/05.jpg"]
+        var miCarousel = document.querySelector('.mi-carousel .wrapper')
+        var str = ''
+        for (var i = 0; i < 5; i++) {
+            str += `<div class="slide"><a href="javascript:;"><img src="./${arr[i]}" alt=""></a></div>`
+        }
+        miCarousel.innerHTML = str
+
+        touch_sliding_screen.create({
+            el: document.querySelector('.mi-carousel'),
+            slidingDistance: 300,   // 滑动多少才进行切换(px)
+            endless: true,  // 是否无缝
+            autoplay: true, // 是否自动切换
+            // delay: 1000,    // 自动切换延迟
+            // mouseclasp:{down(r){},move(r){},up(r){}}, // mouse滑动事件钩子
+            // touchclasp:{start(r){},move(r){},end(r){}}  // touch滑动事件钩子
+        })
+        // touch_sliding_screen.delete() //移除拖拽(配置信息会保留)
+        // touch_sliding_screen.create() //在生成
+    }
+</script>
+
+</html>

@@ -38,14 +38,12 @@
 			video.src = "../4.视频播放器/7.视频播放器布局/video/test.mp4";
 			if(oc.getContext){
 				var ctx = oc.getContext("2d");
-				video.addEventListener("loadeddata",function(){
-					setInterval(function(){
-						ctx.drawImage(video,0,0,oc.width,oc.height);
-					})
+				
+				video.addEventListener("loadedmetadata",function(){
+					//! 当视频加载完毕时 执行一个定时器, 该定时器将一直在画布上绘制视频当前时间的图像
+					setInterval(function(){ctx.drawImage(video,0,0,oc.width,oc.height)})
 				})
-				but.onclick = function(){
-					video.play();
-				}
+				but.onclick = function(){video.play();}
 			}
 		}
 	</script>

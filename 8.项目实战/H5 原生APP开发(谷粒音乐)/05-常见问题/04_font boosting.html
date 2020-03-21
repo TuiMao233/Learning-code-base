@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!--<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />-->
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;	
+			}
+			p{
+				font-size: 24px;
+				/*height: 200px;*/
+				max-height: 999999px; 
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+			<p >Font Boosting</p>
+		</div>
+		<!--
+			什么是Font Boosting
+			Font Boosting是Webkit 给移动端浏览器提供的一个特性：当我们在手机上浏览网页时，很可能因为原始页面宽度较大，
+			在手机屏幕上缩小后就看不清其中的文字了。而 Font Boosting 特性在这时会自动将其中的文字字体变大，
+			保证在即不需要左右滑动屏幕，也不需要双击放大屏幕内容的前提下，也可以让人们方便的阅读页面中的文本。
+
+			Font Boosting 的计算规则伪代码如下：
+				multiplier = Math.max(1, deviceScaleAdjustment * textScalingSlider * systemFontScale * clusterWidth / screenWidth);
+				if (originFontSize < 16) {
+				    computedFontSize = originFontSize * multiplier;
+				}
+				else if (16 <= originFontSize <= (32 * multiplier - 16)) {
+				    computedFontSize = (originFontSize / 2) + (16 * multiplier - 8);
+				}
+				else if (originFontSize > (32 * multiplier - 16)) {
+				    computedFontSize = originFontSize;
+				}
+			
+				originFontSize: 原始字体大小
+				computedFontSize: 经过计算后的字体大小
+				multiplier: 换算系数，值由以下几个值计算得到
+				deviceScaleAdjustment: 当指定 viewport width=device-width 时此值为 1，否则值在 1.05 - 1.3 之间，有专门的计算规则
+				textScalingSlider: 浏览器中手动指定的缩放比例，默认为 1
+				systemFontScale: 系统字体大小，Android设备可以在「设备 - 显示 - 字体大小」处设置，默认为 1
+				clusterWidth: 应用 Font Boosting 特性字体所在元素的宽度
+				screenWidth: 设备独立像素（DIPs, Density-Independent Pixels），如 iPhone 5 为 320
+
+
+
+			Font Boosting 仅在未限定尺寸的文本流中有效，给元素指定宽高，就可以避免 Font Boosting 被触发。
+			但是文本内容不可能都指定宽高。不过还好，我们通过指定 max-height  就可以无副作用的禁掉 Font Boosting 特性。
+			用类似 p { max-height: 999999px; } 的方式来处理
+		-->
+	</body>
+</html>

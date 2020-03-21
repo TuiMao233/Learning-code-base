@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			/*
+			放大:
+				一个css像素的面积变大,视觉视口内css像素的个数变少,视觉视口的尺寸变小
+			缩小:
+				一个css像素的面积变大,视觉视口内css像素的个数变多,视觉视口的尺寸变大
+			
+			* 
+			* 在pc端 	用户缩放影响视口的尺寸
+			* 在移动端     用户缩放影响视觉视口的尺寸
+			* */
+			*{margin: 0;padding: 0;}
+			div{
+				width: 200px;
+				height: 200px;
+				background: pink;
+			}
+			#left{
+				position: absolute;left: 0;top: 100px;
+			}
+			#right{
+				position: absolute;right: 0;top: 100px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="left">
+			left
+		</div>
+		<div id="right">
+			right
+		</div>
+		<span>
+			消费者消费者消费者消费者消费者消费者消费者消费者消费者消费者消费者
+			消费者消费者消费者消费者消费者消费者消费者消费者消费者消费者消费者
+		</span>
+	</body>
+</html>

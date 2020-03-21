@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+		<title></title>
+		<style type="text/css">
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				width: 16rem;
+				height: 1px;
+				margin-top: 1rem;
+				background: black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			(function(){
+				//! 获取物理像素与设备独立像素比例
+				var dpr  = window.devicePixelRatio||1;
+
+				//! 在根据缩放比例 1 / 像素比 = 得到对应物理像素宽度比缩放比例的值
+				var scale = 1/dpr;
+				var meta = document.querySelector("meta[name='viewport']");
+				meta.content="width=device-width,initial-scale="+scale;
+
+				var styleNode = document.createElement("style");
+				//! 设备独立像素(完美视口) * 物理像素与设备独立像素比例 = 物理像素宽度
+				//! 那么调整了1px对应1个物理像素的缩放比例后，rem适配方案也要跟着发生改变 也就是16rem = 手机物理像素宽度
+				var w = document.documentElement.clientWidth*dpr/16;
+				styleNode.innerHTML="html{font-size:"+w+"px!important}";
+				document.head.appendChild(styleNode);
+				
+			})()
+		}
+	</script>
+</html>

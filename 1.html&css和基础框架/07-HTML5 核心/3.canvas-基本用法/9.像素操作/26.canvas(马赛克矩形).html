@@ -60,6 +60,7 @@
 				function draw(){
 					ctx.drawImage(img,0,0);
 					console.log(img.width);
+					//! 在谷歌中，不允许img跨域获取src
 					var oldImagedata = ctx.getImageData(0,0,img.width,img.height);
 					var newImagedata = ctx.createImageData(img.width,img.height);
 					/*

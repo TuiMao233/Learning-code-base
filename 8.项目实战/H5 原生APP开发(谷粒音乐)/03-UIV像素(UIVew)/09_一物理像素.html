@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				position: relative;
+				width: 200px;
+				height: 200px;
+				background: pink;
+			}
+			#test:before{
+				position: absolute;
+				bottom: 0px;
+				content: "";
+				display: block;
+				width: 100%;
+				height: 1px;
+				background: black;
+			}
+			
+			@media only screen and (-webkit-device-pixel-ratio:2 ) {
+				#test:before{
+					transform: scaleY(.5);
+				}
+			}
+			@media only screen and (-webkit-device-pixel-ratio:3 ) {
+				#test:before{
+					transform: scaleY(.33333333333);
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">
+			
+		</div>
+	</body>
+</html>

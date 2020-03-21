@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.item{
+				width: 200px;
+				height:200px;
+				background: pink;
+				font-size: 30px;
+				text-align: center;
+				line-height: 200px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div class="item">hdkjahdkjashdkjas</div>
+	</body>
+	<script type="text/javascript">
+		window.onload=function(){
+			document.addEventListener("touchstart",function(ev){
+				ev=ev||event;
+				ev.preventDefault();
+			})
+			
+			/*var item = document.querySelector(".item");
+			item.addEventListener("touchstart",function(ev){
+				ev=ev||event;
+				ev.stopPropagation();
+			})*/
+			
+			/*var item = document.querySelector(".item");
+			item.addEventListener("touchstart",function(ev){
+				ev=ev||event;
+				console.log(ev.cancelable);
+				ev.preventDefault();
+			})*/
+		}
+		
+		
+	</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width"/>
+		<title></title>
+		<style type="text/css">
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				width: 320px;
+				height: 100px;
+				background: pink;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">test</div>
+	</body>
+	<script type="text/javascript">
+		//将所有设备布局视口的宽度调整为设计图的宽度
+		/*var targetW = 640;
+		var scale = screen.width/targetW;
+		var meta = document.createElement("meta");
+		meta.name = "viewport";
+		meta.content="initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale+",user-scalable=no";
+		document.head.appendChild(meta);*/
+		
+		
+		//viewport
+		/*viewport适配的原理：
+			viewport适配方案中，每一个元素在不同设备上占据的css像素的个数是一样的。但是css像素和物理像素的比例是不一样的，等比的*/
+		/*viewport适配的优缺点：
+			优点:所量即所得
+			缺点:没有使用完美视口*/
+		(function(){
+			var targetW = 640;
+			var scale = document.documentElement.clientWidth/targetW;
+			var meta =	document.querySelector("meta[name='viewport']");
+			meta.content="initial-scale="+scale+",minimum-scale="+scale+",maximum-scale="+scale+",user-scalable=no";
+		})()
+		
+		
+	</script>
+</html>
