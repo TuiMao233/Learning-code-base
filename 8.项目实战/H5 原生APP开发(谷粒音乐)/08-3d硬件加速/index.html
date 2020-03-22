@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#test{
+				width: 200px;
+				height: 200px;
+				background: pink;
+				/*animation: 2s move infinite linear;*/
+				/*position: absolute;*/
+				/* translateZ(0) 开启3d硬件加速 */
+			}
+			@keyframes move{
+				from{
+					transform: translateY(0) translateZ(0);
+					/*top: 0px;*/
+				}
+				to{
+					transform: translateY(400px);
+					/*top: 400px;*/
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="test">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+		/*var i=0;
+		setInterval(function(){
+			i++;
+			test.style.transform="translateY("+i+"px)"
+		},1000)*/
+		
+		
+	</script>
+</html>

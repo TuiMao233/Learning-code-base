@@ -60,7 +60,7 @@
         }
         miCarousel.innerHTML = str
 
-        touch_sliding_screen.create({
+        touchMiCarousel.create({
             el: document.querySelector('.mi-carousel'),
             slidingDistance: 300,   // 滑动多少才进行切换(px)
             endless: true,  // 是否无缝
@@ -69,8 +69,8 @@
             // mouseclasp:{down(r){},move(r){},up(r){}}, // mouse滑动事件钩子
             // touchclasp:{start(r){},move(r){},end(r){}}  // touch滑动事件钩子
         })
-        // touch_sliding_screen.delete() //移除拖拽(配置信息会保留)
-        // touch_sliding_screen.create() //在生成
+        // touchMiCarousel.delete() //移除拖拽(配置信息会保留)
+        // touchMiCarousel.create() //在生成
     }
 </script>
 

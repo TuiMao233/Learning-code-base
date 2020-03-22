@@ -21,16 +21,17 @@ const touchMiCarousel = new reusableDrag({
         // 获取单个项目宽度
         this.slideWidth = this.wrapper.children[0].offsetWidth
         this.page = this.endless ? this.wrapperOriginalLength : 0
+        this.SpeedUp3d = '' // 定义3d硬件加速默认为空
 
         this.setWidth(this.wrapperLength)   // 根据长度设置容器与项目宽度
         this.generateComponents(this.wrapperOriginalLength) // 根据原长度生成零件
         this.upDate(this.page % this.wrapperOriginalLength) // 根据索引更新零件
         if (this.endless && this.autoplay) {//!  如果有轮播并且是无缝
+            this.SpeedUp3d = 'translateZ(0)'
             this.autoplaycreate() // 执行轮播函数
         }
         // 初始化显示第一张
-        this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px)`
-        console.log(this)
+        this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px) ${this.SpeedUp3d}`
     },
     methods: {
         setWidth(length) {// 宽度设置
@@ -63,11 +64,14 @@ const touchMiCarousel = new reusableDrag({
         endlesslogic() { // 定义无缝计算
             if (this.page === 0) {
                 this.page = this.wrapperOriginalLength
+                this.wrapper.style.transition = 'none'
+                this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px) ${this.SpeedUp3d}`
             } else if (this.page === this.wrapperLength - 1) {
                 this.page = this.wrapperOriginalLength - 1
+                this.wrapper.style.transition = 'none'
+                this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px) ${this.SpeedUp3d}`
             }
-            this.wrapper.style.transition = 'none'
-            this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px)`
+
         },
         autoplaycreate() { // 定义生成轮播
             this.timer = setInterval(() => {
@@ -75,7 +79,7 @@ const touchMiCarousel = new reusableDrag({
                 setTimeout(() => { //! 渲染并不是同步的！ 所以执行了无缝逻辑后，将轮播逻辑推入栈中，堆栈会等渲染完毕再执行
                     this.page += 1
                     this.wrapper.style.transition = '0.3s'
-                    this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px)`
+                    this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px) ${this.SpeedUp3d}`
                     this.upDate(this.page % this.wrapperOriginalLength) //! 根据索引更新零件
                 })
             }, this.delay)
@@ -102,10 +106,10 @@ const touchMiCarousel = new reusableDrag({
 
             //如果Y轴抖动，则直接返回 (防抖动)
             if (this.isShakeY) { return }
-            if(this.isShakeY === this.isShakeX){
+            if (this.isShakeY === this.isShakeX) {
                 this.isShakeX = Math.abs(this.slidingCountY) < Math.abs(this.slidingCountX)
                 this.isShakeY = Math.abs(this.slidingCountY) > Math.abs(this.slidingCountX)
-                if(this.isShakeY){return}
+                if (this.isShakeY) { return }
             }
 
 
@@ -129,7 +133,7 @@ const touchMiCarousel = new reusableDrag({
                     this.slidingCountX = 0
                 }
             }
-            this.wrapper.style.transform = `translateX(${wrapper_slidingsetX}px)`
+            this.wrapper.style.transform = `translateX(${wrapper_slidingsetX}px) ${this.SpeedUp3d}`
         },
         end: function (ev) {
             // 如果Y轴抖动, 不执行end逻辑
@@ -142,7 +146,7 @@ const touchMiCarousel = new reusableDrag({
                 (this.slidingCountX < -this.slidingDistance) ? (this.page += 1) :
                     this.page
             this.wrapper.style.transition = '0.3s'
-            this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px)`
+            this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px) ${this.SpeedUp3d}`
             this.upDate(this.page % this.wrapperOriginalLength)
         }
     },

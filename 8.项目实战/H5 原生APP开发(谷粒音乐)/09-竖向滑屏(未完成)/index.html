@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+    a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />a<br />
+<script src="./js/resusable-drag.js"></script>
+<script src="./js/touch-scroll.js"></script>
+<script>
+    window.onload = function () {
+        touchScroll.create({
+            el:document.body
+            // touchclasp:{start(r){},move(r){},end(r){}}  // touch滑动事件钩子
+        })
+        // touchScroll.delete() //移除拖拽(配置信息会保留)
+        // touchScroll.create() //在生成
+    }
+</script>
+<script>
+    (function () {
+        // rem适配
+        var styleNode = document.createElement("style");
+        var w = document.documentElement.clientWidth / 16;
+        styleNode.innerHTML = "html{font-size:" + w + "px!important}";
+        document.head.appendChild(styleNode);
+    })()
+</script>
+</html>
