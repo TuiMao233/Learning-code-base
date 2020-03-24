@@ -392,8 +392,6 @@ ReactDOM.render(<App />, document.getElementById('root'));
 **运行开发环境：**`npm start`
 **生产环境打包：**`npm build`
 
-
-
 # 子组件间通信
 
 ## props通信
@@ -465,10 +463,11 @@ react 的一个插件库，专门用来实现一个 SPA 应用，基于 react �
 `components/app.jsx`
 
 ~~~jsx
-// 引入路由
-import { BrowserRouter, HashRouter,
+// 引入定义路由功能组件
+import { BrowserRouter, Redirect,
         NavLink, Route, Switch
 } from 'react-router-dom';
+
 // 引入路由组件
 import About from '../views/about'
 import Home from '../views/home'
@@ -487,6 +486,8 @@ render {
 					<Route path='/home' component={Home}/>
         	{/* 4.定义路由默认路径 */}
         	<Redirect to='/about'/>
+        {/* 4.定义根路径路由 */}
+        {/* <Route component={ Main }></Route> */}
 			</Switch>
 		</div>
   </BrowserRouter>
@@ -533,6 +534,23 @@ function MyNavLink(props) {
 ...
 ~~~
 
+## 路由属性与方法
+
+~~~jsx
+block() {} // 阻止?
+createHref() {} // 创建链接
+go() {}	// 跳转链接
+goBack() {}	// 回退
+goForward() {}	// 前进
+listen() {}	// 听??
+location:{hash: "", pathname: "/register", search: "", state…} // 路由信息
+push() {}	// 先进后出跳转
+replace() {}	// 先进先出跳转
+}
+~~~
+
+
+
 # Ant Design of React
 
 `antd` 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。
@@ -560,7 +578,7 @@ ReactDOM.render(<Button />, mountNode);	// 渲染
 "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test --env=jsdom"
+    "test": "react-app-rewired test --env=jsdom",
 }
 ~~~
 
@@ -585,6 +603,8 @@ import { Button } from 'antd-mobile'
 # Redux 集中式状态数据
 
 Redux 是 JavaScript 状态容器，提供可预测化的状态管理。它可以用在 react, angular, vue 等项目中, 但基本与 react 配合使用，作用: 集中式管理 react 应用中多个组件共享的状态
+
+安装：`cnpm i redux -D`
 
 ## react-redux 基本架构
 
@@ -681,21 +701,19 @@ export const inCrement = (number)=>({ type: IN_CREMENT, data: number })
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './containters/app';
 
 //? 引入react-redux的 redux状态管理组件
 import { Provider } from 'react-redux'
-//? 引入count储存库
-import {count} from './redux/reducers'
-
-import App from './containters/app';
+//? 引入储存库
+import store from './redux/store'
 
 //? App 封装在Provider(状态管理组件中)
+//? 将储存库传入状态管理组件中
 ReactDOM.render(
-    //? 将储存库传入状态管理组件中
-    (<Provider store={count}>
-        <App />
-    </Provider>)
-    , document.getElementById('root'));
+    (<Provider {...store}><App /></Provider>),
+    document.getElementById('root')
+);
 ~~~
 
 ### 6.定义组件接口容器
@@ -751,7 +769,6 @@ export default Counter
 ~~~js
 //! 引入方法常量命名
 import {IN_CREMENT, DE_CREMENT} from './action-types'
-//! 引入redux创建储存库方法(store)
 
 // 创建一个count储存库，并暴露出去
 const count = (state=0, action)=>{
@@ -771,15 +788,18 @@ export default count
 
 ### 2.定义储存库包装函数
 
+`redux/sotre.js`
+
 ~~~js
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
-const store = (reducer) => createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
-export default store
+
+import reducer from './reducers'
+export default createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))
 
 // 如果是多个储存库对象，则
-// export default createStore(combineReducers(stores), // composeWithDevTools(applyMiddleware(thunk)))
+// export default createStore(combineReducers(stores),composeWithDevTools(applyMiddleware(thunk)))
 ~~~
 
 
@@ -801,7 +821,7 @@ export const DE_CREMENT = 'DE_CREMENT'
 ~~~js
 // 引入方法常量
 import {IN_CREMENT, DE_CREMENT} from './action-types'
-// 将储存库和方法暴露
+// 将方法暴露
 export const inCrement = ()=>({ type: IN_CREMENT, data: number })
 export const deCrement = ()=>({ type: DE_CREMENT, data: number })
 ~~~
@@ -812,7 +832,7 @@ export const deCrement = ()=>({ type: DE_CREMENT, data: number })
 
 ~~~js
 import {stateSubStore, stateSubStoreAll} from 'react-redux-subscript'
-import {count} from './reducers'
+import {count} from './store.js'
 import {inCrement, deCrement} from './actions'
 
 export const AppStateSus = stateSubStore({count},{
@@ -820,16 +840,16 @@ export const AppStateSus = stateSubStore({count},{
 })
 
 // (✪ω✪)绑定一个store
-// export const AppStateSub = stateSubStore({stores}, {addComment, delComment, initComment})
+// export const stateSubApp = stateSubStore({stores}, {addComment, delComment, initComment})
 
 // (ಥ_ಥ) 只需要方法
-// export const CommitStateSus = stateSubStore({store,need:false},{addComment})
+// export const stateSusApp = stateSubStore({store,need:false},{addComment})
 
-//   ψ(*｀ー´)ψ绑定多个store, 并进行筛选(可选)
-/* export const AppStateSub = stateSubStoreAll({
-    stores,
-    filter:['comments']
-},{delComment, initComment,addComment}) */
+//   ψ(*｀ー´)ψ绑定多个store, 并进行筛选需要的数据(可选)
+/* export const AppStateSub = storePushToStateAll(
+    { stores, filter:['comments'] },
+    { delComment, initComment,addComment }
+) */
 ~~~
 
 
@@ -895,4 +915,4 @@ export default createStore(store, composeWithDevTools(applyMiddleware(thunk))  )
 
 ### 4.浏览器查看调试工具
 
-![rudex调试工具](D:\web学习库\7.高级框架\React\img\rudex调试工具.jpg)
+![rudex调试工具](D:.\img\rudex调试工具.jpg)

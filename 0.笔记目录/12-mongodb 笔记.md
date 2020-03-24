@@ -9,7 +9,7 @@
 	- 安装  
 	配置环境变量
 	
-	`计算机->属性->更改设置->高级->环境变量添加D:\software\mongodb\bin`
+	计算机->属性->更改设置->高级->环境变量添加D:\software\mongodb\bin
 	
 	默认目录在c盘根目录，创建一个文件夹 data，在data中创建一个文件夹db
 

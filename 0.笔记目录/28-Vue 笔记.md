@@ -695,8 +695,8 @@ Setup e2e tests with Nightwatch(Y/n)? 		[，e2e测试 ]
 
 #### 3.项目操作方法
 
-**打包并开启服务：**npm run dev 
-**生成静态文件：**npm run build	
+**打包并开启服务：**`npm run dev` 
+**生成静态文件：**`npm run build`	
 
 #### 4.项目配置
 
@@ -813,7 +813,7 @@ var vm = new Vue({
 
 ### 主组件格式 src / app.js
 
-~~~html
+~~~vue
 <template>
     <!-- 模板页面(内容必须用div包裹) -->
 	<div></div>
@@ -945,6 +945,21 @@ mounted () {
 3. 订阅消息(当消息发送改变时执行，并接收数据)
    `PubSub.subscribe('消息名',(msg, data){...})`
 
+# 组件引入css库
+
+## 安装css库包
+
+`cnpm i  stylus-loader stylus --save-dev` **or** `cnpm i  less-loader less --save-dev`
+
+## style中使用
+
+~~~html
+<style lang='less'>
+</style>
+<style lang='stylus'>
+</style>
+~~~
+
 # 路由组件编程
 
 ## 路由基本概念
@@ -953,7 +968,7 @@ mounted () {
 
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
-![单页面应用](D:\web学习库\7.高级框架\Vue\0.vue笔记\img\vue\单页面应用.jpg)
+![单页面应用](D:.\img\vue\单页面应用.jpg)
 
 ##  Vue 路由管理器
 
@@ -979,8 +994,12 @@ Vue.use(VueRouter)
 export default new VueRouter({   
 	linkActiveClass: 'active', // 定义默认路由类名
 	routes: [	 // 配置路由组件地址
-        		{ path: '/about', component: About }, 
-    			{ path: '/home', component: Home },
+        		  { path: '/about', component: About, 
+              		children:[//其他子路由
+                    //{ path:'note', component: aboutl }
+                  ]
+              }, 
+    				  { path: '/home', component: Home },
         		// 配置默认显示路由
             	{ path: '/', redirect: '/about' } 
             ]
