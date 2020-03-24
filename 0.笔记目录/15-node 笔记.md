@@ -581,19 +581,6 @@ rs.pipe(ws)
 ​	– `fs.rename(oldPath, newPath, callback)`
 ​	– `fs.renameSync(oldPath, newPath)`
 
-### 读取文件目录结构
-
-​	`– fs.readdir(path[, options], callback)`
-​	`– fs.readdirSync(path[, options])`
-
-~~~js
-fs.readdir('.',(err,files)=>{
-	if(!err){console.log(files)}
-})
-~~~
-
-
-
 
 
 ### 监视文件更改写入
