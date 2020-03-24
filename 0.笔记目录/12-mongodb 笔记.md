@@ -309,7 +309,8 @@ var stuSchema = new Schema({
 	age: Number,
 	gender: { // 设置多个参数
 		type: String,
-		default: "female" // 设置改属性默认值
+		default: "female", // 设置改属性默认值
+	  required: true // 该属性是否是必须的
 	},
 	address: String
 })
@@ -561,7 +562,7 @@ doc.remove(function (err) {if(!err){
    	age: Number,
    	gender: { // 设置多个参数
    		type: String,
-   		default: "female" // 设置改属性默认值
+   		default: "female" // 设置属性默认值
    	},
    	address: String
    })
