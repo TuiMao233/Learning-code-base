@@ -20,7 +20,8 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
+// node服务器添加socketIO事件
+require('../socketIo/socke-io-server')(server)
 /**
  * Listen on provided port, on all network interfaces.
  */

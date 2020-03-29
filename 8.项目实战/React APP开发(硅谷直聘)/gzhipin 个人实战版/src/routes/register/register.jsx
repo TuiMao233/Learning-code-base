@@ -1,9 +1,11 @@
 /* 注册路由 */
 import React, { Component } from 'react';
 
-// 引入logo组件
-import Logo from '../../components/logo/logo'
-
+// 引入react-redux链接函数
+import { connect } from "react-redux";
+// 引入action 通知方法
+import { register } from '../../redux/actions';
+import { Redirect } from 'react-router-dom';
 // 引入对应的样式组件
 import {
     NavBar, // 导航栏
@@ -12,8 +14,14 @@ import {
     InputItem,
     WhiteSpace, // 上下间隙
     Radio, // 单选框
-    Button // 按钮
+    Button, // 按钮
 } from "antd-mobile";
+
+// 引入logo组件
+import Logo from '../../components/logo/logo'
+import '../../assets/css/index.less'
+
+
 const ListItem = List.Item
 class Register extends Component {
     state = {
@@ -23,7 +31,7 @@ class Register extends Component {
         type: 'laoban',       // 用户类型
     }
     register = () => {
-        console.log(this.state);
+        this.props.register(this.state)
     }
     handleChange = (type, val) => {
         // 根据表单改变state数据
@@ -33,10 +41,16 @@ class Register extends Component {
         this.props.history.replace('/login')
     }
     render() {
+        const { msg, redirectPath } = this.props.user
+        if (redirectPath) { // 如果重定向路径有值, 则跳转
+            return <Redirect to={redirectPath}/>
+        }
         return (
-            <div>
-                <NavBar>硅&nbsp;谷&nbsp;直&nbsp;聘</NavBar>
+            <div style={{marginBottom:50,marginTop:50}}>
+                <NavBar>B&nbsp;5&nbsp;直&nbsp;聘</NavBar>
                 <Logo />
+                {/* 如果错误信息有值, 提示错误信息 */}
+                {msg? <span className='error_text'>{msg}</span> : null }
                 <WingBlank>
                     <List>
                         <InputItem
@@ -82,4 +96,7 @@ class Register extends Component {
         )
     }
 }
-export default Register;
+export default connect(
+    state => ({ user: state.user }), // 需要的数据
+    { register } // 需要的方法
+)(Register);

@@ -19,15 +19,15 @@ function pageSetup(options) {
     // 对文件进行重命名
     filterReaddir.forEach((item) => {
         const itemIndex = Number(item.split(pageSplit)[0])
-        const itemFilterName = item.split(pageSplit)[1]
+        const itemFilterName = item.substring(item.indexOf(pageSplit)+1)
         fs.renameSync(item, `${itemIndex + addNumber}${newPageSplit}${itemFilterName}`)
     });
 }
 /* 注意:危险操作!! 执行前请备份资料  */
 pageSetup({
-    fastPage: 14,   // 开始页码
-    lastPage: 35,   // 最后页码
-    addNumber: 0,  // 每个页码操作多少 默认是0
-    pageSplit: '_____', // 分隔页码的符号 11-  11.  11_ 等等
+    fastPage: 8,   // 开始页码
+    lastPage: 32,   // 最后页码
+    addNumber: 1,  // 每个页码操作多少 默认是0
+    pageSplit: '.', // 分隔页码的符号 11-  11.  11_ 等等
     newPageSplit: '-' // 新的分隔符, 不指定时默认对应pageSplit
 })

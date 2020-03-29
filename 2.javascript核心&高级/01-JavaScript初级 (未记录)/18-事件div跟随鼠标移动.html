@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			#box1 {
+			 width: 30px;
+			 height: 30px;
+			 background-color: brown;
+			 position: absolute;	
+			}
+		</style>
+		<script type="text/javascript">
+		window.onload=	function () {
+			var box1 = document.getElementById("box1");
+			
+			document.onmousemove = function (event){
+				//兼容问题
+				event = event||window.event;
+				if(event.pageX){
+				var x = event.pageX;
+				var y = event.pageY;
+				box1.style.left = x + "px";
+				box1.style.top= y + "px";
+				}else{
+				var x = event.clientX;
+				var y = event.clientY;
+				var body = document.documentElement.scrollTop;
+				box1.style.left = x + "px";
+				box1.style.top= y + body + "px";
+				}
+			
+			}
+			}
+		</script>
+		
+	</head>
+	<body style="height:1000px">
+		<div id="box1"></div>
+	</body>
+	
+	
+</html>

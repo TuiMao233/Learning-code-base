@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+	<style>
+		#box1 {
+			width: 200px;
+			height: 200px;
+			background-color: brown;
+		}
+
+		#span {
+			background-color: blue;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			//事件的冒泡:
+			// 所谓的冒泡Bubble 就是指事件的向上传导， 当后代元素上的事件被触发时，其主线元素的相同事件也会被触发
+			span = document.getElementById("span")
+			span.onclick = function (event) {
+				event = event || window.event;
+				alert("我是span")
+				//! 阻止冒泡
+				event.stopPropagation()
+			}
+			box1 = document.getElementById("box1")
+			box1.onclick = function () {
+				alert("我是box1")
+			}
+		}
+
+
+
+	</script>
+
+</head>
+
+<body>
+	<div id="box1">
+		我是div
+		<span id="span">我是span</span>
+	</div>
+</body>
+
+
+</html>

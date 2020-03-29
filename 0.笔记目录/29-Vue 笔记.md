@@ -8,10 +8,10 @@
 
 ## Vue 基本架构
 
-动态的html页面，包含了一些JS语法代码，双括号表达式。指令（以V-开通的自定义标签属性）。
+动态的html页面，包含了一些JS语法代码，双括号表达式。指令（以V-开通的自定义标签属性）
 
 ~~~html
-![TSGJ](D:\web学习库\7.高级框架\Vue\0.vue笔记\img\vue\TSGJ.jpg)<div id="box">				<!-- v-model:双向数据绑定 -->
+<div id="box">				<!-- v-model:双向数据绑定 -->
 	<input type="text" v-model="message" />
 	<p>		<!-- {{}}单向数据绑定 -->
 	  Hello	{{message}}
@@ -578,6 +578,21 @@ console.log(el.nodeType, attrNode.nodeType, textNode.nodeType)
 
 ### 对象属性描述符
 
+~~~js
+// 创建对象方法的get和set语句
+const obj = {
+  firstName: 'A', lastName: 'B',
+  get fullName () { // 定义数据描述符
+    return this.firstName + '-' +this.lastName
+  },
+  set fullName (val) {
+    const names = value.split('-')
+		this.firstName = names[0]
+		this.lastName = names[1]
+  }
+}
+~~~
+
 **语法：**Object.defineProperty(obj  ,  prop , { descriptor })
 
 **obj：** 要在其上定义属性的对象。
@@ -598,8 +613,7 @@ Object.defineProperty(obj, 'fullName', {
         // 定义存取描述符
 		const names = value.split('-')
 		this.firstName = names[0]
-		this.lastName = name
-        s[1]
+		this.lastName = names[1]
 	}
 })
 ~~~

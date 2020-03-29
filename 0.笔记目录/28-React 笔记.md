@@ -732,7 +732,7 @@ import {inCrement} from '../redux/actions'
 import Counter from '../components/counter'
 //? 向外暴露连接 App 组件的包装组件
 export default connect(
-	state => ({count: state}),
+	state => ({count: state.count}), // 需要的数据(prop的key,val)
 	{inCrement}
 )(Counter)
 ~~~
