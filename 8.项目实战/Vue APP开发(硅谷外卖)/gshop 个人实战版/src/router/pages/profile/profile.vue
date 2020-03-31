@@ -4,7 +4,7 @@
       <div class="center" slot="center">我的</div>
     </HeaderTop>
     <!--  登录/注册 | 用户名称/头像 -->
-    <div class="profile_header_message" @click="$router.replace('/login')">
+    <div class="profile_header_message" @click="$router.push('/login')">
       <div class="profile_link">
         <div class="user-picture">
           <i class="iconfont icon-person"></i>
@@ -68,7 +68,7 @@
 </template>
 
 <style lang='stylus'>
-@import '../../../units/units.styl';
+@import '../../../assets/mixins.styl';
 @import '../pages';
 .profile{
   overflow auto

@@ -25,6 +25,8 @@ module.exports = {
 	},
 	// add your custom rules here
 	rules: {
+		'no-new':'off', // new构造函数左边必须有变量接收
+		'quotes':'off', // import后不能有分号
 		'eol-last': 'off', // 代码最后得有空格
 		'no-trailing-spaces': 'off',	// 不允许有多余空格 
 		'vue/Fvalid-template-root': 'off', // template 不能为空
@@ -33,13 +35,13 @@ module.exports = {
 		'comma-dangle': ["error", "never"], // 数组/对象最后一项不能有逗号
 		'func-call-spacing': 'off', // 函数调用间距
 		'space-before-function-paren': 'off', // 函数括号前得有空格
-		'handle-callback-err': 'off', // axios函数错误函数会显示语法错误
+		'handle-callback-err': 'off', // axios错误函数会显示语法错误
 		'no-undef': 'off', // 不许有undef
 		'no-unused-vars': 'off', // 禁止使用未使用的变量
 		'indent': 'off', // 轨道缩进
 		'semi': 'off', // 引入与调用方法缺少分号
 		// don't require .vue extension when importing
-		'import/newline-after-import':'off',
+		'import/newline-after-import':'off', 
 		'import/extensions': ['error', 'always', {
 			js: 'never',
 			vue: 'never'

@@ -7,7 +7,6 @@ import Profile from './pages/profile/profile'
 import Search from './pages/search/search'
 import Login from './pages/Login/login'
 Vue.use(Router)
-
 export default new Router({
     routes: [
         { path: '/msite', component: Msite },

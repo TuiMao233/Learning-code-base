@@ -10,7 +10,7 @@
 </script>
 
 <style lang='stylus'>
-@import '../../units/units.styl';
+@import '../../assets/mixins.styl';
 
 .header_top {
   position: fixed;
@@ -34,11 +34,12 @@
       }
     }
     &.center {
-      flex: 2.5 !important;
+      flex: 2 !important;
       font-size: 20px;
       text-align: center;
     }
     &.right {
+      flex: 1.3;
       text-align: right;
       box-sizing: border-box;
       border-right: solid 20px rgba(0, 0, 0, 0);

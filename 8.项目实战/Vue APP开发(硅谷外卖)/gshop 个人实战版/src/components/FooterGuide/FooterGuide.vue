@@ -30,12 +30,16 @@
 </script>
 
 <style lang='stylus'>
+@import './../../assets/mixins.styl';
 	.footer_guide{
+		top-border-1px(rgba(0,0,0,.1))
 		position fixed
 		bottom 0
 		width 100%
 		height 50px
 		display flex
+		z-index 1000
+		background #ffffff
 		&.on {
 			display none
 		}

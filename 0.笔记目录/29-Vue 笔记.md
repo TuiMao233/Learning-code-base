@@ -375,13 +375,16 @@ new Vue({
 </div>
 <script>
 var vm = new Vue({       
-el: "#demo",
+		el: "#demo",
 		data:{firstName: 'Aaa',lastName: 'bbbB',funllname: ''},
 		watch:{ 
 		firstName: function (value){ 
             // 当firstName值改变时执行,初始化不会执行
 			this.funllname = value + ' ' + this.lastname
-		}
+		},
+    this.$nextTick(()=>{
+  	// 页面数据更新后执行
+	  })
 })
 
 ~~~
@@ -1007,16 +1010,16 @@ Vue.use(VueRouter)
 // 这里定义一个路由
 export default new VueRouter({   
 	linkActiveClass: 'active', // 定义默认路由类名
-	routes: [	 // 配置路由组件地址
-        		  { path: '/about', component: About, 
-              		children:[//其他子路由
-                    //{ path:'note', component: aboutl }
-                  ]
-              }, 
-    				  { path: '/home', component: Home },
-        		// 配置默认显示路由
-            	{ path: '/', redirect: '/about' } 
-            ]
+  routes = [
+      // 配置路由组件地址
+      { path: "/about",component: About,children: [
+          //{ path:'note', component: aboutl } //其他子路由
+        ], meta: {} // $route元数据 router.meta
+      },
+      { path: "/home", component: Home },
+      // 配置默认显示路由
+      { path: "/", redirect: "/about" }
+  ];
 })
 ~~~
 
@@ -1076,7 +1079,8 @@ mounted () {
 ~~~js
 new Vue({
     ...
-    this.$router.push('路由链接')
+    this.$router.push('路由链接'),
+  	this.$router.replace('路由链接')
     ...
 })
 ~~~
@@ -1322,7 +1326,7 @@ mutations = {
 ~~~js
 // actions.js
 actions = {
-  	qaq ({commit}, Args) { commit('QAQ'), {Arg1:Args[0], Arg2:Args[1]} }
+  	qaq ({commit}, Args) { commit('QAQ',{Arg1:Args[0], Arg2:Args[1]})  }
 }
 // mutations.js
 mutations = {

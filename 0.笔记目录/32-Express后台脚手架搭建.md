@@ -138,7 +138,7 @@ router.post('/register', (req, res) => {
 # Exproess 静态文件接口
 
 ~~~js
-router.static('public')
+app.static('public')
 // localhost:4000/a.mp3 --> public/a.mp3
 // localhost:4000/static/a.mp3 --> public/a.html
 // localhost:4000/static/a.mp3 --> public/a.js

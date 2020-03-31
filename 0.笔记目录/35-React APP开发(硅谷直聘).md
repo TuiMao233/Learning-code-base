@@ -2,11 +2,13 @@
 
 ## 项目描述
 
+~~~
 1) 此项目为一个前后台分离的招聘的 `SPA`, 包括前端应用和后端应用 
 2) 包括用户注册/登陆, 大神/老板列表, 实时聊天等模块 
 3) 前端: 使用 `React` 全家桶+`ES6`+`Webpack` 等技术 
 4) 后端: 使用 `Node` + `express` + `mongodb` + `socketIO` 等技术 
 5) 采用模块化、组件化、工程化的模式开发
+~~~
 
 ## 项目技术栈
 
@@ -55,8 +57,6 @@
 ## 前端React-cli目录设计
 
 ![目录设计](D:\web学习库\0.笔记目录\img\React web App\目录设计.png)
-
-
 
 # 项目初始化
 
@@ -246,11 +246,11 @@ router.post('/register', (req, res) => {
 "scripts": { "start": "nodemon ./bin/www" },
 ~~~
 
-# 创建数据库&MD5加密
+## 创建数据库&MD5加密
 
 **后端脚手架安装：**`cnpm i mongoose blueimp-md5 --save`
 
-## 创建模型集合
+### 创建模型集合
 
 `db/models.js`
 
@@ -283,7 +283,7 @@ module.exports = {
 }
 ~~~
 
-# 定义注册的后台路由
+## 定义注册的后台路由
 
 ~~~js
 // routes/index.js
@@ -316,89 +316,60 @@ router.post('/register', (req, res) => {
 
 ###### ###### 
 
-# React 常见问题&技巧
-
-## React-cli 解决跨域问题
-
-`/package.json`
-
-~~~json
-// 添加代理服务器
-"proxy":"http://localhost:4000"
-~~~
-
-## React-cli 引入图片标签
-
-小图片由路径引入, 引入方式支持`ES6,require`
-
-~~~jsx
-import imgBase64 from './a.png'
-const img = <img src={imgBase64} />
-// or
-const imgBase64 require('./a.png')
-const img = <img src={imgBase64} />
-~~~
-
-## React-router/Redirect的作用
-
-Redirect可以在渲染render函数中重定向路由路径
-
-~~~jsx
-render() {
-  const path = '/login'
-  return <Redirect to={path} />
-}
-~~~
-
-
-
-## React-router/ route 匹配任意路径
-
-~~~jsx
-<Switch>
-    <Route path='/dasheninfo' component={DashenInit}/> 
-    <Route path='/laobaninfo' component={LaobanInit}/>
-  	{/*当不匹配上方任意路径时显示*/}
-  	<Route component={NotFound}/>
-</Switch>
-~~~
-
-## React-router/ 利用数组遍历路由组件
-
-~~~jsx
-//...
-routes = [
-	{path: '/laoban', component:Laoban},
-  {path: '/dashen', component:Dashen}
-  //.....
-];
-<Switch>
-    { routes.map( route => <Route path={route.path} component={route.component} /> ) }
-</Switch>
-~~~
-
-## React-PropTypes 简写插件规则
+## express cookies 操作
 
 ~~~js
-pt // PropTypes
-s,f,n,a,b // string func number array bool
-r // isRequired
-pt[s,f,n,a,b]r // ---> PropTypes.[string func number array bool].isRequired
-cmd // ---> componentDidMount 渲染完毕执行函数(发送ajax请求,或者其他操作)
+req.cookies // 获取cookies{....}  
+res.clearCookie('[cookie_key]') // 告诉浏览器删除cookie
 ~~~
 
-## React-router 非路由组件使用路由api
+## express 获取请求参数
+
+~~~js
+router.get('/', (req,res)=>{
+  req.query // 通常get携带参数的链接key=val
+  req.body // 通常post携带参数的请求体key=val
+})
+~~~
+
+## 实现自动登录逻辑
 
 ~~~jsx
-import { withRouter } from "react-router-dom";
-const dashen = () => {
-  	const path = this.props.location.pathname
-    return (
-        <div></div>
-    );
+componentDidMount() {
+  	// 异步根据用户id获取用户数据并更新redux
+    const userid = Cookies.getItem('userid')
+    const {_id} = this.props.[reduxState]
+    if(userid && !_id){
+        this.props.getUser() // getUser() 是action方法, 用于更新redux的用户数据
+    }
+}
+render () { 
+  const userid = Cookies.getItem('userid')
+  const {user} = this.props.[reduxState] 
+  // 如果cookie中有userid, 但redux没有数据, 代表需要获取对应的用户数据, 则暂时不做任何展示
+  if(userid && user){
+    return null
+  }else {
+    // 当redux对应user有值, 将会重新渲染render, 并会进入以下判断
+
+    let path = this.props.location.pathname
+
+    // 判断是否是当前根路径
+    if(path === '/'){
+      // 根据用户信息重定向对应的路由界面(登录/主界面/信息完善界面)
+      path = gerRedirectTo({user.type, user.header}
+      return <Redirect to={path}/>
+    }
+  }
+  // 如果有userid, 但是路径不是根路径, 则跳转到子路径
+  return (
+  	<Switch>
+    	<Route path='/dasheninfo' component={DashenInit}/>
+      <Route path='/laobaninfo' component={LaobanInit}/>
+    </Switch>
+  )
 }
 
-export default withRouter(dashen);
 ~~~
 
 # antd-mobile 语法参考
@@ -539,67 +510,17 @@ const CardBody = Card.Body; // 卡片的内容
 <Badge text={0}/> // 0则没有任何显示
 ~~~
 
-# express cookies 操作
-
-~~~js
-req.cookies // 获取cookies{....}  
-res.clearCookie('[cookie_key]') // 告诉浏览器删除cookie
-~~~
-
-# express 获取请求参数
-
-~~~js
-router.get('/', (req,res)=>{
-  req.query // 通常get携带参数的链接key=val
-  req.body // 通常post携带参数的请求体key=val
-})
-~~~
-
-# 原生JS合并对象方法
-
-~~~js
-// 后面会覆盖前面的对象
-Object.assign(obj1,obj2)
-~~~
-
-# 实现自动登录逻辑
+## 实现页面进出场动画
 
 ~~~jsx
-componentDidMount() {
-  	// 异步根据用户id获取用户数据并更新redux
-    const userid = Cookies.getItem('userid')
-    const {_id} = this.props.[reduxState]
-    if(userid && !_id){
-        this.props.getUser() // getUser() 是action方法, 用于更新redux的用户数据
-    }
-}
-render () { 
-  const userid = Cookies.getItem('userid')
-  const {user} = this.props.[reduxState] 
-  // 如果cookie中有userid, 但redux没有数据, 代表需要获取对应的用户数据, 则暂时不做任何展示
-  if(userid && user){
-    return null
-  }else {
-    // 当redux对应user有值, 将会重新渲染render, 并会进入以下判断
-
-    let path = this.props.location.pathname
-
-    // 判断是否是当前根路径
-    if(path === '/'){
-      // 根据用户信息重定向对应的路由界面(登录/主界面/信息完善界面)
-      path = gerRedirectTo({user.type, user.header}
-      return <Redirect to={path}/>
-    }
-  }
-  // 如果有userid, 但是路径不是根路径, 则跳转到子路径
-  return (
-  	<Switch>
-    	<Route path='/dasheninfo' component={DashenInit}/>
-      <Route path='/laobaninfo' component={LaobanInit}/>
-    </Switch>
-  )
-}
-
+import QueueAnim from 'rc-queue-anim';
+<QueueAnim
+  type='' // 动画类型
+  >
+	<div></div>
+  <div></div>
+  <div></div>
+</QueueAnim>
 ~~~
 
 # 实现实时聊天 socked.io
@@ -662,17 +583,89 @@ socket.emit('sendMsg', {name: 'Tom', date: Date.now()})
 console.log('浏览器端向服务器发送消息:', {name: 'Tom', date: Date.now()})
 ~~~
 
-# 实现页面进出场动画
+# React-cli 常见问题&技巧
+
+## 解决跨域问题
+
+`/package.json`
+
+~~~json
+// 添加代理服务器
+"proxy":"http://localhost:4000"
+~~~
+
+## 引入图片标签
+
+小图片由路径引入, 引入方式支持`ES6,require`
 
 ~~~jsx
-import QueueAnim from 'rc-queue-anim';
-<QueueAnim
-  type='' // 动画类型
-  >
-	<div></div>
-  <div></div>
-  <div></div>
-</QueueAnim>
+import imgBase64 from './a.png'
+const img = <img src={imgBase64} />
+// or
+const imgBase64 require('./a.png')
+const img = <img src={imgBase64} />
+~~~
+
+## React-router/Redirect的作用
+
+Redirect可以在渲染render函数中重定向路由路径
+
+~~~jsx
+render() {
+  const path = '/login'
+  return <Redirect to={path} />
+}
+~~~
+
+
+
+## React-router/ route 匹配任意路径
+
+~~~jsx
+<Switch>
+    <Route path='/dasheninfo' component={DashenInit}/> 
+    <Route path='/laobaninfo' component={LaobanInit}/>
+  	{/*当不匹配上方任意路径时显示*/}
+  	<Route component={NotFound}/>
+</Switch>
+~~~
+
+## React-router/ 利用数组遍历路由组件
+
+~~~jsx
+//...
+routes = [
+	{path: '/laoban', component:Laoban},
+  {path: '/dashen', component:Dashen}
+  //.....
+];
+<Switch>
+    { routes.map( route => <Route path={route.path} component={route.component} /> ) }
+</Switch>
+~~~
+
+## React-PropTypes 简写插件规则
+
+~~~js
+pt // PropTypes
+s,f,n,a,b // string func number array bool
+r // isRequired
+pt[s,f,n,a,b]r // ---> PropTypes.[string func number array bool].isRequired
+cmd // ---> componentDidMount 渲染完毕执行函数(发送ajax请求,或者其他操作)
+~~~
+
+## React-router 非路由组件使用路由api
+
+~~~jsx
+import { withRouter } from "react-router-dom";
+const dashen = () => {
+  	const path = this.props.location.pathname
+    return (
+        <div></div>
+    );
+}
+
+export default withRouter(dashen);
 ~~~
 
 # 自定义redux和react-redux

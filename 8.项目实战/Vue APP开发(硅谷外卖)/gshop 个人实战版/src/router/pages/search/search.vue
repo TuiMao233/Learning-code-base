@@ -4,16 +4,33 @@
       <div class="center" slot='center'>搜索</div>
     </HeaderTop>
     <from class='search_from'>
-      <input type="search" name="search" placeholder="请输入商家或美食名称">
-      <input type="submit" value="提交">
+      <input type="search" name="search" placeholder="请输入商家或美食名称" v-model="searchText">
+      <input type="submit" value="提交" @click="search">
     </from>
+    <NearbyShops :shops="searchShops"></NearbyShops>
   </div>
 </template>
 
 <script>
 import HeaderTop from '../../../components/HeaderTop/HeaderTop'
+import NearbyShops from '../../../components/NearbyShop/NearbyShops';
+import { mapActions,mapState } from "vuex";
 export default {
-  components: { HeaderTop }
+  data: () => ({
+    searchText:''
+  }),
+  computed: {
+    ...mapState(['searchShops'])
+  },
+  methods: {
+    ...mapActions(['getSearchShops']),
+    search () { // 进行搜索
+      if(this.searchText.trim()){
+        this.getSearchShops(this.searchText)
+      }
+    }
+  },
+  components: { HeaderTop,NearbyShops }
 }
 </script>
 

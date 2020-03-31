@@ -5,6 +5,10 @@
 			"path": "D:\\web学习库"
 		},
 		{
+			"name": "gshop server",
+			"path": "C:\\Users\\Information Center\\Desktop\\Vue谷粒外卖源码\\code\\gshop server"
+		},
+		{
 			"name": "gshop 前端完成版",
 			"path": "C:\\Users\\Information Center\\Desktop\\Vue谷粒外卖源码\\code\\gshop 前端完成版"
 		},
@@ -13,16 +17,11 @@
 			"path": "C:\\Users\\Information Center\\Desktop\\Vue谷粒外卖源码\\code\\gshop 前端完成版\\src"
 		},
 		{
-			"name": "gshop server",
-			"path": "C:\\Users\\Information Center\\Desktop\\Vue谷粒外卖源码\\code\\gshop server"
+			"name": "gshop 个人实战版",
+			"path": "D:\\web学习库\\8.项目实战\\Vue APP开发(硅谷外卖)\\gshop 个人实战版"
 		},
 		{
-			"name": "gshop",
-			"path": "D:\\web学习库\\8.项目实战\\Vue APP开发(硅谷外卖)\\gshop"
-		},
-		{
-			"name": "src",
-			"path": "D:\\web学习库\\8.项目实战\\Vue APP开发(硅谷外卖)\\gshop\\src"
+			"path": "D:\\web学习库\\8.项目实战\\Vue APP开发(硅谷外卖)\\gshop 个人实战版\\src"
 		}
 	],
 	"settings": {}

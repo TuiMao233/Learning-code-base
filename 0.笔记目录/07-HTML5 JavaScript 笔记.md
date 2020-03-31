@@ -10,6 +10,8 @@ dom.getProperty('name')
 dom.setAttribute('name','xxx')
 // 操作布尔值属性
 dom.setProperty('name','xxx')
+// 删除
+dom.removeAttribute('name')
 ~~~
 
 ###### 
