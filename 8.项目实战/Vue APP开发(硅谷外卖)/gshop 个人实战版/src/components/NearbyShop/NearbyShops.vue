@@ -1,16 +1,22 @@
 <template>
   <div class="nearby-shop">
-    <div class="shop_container" v-if="shops instanceof Array">
-      <div v-for="(shop, index) in shops" :key="index" class="shop_item">
+    <div class="shop_container" v-if="shops.length !== 0">
+      <div 
+        v-for="(shop, index) in shops" 
+        :key="index" 
+        class="shop_item"
+        @click="$router.push('/shop_msite')"
+      >
         <!-- 商家图片 -->
-        <img class="shop_img" :src="shop.image_path"/>
+        <img class="shop_img" :src="shop.image_path" />
 
         <!-- 右侧信息 -->
         <div class="shop_right">
           <!-- 店铺名称 -->
           <section class="shop_detail_header">
             <div class="shop_title">
-              <span>品牌</span>{{shop.name}}
+              <span>品牌</span>
+              {{shop.name}}
             </div>
             <ul class="shop_detail_ul">
               <li class="supports">保</li>
@@ -21,16 +27,7 @@
           <!-- 店铺评价 -->
           <section class="shop_rating_order">
             <div class="shop_rating_order_left">
-              <!-- 星星数量 -->
-              <div class="star">
-                <span class="star-item on"></span>
-                <span class="star-item on"></span>
-                <span class="star-item on"></span>
-                <span class="star-item half"></span>
-                <span class="star-item off"></span>
-              </div>
-              <!-- 评分 -->
-              <div class="rating_section">3.6</div>
+              <Star :number="3.5" size="size_24" />
               <div class="order_section">月售{{shop.float_minimum_order_amount}}单</div>
             </div>
 
@@ -49,16 +46,16 @@
         </div>
       </div>
     </div>
-    <div class="shop_container_error" v-else>
-      {{shops.message}}
-    </div>
+    <div class="shop_container_error" v-else>暂无搜索结果</div>
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import Star from "../../components/Star/star";
 export default {
-  props: {shops: Array},
+  props: { shops: Array },
+  components: { Star }
 };
 </script>
 
@@ -67,12 +64,14 @@ export default {
 
 .nearby-shop {
   .shop_container_error {
-    text-align center
-    margin-top 20px
-    background none
+    text-align: center;
+    margin-top: 20px;
+    background: none;
   }
+
   .shop_container {
     background: #ffffff;
+
     .shop_item {
       clearfix();
       display: block;
@@ -138,63 +137,6 @@ export default {
           width: 100%;
           margin-top: 18px;
           margin-bottom: 8px;
-
-          .shop_rating_order_left {
-            .star { // 星星
-              float: left;
-              font-size: 0;
-
-              .star-item {
-                display: inline-block;
-                width: 10px;
-                height: 10px;
-                margin-right: 3px;
-                background-size: 10px 10px;
-
-                @media only screen and (-webkit-device-pixel-ratio: 2) {
-                  &.on { // 满星
-                    background-image: url('./img/stars/star24_on@2x.png');
-                  }
-
-                  &.half { // 半星
-                    background-image: url('./img/stars/star24_half@2x.png');
-                  }
-
-                  &.off { // 空星
-                    background-image: url('./img/stars/star24_off@2x.png');
-                  }
-                }
-
-                @media only screen and (-webkit-device-pixel-ratio: 3) {
-                  &.on { // 满星
-                    background-image: url('./img/stars/star24_on@3x.png');
-                  }
-
-                  &.half { // 半星
-                    background-image: url('./img/stars/star24_half@3x.png');
-                  }
-
-                  &.off { // 空星
-                    background-image: url('./img/stars/star24_off@3x.png');
-                  }
-                }
-              }
-            }
-
-            .rating_section {
-              float: left;
-              font-size: 10px;
-              color: #ff6000;
-              margin-left: 4px;
-            }
-
-            .order_section {
-              float: left;
-              font-size: 10px;
-              color: #666;
-              transform: scale(0.8);
-            }
-          }
 
           .shop_rating_order_right {
             float: right;

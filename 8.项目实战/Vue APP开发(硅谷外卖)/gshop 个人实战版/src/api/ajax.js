@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = '/api' //
+axios.defaults.baseURL = '/api' // 定义检测跨域链接参数
 export const get = (url, params = {}) => (
     new Promise((resolve, reject) => {
         axios.get(url, { params })

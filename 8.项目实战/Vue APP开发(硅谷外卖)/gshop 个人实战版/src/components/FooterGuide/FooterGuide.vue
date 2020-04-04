@@ -1,5 +1,5 @@
 <template>
-	<div class="footer_guide" :class="{on: $route.path === '/login'}">
+	<div class="footer_guide" :class="{on: /login|shop/.test($route.path)}">
 		<a class="guide_item" :class="{on: $route.path === '/msite'}" @click="goTo('/msite')">
 			<i class="iconfont icon-waimai"></i>
 			<span>外卖</span>

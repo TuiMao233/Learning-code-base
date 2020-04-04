@@ -26,6 +26,6 @@ export default {
 <style lang='stylus'>
 #app {
   height: 100%;
-  overflow: hidden;
+  overflow hidden
 }
 </style>

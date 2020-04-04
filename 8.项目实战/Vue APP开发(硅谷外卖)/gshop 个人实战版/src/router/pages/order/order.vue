@@ -3,7 +3,7 @@
     <HeaderTop>
       <div class="center" slot="center">订单</div>
     </HeaderTop>
-    <div class="order_no_login">
+    <div class="order_no_login" v-show="!user.name">
       <img src="./img/person.png" alt />
       <h3>登录后查看外卖订单</h3>
       <button @click="$router.push('/login')">立即登录</button>
@@ -13,7 +13,13 @@
 
 <script>
 import HeaderTop from '../../../components/HeaderTop/HeaderTop';
+import { mapState } from "vuex";
 export default {
+  computed: {
+    ...mapState(["user"])
+  },
+  mounted() {
+  },
   components: { HeaderTop }
 };
 </script>

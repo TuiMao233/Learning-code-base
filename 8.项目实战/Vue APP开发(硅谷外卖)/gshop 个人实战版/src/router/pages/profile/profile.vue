@@ -4,14 +4,14 @@
       <div class="center" slot="center">我的</div>
     </HeaderTop>
     <!--  登录/注册 | 用户名称/头像 -->
-    <div class="profile_header_message" @click="$router.push('/login')">
+    <div class="profile_header_message" @click="goLogin()">
       <div class="profile_link">
         <div class="user-picture">
           <i class="iconfont icon-person"></i>
         </div>
         <div class="user-info">
           <div class="user-name">
-            <h3>登录/注册</h3>
+            <h3>{{user.name ? user.name : "登录/注册"}}</h3>
           </div>
 
           <div class="user-mobile-number">
@@ -64,21 +64,62 @@
         <span>服务中心</span>
       </div>
     </section>
+    <!-- 登出 -->
+    <mt-button
+      @click="outLogin()"
+      v-show="user.name"
+      type="danger"
+      class="out_button"
+    >登出</mt-button>
   </div>
 </template>
-
+<script>
+import HeaderTop from "../../../components/HeaderTop/HeaderTop";
+import { mapState, mapActions } from "vuex";
+import { Button,MessageBox } from "mint-ui";
+import Vue from "vue";
+Vue.component(Button.name, Button);
+export default {
+  components: { HeaderTop },
+  computed: {
+    ...mapState(["user"])
+  },
+  methods: {
+    ...mapActions(["outLogin"]),
+    goLogin() {
+      if (!this.user.name) {
+        this.$router.push("/login");
+      }
+    },
+    outLogin() {
+      const _this = this
+      MessageBox.confirm('确定退出吗?').then(action => {
+        _this.$store.dispatch('outLogin')
+      });
+    }
+  }
+};
+</script>
 <style lang='stylus'>
 @import '../../../assets/mixins.styl';
 @import '../pages';
-.profile{
-  overflow auto
-  padding-bottom 100px
+
+.out_button {
+  width: 100%;
+  margin-top: 20px;
 }
+
+.profile {
+  overflow: auto;
+  padding-bottom: 100px;
+}
+
 .profile_header_message {
   margin-top: 45px;
   height: 100px;
   background-color: rgb(2, 167, 116);
   color: #ffffff;
+
   .profile_link { // 用户跳转
     padding: 20px 10px;
     position: relative;
@@ -146,77 +187,87 @@
   height: 81px;
   background: #ffffff;
   border-bottom: 1px solid #f1f1f1;
+
   div {
     flex: 1;
     border-right: 1px solid #f1f1f1;
-    text-align center
-    padding-top 13px
-    font-size 14px
+    text-align: center;
+    padding-top: 13px;
+    font-size: 14px;
+
     span.number {
-      font-weight bold
-      font-size 30px
+      font-weight: bold;
+      font-size: 30px;
     }
+
     p {
-      margin-top 10px
-      color #666
+      margin-top: 10px;
+      color: #666;
     }
-    &.balance span.number{
-      color #FF9900
+
+    &.balance span.number {
+      color: #FF9900;
     }
-    &.discounts span.number{
-      color  #FF5F3E
+
+    &.discounts span.number {
+      color: #FF5F3E;
     }
-    &.integral span.number{
-      color #6ac20b
+
+    &.integral span.number {
+      color: #6ac20b;
     }
   }
+
   div:last-child {
     border-right: none;
   }
 }
 
 .options {
-  margin-top 10px
-  background #ffffff
-  /* 
-      <div class="my-order">
-        <i class="iconfont icon-order-s"></i>
-        <span>我的订单</span>
-      </div>
-   */
+  margin-top: 10px;
+  background: #ffffff;
+
+  /*
+     <div class="my-order">
+       <i class="iconfont icon-order-s"></i>
+       <span>我的订单</span>
+     </div>
+  */
   div {
-    padding: 10px 10px 10px 0;  
+    padding: 10px 10px 10px 0;
     border-bottom: 1px solid #f1f1f1;
+
     i {
-      font-size 30px
-      vertical-align middle // 文字对齐方向上下居中
+      font-size: 30px;
+      vertical-align: middle; // 文字对齐方向上下居中
     }
+
     &.my-order {
-      color #02a774
+      color: #02a774;
     }
-    &.integral-shop{
-      color #ff5f3e
+
+    &.integral-shop {
+      color: #ff5f3e;
     }
-    &.member-card{
-      color #f90
+
+    &.member-card {
+      color: #f90;
     }
-    &.service-center{
-      color #02a774
+
+    &.service-center {
+      color: #02a774;
     }
+
     span {
-      color #333
+      color: #333;
     }
   }
+
   div:last-child {
-    border-bottom none
+    border-bottom: none;
   }
 }
 </style>
 
-<script>
-import HeaderTop from "../../../components/HeaderTop/HeaderTop";
-export default {
-  components: { HeaderTop }
-};
-</script>
+
 

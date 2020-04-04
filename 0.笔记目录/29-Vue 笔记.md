@@ -398,6 +398,24 @@ vm.$watch('lastName',function(newVal){ // 当lastName值改变时执行,初始�
 </script>
 ~~~
 
+## Vue 切换显示动画
+
+Vue transition 允许我们只设置隐藏或者显示的样式, 这样切换的时候, 也会有过渡的效果
+
+~~~html
+<transition name="myAnim"><div v-show="fool">666</div></transition>
+~~~
+
+~~~less
+.[name]-enter-active, .[name]-leave-active{/*显示/隐藏的过渡样式*/}
+.[name]-enter, .[name]-leave-to {/*隐藏的样式*/}
+.[name]-enter-top, .[name]-leave {/*显示的样式*/}
+~~~
+
+![](https://cn.vuejs.org/images/transition.png)
+
+
+
 # Vue 实例对象生命周期
 
 ## 生命周期流程

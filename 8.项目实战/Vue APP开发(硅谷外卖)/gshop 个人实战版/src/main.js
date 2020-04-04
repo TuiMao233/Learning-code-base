@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import App from './App'
+// 路由器引入
 import router from './router'
+// 状态管理引入
 import store from './store';
-// Vue.config.productionTip = false
+// 模拟数据执行
+import './mock'
+// 图片懒加载
+import VueLazyload from 'vue-lazyload'
+import loading from './assets/img/timg.gif'
+Vue.use(VueLazyload, {loading})
 
-/* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,

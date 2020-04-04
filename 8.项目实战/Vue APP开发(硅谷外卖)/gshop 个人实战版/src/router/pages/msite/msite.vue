@@ -6,7 +6,9 @@
       </div>
       <div class="center" slot="center">{{address.name}}</div>
       <div class="right" slot="right">
-        <a @click="$router.push('/login')">登录|注册</a>
+        <a
+          @click="!user.name ? $router.push('/login') : $router.push('/profile')"
+        >{{user.name ? user.name : "登录/注册"}}</a>
       </div>
     </HeaderTop>
     <!-- 首页导航 -->
@@ -48,7 +50,7 @@ import NearbyShops from "../../../components/NearbyShop/NearbyShops";
 import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   computed: {
-    ...mapState(["shops", "address"]),
+    ...mapState(["shops", "address", "user"]),
     ...mapGetters(["categorysSplit"])
   },
   methods: {

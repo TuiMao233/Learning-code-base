@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>神奇的对象</title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+			}
+			ul{
+				list-style: none;
+			}
+			#wrap{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%,-50%);
+				width: 400px;
+				height: 400px;
+				border-radius: 50%;
+				border: 1px solid;
+			}
+		 	#wrap > ul > li{
+				width: 3px;
+				height: 7px;
+				background: darkgray;
+				position: absolute;
+				top: 0;
+				left: 198.5px;
+				transform-origin: center 200px;
+			}
+			#wrap > ul > li:nth-child(5n+1){
+				background: rgba(0,0,0,.7);
+				height: 10px;
+			}
+			#wrap > .icon{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+				width: 16px;
+				height: 16px;
+				border-radius: 50%;
+				background: rgba(0,0,0,.5);
+				
+			}
+			#wrap > .hour{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 2px;
+				height: 50px;
+				margin-left: -1px;
+				margin-top: -58px;
+				background: #000000;
+				transform-origin: center 58px;
+				z-index: 1;
+				transform:rotate(0deg);
+			}
+			#wrap > .min{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 2px;
+				height: 100px;
+				margin-left: -1px;
+				margin-top: -108px;
+				background: #006699;
+				transform-origin: center 108px;
+				z-index: -1;
+				transform:rotate(0deg);
+			}
+			#wrap > .sec{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				width: 2px;
+				height: 150px;
+				margin-left: -1px;
+				margin-top: -158px;
+				background: #008000;
+				transform-origin: center 158px;
+				z-index: -2;
+				transform:rotate(0deg);
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="hour"></div>
+			<div class="min"></div>
+			<div class="sec"></div>
+			<div class="icon"></div>
+		</div>
+	</body>
+	
+	
+	
+	
+	
+	
+	
+	
+	<script>
+		window.onload = function(){
+			var wrap = document.querySelector("#wrap");
+			var hourInd = document.querySelector("#wrap > .hour");
+			var minInd = document.querySelector("#wrap > .min");
+			var secInd = document.querySelector("#wrap > .sec");
+			var secDeg = 6;
+			var	HourDeg = 30;
+			
+			/*第一部分*/
+			var arr = [];
+			var deg = 0;
+			var ul = document.createElement("ul");
+			for(var i=0; i<60; i++){
+				arr[i] = document.createElement("li");
+				arr[i].style.transform ="rotate("+deg+"deg)";
+				deg += 6;
+				ul.appendChild(arr[i]);	
+			};wrap.appendChild(ul);
+
+			setInterval(upTime,1000);
+			function upTime() {
+				var time = new Date();
+				var hoursTime = time.getHours();
+				var minTime = time.getMinutes();
+				var secTime = time.getSeconds();
+				hourInd.style.transform ="rotate("+(hoursTime*HourDeg)+"deg)";
+				minInd.style.transform ="rotate("+(minTime*secDeg)+"deg)";
+				secInd.style.transform ="rotate("+(secTime*secDeg)+"deg)";
+			};upTime()
+		
+		}
+	</script>
+
+</html>

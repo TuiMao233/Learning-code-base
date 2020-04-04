@@ -17,10 +17,13 @@
 			Array.prototype.unshift()
 			//? 删除并返回数组的第一个元素
 			Array.prototype.shift()
-			//! 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+
+
+			//!返回指定长度的数组(不会改变原数组)
+			Array.prototype.slice(start, End)
+			//! 方法向/从数组中添加/删除项目(改变原数组)，然后返回被删除的项目。
+			//! 第一个参数是项的索引, 第二个参数是删除的个数(0表示不删), 第三个参数是插入的元素(可不选)
 			Array.prototype.splice(index,howmany,item1,...)
-			//! 计算数组元素相加的和
-			Array.prototype.reduce()
 			//! 将数组倒叙
 			['1','2','3'].reverse() // '3', '2', '1'
 			
@@ -36,6 +39,8 @@
 			Array.prototype.filter(function(item, index){return Boolen})
 			//! 遍历所有元素的值和下标, 返回符合规则的一个数组元素。
 			Array.prototype.find()
+			//! 遍历所有元素的值和下标, 返回符合规则的元素的下标
+			Array.prototype.findIndex()
 			//! 将数组合并为一个任意值, 函数传参为 (total 计算后的值, item 当前数组元素), 第二个参数为初始值, 返回累加的值
 			Array.prototype.docs.reduce((total,item)=>{}, {})
 			//! 数据进行排序, a->b为从小到大, b->a为从大到小

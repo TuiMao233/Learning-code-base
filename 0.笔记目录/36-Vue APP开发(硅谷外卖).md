@@ -134,3 +134,411 @@ proxyTable: {
 axios('http://localhost:4000/api')
 ~~~
 
+## class可以与串拼接
+
+~~~vue
+<div :class="'666'+count"></div>
+~~~
+
+## 监视数据并更新标签的回调
+
+~~~js
+watch: {
+  myCount(value) {
+    this.$nextTick(()=>{
+    // 当数据改变导致更新界面时执行
+  	})
+  }
+}
+~~~
+
+## 数据更新通知界面
+
+~~~js
+this.getShopGoods(()=>{ // action
+  this.$nextTick(()=>{
+    	// 数据更新完毕
+  })
+})
+~~~
+
+~~~js
+// action 
+getShopGoods({ commit },cb) {
+  // 更新数据....
+  cb && cb()
+}
+~~~
+
+## methods定义初始化函数前缀加_
+
+methods在Vue中，通常用来存放dom调用的方法, 当需要定义初始化方法时，在方法前缀加上_符号，可以更好的区分方法
+
+~~~js
+methods: {
+  _initScroll () {...},
+  goTo(path){...}
+}
+~~~
+
+## 数据绑定对象添加新属性无数据绑定
+
+~~~vue
+<template>
+<!--无数据绑定, 不会更新界面-->
+<div v-if="shop.count">{{shop.count}}</div>
+</template>
+<script>
+export default {
+  data: ()=> ({ shop: {} }),
+  mounted(){
+    this.shop.count = 6 // 添加新属性
+  }
+}
+</script>
+~~~
+
+**利用Vue.set方法解决问题**
+
+~~~vue
+<template>
+<!--set方法会绑定相应的数据, 这里会更新界面-->
+<div v-if="shop.count">{{shop.count}}</div>
+</template>
+<script>
+import Vue from 'vue'
+export default {
+  data: ()=> ({ shop: {} }),
+  mounted(){
+    Vue.set(this.shop, 'count', 6)
+  }
+}
+</script>
+~~~
+
+## 父组件调用子组件方法
+
+**子组件A.vue: 定义方法**
+
+~~~vue
+<script>
+export default {
+  methods: {add(){}}
+}
+</script>
+~~~
+
+**父组件B.vue: 使用方法**
+
+~~~vue
+<template>
+<A ref="A"></A>
+</template>
+<script>
+import A from './A.vue'
+export default {
+  mounted() {
+    this.$refs.A.add()
+  }
+}
+</script>
+~~~
+
+## 路由link可指定生成标签名称
+
+~~~html
+<router-link tag="li"><!-- 生成li的路由点击跳转 --></router-link>
+~~~
+
+## 路由可指定占位符值
+
+~~~html
+<router-link to="{path:'/login',query:{id:666}}"></router-link>
+<!-- 以上代码等同于 -->
+<router-link to="'/login/id=666'"></router-link>
+~~~
+
+## router-link 默认是push跳转
+
+~~~html
+<!-- 如果需要replace跳转, 在标签内加入replace属性 -->
+<router-link to='/login' replace></router-link>
+~~~
+
+# 使用 mint-ui
+
+`cnpm install --save mint-ui`
+
+## 按需加载
+
+`cnpm install --save-dev babel-plugin-component`
+
+**修改 babel 配置**
+
+~~~js
+"plugins": ["transform-runtime",["component", [
+{
+	"libraryName": "mint-ui",
+	"style": true
+}
+]]]
+~~~
+
+`mint-ui` 组件分类为**标签组件**与**非标签组件**
+
+## 使用 mint-ui 的组件
+
+~~~vue
+<template>
+	<mt-button >退出登陆</mt-button>
+</template>
+<script>
+  import Vue from 'vue'
+  import {Button} from 'mint-ui'
+  
+	Vue.component(Button.name, Button)
+</script>
+~~~
+
+## 提示框
+
+~~~js
+MessageBox({ 
+  title: "错误提示", 
+  message: "手机格式错误",
+	showCancelButton: true, // 是否显示确定按钮
+  showCancelButton: true  // 是否显示取消按钮
+});
+~~~
+
+# 模拟(mock)数据/接口
+
+**`Mockjs`**：用来拦截 ajax 请求, 生成随机数据返回。后台向前台提供 API 接口, 只负责数据的提供和计算，而完全不处理展现，前台通过 Http(Ajax)请求获取数据, 在浏览器端动态构建界面显示数据。http://mockjs.com/
+
+**示例代码：**http://mockjs.com/examples.html
+
+`cnpm install mockjs --save`
+
+## 定义数据
+
+~~~js
+// src/mock/data.json
+{
+  seller: {...},
+  goods: [...],
+  ratings: [...]
+}
+~~~
+
+## 设置模拟接口
+
+~~~js
+// src/mock/mockServer.js
+import Mock from 'mockjs'
+import apiData from './data.json'
+// Mock.mock('拦截地址', 返回数据)
+Mock.mock('/seller', {code:0, data:apiData.seller})
+Mock.mock('/goods', {code:0, data:apiData.goods})
+Mock.mock('/ratings', {code:0, data:apiData.ratings})
+~~~
+
+## 访问接口
+
+~~~js
+export const reqShopMsg = () => get(`http://localhost:8080/shop_msg`)
+export const reqShopGoods = () => get(`http://localhost:8080/shop_goods`)
+export const reqShopAssess = () => get(`http://localhost:8080/shop_assess`)
+~~~
+
+# 实现滑动(better-scroll)
+
+`npm install @better-scroll/core@next --save`
+
+~~~js
+import BScroll from '@better-scroll/core'
+const scroll = new BScroll('.www')
+scroll.refresh() // 重新计算高度 
+
+const scroll = new BScroll('.www', {scrollX:true})
+~~~
+
+~~~html
+<div class="www">
+  <div class="content"></div>
+</div>
+~~~
+
+## better-scroll进行简易封装成Vue组件
+
+`@better-scroll-vue/index.vue`
+
+### template
+
+~~~html
+<template>
+  <div ref="wrapper">
+    <slot><!-- 为父组件提供插槽 --></slot>
+  </div>
+</template>
+~~~
+
+### script
+
+~~~js
+import BScroll from "@better-scroll/core";
+export default {
+  // 需要引入哪些better-scroll配置选项
+  props: ["click", "scrollX", "scrollY"],
+  data: () => ({
+    options: { // 默认BScroll配置
+    }
+  }),
+  mounted() { // 初始化执行
+    this._initOptions()
+    this._initScroll();
+  },
+  updated() { // 当数据更新时重计算滑动值
+    this.scroll.refresh();
+  },
+  methods: {
+    _initScroll() { // 初始化滚动条
+      const { options } = this;
+      const { wrapper } = this.$refs;
+      if (!this.scroll) {
+        // 没有初始化滚动条时执行(一次性代码)
+        this.$nextTick(() => {
+          this.scroll = new BScroll(wrapper, options);
+        });
+      }
+    },
+    _initOptions() { // 初始化props覆盖data中的配置
+      const _propsKey = Object.keys(this._props);
+      // 筛选值不为空的prop
+      const props = _propsKey.reduce((total, key) => {
+        if (this._props[key]) {
+          total[key] = this._props[key];
+        };return total;
+      }, {});
+      this.options = { ...this.options, ...props };
+    }
+  }
+};
+~~~
+
+### 父组件中使用
+
+**注意：**要满足滚动条件，必须有个高或者宽的固定区和溢出的区域。
+
+~~~vue
+<template>
+  <BScroll :click="true">
+    <!-- 固定高宽区 -->
+  	<div class="content">
+  	<!-- 内容区(溢出区) -->
+  	</div>
+  </BScroll>
+</template>
+<script>
+import BScroll from './@better-scroll-vue'
+export default {
+  components: {BScroll} // 映射为组件
+}
+</script>
+~~~
+
+### 如果无法滚动
+
+不能滚动是现象，我们得搞清楚这其中的根本原因。在这之前，我们先来看一下浏览器的滚动原理： 浏览器的滚动条大家都会遇到，当页面内容的高度超过视口高度的时候，会出现纵向滚动条；当页面内容的宽度超过视口宽度的时候，会出现横向滚动条。也就是当我们的视口展示不下内容的时候，会通过滚动条的方式让用户滚动屏幕看到剩余的内容。
+
+[^注意]: 文档参考官方介绍
+
+![](https://raw.githubusercontent.com/ustbhuangyi/better-scroll/master/packages/vuepress-docs/docs/.vuepress/public/assets/images/schematic.png)
+
+# 实现组件懒加载
+
+~~~js
+// 在引入vue组件时, 使用函数包装import 组件的返回值
+// 这样就不会立即加载组件, vue会在特定实机执行函数获取组件
+import Msite from './pages/Msite/Msite'
+import Order from './pages/order/order'
+// ↓↓↓↓↓↓↓
+const Msite = () => import('./pages/Msite/Msite')
+const Order = () => import('./pages/Order/Order')
+~~~
+
+## 实现图片懒加载
+
+https://github.com/hilongjw/vue-lazyload
+
+**安装：**`cnpm i vue-lazyload --save`
+
+### 配置入口(src/main.js)
+
+~~~js
+import Vue from 'vue'
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  preLoad: 1.3, // 预先加载??(可选)
+  error: 'dist/error.png', // 加载错误图片(可选)
+  loading: 'dist/loading.gif',	// 加载中图片(可选)
+  attempt: 1 // ??(可选)
+})
+~~~
+
+## 组件中使用
+
+~~~vue
+<template>
+	<img v-lazy="./img/a.jpg"/>
+</template>
+<script>
+</script>
+~~~
+
+# Vue 自定义字符串过滤器
+
+## 实现时间戳指定特定格式
+
+`src/fiters/index.js`
+
+~~~js
+// 引入js时间格式库
+// 返回经过时间库改造的字符串
+
+import Vue from 'vue';
+// 问题:moment库过大, 会占用大量资源
+import moment from 'moment';
+Vue.filter('date-format', (value, format_str='YYY-MM-DD HH:mm:ss')=>{
+    return moment(value).format(format_str)
+})
+
+// 使用date-fns进行按需加载
+import format from 'date-fns/format'
+Vue.filter('date-format', (value, format_str='YYY-MM-DD HH:mm:ss')=>{
+    return format(format_str)
+})
+~~~
+
+## 加载过滤器
+
+`src/main.js`
+
+~~~js
+import 'fiters'
+~~~
+
+## 大括号表达式中使用
+
+~~~vue
+<div>
+  {{1513132015 | date-format}}
+</div>
+~~~
+
+# Vue 进行打包状态可视化
+
+**启动打包状态可视化：**`npm run build --report`
+**启动打包：**`npm run build`
+
+![批注5](D:\web学习库\0.笔记目录\img\Vue web App\批注5.png)
+

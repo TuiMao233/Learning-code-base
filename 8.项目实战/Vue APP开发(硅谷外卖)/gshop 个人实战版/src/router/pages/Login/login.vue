@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <div class="login-inner">
-      <div class="login-logo">硅谷外卖</div>
+      <div class="login-logo">潍坊外卖</div>
       <div class="login-method">
         <a class="to_note" @click="toggleMethod(true)" :class="{active:isMethod}">短信登录</a>
         <a class="to_password" @click="toggleMethod(false)" :class="{active:!isMethod}">密码登录</a>
@@ -10,7 +10,11 @@
         <div class="note" :class="{on:isMethod}">
           <section class="mobile-number">
             <input type="number" maxlength="11" placeholder="手机号" v-model="mobileCode" />
-            <button class="get_verification" @click="getCodeVerif">获取验证码</button>
+            <button
+              class="get_verification"
+              @click="getCodeVerif"
+              :class="{on:isMobile && !isCountDown}"
+            >获取验证码</button>
           </section>
           <section class="login-verification">
             <input type="tel" maxlength="8" placeholder="验证码" v-model="codeVerif" />
@@ -40,11 +44,10 @@
           <section class="login-verification">
             <input type="tel" maxlength="11" placeholder="验证码" v-model="verif" />
             <img class="get-verification" ref="captcha" />
-            <button class="get_verification" @click="getVerif">获取验证码</button>
+            <button class="get_verification" @click="getVerif" ref="getVerifButton">获取验证码</button>
           </section>
         </div>
       </form>
-      <span class="error_msg">{{errorMsg}}</span>
       <button class="login-button" :disabled="!isSend" :class="{on:isSend}" @click="login">登录</button>
       <a class="about-us" href="javascript:;">关于我们</a>
     </div>
@@ -55,26 +58,23 @@
 </template>
 
 <script>
-import { isMobile, removeStrCode } from "../../../units/units";
+import { MessageBox } from "mint-ui";
 import { mapActions, mapState } from "vuex";
+import { isMobile, removeStrCode } from "../../../units/units";
 import { reqLoginPwd, reqLoginSms, reqSendCode } from "../../../api";
 export default {
   data: () => ({
-    userCode: "",       // 手机/邮箱/用户名
-    password: "",       // 密码
-    verif: "",          // 账号密码登录验证码
-    mobileCode: "",     // 手机号码
-    codeVerif: "",      // 短信验证码
-    isMethod: true,     // true代表短信, false代表密码
-    isShowPwd: false,   // 是否显示密码
-    errorMsg: "",       // 错误信息
-    isCountDown: false  // 是否在倒计时
+    userCode: "", // 手机/邮箱/用户名
+    password: "", // 密码
+    verif: "", // 账号密码登录验证码
+    mobileCode: "", // 手机号码
+    codeVerif: "", // 短信验证码
+    isMethod: true, // true代表短信, false代表密码
+    isShowPwd: false, // 是否显示密码
+    isCountDown: false // 是否在倒计时
   }),
   methods: {
-    toggleMethod(fool) { // 切换登录类型
-      // 切换登录类型
-      // 切换登录类型
-      // 切换短信或密码登录
+    toggleMethod(fool) { // 切换短信或密码登录
       if (this.isMethod === fool) {
         return;
       } else {
@@ -84,11 +84,9 @@ export default {
         this.password = "";
         this.verif = "";
         this.codeVerif = "";
-        this.errorMsg = "";
       }
     },
-    showPwd() { // 显示/隐藏密码
-      // 是否显示密码
+    showPwd() {// 显示/隐藏密码
       this.isShowPwd = !this.isShowPwd;
       const { pwsInput } = this.$refs;
       if (this.isShowPwd) {
@@ -99,38 +97,37 @@ export default {
         pwsInput.setAttribute("type", "password");
       }
     },
-    getVerif(ev) { // 获取图形验证码
-      // 获取图形验证码
-      // 获取验证码
-      ev.toElement.innerText = "";
-      this.$refs.captcha.src =
-        "http://localhost:4000/captcha/?" + new Date().toString();
+    getVerif(ev) {// 获取图形验证码
+      this.$refs.getVerifButton.innerText = "";
+      this.$refs.captcha.src = "http://localhost:4000/captcha/?" + new Date().toString();
     },
-    getCodeVerif(ev) { // 发送短信验证码
-      // 如果手机验证不成功, 不执行逻辑
-      if (!isMobile(this.mobileCode)) {
-        this.errorMsg = "手机格式错误"
+    async getCodeVerif(ev) {// 发送短信验证码
+      if (!isMobile(this.mobileCode)) {// 如果手机验证不成功, 不执行逻辑
+        MessageBox({ title: "错误提示", message: "手机格式错误" });
         return;
       }
-       this.errorMsg = ""
-      // 获取短信验证码
       const phone = this.codeVerif.trim();
-      // 发送请求
-      reqSendCode(phone);
+      const result = await reqSendCode(phone);
+      if (result.code === 1) {
+        MessageBox({ title: "错误提示", message: result.msg });
+        return;
+      }
+      this.isCountDown = true;
       // 点击后不能更改
       const el = ev.toElement;
       ev.toElement.setAttribute("disabled", "aaaaa");
       let countDown = 30;
-      el.innerText = `${countDown} 后获取验证码`;
+      el.innerText = `已发送(${countDown}s)`;
       const timer = setInterval(() => {
         if (countDown !== 0) {
           // 倒计时
           countDown--;
-          el.innerText = `${countDown} 后获取验证码`;
+          el.innerText = `已发送(${countDown}s`;
         } else {
           // 倒计时结束
           el.innerText = `获取验证码`;
           el.removeAttribute("disabled");
+          this.isCountDown = false;
           clearInterval(timer);
         }
       }, 1000);
@@ -149,19 +146,25 @@ export default {
         const captcha = this.verif.trim();
         result = await reqLoginPwd(name, pwd, captcha);
       }
+      console.log(result)
       if (result.code === 0) {
-        // 将登录数据保存
-        this.$store.dispatch("receive_user", result.data);
-        // 切换界面
-        this.$router.replace("/profile");
+        this.$store.dispatch("login", result.data);// 将登录数据保存
+        this.$router.replace("/profile");// 切换界面
       } else {
-        this.errorMsg = result.msg;
+        MessageBox({
+          title: "错误提示",
+          message: result.msg
+        });
+        this.getVerif()
       }
-      console.log(result);
     }
   },
   computed: {
-    isSend() { // 判断是否可发送数据
+    isMobile() {
+      return isMobile(this.mobileCode);
+    },
+    isSend() {
+      // 判断是否可发送数据
       if (this.isMethod) {
         // 手机短信登录
         const codeVerif = this.codeVerif.trim();
@@ -175,7 +178,10 @@ export default {
         return userCode.length > 3 && password.length > 3 && verif.length > 3;
       }
     }
-  }
+  },
+  mounted() {
+    this.getVerif()
+  },
 };
 </script>
 
@@ -185,6 +191,10 @@ export default {
   color: red;
   margin-top: 10px;
   opacity: 0.8;
+}
+
+.get_verification.on {
+  color: #000;
 }
 
 .login-page {

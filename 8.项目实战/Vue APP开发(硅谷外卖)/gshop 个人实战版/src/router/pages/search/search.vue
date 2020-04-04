@@ -3,10 +3,10 @@
     <HeaderTop>
       <div class="center" slot='center'>搜索</div>
     </HeaderTop>
-    <from class='search_from'>
-      <input type="search" name="search" placeholder="请输入商家或美食名称" v-model="searchText">
+    <div class='search_from' name="search">
+      <input type="search" placeholder="请输入商家或美食名称" v-model="searchText">
       <input type="submit" value="提交" @click="search">
-    </from>
+    </div>
     <NearbyShops :shops="searchShops"></NearbyShops>
   </div>
 </template>

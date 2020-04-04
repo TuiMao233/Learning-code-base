@@ -76,3 +76,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+button {
+  outline: none;
+  border: none;
+}
