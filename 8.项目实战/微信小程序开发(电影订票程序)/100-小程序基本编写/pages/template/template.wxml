@@ -1,0 +1,21 @@
+<template name="list_template">
+    <view class="list" >
+        <text class="headText">{{title}}</text>
+        <view 
+            class="image" 
+            style="background-image:url({{detail_img}})"
+        />
+        <view class="content" >
+            {{detail_content}}
+        </view>
+        <view class="collect"><!-- 收藏 -->
+            <image class="icon" src="{{detail_love_image1}}"/>
+            <text class="number">{{love_count}}</text>
+        </view>
+        <view class="watch">
+            <!-- 观看量 -->
+            <image class="icon" src="{{detail_love_image2}}"/>
+            <text class="number">{{attention_count}}</text>
+        </view>
+    </view>
+</template>

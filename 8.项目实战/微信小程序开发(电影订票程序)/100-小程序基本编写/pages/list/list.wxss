@@ -1,0 +1,17 @@
+@import "/pages/template/template.wxss";
+swiper {
+    height: 400rpx;
+    display: flex;
+}
+
+swiper-item {
+    font-size: 30px;
+    font-weight: blod;
+    text-align: center;
+    line-height: 400rpx;
+    background-size: cover;
+    background-position: center;
+}
+swiper-item:nth-child(1){background-color: aquamarine;}
+swiper-item:nth-child(2){background-color: bisque;}
+swiper-item:nth-child(3){background-color: tomato;}

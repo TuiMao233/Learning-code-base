@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="head"><image src="{{userInfo.avatarUrl}}" /></view>
+    <button 
+        open-type="getUserInfo"
+        style="display:{{isShowGetUser ? 'block' : 'none'}}"
+        bindgetuserinfo="headelGetUserInfo"
+    >用户信息授权</button>
+    <text class="userName">hello {{msg}}</text>
+    <view class="button" bind:tap="handleClick">
+    <span>开启小程序之旅</span>
+    </view>
+    <scroll-view >
+    </scroll-view>
+</view>

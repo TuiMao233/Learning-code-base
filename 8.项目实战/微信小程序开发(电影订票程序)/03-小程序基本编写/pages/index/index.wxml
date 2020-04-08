@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="head"><image src="../../image/head.jpg" /></view>
+    <text class="userName">hello {{msg}}</text>
+    <view class="button" bind:tap="handleClick">
+    <span>开启小程序之旅</span>
+    </view>
+    <scroll-view >
+    </scroll-view>
+</view>

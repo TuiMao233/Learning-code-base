@@ -1,0 +1,13 @@
+<!--100-小程序基本编写/pages/movies/movies.wxml-->
+<view>
+    <navigator url="/pages/moviesDetail/moviesDetail?index={{index}}" class="movie" wx:for="{{subjects}}">
+        <image src="{{item.images.large}}" />
+        <view class="movie_msg">
+            <text class="name">{{item.title}}</text>
+            <text class="time">年份：{{item.year}}</text>
+            <text class="director">导演：{{item.casts[0].name}}</text>
+        </view>
+        <text class="rating">{{item.rating.average}}</text>
+    </navigator>
+</view>
+	

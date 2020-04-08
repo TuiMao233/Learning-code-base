@@ -1,0 +1,31 @@
+.list {
+    margin-top: 20rpx;
+}
+.headText {
+    font-weight: bold;
+}
+.image {
+    margin-top: 20rpx;
+    width: 100%;
+    height: 450rpx;
+    background-size: cover;
+    background-position: center;
+}
+.content {
+    font-size: 13.5px;
+    width: 100%;
+    height: 90px;
+    overflow: hidden; text-overflow:ellipsis;
+}
+.collect, .watch {
+    display: inline-block;
+    margin-right: 10px;
+}
+.icon {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+.number {
+    font-size: 12px;
+}

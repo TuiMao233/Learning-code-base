@@ -1,0 +1,11 @@
+<!--100-小程序基本编写/pages/moviesDetail/moviesDetail.wxml-->
+<view class="movie_detail">
+    <image src="{{subject.images.large}}" />
+    <text class="name">{{subject.title}}</text>
+    <view class="movie_msg">
+        <text>评分: {{subject.rating.average}}</text>
+        <text>导演: {{subject.directors[0].name}}</text>
+        <text>主演: <text wx:for="{{subject.casts}}">{{item.name}}、</text></text>
+    </view>
+    <button>我要观影</button>
+</view>

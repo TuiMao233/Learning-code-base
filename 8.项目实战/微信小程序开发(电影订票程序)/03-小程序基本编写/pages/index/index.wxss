@@ -1,0 +1,31 @@
+page {
+    height: 100%;
+    background-color: #8CC242;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+image {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    margin-top: 100rpx;
+}
+.userName {
+    font-weight: bold;
+    font-size: 40rpx;
+    margin-top: 150rpx;
+}
+.button {
+    margin-top: 100rpx;
+}
+.button span {
+    font-size: 30rpx;
+    border: solid 1rpx;
+    padding: 20rpx;
+}
+scroll-view {
+    height: 100px;
+}

@@ -1,0 +1,29 @@
+<!--100-小程序基本编写/pages/list/list.wxml-->
+<import src="/pages/template/template.wxml"></import>
+<view>
+    <swiper
+        circular
+        indicator-dots
+        indicator-color="rgba(0,0,0,.5)" 
+        indicator-active-color="rgba(255,29,15,1)"
+        catch:tap="swiperToDetail"
+    >
+        <swiper-item
+            wx:for="{{swiperImgUrl}}"
+            style="background-image:url({{item}})"
+            data-index="{{index}}"
+        />
+    </swiper>
+    <view
+        class="list_template"
+        bind:tap="toDetail"
+        wx:for="{{list_data}}"
+        data-index="{{index}}"
+    >
+        <template
+            is="list_template"
+            data="{{...item}}"
+        />
+    </view>
+</view>
+	

@@ -1,0 +1,33 @@
+<!--100-小程序基本编写/pages/detail/detail.wxml-->
+<view class="article">
+    <text class="head_text">{{article.title}}</text>
+    <view class="icon_box">
+        <view class="user_msg">
+            <image class="user_headImg" src="{{article.avatar}}" />
+            <text>{{article.author}} 发布于 {{article.date}}</text>
+        </view>
+
+        <view class="collect" catch:tap="collect">
+            <image wx:if="{{isCollect}}" class="icon" src="/images/icon/collection.png"/>
+            <image wx:else class="icon" src="/images/icon/collection-anti.png"/>
+        </view>
+        <view class="share" catch:tap="share">
+            <image wx:if="{{isShare}}" class="icon" src="/images/icon/share.png"/>
+            <image wx:else class="icon" src="/images/icon/share-anti.png"/>
+        </view>
+        
+    </view>
+     <view class="player" catch:tap="togglePlay">
+        <view
+            class="image" 
+            style="background-image:url({{article.detail_img}})"
+        />
+        <image 
+            class="play_icon"
+            src="{{isMusicPlay ? '/images/music/music-start.png' : '/images/music/music-stop.png'}}"
+        />
+    </view>
+    <view class="article_content">{{article.detail_content}}</view>
+    <button class="forward_button"  open-type="share">转发此文章</button>
+</view>
+	
