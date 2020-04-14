@@ -1,10 +1,12 @@
-# mpVue(Vue in Mini Program)
+# mpVue 简介
 
-美团工程师推出的基于Vue.js封装的用于开发小程序的框架，融合了原生小程序和Vue.js的特点，可完全组件化开发
+mpVue (Vue in Mini Program) 美团工程师推出的基于Vue.js封装的用于开发小程序的框架，融合了原生小程序和Vue.js的特点，可完全组件化开发
 
-## 特点
+## mpVue特点
 
 组件化开发、完整Vue.js的开发体验、可使用Vue第三方扩展插件、Webpack构建项目、最终H5转换工具将项目编译成小程序识别的文件
+
+# mpVue 项目构建
 
 ## 初始化项目
 
@@ -55,7 +57,35 @@ app.$mount()
 
 <img src="D:\web学习库\0.笔记目录\img\mpVue\图片2.png" alt="图片2" style="zoom: 67%;" />
 
-# 生命周期
+## 定义页面流程
+
+`src/pages/index/index.vue`
+
+~~~html
+<template>
+  <div></div>
+</template>
+<script>
+export default {}
+</script>
+<style>
+</style>
+~~~
+
+`src/pages/index/main.js`
+
+~~~js
+import Vue from 'vue'
+import Index from './index.vue'
+
+const index = new Vue(Index)
+// 挂载当前页面
+index.$mount()
+~~~
+
+**重新编译打包：**`npm start`
+
+# mpVue 生命周期
 
 **注意事项：**除了 Vue 本身的生命周期外，mpvue 还兼容了小程序生命周期，这部分生命周期钩子的来源于[微信小程序的 Page](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/app-service/page.html)， 除特殊情况外，不建议使用小程序的生命周期钩子。
 
@@ -97,6 +127,69 @@ app.$mount()
 9. onPageScroll: 页面滚动
 10. onTabItemTap： 当前是 tab 页时，点击 tab 时触发
 ~~~
+
+# 挂载 Vuex 状态管理
+
+~~~js
+import Vue from 'vue'
+import App from './app.vue'
+import store from './store'
+Vue.config.productionTip = false
+App.mpType = 'app'  
+
+// Vue原型上挂载store
+Vue.prototype.$store = store
+
+const app = new Vue(App)
+app.$mount()
+~~~
+
+###### ###
+
+# 实例对象中获取路由传参
+
+~~~js
+beforeMount () {
+  const {query} = this.$root.$mp
+}
+~~~
+
+###### ###
+
+# fly.js 请求访问api封装
+
+**安装：**`cnpm i flyio --save`
+
+`/src/api/ajax.js`
+
+~~~js
+import Fly from 'flyio/dist/npm/wx'
+const fly = new Fly
+export const get = (url, params = {}) => (
+    new Promise((resolve, reject) => {
+        fly.get(url, { params })
+            .then(response => resolve(response.data))
+            .catch(error => reject(error))
+    })
+)
+export const post = (url, data = {}) => (
+    new Promise((resolve, reject) => {
+        fly.post(url, data)
+            .then(response => resolve(response.data))
+            .catch(error => reject(error))
+    })
+)
+~~~
+
+`src/api/index.js`
+
+~~~js
+import { get } from "./ajax";
+// 获取电影列表
+export const reqSubjects = () => get('http://t.yushu.im/v2/movie/top250')
+~~~
+
+###### ###
 
 # 原生小程序 VS mpvue 对比总结
 

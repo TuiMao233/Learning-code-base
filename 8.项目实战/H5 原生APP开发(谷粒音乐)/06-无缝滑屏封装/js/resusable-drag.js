@@ -1,4 +1,4 @@
-//! 拖拽/滑屏构建工具
+// 拖拽/滑屏构建工具
 class reusableDrag {
     units = {// 通用工具方法库
         forIn(object, callback) {
@@ -29,7 +29,7 @@ class reusableDrag {
                 })
             }
         },
-        browserRedirect() {//! 判断浏览器类型
+        browserRedirect() {// 判断浏览器类型
             var sUserAgent = navigator.userAgent.toLowerCase();
             var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
             var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
@@ -109,7 +109,7 @@ class reusableDrag {
             ev = ev || window.event
             this.mouse.move.call(this, ev)
         },
-        up() {
+        up(ev) {
             ev = ev || window.event
             this.mouse.up.call(this, ev)
         }

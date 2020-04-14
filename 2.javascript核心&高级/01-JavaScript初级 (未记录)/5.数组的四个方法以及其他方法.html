@@ -19,7 +19,7 @@
 			Array.prototype.shift()
 
 
-			//!返回指定长度的数组(不会改变原数组)
+			//! 截取返回指定长度的数组(不会改变原数组)
 			Array.prototype.slice(start, End)
 			//! 方法向/从数组中添加/删除项目(改变原数组)，然后返回被删除的项目。
 			//! 第一个参数是项的索引, 第二个参数是删除的个数(0表示不删), 第三个参数是插入的元素(可不选)
@@ -43,9 +43,11 @@
 			Array.prototype.findIndex()
 			//! 将数组合并为一个任意值, 函数传参为 (total 计算后的值, item 当前数组元素), 第二个参数为初始值, 返回累加的值
 			Array.prototype.docs.reduce((total,item)=>{}, {})
-			//! 数据进行排序, a->b为从小到大, b->a为从大到小
+			//! 数据进行排序, a->b为从小到大, b->a为从大到小(该方法对字母, 单词也有效)
+			// 默认不传参数则为字典排序 a->b
 			Array.prototype.sort((a,b)=> a-b)
-			
+			//! 将数组进行字符串拼接参数可传拼接的字符串
+			Array.prototype.join('')
 
 			//! 连接两个或更多的数组，并返回结果。
 			Array.prototype.concat()

@@ -312,7 +312,12 @@ var stuSchema = new Schema({
 		default: "female", // 设置改属性默认值
 	  required: true // 该属性是否是必须的
 	},
-	address: String
+  xxx_id:{
+    type: Number,
+    unique: true // 为属性定义唯一标识
+  }
+	address: String,
+  createTime: { type: Date, default: Date.now() } // 定义创建时间
 })
 ~~~
 
@@ -586,4 +591,29 @@ doc.remove(function (err) {if(!err){
    })
    ~~~
 
-   
+
+###### ###
+
+# mongoose 技巧
+
+## 查询值为空的文档
+
+~~~js
+Model.find({
+  // 该值为 '' | null | 并且该字段不存在
+  $or:[
+    {oneKey: ''},
+    {oneKey: null},
+    {oneKey: {$exists:false}}
+  ]
+})
+~~~
+
+## 用await接收查询结果
+
+~~~js
+// 返回结果是一个doc对象数组, 每个对象拥有doc中的所有方法以及数据
+const dbFindDoc = await Model.find({})
+// 可以进行遍历并保存
+~~~
+

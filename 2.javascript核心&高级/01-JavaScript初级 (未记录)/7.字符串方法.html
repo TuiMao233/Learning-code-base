@@ -20,9 +20,9 @@
 				// 用另一个值替换在字符串中指定的值
 				
 				
-				String.prototype.replace(a,[,b]) // ??
+				String.prototype.replace(a,[,b]) // 替换（支持正则表达式）
 				// //截取字符串/替换，范围是从下标为a的字符开始，截取长度为b ,如果省略第二个参数 将裁剪a开始的剩余部分。
-				String.prototype.slice(a,[,b]) // yes
+				String.prototype.slice(a,[,b]) // 截取指定长度（支持正则表达式?未知）
 				// //截取字符串/替换，范围是从下标为a的字符开始，截取长度为b ,如果省略第二个参数 将裁剪a开始的剩余部分。
 				String.prototype.substring(a,[,b])
 				// //截取字符串/替换，范围是从下标为a的字符开始，截取长度为b ,如果省略第二个参数 将裁剪a开始的剩余部分。
@@ -37,6 +37,8 @@
 				String.prototype.length 
 				// 连接两个或多个字符串
 				String.prototype.concat()
+				// 判断是否有对应字符
+				String.prototype.match('www')
 				
 			}
 		</script>

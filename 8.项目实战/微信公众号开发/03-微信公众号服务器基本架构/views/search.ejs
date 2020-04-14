@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wppAppPage</title>
+</head>
+
+<body>
+    <p class="record">点击录音</p>
+    <div class="list">
+    </div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        wx.config({
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: 'wxa2a6b98bb1a339d6', // 必填，公众号的唯一标识
+            timestamp: '<%= timestamp %>', // 必填，生成签名的时间戳
+            nonceStr: '<%= noncestr %>', // 必填，生成签名的随机串
+            signature: '<%= signature %>',// 必填，签名
+            jsApiList: [
+                'onMenuShareQQ',    // “分享到QQ”按钮点击状态及自定义分享内容接口
+                'onMenuShareQZone', //  “分享到QQ空间”按钮点击状态及自定义分享内容接口
+                'startRecord',      // 开始录音
+                'stopRecord',       // 结束录音
+                'translateVoice'    // 识别音频返回文字结果
+            ] // 必填，需要使用的JS接口列表
+        });
+        wx.ready(function () {
+            wx.checkJsApi({
+                jsApiList: [// 需要检测的JS接口列表，所有JS接口列表见附录2,
+                    'onMenuShareQQ', 'onMenuShareQZone', 'startRecord',
+                    'stopRecord', 'translateVoice'
+                ],
+                success: function (res) {
+                    // 以键值对的形式返回，可用的api值true，不可用为false
+                    // 如：{"checkResult":{"onMenuShareQQ":true},"errMsg":"checkJsApi:ok"}
+                }
+            });
+        });
+        // config信息验证失败会执行error方法
+        wx.error(function (res) { });
+
+
+        {/* 搜索热门电影列表接口配置
+            搜索API：http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10
+            携带参数:
+                start: 从多少页开始搜索(默认为0,一页代表count的总数)
+                count: 搜索返回总数(默认20个)
+                apikey: 请求授权码
+            响应结果:
+                start: 搜索页数
+                count: 搜索数量
+                query: 搜索字符串
+                tag: 搜索标签
+                subjects: 搜索结果列表
+        */}
+
+        function searchMovie() { // 请求搜索豆瓣热门电影
+            return new Promise((resolve, reject) => {
+                const SEARCH_URL = "https://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=10"
+                $.ajax({
+                    url: SEARCH_URL,
+                    dataType: "jsonp",
+                    success: resolve,
+                    error: reject
+                })
+            })
+        }
+        function wxEventAsync(event, options = {}) {
+            return new Promise((resolve, reject) => {
+                wx[event]({
+                    success: resolve,
+                    fail: reject,
+                    ...options
+                })
+            })
+        }
+        // 是否在录音
+        let isRecord = false
+        async function record() {
+            if (!isRecord) {
+                isRecord = true
+                // 开始录音
+                wxEventAsync('startRecord')
+            } else {
+                isRecord = false
+                // 结束录音 获取音频ID
+                const { localId } = await wxEventAsync('stopRecord')
+
+                // 获取识别结果
+                const { translateResult } = await wxEventAsync('translateVoice', { localId, isShowProgressTips: 1 })
+                console.log(translateResult)
+
+                // 豆瓣搜索热门电影
+                const { subjects } = await searchMovie()
+
+                // 根据电影列表添加dom结构
+                let html = ''
+                subjects.forEach(item => {
+                    // 获取名称 图片 链接 评价
+                    const { title, images, rating, alt } = item
+                    // 获取大图
+                    const { small } = images
+                    // 获取综合评价
+                    const { average } = rating
+                    html += `
+                        <div>
+                            <h2>${title}</h2>
+                            <p>评分：${average}</p>
+                            <div style="width:270px;height:402px;background-image:url(${small})"></div>
+                            <a href="${alt}"></a>
+                        </div>`
+                });
+                $('.list').html(html)
+            }
+        }
+
+        // 绑定事件
+        window.onload = () => {
+            const record_box = document.querySelector('.record')
+            record_box.onclick = record
+        }
+
+
+
+    </script>
+</body>
+
+</html>

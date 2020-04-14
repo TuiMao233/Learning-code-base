@@ -97,7 +97,7 @@
         //! 获取成功函数
         function resolve(value) {
             //! 如果状态不是pending, 则直接返回
-            if(_this.status !== PENDING) {return}
+            if (_this.status !== PENDING) { return }
             //! 将状态更改为获取成功
             _this.status = RESOLVED
             //! 将数据保存
@@ -110,7 +110,7 @@
         //! 获取失败函数
         function reject(reason) {
             //! 如果状态不是pending, 则直接返回
-            if(_this.status !== PENDING) {return}
+            if (_this.status !== PENDING) { return }
             //! 将状态更改为获取失败
             _this.status = REJECTED
             //! 将数据保存
@@ -189,40 +189,40 @@
         },
         catch: function (reject) { return this.then(null, reject) },
     }
-    Promise.resolve = function (value){
+    Promise.resolve = function (value) {
         /* 
         ! Promise.resolve接收有三种参数
         ! 1.实例结果是失败的
         ! 2.实例结果是成功的
         ! 3.不是实例
         */
-        return new Promise((resolve,reject)=>{
-            if(value instanceof Promise){
+        return new Promise((resolve, reject) => {
+            if (value instanceof Promise) {
                 //! 如果value是Promise的实例
                 value.then(resolve, reject)
-            }else{
+            } else {
                 //! 如果不是
                 resolve(value)
             }
         })
-        
+
     }
-    Promise.reject = function (reason){
-        return new Promise((resolve,reject)=>{
+    Promise.reject = function (reason) {
+        return new Promise((resolve, reject) => {
             reject(reason)
         })
     }
-    Promise.all = function (promises){
+    Promise.all = function (promises) {
         //! 创建一个计数器
         let resolveCount = 0
         //! 创建数组指定长度
         const values = new Array(promises.length)
-        return new Promise((resolve, reject)=>{
+        return new Promise((resolve, reject) => {
             promises.forEach((item, index) => {
                 Promise.resolve(item).then(
                     value => {
                         //! 当获取成功时, 计数器+1
-                        resolveCount ++
+                        resolveCount++
                         //! promise实例成功, 将结果保存在数组
                         values[index] = value
                         //! 当执行到最后一个, 执行all return promise成功函数, 传入成功值的数组
@@ -234,33 +234,35 @@
             })
         })
     }
-    Promise.rule = function(promises){
-        return new Promise((resolve, reject)=>{
+    Promise.rule = function (promises) {
+        return new Promise((resolve, reject) => {
             promises.forEach(item => {
-                Promise.resolve(item).then(resolve,reject)
+                Promise.resolve(item).then(resolve, reject)
             })
         })
     }
     //! 自定义promise
-    Promise.resolveDelay = function (value, time){
+    Promise.resolveDelay = function (value, time) {
         //! 延迟成功
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if(value instanceof Promise){
+                if (value instanceof Promise) {
                     //! 如果value是Promise的实例
                     value.then(resolve, reject)
-                }else{
+                } else {
                     //! 如果不是
                     resolve(value)
                 }
             }, time);
         })
     }
-    Promise.rejectDelay = function (reason, time){
-        return new Promise((resolve,reject)=>{
+    Promise.rejectDelay = function (reason, time) {
+        return new Promise((resolve, reject) => {
             setTimeout(() => reject(reason), time);
-            
+
         })
     }
     window.Promise = Promise
 })(window)
+
+

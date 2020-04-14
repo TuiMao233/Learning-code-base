@@ -39,6 +39,33 @@ $ express -h
 var port = normalizePort(process.env.PORT || '3000'); // 3000则是端口号
 ~~~
 
+## 接收post请求体数据
+
+~~~js
+var bodyParser=require('body-parser');
+router.use(bodyParser.urlencoded({extended: false}));
+~~~
+
+## 接收get请求参数
+
+~~~js
+let name = req.query.name;　
+let pageNum = req.query.pageNum;
+let pageisze = req.query.pageisze;
+~~~
+
+## 接收流体数据
+
+~~~js
+let data = ''
+req.on('data', (_data)=>{
+  data += _data.toString()
+})
+.on('end', ()=>{
+  console.log(data)
+})
+~~~
+
 ## 提供一个注册账号的接口
 
 ~~~js
@@ -151,6 +178,16 @@ app.use('/static', express.static('public'))
 // localhost:4000/static/a.mp3 --> public/a.mp3
 // localhost:4000/static/a.mp3 --> public/a.html
 // localhost:4000/static/a.mp3 --> public/a.js
+~~~
+
+# Exproess 定义路由占位符
+
+**访问：**`xxx/search/6666`
+
+~~~js
+router.get('/search:id', (req,res)=>{
+  const {id} = req.params // 666
+})
 ~~~
 
 # Exproess 定义下载数据

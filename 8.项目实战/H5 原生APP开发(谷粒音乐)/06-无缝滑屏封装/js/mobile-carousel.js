@@ -107,9 +107,6 @@ const touchMiCarousel = new reusableDrag({
                 if(this.isShakeY){return}
             }
 
-
-
-
             // 手指位置 + 手指点击时轮播图容器距离浏览器的偏移量 = 轮播图容器偏移量
             var wrapper_slidingsetX = ev.touches[0].clientX + this.startMoveOffsetX
             // 如果滑动超出了一个元素的宽度，则固定宽度

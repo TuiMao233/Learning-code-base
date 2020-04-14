@@ -37,3 +37,28 @@
 		<div id="div"></div>
 	</body>
 </html>
+
+(function(){
+	const oneDetail = {}
+	// 爬取信息栏的所有标签
+	const info_span = $('#content .article .indent #info > span')
+	// 爬取类型
+	oneDetail.genre = $.map($("[property='v:genre']"), item => item.innerText).join(' / ')
+	// 爬取导演
+	oneDetail.director = $.map($("[rel='v:directedBy']"), item => item.innerText).join(' / ')
+	// 爬取编剧
+	oneDetail.screenwriter = $.map($(info_span[1]).find('.attrs a'), item => item.innerText).join(' / ')
+	// 爬取主演
+	oneDetail.starring = $.map($(info_span[2]).find('.attrs a'), item => item.innerText).slice(0, 6).join(' / ')
+	// 爬取简介, 并去除空格与换行
+	oneDetail.summary = $("[property='v:summary']").text().replace(/\s/g, "")
+
+	// 如果有视频(不等于undefind), 则爬取视频信息
+	if($('.related-pic-video')[0]){
+		// 爬取视频详情页面链接
+		oneDetail.video_page_url = $('.related-pic-video').attr('href')
+		// 爬取封面图
+		oneDetail.video_cover_image = $('.related-pic-video').css('background-image').replace(/url\("|"\)/g,"")
+	}
+	return oneDetail
+})()

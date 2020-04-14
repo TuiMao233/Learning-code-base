@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width =device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0" />
+  <title>电影详情</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #app>header {
+      box-sizing: border-box;
+      width: 100%;
+      height: 2rem;
+      padding: .4rem .5rem;
+      border-bottom: 1px solid #f3f3f3;
+    }
+
+    #app>header .header_title {
+      float: left;
+      color: #00b600;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    #app>header .header_search {
+      float: right;
+      color: #00b600;
+      font-size: .8rem;
+      font-weight: bold;
+    }
+
+    #app>.page {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 1rem .5rem 0;
+    }
+
+    #app>.page>.title {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    #app>.page>.info {
+      width: 100%;
+      height: 7.6rem;
+      padding-bottom: .5rem;
+      border-bottom: 1px solid #f3f3f3;
+    }
+
+    #app>.page>.info>.right {
+      float: right;
+      width: 35%;
+    }
+
+    #app>.page>.info>.right>a {
+      display: block;
+      width: 100%;
+    }
+
+    #app>.page>.info>.right>a>img {
+      display: block;
+      width: 100%;
+      height: 7.6rem
+    }
+
+    #app>.page>.info>.left {
+      float: left;
+      width: 56%;
+    }
+
+    #app>.page>.info>.left>p {
+      font-size: .7rem;
+      color: #494949;
+    }
+
+    #app>.page>.info>.left>.rating {
+      margin: .2rem 0 .8rem 0;
+    }
+
+    #app>.page>.info>.left>.meta {
+      font-size: .6rem;
+      line-height: 1.1rem;
+    }
+
+    #app>.page>.info>.left>.rating>span {
+      color: lightgreen;
+      margin: .2rem 0 .8rem 0;
+    }
+
+    #app>.page>.info>.left>.rating>.ratingNum {
+      margin-left: .5rem;
+      color: #aaa;
+    }
+
+    h2 {
+      color: #aaa;
+      margin: 0 0 15px;
+      font-size: 15px;
+    }
+
+    .intro {
+      margin-top: .7rem;
+    }
+
+    .intro>h2 {
+      color: #aaa;
+      font-weight: 400;
+
+    }
+
+    .intro>.bd {
+      font-size: .6rem;
+      line-height: .8rem;
+      color: #494949;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+  {/* {
+    title: '饥饿站台',
+    score: '7.8',
+    image: 'https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2566870171.jpg',
+    genre: '科幻 / 惊悚',
+    director: '加尔德·加兹特鲁·乌鲁蒂亚',
+    screenwriter: '大卫·德索拉 / 佩德罗·里韦罗',
+    starring: '伊万·马萨戈 / 佐里昂·伊圭里奥尔 / 安东尼亚·圣胡安 / 埃米利奥·布阿勒 / 亚历山德拉·玛桑凯 / 马里奥·帕尔多',
+    summary: '在未来的反乌托邦国度中，囚犯们被关押在垂直堆叠的牢房里，饥肠辘辘地看着食物从上层落下，靠近顶层的人吃得饱饱的，而位于
+    底层的人则因饥饿而变得激进。由加尔德·加斯特卢-乌鲁希亚执导的《饥饿站台》是一部扭曲的社会寓言，讲述了人类最黑暗和最饥渴的一面。'
+  } */}
+  </script>
+  <div id="app">
+    <header>
+      <a class="header_title" href="/movie">white电影</a>
+      <a class="header_search" href="/search">搜索</a>
+    </header>
+    <div class="page">
+      <h1 class="title"><%= title %></h1>
+      <section class="info">
+        <div class="left">
+          <p class="rating">
+            <span>评分:</span>
+            <strong><%= score %></strong>
+            <span class="ratingNum">52996人评价</span>
+          </p>
+          <p class="meta">
+            导演: <%= director %>; 编剧: <%= screenwriter %> 主演: <%= starring %>
+            <!-- 导演、编剧、演员信息 -->
+          </p>
+        </div>
+        <div class="right">
+          <a href="javascript:">
+            <img src="<%= image %>" alt="<%= title %>">
+          </a>
+        </div>
+      </section>
+      <section class="intro">
+        <h2><%= title %>的剧情简介</h2>
+        <div class="bd">
+          <p><%= summary %></p>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+
+</html>

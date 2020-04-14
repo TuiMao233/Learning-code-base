@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // 引入webpack压缩CSS文件的插件
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-// 共用处理css数组
+// 共用处理css数组配置
 const commtCssOptions = [
 	// 提取css字符串为单独css文件
 	MiniCssExtractPlugin.loader,
