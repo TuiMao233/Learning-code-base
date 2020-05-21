@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta charset="utf-8" />
+		<title>xxx</title>
+	</head>
+	<style>
+		.box {
+			width: 50px;
+			height: 50px;
+			background-color: salmon;
+		}
+	</style>
+	<body>
+		你喜欢的运动是<input type="checkbox" id="checkAllBox" value="全选/全不选" />全选/全不选
+		<br />
+		<input type="checkbox" name="items" value="足球" />足球
+		<input type="checkbox" name="items" value="羽毛球" />羽毛球
+		<input type="checkbox" name="items" value="乒乓球" />乒乓球
+		<input type="checkbox" name="items" value="篮球" />篮球
+		<br />
+		<button id="checkQx">全    选</button>
+		<button id="checkBx">全不选</button>
+		<button id="checkFx">反    选</button>
+		<button id="dJut">提    交</button>
+		<div class="box">
+			<div></div>
+		</div>
+		<div class="box">
+			<div></div>
+		</div>
+	</body>
+	<script>
+		
+		function butbox (id,fun){
+			var box =  document.getElementById(id);
+			box.onclick = fun;
+		}
+		
+		var items = document.getElementsByName("items");
+		
+		butbox("checkQx",function (){
+			for(var i=0 ; i<items.length ; i++){
+				items[i].checked = true;
+			}
+		})
+		butbox("checkBx",function(){
+			for(var i=0 ; i<items.length ; i++){
+				items[i].checked = false;
+			}
+		})
+		butbox("checkFx",function(){
+			for(var i=0 ; i<items.length ; i++){
+				items[i].checked = !items[i].checked;
+			}
+		})
+		butbox("dJut",function(){
+			for(var i=0 ; i<items.length ; i++){
+				if(items[i].checked){
+					alert(items[i].value);
+				}
+			}
+		})
+		butbox("checkAllBox",function(){
+			for(var i=0 ; i<items.length ; i++){
+				items[i].checked = this.checked;
+			}
+			
+		})
+		
+//		在事件的响应函数最后 响应函数是给谁绑定的this就是谁
+		//获取body的元素节点
+		var body = document.body;
+		//获取html的元素节点
+		var html = document.documentElement;
+		//获取全部的元素节点
+		var all = document.all;
+		//获取全部的元素节点
+		var all2 = document.getElementsByTagName("*");
+		//获取head的元素节点
+		var head = document.head;
+		//使用CSS选择器选择节点 但总是单个识别
+		var calsx = document.querySelector(".box")
+		//使用CSS选择器选择节点 会封装为数组 注意：一旦元素结构发生改变 querySelectorAll 就会失效
+		var calsx2 = document.querySelectorAll(".box");
+		console.log(calsx2[1]);
+		//  获取当前屏幕宽度和高度 注意：||顺序不能变。
+		var documWidth = document.documentElement.clientWidth || document.body.clientWidth;
+    	var documHeight = document.documentElement.clientHeight || document.body.clientHeight;
+		console.log(documWidth , documHeight)
+		
+		function $ (obj){
+			return document.querySelectorAll(obj)
+		}
+	</script>
+</html>
+

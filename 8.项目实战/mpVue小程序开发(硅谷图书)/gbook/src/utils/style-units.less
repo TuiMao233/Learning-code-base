@@ -1,0 +1,17 @@
+// 两列宫格的边框设置
+.grid-border (@border-style:solid 1px #000) {
+    &:nth-child(odd) {
+      border-right: @border-style;
+      border-left: @border-style;
+    }
+    &:nth-child(even) {
+      border-right: @border-style;
+    }
+    &:nth-child(2n), &:nth-child(1n) {
+      border-top: @border-style;
+    }
+    &:nth-last-child(1), &:nth-last-child(2) {
+      border-bottom: @border-style;
+    }
+}
+.clearfix() {&:after{content: '';display: block;clear: both;}}

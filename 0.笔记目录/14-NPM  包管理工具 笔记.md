@@ -19,8 +19,10 @@
 	• npm install 包名 –g
 # 安装包并指定版本
 	• npm install 包名@1	|-这里会下1.几版本的最新版本，也可以指定详细版本1.2.4....-| 
-# 安装包并添加到依赖中
-	• npm install 包名 –save-dev 简写：-S-D
+# 安装包并添加到生产依赖中(dependencies)
+	• npm install 包名 –save 简写：-S
+# 安装包并添加到开发依赖中(devDependencies)
+	• npm install 包名 –save-dev 简写：-D
 # 删除一个模块
 	• npm remove 包名
 # 从本地安装
@@ -61,6 +63,7 @@ npm config set cache "D:\nodejs\node_cache"
    `npm list -global`
 2. **配置镜像站**
    `npm install -g cnpm --registry=https://registry.npm.taobao.org`
+   `npm config set registry https://registry.npm.taobao.org`
 3. **查看c盘配置文件仓库地址**
    `C:\Users\Administrator\.npmrc`
 4. **添加新的环境变量**

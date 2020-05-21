@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+	<style>
+		#div {
+			width: 350px;
+			height: 350px;
+			background-color: tomato;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = wowowo;
+		function wowowo() {
+			const domObj = document.getElementById("div");
+			console.log(getStyle(domObj, 'width')) // "350px"
+			function getStyle(obj, styleName) {
+				if (!window.getComputedStyle) {
+					//IE8获取元素宽度样式方法
+					return obj.currentStyle[styleName];
+				} else {
+					//其他浏览器获取样式方法
+					return getComputedStyle(obj, null)[styleName];
+				}
+			}
+		}
+	</script>
+
+</head>
+
+<body>
+	<div id="div"></div>
+</body>
+const domObj = document.getElementById("div");
+console.log(getStyle(domObj, 'width')) // "350px"
+function getStyle(obj, styleName) {
+	if (!window.getComputedStyle) {
+		//IE8获取元素宽度样式方法
+		return obj.currentStyle[styleName];
+	} else {
+		//其他浏览器获取样式方法
+		return getComputedStyle(obj, null)[styleName];
+	}
+}
+
+</html>

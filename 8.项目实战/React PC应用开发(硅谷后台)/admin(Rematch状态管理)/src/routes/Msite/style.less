@@ -1,0 +1,67 @@
+.msite {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    .msite_menu {
+        height: 100%;
+        width: 200px;
+        background-color: #001529;
+        header {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: bold;
+            height: 50px;
+            padding-left: 24px;
+            line-height: 50px;
+        }
+    }
+    .right_page {
+        position: absolute;
+        top: 0px;bottom: 0;left: 200px;right: 0;
+        background-color: #F0F2F6;
+    }
+    .header {
+        height: 40px;
+        background-color: #ffffff;
+        div {
+            float: right;
+            line-height: 40px;
+            margin-right: 10px;
+            font-size: 15px;
+        }
+        border-bottom: #6DA192 1px solid;
+    }
+    .page_msg {
+        height: 45px;
+        background-color: #ffffff;
+        line-height: 45px;
+        .method {
+            float: left;
+            margin-left: 100px;
+            font-weight: bold;
+            position: relative;
+            &::after{
+                content: '';
+                position: absolute;
+                top: 45px;left: 0;right: 0;
+                margin: auto;
+                width: 10px;
+                border-width: 10px;
+                border-style:solid dashed dashed dashed;
+                border-color:#ffffff transparent transparent transparent;
+            }
+        }
+        .time_weather {
+            float: right;
+            margin-right: 10px;
+            font-size: 15px;
+            span {
+                margin: 0 5px;
+            }
+        }
+    }
+    .route_switch {
+        background-color: #ffffff;
+        margin: 15px;
+    }
+}

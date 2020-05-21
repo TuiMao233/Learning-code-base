@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+		</style>
+		<script type="text/javascript">
+		window.onload=	function () {
+			/*
+			将其他的数据类型转换为Number
+				转换方式一：
+					使用Number()函数
+						- 字符串 --> 数字
+							1.如果是纯数字的字符串，则直接将其转换为数字
+							2.如果字符串中有非数字的内容，则转换为NaN
+							3.如果字符串是一个空串或者是一个全是空格的字符串，则转换为0
+						- 布尔 --> 数字
+							true 转成 1
+							false 转成 0
+			
+						- null --> 数字     0
+			
+						- undefined --> 数字 NaN
+			
+			转换方式二：
+					- 这种方式专门用来对付字符串
+					- parseInt() 把一个字符串转换为一个整数
+					- parseFloat() 把一个字符串转换为一个浮点数
+			 */
+			Number('60')  		// 60
+			Number(true) 		// 1
+			Number(false) 		// 0
+			Number(null) 		// 0
+			Number(undefined) 	// NaN
+			
+			
+			parseInt('60px')  		// 60
+			
+			parseFloat('51.15610px')// 51.15610
+			}
+		</script>
+		
+	</head>
+	<body id="xxx">
+		<button id="but">点击</button>
+		<div id="box1"></div>
+	</body>
+	
+	
+</html>
+/*
+将其他的数据类型转换为Number
+	转换方式一：
+		使用Number()函数
+			- 字符串 --> 数字
+				1.如果是纯数字的字符串，则直接将其转换为数字
+				2.如果字符串中有非数字的内容，则转换为NaN
+				3.如果字符串是一个空串或者是一个全是空格的字符串，则转换为0
+			- 布尔 --> 数字
+				true 转成 1
+				false 转成 0
+
+			- null --> 数字     0
+
+			- undefined --> 数字 NaN
+
+转换方式二：
+		- 这种方式专门用来对付字符串
+		- parseInt() 把一个字符串转换为一个整数
+		- parseFloat() 把一个字符串转换为一个浮点数
+ */

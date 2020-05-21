@@ -436,7 +436,7 @@ StuModel.find({name:'孙悟空'},'name age -_id',{skip:3,limit:3},function(err,d
 ~~~javascript
 StuModel.findById('5e51488eee942f08a4072305', function(err, doc){if(!err){
 		console.log(doc)
-	}})
+}})
 ~~~
 
 ## Model查询修改
@@ -595,6 +595,12 @@ doc.remove(function (err) {if(!err){
 ###### ###
 
 # mongoose 技巧
+
+## Schema 添加创建时间
+
+~~~js
+create_time: { type: Date, default: Date.now } 
+~~~
 
 ## 查询值为空的文档
 

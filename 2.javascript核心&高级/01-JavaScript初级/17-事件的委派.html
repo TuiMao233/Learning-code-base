@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			li{list-style-type :none;}
+			#xxx{
+				display: flex;
+			}
+			button{
+				align-content: center;
+			}
+			li{
+				width: 60px;
+				height: 60px;
+				float: left;
+				margin: 5px;
+				background-color: darkcyan;
+			}
+			ul{
+				display: flex;
+			}
+		</style>
+		
+		
+	</head>
+	<body>
+			<button id="but">点击添加</button><br>
+		<ul id="ulu">
+			<li class="link"></li>
+			<li class="link"></li>
+			<li class="link"></li>
+			<li class="link"></li>
+			<li class="link"></li>
+			<li class="link"></li>
+		</ul>
+		
+		<script type="text/javascript">
+		window.onload=	function () {
+			var ul = document.getElementById("ulu");
+			var lil = document.getElementsByClassName("link");
+			// for(var i=0; i<lil.length; i++){
+			// 	lil[i].onclick = function() {
+			// 		console.log(this)
+			// 	}
+			// }
+			ul.onclick = function (event){
+				event = event || window.event;
+				if(event.target.className == "link"){//如果触发事件的对象是我们期望的元素，则执行否则不执行
+					alert("我是ul的单击响应函数");
+				}	
+			};
+		document.getElementById("but").onclick = function(){
+			var li = document.createElement("li");
+			li.className = "link";
+			ul.appendChild(li);
+		}
+	}
+			
+			
+		</script>
+	</body>
+	
+	
+</html>
+

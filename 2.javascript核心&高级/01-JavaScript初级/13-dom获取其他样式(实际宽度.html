@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+	<style>
+		#box1 {
+			width: 300px;
+			height: 300px;
+			background-color: brown;
+			margin-top: 350px;
+		}
+
+		#box2 {
+			width: 300px;
+			height: 300px;
+			background-color: cadetblue;
+			overflow: auto;
+		}
+
+		#box3 {
+			width: 450px;
+			height: 600px;
+			background-color: darkorange;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			dom = document.getElementById("box1")
+			but = document.getElementById("but");
+			but.onclick = function () {
+				// 元素宽度或高度 但不包括边框的高宽度 也就是可见宽度
+				// alert(dom.clientHeight)
+
+				//返回元素的真实宽度或高度
+				// alert(dom.offsetHeight)
+
+				// 获取当前元素的定位父元素
+				// 如果都没定位 则获取body
+				// alert(dom.offsetParent.id)
+
+				/*
+				 offsetLeft
+				  当前元素相对其定位元素的水平偏移量
+				 offsetLeft
+				 当前元素相对其定位元素的垂直偏移量*/
+				// alert(dom.offsetLeft);
+
+				/*
+				 	scrollWidth
+				 	scrollHeight
+				 	总宽度,溢出宽度也包括 同理高度也是
+				 */
+				var box3 = document.getElementById("box2");
+				// alert(box3.scrollHeight)
+
+				// 溢出滚动条的偏移值
+				// 使用方法：溢出子元素的父元素.scrollTop
+				// alert(box3.scrollTop);
+
+				// 总高度 - 溢出偏移量 == 可见高度 则表示滚动条到底了
+				var bz = box3.scrollHeight - box3.scrollTop == box3.clientHeight;
+				alert(bz);
+
+				// 获取浏览器滚动条的偏移值
+				var L = document.documentElement.scrollLeft || document.body.scrollLeft;
+				var T = document.documentElement.scrollTop || document.body.scrollTop;
+			}
+		}
+	</script>
+
+</head>
+
+<body id="xxx">
+	<button id="but">点击</button>
+	<div id="box2">
+		<div id="box3">
+
+		</div>
+	</div>
+	<!--<div style="position: relative;">-->
+	<div id="box1"></div>
+	<!--</div>-->
+</body>
+
+
+</html>
