@@ -1,0 +1,2 @@
+@import "../../common/vendor.wxss";
+._input{margin:10rpx;border-bottom:2rpx solid #009475;font-size:33rpx}

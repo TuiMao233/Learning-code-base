@@ -1,4 +1,5 @@
-const fly = new require('flyio/dist/npm/wx')
+var Fly=require("flyio/dist/npm/wx") 
+var fly=new Fly
 export const get = (url, params = {}) => (
     new Promise((resolve, reject) => {
         fly.get(url, { params })

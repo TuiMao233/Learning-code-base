@@ -895,7 +895,7 @@ module.exports = {
 ## 脚手架搭建环境(vue/cli@3/4)
 
 ~~~makefile
-npm i @vue/cli -g
+cnpm i @vue/cli -g
 
 vue create  '项目名'  / vue ui
 
@@ -1687,12 +1687,12 @@ module.exports = {
     devServer: {
         proxy: { // 代理
           '/api': {
-            target: '<url>', //API服务器的地址
-            ws: true,	//代理websockets
-            changeOrigin: true	// 虚拟的站点需要更管origin
-            pathRewrite: { '^/api': '' }//重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
-          },
-        }
+                target: '<url>', //API服务器的地址
+                ws: true,	//代理websockets
+                changeOrigin: true，	// 虚拟的站点需要更管origin
+                pathRewrite: { '^/api': '' }//重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
+          	},
+         }
       }
 }
 ~~~

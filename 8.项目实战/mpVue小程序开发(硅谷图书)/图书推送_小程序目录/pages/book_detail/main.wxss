@@ -1,0 +1,2 @@
+@import "../../common/vendor.wxss";
+.book_detail{display:flex;flex-direction:column;justify-content:center;padding:0 80rpx}.book_detail image{width:100%;height:800rpx}.book_detail .header{text-align:center;font-weight:700;margin:20rpx 0}.book_detail .book_msg{margin:20rpx 0;font-size:33rpx}.book_detail .about_header{text-align:center;font-weight:700;margin:20rpx 0}.book_detail .about_text{overflow-wrap:break-word}

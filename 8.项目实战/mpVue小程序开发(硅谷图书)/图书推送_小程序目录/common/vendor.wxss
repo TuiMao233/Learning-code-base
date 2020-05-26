@@ -1,0 +1,1 @@
+.book_item{margin-top:40rpx}.book_item:after{content:"";display:block;clear:both}.book_item image{float:left;width:160rpx;height:160rpx;margin-right:10rpx}.book_item .book_msg{height:160rpx;display:flex;flex-direction:column;font-size:33rpx;justify-content:space-between;margin-right:10rpx}.book_item .book_msg .price{float:right;color:red;font-weight:700}
