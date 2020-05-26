@@ -1223,7 +1223,7 @@ import Home from '../views/b.vue'
 // 对路由插件进行解析
 Vue.use(VueRouter) 
 // 这里定义一个路由
-export default new VueRouter({   
+export default new VueRouter({
 	linkActiveClass: 'active', // 定义默认路由类名
   routes = [
       // 配置路由组件地址

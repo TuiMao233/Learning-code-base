@@ -7,7 +7,7 @@ module.exports = {
         {   // 普通菜单按钮
             "type": "view",
             "name": "查看电影🎥",
-            "url": `${url}/movie/`
+            "url": `${url}/trailer/`
         },
         {
             "type": "view",

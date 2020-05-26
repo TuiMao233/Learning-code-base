@@ -194,7 +194,7 @@ export const reqSubjects = () => get('http://t.yushu.im/v2/movie/top250')
 # 原生小程序 VS mpvue 对比总结
 
 ~~~
-1)原生小程序运行更稳定些, 兼容性好，mpvue可能在某些方面存在兼容性问题（vue-router）
+1)原生小程序运行更稳定些, 兼容性好，mpvue可能在某些方面存在兼容性问题(vue-router)
 2)mpvue支持vue组件化开发. 效率更高，功能更强大(双向数据绑定, vuex)
 3)mpvue可基于webpack组件化, 工程化开发
 4)原生不支持npm安装包，不支持css预处理

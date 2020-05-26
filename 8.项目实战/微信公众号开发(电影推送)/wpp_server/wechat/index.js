@@ -268,11 +268,11 @@ const w = new Wechat();
 
 
 // 修改菜单
-/* ;(async ()=>{
+;(async ()=>{
     let result = await w.delMenu()
     console.log(result)
     result = await w.createMenu()
     console.log(result)
-})() */
+})()
 
 module.exports = w
