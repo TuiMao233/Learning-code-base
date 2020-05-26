@@ -15,6 +15,7 @@
   * call()/apply()是立即调用函数
   * bind()是将函数返回
 -->
+
 <script type="text/javascript">
 // 需求：我想执行函数的this不是window,而是上方的obj
 var obj = {username: '魏大勋'}
@@ -22,7 +23,7 @@ function fun (data) { console.log(this, data) }
 
 // 执行该函数, 并将this指针指向obj, 带参数时: 参数放在对象的后面
 fun.call(obj, 60)
-// 执行该函数, 并将this指针指向obj, 带参数时: ,参数放在对象的后面的数组,或者伪数组
+// 执行该函数, 并将this指针指向obj, 带参数时: 参数放在对象的后面的数组,或者伪数组
 fun.apply(obj, [60])
 
 

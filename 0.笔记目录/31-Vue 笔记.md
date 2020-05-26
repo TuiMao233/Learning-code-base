@@ -892,10 +892,10 @@ module.exports = {
 };
 ~~~
 
-## 脚手架搭建环境(vue/cli-v3)
+## 脚手架搭建环境(vue/cli@3/4)
 
 ~~~makefile
-npm i @vue/cli
+npm i @vue/cli -g
 
 vue create  '项目名'  / vue ui
 
