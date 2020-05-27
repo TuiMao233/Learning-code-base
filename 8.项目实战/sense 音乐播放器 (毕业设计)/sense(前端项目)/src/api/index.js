@@ -2,6 +2,6 @@
 import axios from "./axios";
 
 // 请求登录
-export const reqLogin = (username, password) => axios.post('/login', {username, password})
+export const reqLogin = (email, password) => axios.post('/login', {email, password})
 // 请求注册
-export const reqRegister = (username, password) => axios.post('/register', {username, password})
+export const reqRegister = (name, email, password) => axios.post('/register', {name, email, password})

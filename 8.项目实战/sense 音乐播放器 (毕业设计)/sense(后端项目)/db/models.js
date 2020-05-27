@@ -15,7 +15,8 @@ const MusicModel = createModel({
 
 // 用户数据
 const UserModel = createModel({
-   username: { type: String, required: true }, // 账号
+   name: { type: String, required: true }, // 昵称
+   email:  { type: String, required: true }, // 电子邮箱
    password: { type: String, required: true }, // 密码
    song_list: [{ // 歌单
       name: { type: String, required: true }, // 歌单名

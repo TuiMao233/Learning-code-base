@@ -6,7 +6,7 @@
         <transition name="masking_anim">
           <div class="masking" v-show="scroll_pos > 80"></div>
         </transition>
-        <img class="head_img" src alt="" />
+        <img class="head_img" src="./assets/images/user_head.jpg" alt="" />
       </div>
 
       <el-aside width="200px">

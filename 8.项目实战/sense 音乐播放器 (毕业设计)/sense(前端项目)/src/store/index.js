@@ -20,9 +20,10 @@ export default new Vuex.Store({
       if(result.code == 0){ commit(RECEIVE_USER_INFO, result.data) }
     },
     // 提交注册数据
-    async getRegister ({commit}, {username, password}) {
-      const result = await reqRegister(username, password)
-      if(result.code == 0){ commit(RECEIVE_USER_INFO, result.data) }
+    async getRegister ({commit}, {name, email, password , ob}) {
+      const result = await reqRegister(name, email, password)
+      if(result.code == 0){ commit(RECEIVE_USER_INFO, result.data); ob(true) }
+      else { ob(false) }
     }
   },
   modules: {}

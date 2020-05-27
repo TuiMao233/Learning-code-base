@@ -5,40 +5,43 @@ const { md5, upload } = require('../utils')
 const { host_url } = require('../config')
 // 登录
 router.post('/login', async ctx => {
-    let username = ctx.request.body.username
+    let email = ctx.request.body.email
     let password = ctx.request.body.password
-    if (!username && !password) return ctx.body = { code: 1, msg: '账户/密码未输入' };
+    if (!email && !password) return ctx.body = { code: 1, msg: '账户/密码未输入' };
     password = md5(password)
-    const find_result = await UserModel.findOne({ username, password }, { __v: 0 })
+    const find_result = await UserModel.findOne({ email, password }, { __v: 0 })
 
     if (find_result) {
         ctx.body = { code: 0, data: find_result }
-        ctx.session.username = username
+        ctx.session.email = email
         ctx.session.password = password
     }
     else ctx.body = { code: 1, msg: '该账户不存在' }
 })
 // 注册
 router.post('/register', async ctx => {
-    let username = ctx.request.body.username
+    let name = ctx.request.body.name
+    let email = ctx.request.body.email
     let password = ctx.request.body.password
-    if (!username && !password) return ctx.body = { code: 1, msg: '账户/密码未输入' };
+    if (!email && !password && !name) return ctx.body = { code: 1, msg: '账户/密码未输入' };
     password = md5(password)
-    const find_result = await UserModel.findOne({ username, password }, { __v: 0 })
+    const find_result = await UserModel.findOne({ email, password }, { __v: 0 })
 
     if (!find_result) {
-        const create_result = await UserModel.create({ username, password })
+        const create_result = await UserModel.create({ email, password, name })
         const { song_list } = create_result
-        ctx.body = { code: 0, data: { username, password, song_list } }
-        ctx.session.username = username
+        ctx.body = { code: 0, data: { email, password, song_list } }
+        ctx.session.email = email
         ctx.session.password = password
     } else ctx.body = { code: 0, msg: '该账户已存在' }
 })
+
+
 // 自动登录
 router.get('/auto_login', async ctx => {
-    const { username, password } = ctx.session
-    if (!username && !password) return ctx.body = { code: 1, msg: '账户/密码未输入' };
-    const find_result = await UserModel.findOne({ username, password }, { __v: 0 })
+    const { email, password } = ctx.session
+    if (!email && !password) return ctx.body = { code: 1, msg: '账户/密码未输入' };
+    const find_result = await UserModel.findOne({ email, password }, { __v: 0 })
     if (find_result) ctx.body = { code: 0, data: find_result }
     else ctx.body = { code: 1, msg: '该账户不存在' }
 })
