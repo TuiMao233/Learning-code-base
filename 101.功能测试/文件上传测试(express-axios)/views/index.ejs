@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+  <input class="file" type="file" value="指定文件">
+  <div class="submit">点击上传</div>
+  <img src />
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.js"></script>
+<script>
+  const fileInputDom = document.querySelector('.file')
+  const imgDom = document.querySelector('img')
+  const submitDom = document.querySelector('.submit')
+
+
+  const formFile = new FormData() // 创建formDate对象
+  fileInputDom.addEventListener('change', function () {
+    // 获取file文件信息
+    const file = this.files[0]
+
+    // 创建本地浏览图片地址, 并写入img中
+    const http_url = window.webkitURL.createObjectURL(file)
+    imgDom.setAttribute('src', http_url)
+
+    // 将文件追加到fromDtate对象中, 第一个参数对应着表单的name, 第二个传入file文件
+    formFile.append("avatar", file)
+  })
+
+
+  const axios_upload_config = { // 全局请求头设置
+    headers: { "Content-Type": "multipart/form-data" },
+    // 添加上传进度监听事件
+    onUploadProgress: e => {
+      const completeProgress = ((e.loaded / e.total * 100) | 0) + "%";
+      console.log(completeProgress)
+      this.progress = completeProgress;
+    }
+  }
+
+  submitDom.onclick = async function () { // 进行上传
+    const result = await axios.post('/upImage', formFile, axios_upload_config)
+    console.log(result)
+  }
+</script>
+
+</html>

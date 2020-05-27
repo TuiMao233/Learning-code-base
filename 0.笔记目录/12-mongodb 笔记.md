@@ -522,7 +522,7 @@ doc.save();
 
 ~~~javascript
 doc.remove(function (err) {if(!err){
-				console.log("大师兄再见~~~");
+	console.log("大师兄再见~~~");
 }});
 ~~~
 

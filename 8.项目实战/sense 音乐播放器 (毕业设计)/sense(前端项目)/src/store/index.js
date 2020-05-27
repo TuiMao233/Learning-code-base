@@ -14,17 +14,8 @@ export default new Vuex.Store({
     [RECEIVE_USER_INFO] (state, userInfo) {state.userInfo = userInfo}
   },
   actions: {
-    // 提交登录数据
-    async getLogin ({commit}, {username, password}) {
-      const result = await reqLogin(username, password)
-      if(result.code == 0){ commit(RECEIVE_USER_INFO, result.data) }
-    },
     // 提交注册数据
-    async getRegister ({commit}, {name, email, password , ob}) {
-      const result = await reqRegister(name, email, password)
-      if(result.code == 0){ commit(RECEIVE_USER_INFO, result.data); ob(true) }
-      else { ob(false) }
-    }
+    async receiveUserInfo ({commit}, userInfo) { commit(RECEIVE_USER_INFO, userInfo) },
   },
   modules: {}
 });

@@ -1,6 +1,8 @@
-/* 搜索页面 */
+/* 个人中心 */
 <template>
-    <div>Search</div>
+  <div>
+      Personal
+  </div>
 </template>
 
 <script>
@@ -9,6 +11,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style>
 
 </style>

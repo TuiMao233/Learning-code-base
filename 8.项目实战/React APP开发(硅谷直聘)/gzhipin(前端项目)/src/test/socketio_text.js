@@ -12,7 +12,3 @@ socket.on('receiveMsg', function (data) {
 // 向服务器发送消息
 socket.emit('sendMsg', {name: 'Tom', date: Date.now()})
 
-
-const arr = [0,5,3,7,1,5,7]
-arr.sort((a,b)=>a-b)
-console.log(arr)

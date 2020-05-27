@@ -1,12 +1,14 @@
+/* 注册页面 */
 <template>
   <div class="login">
     <el-card class="box-card">
       <div slot="header">你就是我的master吗？</div>
       <el-upload
         class="avatar-uploader"
+        action
         :show-file-list="false"
-        :on-success="handleAvatarSuccess"
-        :before-upload="beforeAvatarUpload"
+        :on-change="changeFile"
+        :auto-upload="false"
       >
         <img v-if="imageUrl" :src="imageUrl" class="avatar" />
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -15,7 +17,7 @@
       <el-input v-model="email" placeholder="邮箱" clearable />
       <el-input v-model="password" placeholder="密码" show-password />
       <el-input v-model="password_rep" placeholder="重复密码" show-password />
-      <el-button type="primary" @click="send_login" class="send_button">注册</el-button>
+      <el-button type="primary" @click="sendRegister" class="send_button">注册</el-button>
       <div class="error_msg">{{ error_msg }}</div>
     </el-card>
   </div>
@@ -23,7 +25,9 @@
 
 <script>
 import { isEmail } from "../assets/utils";
+import { reqRegister } from "../api";
 import { mapActions, mapState } from "vuex";
+import axios from "axios";
 export default {
   data: () => ({
     name: "",
@@ -31,11 +35,13 @@ export default {
     password: "",
     password_rep: "",
     error_msg: "",
-    imageUrl: ''
+    imageUrl: "",
+    file: ""
   }),
   computed: {
     ...mapState(["userInfo"]),
-    isLogin() {
+    loginErrorMsg() {
+      // 是否符合登录条件
       let error_msg = [];
       const { name, email, password, password_rep } = this;
       if (!name.trim()) {
@@ -50,60 +56,59 @@ export default {
       if (!(password.trim() === password_rep.trim())) {
         error_msg.push("重复密码不相同");
       }
-
       return error_msg.join(" | ");
     }
   },
-  mounted() {
-    if (this.userInfo.email) this.$router.replace("/home");
-  },
+  // 如果store存在用户信息, 跳转到personal
+  mounted() { if (this.userInfo.email) this.$router.replace("/personal"); },
   methods: {
-    ...mapActions(["getRegister"]),
-    send_login() {
+    ...mapActions(["receiveUserInfo"]),
+    async sendRegister() { // 发送注册请求
       const { name, email, password } = this;
-      if (!this.isLogin) {
-        // 准备发送请求
-        this.error_msg = "";
-        const loadingInstance = this.$loading({
-          background: "rgba(255,255,255,.2)",
-          text: "少女祈祷中...."
-        });
-        this.getRegister({
-          name,
-          email,
-          password,
-          ob: bool => {
-            if (bool) {
-              // 登录成功
-              loadingInstance.close();
-              this.$router.replace("/home");
-            } else {
-              // 登录失败
-              this.$notify.error({
-                title: "注册失败",
-                message: "请联系管理员"
-              });
-            }
-          }
-        });
-      } else {
-        this.error_msg = this.isLogin;
-      }
-    },
-    handleAvatarSuccess(res, file) {
-      this.imageUrl = window.webkitURL.createObjectURL(file);
-    },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (this.loginErrorMsg) return this.error_msg = this.loginErrorMsg;
 
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
+      // 准备发送请求....
+      const loadingInstance = this.$loading({ background: "rgba(255,255,255,.2)", text: "少女祈祷中...." });
+      let result = await reqRegister(name, email, password)
+      loadingInstance.close()
+      if(result.code !== 0) return this.$message.error(result.msg)
+      const submitFileResult = await this.submitFile(result.data.email)
+      // 上传头像成功, 用户数据更新
+      if (submitFileResult && submitFileResult.code == 0){ result = submitFileResult }
+      // 将数据储存到store中, 并跳转页面
+      this.receiveUserInfo(result.data)
+      this.$router.replace('/personal')
+    },
+    // 是否符合头像文件规则
+    isAvatar (file) {
+      if(!file) return false;
+      const isJPG = file.raw.type === "image/jpeg";
+      const isLt2M = file.raw.size / 1024 / 1024 < 2;
+      if (!isJPG) this.$message.error("上传头像图片只能是 JPG 格式!");
+      if (!isLt2M) this.$message.error("上传头像图片大小不能超过 2MB!");
+      return isJPG && isLt2M
+    },
+    submitFile(email) { // 将需要提交的文件，和附带的数据，append  FormData中 然后提交
+      if (!this.file && !this.isAvatar(this.file)) return false;
+
+      const fromData = new FormData();
+      fromData.append("avatar", this.file.raw);
+
+      // 发送上传请求, 请求url带用户的email(登录账户),
+      return axios({
+        url: '/AvatarUpload',
+        headers: { "Content-Type": "multipart/form-data" },
+        method: "POST",
+        data: fromData,
+        params: { email }
+      });
+    },
+    // 改变时
+    changeFile(file) {
+      if (!this.isAvatar(file)) return false;
+      // 符合文件的创建本地URL写入IMG标签中, 并保存到this中
+      this.imageUrl = window.webkitURL.createObjectURL(file.raw);
+      this.file = file;
     }
   }
 };

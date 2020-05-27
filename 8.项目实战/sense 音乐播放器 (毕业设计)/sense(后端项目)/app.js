@@ -12,6 +12,7 @@ app.keys = ['im a newer secret']
 // 添加中间件
 app.use(bodyParser());
 app.use(static('./public'))
+app.use(static('../sense(前端项目)/dist'))
 app.use(Koa_Session({}, app))
 app.use(router.routes()).use(router.allowedMethods());
 

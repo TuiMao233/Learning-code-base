@@ -1,6 +1,6 @@
-/* 搜索页面 */
+/* 更新日志 */
 <template>
-    <div>Search</div>
+  
 </template>
 
 <script>
@@ -9,6 +9,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style>
 
 </style>

@@ -5,3 +5,5 @@ import axios from "./axios";
 export const reqLogin = (email, password) => axios.post('/login', {email, password})
 // 请求注册
 export const reqRegister = (name, email, password) => axios.post('/register', {name, email, password})
+// 自动登录
+export const reqAutoLogin = () => axios.get('/auto_login')

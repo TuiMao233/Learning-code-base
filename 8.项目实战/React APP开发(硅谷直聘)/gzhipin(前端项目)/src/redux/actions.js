@@ -15,7 +15,7 @@ import io from 'socket.io-client'
 function initIo(dispatch, userid) {
     // 连接并绑定箭头
     if (!io.socket) {
-        io.socket = io('ws://localhost:4000')
+        io.socket = io('/') // ws://localhost:4000
         io.socket.on('receiveMsg', function (data) {
             // 由于是接收所有消息, 所以进行过滤
             if (data.from === userid || data.to === userid) {

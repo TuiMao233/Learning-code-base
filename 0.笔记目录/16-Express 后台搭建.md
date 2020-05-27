@@ -322,19 +322,20 @@ module.exports = router;
 ### 表单上传(自动展示接收数据)
 
 ~~~html
-<from action="http://locallhost:8080/" moethod="post", enctype="multipart/form-data"/>
-<input type="file" value="指定文件" name="avatar">
-<input type="submit", value="上传"/>
-</from>
+<form action="http://locallhost:8080/" method="post", enctype="multipart/form-data"/>
+    <input type="file" value="指定文件" name="avatar">
+    <input type="submit", value="上传"/>
+</form>
 ~~~
 
 ### axios上传(接收数据)
 
 ~~~html
-<from action="http://locallhost:8080/" moethod="post", enctype="multipart/form-data"/>
+<form action="http://locallhost:8080/" method="post", enctype="multipart/form-data"/>
 <input class="file" type="file" value="指定文件" name="avatar">
 <div class="submit"/>
-</from>
+</form>
+<img src/>
 ~~~
 
 ~~~js
@@ -391,9 +392,10 @@ function fileFilter (req, file, cb) {
 }
 
 // 路径, 名称修改器, 默认随机名称且无后缀 (可选)
+// 注意: 添加该属性后, 自动将文件存入该路径, 不会经过路由器访问
 const storage = multer.diskStorage({
   // destination 是确定文件的具体路径
-  destination (req, file, cb) { cb(null, '/tmp/my-uploads') }
+  destination (req, file, cb) { cb(null, path.resolve(__dirname, '../public')) }
   filename (req, file, cb) { 
   	// 获取后缀名
   	const ext = path.extname(file.originalname)
@@ -418,10 +420,16 @@ const upload = multer({
 // 上传单个文件, 调用upload.single方法, 并将表单标签的name值传入
 app.post('/upload', upload.single('avatar'), (req, res)=>{
   // 会自动添加req.file, 是 `avatar` 文件的信息
+  // 如果没有添加storage, 需要自行重命名和写入文件夹最后
+  const ext = path.extname(req.file.originalname);
+  if(!ext.match(/jpg|png/)) return res.send({code: 1, msg: '上传失败, 文件不是jpg或png'});
+  const dir_file = path.resolve(__dirname, `../public/${Date.now()}${ext}`)
+  // 使用fs模块上传文件
+  fs.writeFile(dir_file, req.file.buffer, {flag:'w'})
 })
 
 // 上传多个文件, 调用upload.array方法, 传入标签name值, 文件数量
-app.post('/upload', upload.array方法('files', 6), (req, res)=>{
+app.post('/upload', upload.array('files', 6), (req, res)=>{
   // 会自动添加req.files , 是 `files` 文件数组的信息
 })
 ~~~

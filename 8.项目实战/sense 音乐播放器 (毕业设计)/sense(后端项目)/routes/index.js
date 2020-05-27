@@ -1,8 +1,11 @@
 // 由于Koa本身并没有内置路由, 需要引入路由器
 const router = require('koa-router')()
 const { UserModel, MusicModel, DiscussModel } = require('../db/models')
-const { md5, upload } = require('../utils')
-const { host_url } = require('../config')
+const { md5 } = require('../utils')
+const multer = require('@koa/multer');
+const path = require('path')
+const fs = require('fs')
+const { nanoid } = require('nanoid')
 // 登录
 router.post('/login', async ctx => {
     let email = ctx.request.body.email
@@ -33,9 +36,30 @@ router.post('/register', async ctx => {
         ctx.body = { code: 0, data: { email, password, song_list } }
         ctx.session.email = email
         ctx.session.password = password
-    } else ctx.body = { code: 0, msg: '该账户已存在' }
+    } else ctx.body = { code: 1, msg: '该账户已存在' }
 })
-
+// 上传头像
+router.use(multer().single('avatar'))
+router.post('/AvatarUpload', async ctx => {
+    const find_result = await UserModel.findOne({ email: ctx.query.email }, { __v: 0 })
+    if (!find_result) return ctx.body = {code: 1, msg: '上传失败, 该用户不存在'};
+    if (!ctx.file) return ctx.body = {code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确'};
+    // 获取文件后缀名 originalname 属性是名称
+    const ext = path.extname(ctx.file.originalname);
+    if(!ext.match(/jpg|png/)) return ctx.body = {code: 1, msg: '上传失败, 文件不是jpg或png'};
+    // 构建文件名
+    const file_name = `${nanoid(10)}${ext}`
+    // 文件的目录
+    const dir_file = path.resolve(__dirname, `../public/user_img/${file_name}`)
+    // 写入文件
+    fs.writeFileSync(dir_file, ctx.file.buffer)
+    // 保存到该文档数据库中
+    find_result.avatar_file_path = `/user_img/${file_name}`
+    find_result.save()
+    // 返回响应
+    console.log(find_result)
+    ctx.body = {code:0, data: find_result}
+})
 
 // 自动登录
 router.get('/auto_login', async ctx => {
@@ -54,23 +78,6 @@ router.post('/upload_song_info', async ctx => {
     const create_result = await MusicModel.create({ audio_name, singer_name, album_name })
     ctx.body = { code: 0, data: { song_id: create_result._id } }
 })
-// 上传歌曲文件, 返回歌曲信息
-router.post('/upload_song_file',
-    upload.fields([{ name: 'audio', maxCount: 1 }, { name: 'albumImg', maxCount: 1 }]),
-    async ctx => {
-        const { song_id } = ctx.query
-        if (!song_id || !song_id.match(/^[0-9a-fA-F]{24}$/))
-            return ctx.body = { code: 1, msg: '歌曲ID格式不正确' };
-        const findDoc = await MusicModel.findById(song_id, { _id: 0, __v: 0 })
-        if (!findDoc) return ctx.body = { code: 1, msg: '歌曲信息未被创建' };
-
-        const { albumImg, audio } = ctx.files
-        // 如果值不为空, 将文件路径信息添加到数据库中
-        albumImg ? findDoc.album_img_path = `${host_url}${albumImg[0].originalname}` : null
-        audio ? findDoc.audio_path = `${host_url}${audio[0].originalname}` : null
-        ctx.body = { code: 0, data: findDoc };
-    }
-);
 // 歌曲名称搜索路由
 router.get('/search_song', async ctx => {
     const { audio_name } = ctx.query

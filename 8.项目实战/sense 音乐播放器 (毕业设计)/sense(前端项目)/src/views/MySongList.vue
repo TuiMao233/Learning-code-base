@@ -1,6 +1,8 @@
-/* 搜索页面 */
+/* 我的歌单 */
 <template>
-    <div>Search</div>
+  <div>
+      MySongList
+  </div>
 </template>
 
 <script>
@@ -9,6 +11,6 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style>
 
 </style>
