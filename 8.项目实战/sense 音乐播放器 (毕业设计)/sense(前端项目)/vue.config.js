@@ -9,7 +9,7 @@ module.exports = {
     hotOnly: true, //是否开启热更新
     proxy: { // 代理
       '/api': {
-            target: 'http://localhost:3000/', //API服务器的地址
+            target: 'http://localhost:3003/', //API服务器的地址
             ws: true,	//代理websockets
             changeOrigin: true,	// 虚拟的站点需要更管origin
             pathRewrite: { '^/api': '' }//重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'

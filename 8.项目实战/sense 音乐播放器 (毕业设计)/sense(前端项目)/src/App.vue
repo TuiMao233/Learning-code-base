@@ -165,7 +165,8 @@ export default {
     margin-left: 240px;
     padding: 0 0 !important;
     padding-top: 60px !important;
-    &::-webkit-scrollbar {
+    overflow: hidden;
+   /*  &::-webkit-scrollbar {
       width: 12px;
       background-color: #f1f1f1;
     } // 滚动条整体部分
@@ -176,7 +177,7 @@ export default {
       &:hover {
         background-color: rgba(0, 0, 0, 0.27);
       }
-    }
+    } */
   }
 }
 </style>

@@ -77,7 +77,7 @@ export default {
       if (submitFileResult && submitFileResult.code == 0){ result = submitFileResult }
       // 将数据储存到store中, 并跳转页面
       this.receiveUserInfo(result.data)
-      this.$router.replace('/personal')
+      setTimeout(() => { this.$router.replace('/personal') });
     },
     // 是否符合头像文件规则
     isAvatar (file) {

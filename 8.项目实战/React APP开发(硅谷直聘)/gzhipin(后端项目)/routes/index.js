@@ -4,11 +4,7 @@ var router = express.Router();
 const md5 = require('blueimp-md5')
 // 引入集合操作构造函数
 const { UserModel, ChatsModel } = require('../db/models')
-/* GET home page. */
-router.get('/', (res) => res.render('index', { title: 'Express' }))
 
-// 注册静态资源 loaclhost:4000/....
-router.use(express.static('public'))
 
 
 

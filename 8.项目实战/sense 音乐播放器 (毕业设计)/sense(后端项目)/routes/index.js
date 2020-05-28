@@ -42,11 +42,11 @@ router.post('/register', async ctx => {
 router.use(multer().single('avatar'))
 router.post('/AvatarUpload', async ctx => {
     const find_result = await UserModel.findOne({ email: ctx.query.email }, { __v: 0 })
-    if (!find_result) return ctx.body = {code: 1, msg: '上传失败, 该用户不存在'};
-    if (!ctx.file) return ctx.body = {code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确'};
+    if (!find_result) return ctx.body = { code: 1, msg: '上传失败, 该用户不存在' };
+    if (!ctx.file) return ctx.body = { code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确' };
     // 获取文件后缀名 originalname 属性是名称
     const ext = path.extname(ctx.file.originalname);
-    if(!ext.match(/jpg|png/)) return ctx.body = {code: 1, msg: '上传失败, 文件不是jpg或png'};
+    if (!ext.match(/jpg|png/)) return ctx.body = { code: 1, msg: '上传失败, 文件不是jpg或png' };
     // 构建文件名
     const file_name = `${nanoid(10)}${ext}`
     // 文件的目录
@@ -58,7 +58,11 @@ router.post('/AvatarUpload', async ctx => {
     find_result.save()
     // 返回响应
     console.log(find_result)
-    ctx.body = {code:0, data: find_result}
+    ctx.body = { code: 0, data: find_result }
+
+    // 旧头像路径有值, 执行删除旧头像逻辑
+    if (ctx.query.oldAvatar) return fs.unlinkSync(path.resolve(__dirname, `../public${ctx.query.oldAvatar}`));
+
 })
 
 // 自动登录
@@ -69,7 +73,11 @@ router.get('/auto_login', async ctx => {
     if (find_result) ctx.body = { code: 0, data: find_result }
     else ctx.body = { code: 1, msg: '该账户不存在' }
 })
-
+router.get('/out_login', async ctx => {
+    ctx.session.email = null
+    ctx.session.password = null
+    ctx.body = { code: 0, msg: '用户cookies清除成功' }
+})
 // 上传歌曲信息, 返回歌曲ID
 router.post('/upload_song_info', async ctx => {
     const { audio_name, singer_name, album_name } = ctx.request.body

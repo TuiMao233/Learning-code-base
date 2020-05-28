@@ -17,4 +17,4 @@ app.use(Koa_Session({}, app))
 app.use(router.routes()).use(router.allowedMethods());
 
 // 开启服务器
-app.listen(3000, () => console.log('服务器启动成功, 端口号为:3000'))
+app.listen(3003, () => console.log('服务器启动成功, 端口号为:3003'))

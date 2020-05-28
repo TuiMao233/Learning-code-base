@@ -28,7 +28,7 @@ module.exports = function (server) {
             ChatsModel.create(
                 { from, to, chat_id, content, create_time },
                 function (error, chatMsg) {
-                    console.log(chatMsg)
+                    console.log('服务器端发送浏览器消息', chatMsg)
                     io.emit('receiveMsg', chatMsg)
                 }
             )

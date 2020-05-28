@@ -99,7 +99,7 @@ export default {
     },
     getVerif(ev) {// 获取图形验证码
       this.$refs.getVerifButton.innerText = "";
-      this.$refs.captcha.src = "http://localhost:4000/captcha/?" + new Date().toString();
+      this.$refs.captcha.src = "/captcha/?" + new Date().toString();
     },
     async getCodeVerif(ev) {// 发送短信验证码
       if (!isMobile(this.mobileCode)) {// 如果手机验证不成功, 不执行逻辑

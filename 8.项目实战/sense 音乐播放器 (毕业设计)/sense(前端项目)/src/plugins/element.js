@@ -3,6 +3,7 @@ import {
     Container, Header, Aside, Main, Footer,
     MenuItem, Button, Card, Input, Link, Upload,
     Avatar, Carousel, CarouselItem, divider,
+    Table, TableColumn,
     Notification , Loading, Message
     } from "element-ui";
 
@@ -11,7 +12,8 @@ const forUse = (array) => array.forEach(plugin => Vue.use(plugin))
 forUse([
     Container, Header, Aside, Main, Footer,
     MenuItem, Button, Card, Input, Link, Upload,
-    Avatar, Carousel, CarouselItem, divider
+    Avatar, Carousel, CarouselItem, divider,
+    Table, TableColumn,
 ])
 
 // 向Vue原型添加方法

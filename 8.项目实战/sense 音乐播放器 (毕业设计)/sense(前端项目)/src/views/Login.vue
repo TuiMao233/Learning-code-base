@@ -56,7 +56,9 @@ export default {
       if(result.code !== 0) return this.$message.error(result.msg)
       // 将数据储存到store中, 并跳转页面
       this.receiveUserInfo(result.data)
-      this.$router.replace('/personal')
+      setTimeout(() => {
+        this.$router.replace('/personal')
+      }, 50);
     }
   }
 };
