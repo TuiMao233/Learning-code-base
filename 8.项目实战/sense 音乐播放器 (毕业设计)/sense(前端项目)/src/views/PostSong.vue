@@ -2,14 +2,14 @@
   <div>
     <el-card class="box-card-postSong">
       <div slot="header" class="clearfix">发布歌曲</div>
-      <div class="card-content">
+      <section class="card-content-one">
         <el-upload
           class="upload-song"
           drag
           :limit="1"
           action
           name="mp3"
-          :on-change="handleUpLoginChange"
+          :on-change="handleUpLoadMp3Change"
           :auto-upload="false"
         >
           <i class="el-icon-upload"></i>
@@ -30,8 +30,20 @@
         <div class="right-commit-block">
           <el-button type="primary" class="send_song" @click="submitFile">点击上传</el-button>
         </div>
+      </section>
+      <section class="card-content-to">
+        
+        <el-upload
+          class="avatar-uploader albumImg-uploader"
+          action
+          :on-change="handleUpLoadImageChange"
+          :show-file-list="false"
+        >
+          <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
         <audio class="browse_audio" :src="mp3Url" controls></audio>
-      </div>
+      </section>
     </el-card>
   </div>
 </template>
@@ -40,50 +52,49 @@
 import axios from "axios";
 export default {
   data: () => ({
-    file: null,
+    mp3File: null,
+    imageFile: null,
     audio_name: "",
     album_name: "",
     singer_name: "",
-    mp3Url: ""
+    mp3Url: "",
+    imageUrl: ""
   }),
-  computed: {
-    isCompleteSong() {
-      // 歌曲信息是否完整
-      let bool = true;
-      const { file, audio_name, album_name, singer_name } = this;
-      [file, audio_name, album_name, singer_name].forEach(item => {
-        if (!item) bool = false;
-      });
-      return bool;
-    }
-  },
   methods: {
-    isMP3Lt5M(file) {
-      if (!file) return this.$message.error("文件不能为空!");
-      const isMP3 = file.raw.type === "audio/mpeg";
-      const isLt5M = file.raw.size / 1024 / 1024 < 15;
+    isJPGLt2M(imageFile) {
+      if (!imageFile) return false;
+      const isJPG = imageFile.raw.type === "image/jpeg";
+      const isLt2M = imageFile.raw.size / 1024 / 1024 < 2;
+      if (!isJPG) this.$message.error("上传专辑图片只能是 JPG 格式!");
+      if (!isLt2M) this.$message.error("上传专辑图片大小不能超过 2MB!");
+      return isJPG && isLt2M;
+    },
+    isMP3Lt15M(mp3File) {
+      console.log(mp3File);
+      if (!mp3File) return this.$message.error("上传音频文件不能为空!");
+      const isMP3 = mp3File.raw.type === "audio/mpeg";
+      const isLt5M = mp3File.raw.size / 1024 / 1024 < 15;
       if (!isMP3) return this.$message.error("上传音频文件只能是 mp3 格式!");
-      if (!isLt5M) return this.$message.error("上传头像图片大小不能超过 15MB!");
+      if (!isLt5M) return this.$message.error("上传音频文件大小不能超过 15MB!");
       return isMP3 && isLt5M;
     },
     submitFile() {
       // 将需要提交的文件，和附带的数据，append  FormData中 然后提交
-
       const {
-        file,
+        mp3File,
         $message,
         audio_name,
         album_name,
         singer_name,
-        isMP3Lt5M,
+        isMP3Lt15M,
         isCompleteSong
       } = this;
       // 文件判断
 
-      if (!isMP3Lt5M(file)) return false;
-      if (!isCompleteSong) return $message.error("歌曲信息不正确 !");
+      if (!isMP3Lt15M(mp3File)) return false;
+      if (!audio_name) return $message.error("名称未填写 !");
       const fromData = new FormData();
-      fromData.append("mp3", file.raw);
+      fromData.append("mp3", mp3File.raw);
       // 发送上传请求, 请求url带歌曲的id,
       return axios({
         url: "/upload_song",
@@ -97,18 +108,47 @@ export default {
         }
       });
     },
-    handleUpLoginChange(file) {
+    handleUpLoadMp3Change(file) {
+      this.mp3File = file;
       const isMP3 = file.raw.type === "audio/mpeg";
       if (!isMP3) return false;
       this.audio_name = file.raw.name.split(".")[0];
       this.mp3Url = window.webkitURL.createObjectURL(file.raw);
+    },
+    handleUpLoadImageChange(file) {
+      // 表单改变时将file储存到data中
+      if (!this.isJPGLt2M(file)) return false;
+      // 符合文件的创建本地URL写入IMG标签中, 并保存到this中
+      this.imageUrl = window.webkitURL.createObjectURL(file.raw);
+      this.imageFile = file;
     }
   }
 };
 </script>
 
 <style lang="less">
-.card-content {
+.albumImg-uploader {
+  width: 200px;
+  height: 200px;
+  margin: 0 80px;
+  .el-upload.el-upload--text {
+    width: 200px;
+    height: 200px;
+    .el-icon-plus.avatar-uploader-icon, img {
+      width: 200px;
+    height: 200px;
+    }
+  }
+}
+.browse_audio {
+  flex: 1;
+  margin-right: 70px;
+}
+.card-content-to {
+  display: flex;
+  align-items: center;
+}
+.card-content-one {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

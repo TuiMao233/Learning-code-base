@@ -3,7 +3,7 @@ import axios from "axios";
 import { Notification } from "element-ui";
 
 // 定义检测跨域链接参数
-// axios.defaults.baseURL = '/api'
+axios.defaults.baseURL = '/api'
 
 // 添加响应拦截器
 axios.interceptors.response.use(
