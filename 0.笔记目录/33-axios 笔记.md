@@ -258,7 +258,7 @@ axios.interceptors.response.use(
 
 ## axios 运行的整体流程
 
-![axios流程](D:\web学习库\0.笔记目录\img\axios\axios流程.png)
+![axios流程](.\img\axios\axios流程.png)
 
 **整体流程：**`request(config) ==> dispatchRequest(config) ==> xhrAdapter(config)`
 
@@ -268,7 +268,7 @@ axios.interceptors.response.use(
 
 ## 拦截器数组的运行流程
 
-![拦截器数组的运行流程](D:\web学习库\0.笔记目录\img\axios\拦截器数组的运行流程.png)
+![拦截器数组的运行流程](.\img\axios\拦截器数组的运行流程.png)
 
 ~~~js
 	/*

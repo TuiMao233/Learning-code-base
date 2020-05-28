@@ -13,27 +13,15 @@
         <el-table-column prop="singer" label="歌手"></el-table-column>
         <el-table-column prop="singer" label>
           <template slot-scope="scope">
-            <i class="el-icon-video-play" v-if="!isPlay" @click="handleClick(scope.row)" />
-            <i class="el-icon-video-pause" v-else />
-            <i class="el-icon-chat-dot-square" />
-            <i class="el-icon-crop" />
+            <div class="controls">
+              <i class="el-icon-video-play" v-if="!isPlay" @click="handleClick(scope.row)" />
+              <i class="el-icon-video-pause" v-else />
+              <i class="el-icon-chat-dot-square" />
+              <i class="el-icon-crop" />
+            </div>
           </template>
         </el-table-column>
       </el-table>
-
-      <!-- <div v-for="o in 4" :key="o" class="text item">
-        <img :src="'/timg.jpg'" alt />
-        <span>1/6 -genesis mix-</span>
-        <span>EXIT TUNES PRESENTS Vocalogenesis</span>
-        <span>初音ミク / ぼーかりおどP</span>
-        <div class="controls">
-          <i class="el-icon-video-play" v-if="!isPlay" />
-          <i class="el-icon-video-pause" v-else />
-          <i class="el-icon-chat-dot-square" />
-          <i class="el-icon-crop" />
-        </div>
-        <el-divider />
-      </div>-->
     </el-card>
   </div>
 </template>
@@ -59,7 +47,12 @@ export default {
         singer: "初音ミク / ぼーかりおどP"
       }
     ]
-  })
+  }),
+  methods: {
+    handleClick(row) {
+      console.log(row);
+    }
+  }
 };
 </script>
 
@@ -74,11 +67,11 @@ export default {
     font-size: 14px;
   }
 }
-.el-table.cell {
-  float: right;
+.controls {
   font-size: 25px;
   i {
     margin-right: 25px;
   }
+  text-align: right;
 }
 </style>

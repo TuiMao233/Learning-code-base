@@ -38,6 +38,14 @@
         <router-link to="/search" class="router-link" replace>
           <i class="el-icon-search" /> 搜索歌曲
         </router-link>
+
+        <router-link to="/post_song" class="router-link" replace>
+          <i class="el-icon-search" /> 发布歌曲
+        </router-link>
+
+        <router-link to="/up_dateLog" class="router-link" replace>
+          <i class="el-icon-date" /> 开发日志
+        </router-link>
       </el-aside>
 
       <el-main>
@@ -112,7 +120,6 @@ export default {
     }
     .head_img {
       cursor: pointer;
-      background: blueviolet;
       position: absolute;
       top: 12px;
       right: 15px;

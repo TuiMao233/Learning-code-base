@@ -15,7 +15,7 @@
 	<input type="text" v-model="message" />
 	<p>		<!-- {{}}单向数据绑定 -->
 	  Hello	{{message}}
-	</p>
+	</p> 
 </div>
 <!-- 1.引入Vue.js -->
 <script src='js/vue.js'></script>

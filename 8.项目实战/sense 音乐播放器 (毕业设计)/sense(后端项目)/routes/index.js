@@ -79,12 +79,14 @@ router.get('/out_login', async ctx => {
     ctx.body = { code: 0, msg: '用户cookies清除成功' }
 })
 // 上传歌曲信息, 返回歌曲ID
-router.post('/upload_song_info', async ctx => {
-    const { audio_name, singer_name, album_name } = ctx.request.body
-    if (!audio_name && !singer_name && !album_name)
-        return ctx.body = { code: 1, msg: '歌曲信息不完整' };
-    const create_result = await MusicModel.create({ audio_name, singer_name, album_name })
-    ctx.body = { code: 0, data: { song_id: create_result._id } }
+router.use(multer().single('mp3'))
+router.post('/upload_song', async ctx => {
+    console.log(ctx.file)
+    // const { audio_name, singer_name, album_name } = ctx.request.body
+    // if (!audio_name && !singer_name && !album_name)
+    //     return ctx.body = { code: 1, msg: '歌曲信息不完整' };
+    // const create_result = await MusicModel.create({ audio_name, singer_name, album_name })
+    // ctx.body = { code: 0, data: { song_id: create_result._id } }
 })
 // 歌曲名称搜索路由
 router.get('/search_song', async ctx => {

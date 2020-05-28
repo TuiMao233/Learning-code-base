@@ -156,7 +156,7 @@
                     _this.onRejected = reason => DealWithThenReturnPromise(onRejected)
                 }
                 //! 定义处理return promise 函数, 传入要处理的成功|失败函数
-                function DealWithThenReturnPromise(callback) {
+                function DealWithThenReturnPromise(callback = (data) => data) {
                     /* 
                     !   onResolved, onRejected 有三种结果情况来改变return pormise的状态
                     !   执行结果是异常抛出, 执行return promise的失败函数, 并传入异常数据
