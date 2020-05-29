@@ -1,72 +1,61 @@
 <template>
-  <div class="audio_progress" ref="wrapper">
-    <time>{{duration|date-format}} / {{currentTime|date-format}}</time>
-    <div class="line"></div>
-    <div class="interaction-line" @mousedown="mouse" ref="ittn"></div>
-    <div class="circle" ref="circle" @mousedown.prevent></div>
+  <div class="volume_box">
+    <el-button type="text" v-if="!muted" @click="toggleVlume">
+      <i class="icon-yinliangkai"></i>
+    </el-button>
+    <el-button type="text" v-else @click="toggleVlume">
+      <i class="icon-yinliangguan"></i>
+    </el-button>
+    <div class="volume_progress" ref="wrapper">
+      <div class="line"></div>
+      <div class="interaction-line" @mousedown="mouse" ref="ittn"></div>
+      <div class="circle" ref="circle" @mousedown.prevent></div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["audio", "paused", "change"],
   data: () => ({
     ittnOffsetLeft: 0, // 交互块X轴距离浏览器的距离
     ittnWidth: 0, // 容器宽度
-    timer: 0, // 定时器
-    duration: 0, // 总时长
-    currentTime: 0, // 当前时长
-    slidingsetX: 0 // 滑动时, 偏移的px值
+    oldVolume: 0 // 之前的音量
   }),
+  props: ["audio", "muted"],
   watch: {
-    paused(val) {
-      console.log("状态发生改变了, 状态是:", val);
-      if (val) clearInterval(this.timer);
-      else this.audioSynch();
+    // 监视是否静音
+    muted() {
+      this.vlumeSynch();
     },
-    change() {
-      this.duration = this.audio.duration;
-      this.currentTime = this.audio.currentTime;
+    audio() {
+      this.audio.volume = 0.5;
+      this.vlumeSynch();
     }
   },
+
   methods: {
-    audioSynch() {
-      // 音频同步器, 音频播放时实时更新界面
-      clearInterval(this.timer);
-      // 获取目标元素
+    vlumeSynch() {
+      // 音量同步改变元素偏移量
       const ittnEl = this.$refs.ittn;
       const circleEl = this.$refs.circle;
-      // 交互块宽度
       const ittnWidth = ittnEl.clientWidth - circleEl.offsetWidth;
-      this.timer = setInterval(() => {
-        console.log("----音乐播放中----");
-        const { duration, currentTime } = this.audio;
-        this.currentTime = currentTime;
-        // 计算交互块宽度, 音频进度的百分比, 根据百分比算出偏移量
-        const percent_one = duration / 100;
-        const currentPercent = currentTime / percent_one;
-        const widthPercent_one = ittnWidth / 100;
-        const slidingsetX = currentPercent * widthPercent_one;
-        circleEl.style.transform = `translateX(${slidingsetX}px)`;
-        if (currentTime == duration) this.currentTimeEnd();
-      }, 100);
+      const percent = this.audio.volume;
+      circleEl.style.transform = `translateX(${ittnWidth * percent}px)`;
     },
-    currentTimeEnd() {
-      console.log("----音乐播放完毕----");
-      clearInterval(this.timer);
-      this.audio.pause();
-    },
-    setAudioCurrentTime(percent) {
-      // 输入百分比改变歌曲时间
-      const { duration, currentTime } = this.audio;
-      const percent_one = duration / 100;
-      this.audio.currentTime = percent_one * percent;
+    toggleVlume() {
+      // 切换音量
+      if (this.audio.volume == 0) {
+        if (this.oldVolume == 0) return (this.audio.volume = 0.5);
+        this.audio.volume = this.oldVolume;
+      } else {
+        this.oldVolume = this.audio.volume;
+        this.audio.volume = 0;
+      }
     },
     mouse(ev) {
       //当点击时所有事件都捕获为dragEl的事件
       document.setCapture && document.setCapture();
-      // 关闭音频同步器
-      clearInterval(this.timer);
+
       // 获取目标元素
       const ittnEl = ev.target;
       const circleEl = this.$refs.circle;
@@ -86,29 +75,30 @@ export default {
     move(ev) {
       if(!this.audio) return false;
       const circleEl = this.$refs.circle;
-      this.slidingsetX =
+      let slidingsetX =
         ev.clientX - this.ittnOffsetLeft - circleEl.offsetWidth / 2;
 
       // 控制元素保持在交互块当中
-      if (this.slidingsetX > this.ittnWidth) this.slidingsetX = this.ittnWidth;
-      if (this.slidingsetX < 0) this.slidingsetX = 0;
-      circleEl.style.transform = `translateX(${this.slidingsetX}px)`;
+      if (slidingsetX > this.ittnWidth) slidingsetX = this.ittnWidth;
+      if (slidingsetX < 0) slidingsetX = 0;
+      circleEl.style.transform = `translateX(${slidingsetX}px)`;
+
+      // 改变音量
+      const widthPercent_one = this.ittnWidth / 100;
+      const slidingPercent = slidingsetX / widthPercent_one / 100;
+      this.audio.volume = slidingPercent;
 
       ev.preventDefault();
       return false;
     },
     up(ev) {
-      if(!this.audio) return false;
-      const circleEl = this.$refs.circle;
-      const widthPercent_one = this.ittnWidth / 100;
-      const slidingPercent = this.slidingsetX / widthPercent_one;
-      this.setAudioCurrentTime(slidingPercent);
-
-      if (!this.paused) this.audioSynch();
-      // 释放document的onmouseup/move事件, dragEl点击事件, 关闭默认行为
+      // 释放document的move事件
       document.onmousemove = null;
+      // 释放document的onmouseup事件
       document.onmouseup = null;
+      //释放dragEl的点击事件
       document.releaseCapture && document.releaseCapture();
+
       ev.preventDefault();
       return false;
     }
@@ -118,10 +108,18 @@ export default {
 
 <style lang="less">
 @circleSize: 18px;
-.audio_progress {
-  flex: 1;
+.volume_box {
   height: 100%;
   position: relative;
+}
+.volume_progress {
+  flex: 1;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  right: 0;
   margin-left: @circleSize / 2;
   time {
     display: block;
@@ -130,7 +128,7 @@ export default {
     font-size: 13px;
   }
   .line {
-    height: 2px;
+    height: 1px;
     background: #dcdfe6;
     position: absolute;
     left: -@circleSize / 2;

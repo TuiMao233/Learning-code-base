@@ -49,6 +49,7 @@
 
 <script>
 import axios from "axios";
+import { mapState, mapActions } from "vuex";
 export default {
   data: () => ({
     mp3File: null,
@@ -60,6 +61,7 @@ export default {
     imageUrl: ""
   }),
   methods: {
+    ...mapActions(['receivePlayerSong']),
     isJPGLt2M(imageFile) {
       if (!imageFile) return false;
       const isJPG = imageFile.raw.type === "image/jpeg";
@@ -92,7 +94,7 @@ export default {
       if (result && result.code !== 0) return this.$message.error(result.msg);
       // 上传头像成功, 用户数据更新, 将数据储存到store中, 并跳转页面
       this.$message({ type: "success", message: "上传头像成功" });
-      console.log(result)
+      this.receivePlayerSong(result.data)
     },
     submitFile() {
       // 将需要提交的文件，和附带的数据，append  FormData中 然后提交

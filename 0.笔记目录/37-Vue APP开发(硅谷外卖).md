@@ -515,7 +515,7 @@ Vue.filter('date-format', (value, format_str='YYY-MM-DD HH:mm:ss')=>{
 // 使用date-fns进行按需加载
 import format from 'date-fns/format'
 Vue.filter('date-format', (value, format_str='YYY-MM-DD HH:mm:ss')=>{
-    return format(format_str)
+    return format(value, format_str)
 })
 ~~~
 

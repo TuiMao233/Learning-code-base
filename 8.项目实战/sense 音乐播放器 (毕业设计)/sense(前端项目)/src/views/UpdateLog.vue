@@ -70,6 +70,10 @@ export default {
     activities: [
       {
         type: "primary",
+        content: "构建全局音频控件",
+        timestamp: "2020-05-29"
+      },
+      {
         content: "构建模糊搜索歌曲",
         timestamp: "2020-05-29"
       },
@@ -80,14 +84,6 @@ export default {
       {
         content: "完善用户头像上传",
         timestamp: "2020-05-28"
-      },
-      {
-        content: "构建用户接口",
-        timestamp: "2020-05-26"
-      },
-      {
-        content: "搭建整体架构",
-        timestamp: "2020-05-24"
       }
     ]
   })
