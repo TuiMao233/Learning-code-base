@@ -6,7 +6,7 @@
 | -------- | ------------------------ | ---------------------------------------------------- |
 | **$eq**  | 匹配等于指定的值         | **db.t_01.find( { “name”: { $eq:”david” } } )**      |
 | **$gt**  | 匹配大于指定的值         | **db.t_01.find( { “age” : { $gt: 30 } } )**          |
-| **$gt**  | 匹配大于或等于指定的值   | **db.t_01.find( { “age” : { $gte: 30 } } )**         |
+| **$gte** | 匹配大于或等于指定的值   | **db.t_01.find( { “age” : { $gte: 30 } } )**         |
 | **$in**  | 匹配数组中的任意一个值   | **db.t_01.find( { “age” : { $in : [ 30,40 ] } } )**  |
 | **$lt**  | 匹配小于指定的值         | **db.t_01.find( { “age” : { $lt: 30 } } )**          |
 | **$lte** | 匹配小于等于指定的值     | **db.t_01.find( { “age” : { $lte: 30 } } )**         |
@@ -23,7 +23,12 @@
 | **$or**  | 逻辑或操作，返回符合任一条件的所有文档                     | db.t_01.find( {  $or : [ { “deparm                           |
 
 ~~~js
-db.t_01.find( {  $and : [ {“age”:{ $gte : 28 } }, { “deparment” : { $eq : “sale_01”} } ]  } )
+db.t_01.find( {  
+    $and : [
+        {“age”:{ $gte : 28 } },
+        { “deparment” : { $eq : “sale_01”} }
+    ]
+})
 ~~~
 
 
@@ -50,7 +55,7 @@ db.t_01.find( {  $and : [ {“age”:{ $gte : 28 } }, { “deparment” : { $eq 
 | **$expr**       | 允许在查询语句中使用聚合表达式，$expr可以构建查询表达式，在匹配时，比较同一文档中的字段。 | --两个字段比较，返回”sal”比”age”大的文档：db.t_01.find(  {$expr: { $gt: [“age”,”sal”] } } ) |
 | **$jsonSchema** | $jsonSchema可以被用于文档验证器，用于集合模式验证。          | --定义一个users集合模式验证：db.createCollection(“users”,  {validator: { $jsonSchema: {bsonType: “object”,required: [“name”,”sex”],properties: { name: {  bsonType: “string”,  description: “must be a  string and is required”},age: {bsonType: “int”,description: “must be a integer and is not  required”},sex: {enum: [“male” , “female”],description: “can only be one of the enum  values and is required”}}} } )--往集合users插入数据db.users.insert({“name”:”gg”,”sex”:”male”}) |
 | **$mod**        | 对字段的值执行除以指定值取余数运算。                         | --返回”age”字段值被3整除的文档db.t_01.find( {“age”  : {$mod : [3,0] } } ) |
-| **$regex**      | 选择与指定正则表达式匹配的文档，MongoDB使用Perl兼容正则表达式版本8.41 | --查询”name”结尾是tor三个字符的文档db.t_01.find( {“name”:  {$regex : /tor$/ } } ) |
+| **$regex**      | 选择与指定正则表达式匹配的文档                               | 查询”name”结尾是tor三个字符的文档db.t_01.find( {“name”:  {$regex : /tor$/ } } ) |
 | **$text**       | $text是对具有文本索引的字段执行文本搜索。                    | --在t_01集合的”name”上创建text索引db.t_01.createIndex(  { “name” : “text”})--使用全本搜索db.t_01.find(  {$text: {$search: “david” } } ) |
 | **$where**      | 匹配满足JavaScript表达式的文档，使用$where操作符将包含JavaScript表达式的字符串或完整的JavaScript函数传递给查询系统。 | --查询”name”字段为david的文档db.t_01.find( {  $where : function() {return  (this.name == “david”)} } ) |
 
@@ -105,7 +110,7 @@ db.products.update(
 
 ~~~javascript
 db.products.update(
-    {_id:1},{$min:{num:10}}
+    {_id:1}, {$min:{num:10}}
 )
 ~~~
 
@@ -162,7 +167,7 @@ db.products.update(
 
 ~~~js
 db.products.aggregate([{
-    $group:{_id:null,alias:{$max: "$index"}}
+    $group:{_id:null, alias:{$max: "$index"}}
 }]);
 ~~~
 

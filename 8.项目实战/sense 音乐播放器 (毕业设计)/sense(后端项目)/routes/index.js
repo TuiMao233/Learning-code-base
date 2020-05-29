@@ -44,7 +44,7 @@ router.post('/register', async ctx => {
         ctx.session.password = password
     } else ctx.body = { code: 1, msg: '该账户已存在' }
 })
-
+// 上传头像数据
 router.post('/AvatarUpload', async ctx => {
     const find_result = await UserModel.findOne({ email: ctx.query.email }, { __v: 0 })
     if (!find_result) return ctx.body = { code: 1, msg: '上传失败, 该用户不存在' };
@@ -85,7 +85,7 @@ router.get('/out_login', async ctx => {
     ctx.session.password = null
     ctx.body = { code: 0, msg: '用户cookies清除成功' }
 })
-// 上传歌曲信息, 返回歌曲ID
+// 上传歌曲信息, 返回歌曲信息
 router.post('/upload_song', async ctx => {
     const { audio_name, album_name, singer_name } = ctx.query
     if (!ctx.query.audio_name) return ctx.body = { code: 1, msg: '歌曲名称不能为空' }
@@ -93,7 +93,7 @@ router.post('/upload_song', async ctx => {
         return ctx.body = { code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确' };
     let albumImage_name = null;
     const findMusicResult = await MusicModel.findOne({ audio_name })
-    if (findMusicResult) return ctx.body = {code:1, msg:'该歌曲已存在, 请删除该歌曲后重试'}
+    if (findMusicResult) return ctx.body = { code: 1, msg: '该歌曲已存在, 请删除该歌曲后重试' }
     if (ctx.files['album_image'] && ctx.files['album_image'][0]) {
         // 专辑图片已获取, 写入专辑图片
         const albumImageFile = ctx.files['album_image'][0]
@@ -114,7 +114,7 @@ router.post('/upload_song', async ctx => {
         audio_path: `/user_img/${audioFile_name}`,
         albumImage_name: ''
     }
-    if (albumImage_name) data.album_img_path = `/album_img/${audioFile_name}`;
+    if (albumImage_name) data.album_img_path = `/album_img/${albumImage_name}`;
 
     // 创建歌曲文档
     const create_doc = await MusicModel.create(data)
@@ -124,8 +124,13 @@ router.post('/upload_song', async ctx => {
 // 歌曲名称搜索路由
 router.get('/search_song', async ctx => {
     const { audio_name } = ctx.query
+    console.log(ctx.query)
+    console.log(ctx.request.body)
     if (!audio_name) return ctx.body = { code: 1, msg: '参数不能为空' };
-    const find_result = await MusicModel.find({ audio_name }, { _id: 0, __v: 0 });
+    // 模糊查询歌曲名称
+    const find_result = await MusicModel.find(
+        { audio_name: { $regex: new RegExp(audio_name, "i") } }, { __v: 0}
+    );
     if (!find_result) return ctx.body = { code: 1, msg: '未找到该歌曲' };
     ctx.body = { code: 0, data: find_result }
 })

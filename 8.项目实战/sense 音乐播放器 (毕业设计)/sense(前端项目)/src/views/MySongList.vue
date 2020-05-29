@@ -5,7 +5,7 @@
       <div slot="header" class="clearfix">
         我的歌曲
       </div>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="userInfo.songList" style="width: 100%">
         <el-table-column prop="song" label="歌曲名" width="180"></el-table-column>
         <el-table-column prop="album" label="专辑" width="340"></el-table-column>
         <el-table-column prop="singer" label="歌手"></el-table-column>
@@ -26,27 +26,14 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   data: () => ({
-    isPlay: false,
-    tableData: [
-      {
-        song: "1/6 -genesis mix-",
-        album: "EXIT TUNES PRESENTS Vocalogenesis",
-        singer: "初音ミク / ぼーかりおどP"
-      },
-      {
-        song: "1/6 -genesis mix-",
-        album: "EXIT TUNES PRESENTS Vocalogenesis",
-        singer: "初音ミク / ぼーかりおどP"
-      },
-      {
-        song: "1/6 -genesis mix-",
-        album: "EXIT TUNES PRESENTS Vocalogenesis",
-        singer: "初音ミク / ぼーかりおどP"
-      }
-    ]
+    isPlay: false
   }),
+  computed: {
+    ...mapState(['userInfo'])
+  },
   methods: {
     handleClick(row) {
       console.log(row);

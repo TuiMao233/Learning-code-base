@@ -70,6 +70,10 @@ export default {
     activities: [
       {
         type: "primary",
+        content: "构建模糊搜索歌曲",
+        timestamp: "2020-05-29"
+      },
+      {
         content: "完善歌曲上传",
         timestamp: "2020-05-29"
       },
@@ -91,6 +95,8 @@ export default {
 </script>
 
 <style lang="less">
+.el-table__row {
+}
 .data_log_content {
   display: flex;
   justify-content: space-between;

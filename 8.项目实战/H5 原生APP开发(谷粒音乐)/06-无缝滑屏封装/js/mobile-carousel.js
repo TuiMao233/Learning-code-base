@@ -32,7 +32,7 @@ const touchMiCarousel = new reusableDrag({
         this.wrapper.style.transform = `translateX(${-(this.page * this.slideWidth)}px) ${this.SpeedUp3d}`
     },
     methods: {
-        setWidth(length) {// 宽度设置
+        setWidth(length) { // 宽度设置
             var slides = this.wrapper.children
             // 初始化复制后宽度
             this.wrapper.style.width = length + '00%'

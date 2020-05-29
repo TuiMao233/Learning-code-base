@@ -51,6 +51,9 @@
       <el-main>
         <router-view></router-view>
       </el-main>
+      <div class="footer">
+        <AudioPlayer />
+      </div>
     </el-container>
   </div>
 </template>
@@ -59,6 +62,7 @@
 import { onScroll } from "./assets/utils";
 import { reqAutoLogin } from "./api";
 import { mapState, mapActions } from "vuex";
+import AudioPlayer from './components/AudioPlayer'
 export default {
   data: () => ({
     scroll_pos: 0
@@ -76,12 +80,18 @@ export default {
   methods: {
     ...mapActions(["receiveUserInfo"])
   },
-  components: {}
+  components: { AudioPlayer }
 };
 </script>
 
 <style lang="less">
 @import "./assets/style/index.less";
+.footer {
+  position: fixed;
+  left: 240px;
+  right: 0;
+  bottom: 0;
+}
 * {
   color: #303133;
 }
@@ -172,6 +182,7 @@ export default {
     margin-left: 240px;
     padding: 0 0 !important;
     padding-top: 60px !important;
+    padding-bottom: 100px !important;
     overflow: hidden;
    /*  &::-webkit-scrollbar {
       width: 12px;
