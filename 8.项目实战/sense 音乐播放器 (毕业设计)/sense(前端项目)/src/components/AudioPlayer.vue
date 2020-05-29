@@ -9,10 +9,10 @@
       <el-button type="text" icon="el-icon-video-play"></el-button>
       <el-button type="text" icon="el-icon-arrow-right"></el-button>
     </div>
-    <AudioProgress
-      src="http://localhost:3003/audio/cqO8WY1nLj.mp3"
-    />
+    <AudioProgress />
     <div class="right-controls">
+      <el-button type="text" icon="el-icon-turn-off"></el-button>
+      <AudioProgress style="width:80px; margin-right:20px" />
       <el-button type="text" icon="el-icon-folder-add"></el-button>
       <el-button type="text" icon="el-icon-delete"></el-button>
     </div>

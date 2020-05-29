@@ -1,6 +1,5 @@
 <template>
   <div class="center-controls" ref="wrapper">
-    <time>00:00 / 00:00</time>
     <div class="line"></div>
     <div class="circle" @mousedown="mouse" ref="circle"></div>
   </div>
@@ -14,11 +13,6 @@ export default {
     wrapperOffsetLeft: 0, // 容器x轴距离浏览器的距离
     wrapperWidth: 0 // 容器宽度
   }),
-  mounted() {
-    const wrapperEl = this.$refs.wrapper;
-    this.wrapperOffsetLeft = wrapperEl.getBoundingClientRect().x;
-    this.wrapperWidth = wrapperEl.clientWidth;
-  },
   methods: {
     mouse(ev) {
       //当点击时所有事件都捕获为dragEl的事件
@@ -29,9 +23,15 @@ export default {
       // 按下时, 元素距离浏览器的距离
       this.startClientX = ev.clientX;
       // 按下时, 元素距离容器的偏移量
-      this.startMoveOffsetX = ev.clientX - this.wrapperOffsetLeft;
+      const wrapperOffsetLeft = wrapperEl.getBoundingClientRect().x;
+      this.startMoveOffsetX = ev.clientX - wrapperOffsetLeft;
+      // 按下时, 保存容器宽度
+      this.wrapperWidth = wrapperEl.clientWidth;
+
+      // 订阅移动和松开事件
       document.onmousemove = this.move;
       document.onmouseup = this.up;
+      // 清除默认行为
       ev.preventDefault();
       return false;
     },
@@ -42,7 +42,9 @@ export default {
       // 控制元素保持在父元素当中
       if (slidingsetX > this.wrapperWidth) slidingsetX = this.wrapperWidth;
       if (slidingsetX < 0) slidingsetX = 0;
+
       circleEl.style.transform = `translateX(${slidingsetX}px)`;
+
       ev.preventDefault();
       return false;
     },
@@ -53,6 +55,7 @@ export default {
       document.onmouseup = null;
       //释放dragEl的点击事件
       document.releaseCapture && document.releaseCapture();
+
       ev.preventDefault();
       return false;
     }
@@ -77,8 +80,8 @@ export default {
     height: 1px;
     background: #dcdfe6;
     position: absolute;
-    left: 0;
-    right: 0;
+    left: -@circleSize / 2;
+    right: -@circleSize / 2;
     top: 0;
     bottom: 0;
     margin: auto;
