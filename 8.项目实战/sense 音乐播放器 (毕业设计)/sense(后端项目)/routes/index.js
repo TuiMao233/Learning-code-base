@@ -6,6 +6,12 @@ const multer = require('@koa/multer');
 const path = require('path')
 const fs = require('fs')
 const { nanoid } = require('nanoid')
+// 上传文件配置
+router.use(multer().fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'audio', maxCount: 1 },
+    { name: 'album_image', maxCount: 1 }
+]))
 // 登录
 router.post('/login', async ctx => {
     let email = ctx.request.body.email
@@ -38,21 +44,22 @@ router.post('/register', async ctx => {
         ctx.session.password = password
     } else ctx.body = { code: 1, msg: '该账户已存在' }
 })
-// 上传头像
-router.use(multer().single('avatar'))
+
 router.post('/AvatarUpload', async ctx => {
     const find_result = await UserModel.findOne({ email: ctx.query.email }, { __v: 0 })
     if (!find_result) return ctx.body = { code: 1, msg: '上传失败, 该用户不存在' };
-    if (!ctx.file) return ctx.body = { code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确' };
+    if (!ctx.files['avatar'] || !ctx.files['avatar'][0])
+        return ctx.body = { code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确' };
     // 获取文件后缀名 originalname 属性是名称
-    const ext = path.extname(ctx.file.originalname);
+    const file = ctx.files['avatar'][0]
+    const ext = path.extname(file.originalname);
     if (!ext.match(/jpg|png/)) return ctx.body = { code: 1, msg: '上传失败, 文件不是jpg或png' };
     // 构建文件名
     const file_name = `${nanoid(10)}${ext}`
     // 文件的目录
     const dir_file = path.resolve(__dirname, `../public/user_img/${file_name}`)
     // 写入文件
-    fs.writeFileSync(dir_file, ctx.file.buffer)
+    fs.writeFileSync(dir_file, file.buffer)
     // 保存到该文档数据库中
     find_result.avatar_file_path = `/user_img/${file_name}`
     find_result.save()
@@ -79,14 +86,40 @@ router.get('/out_login', async ctx => {
     ctx.body = { code: 0, msg: '用户cookies清除成功' }
 })
 // 上传歌曲信息, 返回歌曲ID
-router.use(multer().single('mp3'))
 router.post('/upload_song', async ctx => {
-    console.log(ctx.file)
-    // const { audio_name, singer_name, album_name } = ctx.request.body
-    // if (!audio_name && !singer_name && !album_name)
-    //     return ctx.body = { code: 1, msg: '歌曲信息不完整' };
-    // const create_result = await MusicModel.create({ audio_name, singer_name, album_name })
-    // ctx.body = { code: 0, data: { song_id: create_result._id } }
+    const { audio_name, album_name, singer_name } = ctx.query
+    if (!ctx.query.audio_name) return ctx.body = { code: 1, msg: '歌曲名称不能为空' }
+    if (!ctx.files['audio'] && !ctx.files['audio'][0])
+        return ctx.body = { code: 1, msg: '上传失败, 指定文件不存在, 或文件格式不正确' };
+    let albumImage_name = null;
+    const findMusicResult = await MusicModel.findOne({ audio_name })
+    if (findMusicResult) return ctx.body = {code:1, msg:'该歌曲已存在, 请删除该歌曲后重试'}
+    if (ctx.files['album_image'] && ctx.files['album_image'][0]) {
+        // 专辑图片已获取, 写入专辑图片
+        const albumImageFile = ctx.files['album_image'][0]
+        const albumImage_ext = path.extname(albumImageFile.originalname);
+        albumImage_name = `${nanoid(10)}${albumImage_ext}`
+        const dirAlbumImage_name = path.resolve(__dirname, `../public/album_img/${albumImage_name}`)
+        fs.writeFileSync(dirAlbumImage_name, albumImageFile.buffer)
+    }
+
+    const audioFile = ctx.files['audio'][0]
+    const audio_ext = path.extname(audioFile.originalname);
+    const audioFile_name = `${nanoid(10)}${audio_ext}`
+    const dirAudio_name = path.resolve(__dirname, `../public/audio/${audioFile_name}`)
+
+    fs.writeFileSync(dirAudio_name, audioFile.buffer)
+    const data = {
+        audio_name, album_name, singer_name,
+        audio_path: `/user_img/${audioFile_name}`,
+        albumImage_name: ''
+    }
+    if (albumImage_name) data.album_img_path = `/album_img/${audioFile_name}`;
+
+    // 创建歌曲文档
+    const create_doc = await MusicModel.create(data)
+    if (create_doc) ctx.body = { code: 0, data: create_doc }
+    else ctx.body = { code: 1, data: '上传数据库失败, 请联系管理员' }
 })
 // 歌曲名称搜索路由
 router.get('/search_song', async ctx => {

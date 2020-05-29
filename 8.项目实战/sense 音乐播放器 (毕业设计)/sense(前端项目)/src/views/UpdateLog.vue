@@ -59,7 +59,6 @@
         <el-image src="/images/psc.jpg"></el-image>
       </div>
     </el-card>
-    <img src alt />
   </div>
 </template>
 

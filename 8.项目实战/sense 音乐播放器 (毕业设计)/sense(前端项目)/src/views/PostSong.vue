@@ -8,13 +8,12 @@
           drag
           :limit="1"
           action
-          name="mp3"
           :on-change="handleUpLoadMp3Change"
           :auto-upload="false"
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">
-            将文件拖到此处，或
+            将mp3文件拖到此处，或
             <em>点击上传</em>
           </div>
           <div class="el-upload__tip" slot="tip">只能上传mp3文件，且不超过15m</div>
@@ -28,19 +27,19 @@
           <el-input v-model="singer_name" placeholder="请输入歌手名称"></el-input>
         </div>
         <div class="right-commit-block">
-          <el-button type="primary" class="send_song" @click="submitFile">点击上传</el-button>
+          <el-button type="primary" class="send_song" @click="sendSongFile">点击上传</el-button>
         </div>
       </section>
       <section class="card-content-to">
-        
         <el-upload
           class="avatar-uploader albumImg-uploader"
           action
           :on-change="handleUpLoadImageChange"
           :show-file-list="false"
+          :auto-upload="false"
         >
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <div class="el-upload__text">点击上传专辑图片(可选)</div>
         </el-upload>
         <audio class="browse_audio" :src="mp3Url" controls></audio>
       </section>
@@ -66,35 +65,50 @@ export default {
       const isJPG = imageFile.raw.type === "image/jpeg";
       const isLt2M = imageFile.raw.size / 1024 / 1024 < 2;
       if (!isJPG) this.$message.error("上传专辑图片只能是 JPG 格式!");
+      console.log('---')
       if (!isLt2M) this.$message.error("上传专辑图片大小不能超过 2MB!");
       return isJPG && isLt2M;
     },
     isMP3Lt15M(mp3File) {
-      console.log(mp3File);
-      if (!mp3File) return this.$message.error("上传音频文件不能为空!");
-      const isMP3 = mp3File.raw.type === "audio/mpeg";
+      if (!mp3File) {this.$message.error("上传音频文件不能为空!"); return false;}
+      const isMP3 = mp3File.raw.type.match(/audio\/mpeg|audio\/mp3/);
       const isLt5M = mp3File.raw.size / 1024 / 1024 < 15;
-      if (!isMP3) return this.$message.error("上传音频文件只能是 mp3 格式!");
-      if (!isLt5M) return this.$message.error("上传音频文件大小不能超过 15MB!");
+      if (!isMP3) {this.$message.error("上传音频文件只能是 mp3 格式!"); return false;}
+      if (!isLt5M) {this.$message.error("上传音频文件大小不能超过 15MB!"); return false;}
       return isMP3 && isLt5M;
+    },
+    async sendSongFile () {
+      const { $message, audio_name, submitFile, isMP3Lt15M, mp3File } = this;
+      // mp3文件判断, 不符合不进行发送请求
+      if (!isMP3Lt15M(mp3File)) return false;
+      // 提示用户必须填写歌曲名称
+      if (!audio_name) return $message.error("歌曲名称未填写 !");
+      const loadingInstance = this.$loading({
+        background: "rgba(255,255,255,.2)",
+        text: "少女祈祷中...."
+      });
+      const result = await submitFile()
+      loadingInstance.close();
+      if (result && result.code !== 0) return this.$message.error(result.msg);
+      // 上传头像成功, 用户数据更新, 将数据储存到store中, 并跳转页面
+      this.$message({ type: "success", message: "上传头像成功" });
+      console.log(result)
     },
     submitFile() {
       // 将需要提交的文件，和附带的数据，append  FormData中 然后提交
       const {
-        mp3File,
-        $message,
-        audio_name,
-        album_name,
-        singer_name,
-        isMP3Lt15M,
-        isCompleteSong
+        mp3File, $message, audio_name, album_name,
+        singer_name, imageFile
       } = this;
-      // 文件判断
-
-      if (!isMP3Lt15M(mp3File)) return false;
-      if (!audio_name) return $message.error("名称未填写 !");
+      // 创建表单数据, 并将MP3文件添加到表单数据
       const fromData = new FormData();
-      fromData.append("mp3", mp3File.raw);
+      fromData.append("audio", mp3File.raw);
+      // 如果专辑图片文件有数据, 添加到fromData中
+      if (imageFile && imageFile.raw) {
+        const isJPG = imageFile.raw.type === "image/jpeg";
+        const isLt2M = imageFile.raw.size / 1024 / 1024 < 2;
+        if(isJPG && isLt2M) fromData.append("album_image", imageFile.raw);
+      }
       // 发送上传请求, 请求url带歌曲的id,
       return axios({
         url: "/upload_song",
@@ -104,21 +118,19 @@ export default {
         params: {
           audio_name: audio_name.trim(),
           album_name: album_name.trim(),
-          singer_name: singer_name.trim()
+          singer_name:singer_name.trim()
         }
       });
     },
-    handleUpLoadMp3Change(file) {
+    handleUpLoadMp3Change(file) { // MP3文件改变时添加本地浏览地址, 储存到this中
       this.mp3File = file;
-      const isMP3 = file.raw.type === "audio/mpeg";
+      const isMP3 = file.raw.type.match(/audio\/mpeg|audio\/mp3/);
       if (!isMP3) return false;
       this.audio_name = file.raw.name.split(".")[0];
       this.mp3Url = window.webkitURL.createObjectURL(file.raw);
     },
-    handleUpLoadImageChange(file) {
-      // 表单改变时将file储存到data中
+    handleUpLoadImageChange(file) { // image文件改变时添加本地浏览地址, 储存到this中
       if (!this.isJPGLt2M(file)) return false;
-      // 符合文件的创建本地URL写入IMG标签中, 并保存到this中
       this.imageUrl = window.webkitURL.createObjectURL(file.raw);
       this.imageFile = file;
     }
@@ -134,9 +146,19 @@ export default {
   .el-upload.el-upload--text {
     width: 200px;
     height: 200px;
-    .el-icon-plus.avatar-uploader-icon, img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .el-upload__text {
+      color: #606266 !important;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    img {
       width: 200px;
-    height: 200px;
+      height: 200px;
     }
   }
 }
@@ -221,8 +243,5 @@ export default {
     width: 360px;
     height: 180px;
   }
-}
-
-.el-upload__tip {
 }
 </style>

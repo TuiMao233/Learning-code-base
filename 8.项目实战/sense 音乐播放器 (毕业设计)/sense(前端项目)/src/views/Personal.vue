@@ -56,13 +56,14 @@ export default {
         background: "rgba(255,255,255,.2)",
         text: "少女祈祷中...."
       });
-      loadingInstance.close();
+      
       const result = await this.submitFile(
         this.userInfo.email,
         this.userInfo.avatar_file_path
       );
-      // 上传头像成功, 用户数据更新, 将数据储存到store中, 并跳转页面
+      loadingInstance.close();
       if (result && result.code !== 0) return this.$message.error(result.msg);
+      // 上传头像成功, 用户数据更新, 将数据储存到store中, 并跳转页面
       if(!result) return this.$message({type: 'warning', message:'未选择图片或图片格式不正确'});
       this.$message({ type: "success", message: "上传头像成功" });
       console.log(result)

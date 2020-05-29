@@ -4,11 +4,10 @@ const createModel = require('./model_ence')
 // 音频数据
 const MusicModel = createModel({
    audio_name: { type: String, required: true },   // 音乐名称
-   audio_path: String,                             // 音乐文件地址
-   singer_name: String,                            // 歌手名
-   lyric_path: String,                             // 歌词文件地址
-   album_name: String,     // 专辑名
+   audio_path: String,     // 音乐文件地址
    album_img_path: String, // 专辑图片地址
+   singer_name: String,    // 歌手名
+   album_name: String,     // 专辑名
    create_time: { type: Date, default: Date.now }  // 歌曲创建时间
 })('musics')
 
