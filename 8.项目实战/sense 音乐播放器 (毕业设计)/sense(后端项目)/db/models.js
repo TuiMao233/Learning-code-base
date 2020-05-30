@@ -16,11 +16,14 @@ const MusicModel = createModel({
 const UserModel = createModel({
    avatar_file_path: String,
    name: { type: String, required: true }, // 昵称
-   email:  { type: String, required: true }, // 电子邮箱
+   email: { type: String, required: true }, // 电子邮箱
    password: { type: String, required: true }, // 密码
    song_list: [{ // 歌单
-      name: { type: String, required: true }, // 歌单名
-      song_id: Array                         // 歌单歌曲id
+      audio_name: { type: String, required: true },   // 音乐名称
+      audio_path: String,     // 音乐文件地址
+      album_img_path: String, // 专辑图片地址
+      singer_name: String,    // 歌手名
+      album_name: String,     // 专辑名
    }],
    create_time: { type: Date, default: Date.now }  // 用户创建时间
 })('users')

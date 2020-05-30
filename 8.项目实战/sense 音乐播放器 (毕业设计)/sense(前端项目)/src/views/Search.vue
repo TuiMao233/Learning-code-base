@@ -7,56 +7,38 @@
           <i slot="suffix" class="el-input__icon el-icon-search" @click="searchSong"></i>
         </el-input>
       </div>
-      <el-table :data="searchSongList" style="width: 100%">
-        <el-table-column width="100">
-          <template slot-scope="scope">
-            <el-image
-              class="album_img"
-              :src="scope.row.album_img_path ? scope.row.album_img_path : '/images/timg.jpg'"
-              fit="cover"
-            />
-          </template>
-        </el-table-column>
-
-        <el-table-column show-overflow-tooltip prop="audio_name" label="歌曲名" width="200"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="album_name" label="专辑" width="200"></el-table-column>
-        <el-table-column show-overflow-tooltip prop="singer_name" label="歌手" width="200"></el-table-column>
-        <el-table-column>
-          <template slot-scope="scope">
-            <div class="controls">
-              <i class="el-icon-video-play" v-if="!isPlay" @click="handleClick(scope.row)" />
-              <i class="el-icon-video-pause" v-else />
-              <i class="el-icon-chat-dot-square" />
-              <i class="el-icon-crop" />
-            </div>
-          </template>
-        </el-table-column>
-      </el-table>
+      <SongList :songList="songList"/>
     </el-card>
   </div>
 </template>
 
 <script>
 import { mapActions, mapState } from "vuex";
+import SongList from "../components/SongList";
+import { reqSearchSong } from "../api";
 export default {
+  components: { SongList },
   data: () => ({
     searchStr: "",
-    isPlay: false
+    songList: []
   }),
   computed: {
-    ...mapState(["searchSongList"])
   },
   methods: {
-    ...mapActions(["getSearchSongList"]),
-    searchSong() {
-      const searchStr = this.searchStr.trim();
-      if (!searchStr) return this.$message.error("搜索内容不能为空");
-      // 准备发送请求
-      const loadingInstance = this.$loading({ background: "rgba(255,255,255,.2)", text: "少女祈祷中...." });
-      this.getSearchSongList([searchStr, ()=>loadingInstance.close()]);
-    },
-    handleClick(row) {
-      console.log(row);
+    async searchSong() { // 发送请求获取歌曲列表
+    let loadingInstance
+      try {
+        const searchStr = this.searchStr.trim();
+        if (!searchStr) return this.$message.error("搜索内容不能为空");
+        loadingInstance = this.$loading({ background: "rgba(255,255,255,.2)", text: "少女祈祷中...."});
+        const result = await reqSearchSong(searchStr)
+        loadingInstance.close()
+        if (result.code !== 0) return this.$message.error(result.msg)
+        this.songList = result.data.map((item, index)=> {
+          item.index = index
+          return item
+        })
+      } catch (error) { loadingInstance.close() }
     }
   }
 };

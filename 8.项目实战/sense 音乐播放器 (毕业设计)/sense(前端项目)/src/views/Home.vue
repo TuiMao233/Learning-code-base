@@ -3,40 +3,39 @@
   <div>
     <el-carousel :interval="4000" type="card" height="350px">
       <el-carousel-item v-for="(item, index) in 6" :key="item">
-        <el-image class="carousel_img" :src="`/carousel/${index+1}.jpg`" alt fit="scale-down"/>
+        <el-image class="carousel_img" :src="`/carousel/${index+1}.jpg`" alt fit="scale-down" />
       </el-carousel-item>
     </el-carousel>
     <el-card class="box-card-home">
       <div slot="header" class="clearfix">
         <span>最新歌曲</span>
       </div>
-      <div v-for="o in 4" :key="o" class="text item">
-        <img :src="'/timg.jpg'" alt />
-        <span>1/6 -genesis mix-</span>
-        <span>EXIT TUNES PRESENTS Vocalogenesis</span>
-        <span>初音ミク / ぼーかりおどP</span>
-        <div class="controls">
-          <i class="el-icon-video-play" v-if="!isPlay" />
-          <i class="el-icon-video-pause" v-else />
-          <i class="el-icon-chat-dot-square" />
-          <i class="el-icon-crop" />
-        </div>
-        <el-divider />
-      </div>
+      <SongList :songList="songList" />
     </el-card>
   </div>
 </template>
 
 <script>
+import SongList from "../components/SongList";
+import { reqNewSong } from "../api";
 export default {
+  components: { SongList },
   data: () => ({
-    isPlay: false
-  })
+    songList: []
+  }),
+  async mounted() {
+    const result = await reqNewSong();
+    if (result.code !== 0) return;
+    this.songList = result.data.map((item, index) => {
+      item.index = index;
+      return item;
+    });
+  }
 };
 </script>
 
 <style lang="less">
-.carousel_img{
+.carousel_img {
   display: block !important;
   width: 100% !important;
   height: 100% !important;

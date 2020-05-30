@@ -62,7 +62,7 @@
 import { onScroll } from "./assets/utils";
 import { reqAutoLogin } from "./api";
 import { mapState, mapActions } from "vuex";
-import AudioPlayer from './components/AudioPlayer'
+import AudioPlayer from './components/AudioPlayer/AudioPlayer'
 export default {
   data: () => ({
     scroll_pos: 0
@@ -75,6 +75,7 @@ export default {
     onScroll(window, scroll_pos => (this.scroll_pos = scroll_pos));
     const result = await reqAutoLogin();
     if (result.code !== 0) return false;
+    result.data.song_list.forEach((item, index) => item.index = index);
     this.receiveUserInfo(result.data);
   },
   methods: {

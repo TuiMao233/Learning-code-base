@@ -10,6 +10,7 @@
           action
           :on-change="handleUpLoadMp3Change"
           :auto-upload="false"
+          ref="uploadSong"
         >
           <i class="el-icon-upload"></i>
           <div class="el-upload__text">
@@ -37,6 +38,7 @@
           :on-change="handleUpLoadImageChange"
           :show-file-list="false"
           :auto-upload="false"
+          ref="uploadAlbumImg"
         >
           <img v-if="imageUrl" :src="imageUrl" class="avatar" />
           <div class="el-upload__text">点击上传专辑图片(可选)</div>
@@ -61,7 +63,7 @@ export default {
     imageUrl: ""
   }),
   methods: {
-    ...mapActions(['receivePlayerSong']),
+    ...mapActions(['receiveSongList', 'modifySongIndex']),
     isJPGLt2M(imageFile) {
       if (!imageFile) return false;
       const isJPG = imageFile.raw.type === "image/jpeg";
@@ -79,7 +81,7 @@ export default {
       if (!isLt5M) {this.$message.error("上传音频文件大小不能超过 15MB!"); return false;}
       return isMP3 && isLt5M;
     },
-    async sendSongFile () {
+    async sendSongFile () { // 发送请求
       const { $message, audio_name, submitFile, isMP3Lt15M, mp3File } = this;
       // mp3文件判断, 不符合不进行发送请求
       if (!isMP3Lt15M(mp3File)) return false;
@@ -92,12 +94,22 @@ export default {
       const result = await submitFile()
       loadingInstance.close();
       if (result && result.code !== 0) return this.$message.error(result.msg);
-      // 上传头像成功, 用户数据更新, 将数据储存到store中, 并跳转页面
-      this.$message({ type: "success", message: "上传头像成功" });
-      this.receivePlayerSong(result.data)
+      // 上传歌曲成功, 提示信息, 移除页面数据, 将数据传入歌曲列表中
+      this.$message({ type: "success", message: "上传歌曲成功" });
+      this.remoteData()
+      this.receiveSongList([result.data])
+      this.modifySongIndex(0)
     },
-    submitFile() {
-      // 将需要提交的文件，和附带的数据，append  FormData中 然后提交
+    remoteData () { // 移除所有数据
+      this.$refs.uploadSong.uploadFiles = [];
+      this.$refs.uploadAlbumImg.uploadFiles = [];
+      this.imageUrl = "";
+      this.mp3Url = "";
+      this.audio_name = "";
+      this.album_name = "";
+      this.singer_name = "";
+    },
+    submitFile() { // 将需要提交的文件，和附带的数据，append  FormData中 然后提交
       const {
         mp3File, $message, audio_name, album_name,
         singer_name, imageFile
@@ -124,14 +136,14 @@ export default {
         }
       });
     },
-    handleUpLoadMp3Change(file) { // MP3文件改变时添加本地浏览地址, 储存到this中
+    handleUpLoadMp3Change(file) { // MP3文件改变时添加本地浏览地址, 并储存到this中
       this.mp3File = file;
       const isMP3 = file.raw.type.match(/audio\/mpeg|audio\/mp3/);
       if (!isMP3) return false;
       this.audio_name = file.raw.name.split(".")[0];
       this.mp3Url = window.webkitURL.createObjectURL(file.raw);
     },
-    handleUpLoadImageChange(file) { // image文件改变时添加本地浏览地址, 储存到this中
+    handleUpLoadImageChange(file) { // image文件改变时添加本地浏览地址, 并储存到this中
       if (!this.isJPGLt2M(file)) return false;
       this.imageUrl = window.webkitURL.createObjectURL(file.raw);
       this.imageFile = file;

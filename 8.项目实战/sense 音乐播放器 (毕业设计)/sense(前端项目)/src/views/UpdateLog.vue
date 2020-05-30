@@ -64,27 +64,18 @@
 
 
 <script>
+// type: "primary",
 export default {
   data: () => ({
     reverse: true,
     activities: [
-      {
-        type: "primary",
-        content: "构建全局音频控件",
-        timestamp: "2020-05-29"
-      },
-      {
-        content: "构建模糊搜索歌曲",
-        timestamp: "2020-05-29"
-      },
-      {
-        content: "完善歌曲上传",
-        timestamp: "2020-05-29"
-      },
-      {
-        content: "完善用户头像上传",
-        timestamp: "2020-05-28"
-      }
+      { type: "primary", content: "完善主页最新歌曲列表展示", timestamp: "2020-05-30" },
+      { content: "完善歌曲列表控件", timestamp: "2020-05-30" },
+      { content: "构建模糊搜索歌曲", timestamp: "2020-05-29" },
+      { content: "完善歌曲上传", timestamp: "2020-05-29" },
+      { content: "完善用户头像上传", timestamp: "2020-05-28" },
+      { content: "搭建用户后台服务", timestamp: "2020-05-27" },
+      { content: "构建页面基本架构", timestamp: "2020-05-26" },
     ]
   })
 };

@@ -1271,7 +1271,7 @@ const app = new Vue({
 可让显示路由保存值和自身，在刷新页面时或重新启动浏览器不会消失
 
 ~~~html
-<keep-alive> <!-- 利用keep-alive标签包裹显示路由 -->
+<keep-alive > <!-- 利用keep-alive标签包裹显示路由 -->
 	<router-view class="w"></router-view>
 </keep-alive>
 ~~~
