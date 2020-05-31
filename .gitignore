@@ -3,6 +3,5 @@ node_modules/
 npm-debug.log
 *.zip
 *.7z
-*.mp3
 *.mp4
 *.exe

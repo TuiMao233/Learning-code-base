@@ -1,3 +1,0 @@
-module.exports = {
-    host_url: 'http://localhost:3000/'
-}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 方式二：媒体查询像素比 -->
+    <style>
+        #test { height: 1px }
+        @media only screen and (-webkit-device-pixel-ratio: 2) {
+            /* 像素比为2的时候，缩放指定元素 */
+            #test { transform: scaleY(0.5) }
+        }
+        @media only screen and (-webkit-device-pixel-ratio: 3) {
+            /* 像素比为3的时候，缩放指定元素 */
+            #test { transform: scaleY(0.3333333333333333333333333) }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="height:1px"></div>
+</body>
+<!-- 方式一：设置像素比缩放比例 -->
+<script>
+    (function () {
+        //! 获取物理像素与设备独立像素比例
+        var dpr = window.devicePixelRatio || 1;
+        //! 在根据缩放比例 1 / 像素比 = 得到对应物理像素宽度比缩放比例的值
+        var scale = 1 / dpr;
+        var meta = document.querySelector("meta[name='viewport']");
+        meta.content = "width=device-width,initial-scale=" + scale;
+
+
+        var styleNode = document.createElement("style");
+        //! 设备独立像素(完美视口) * 物理像素与设备独立像素比例 = 物理像素宽度
+        //! 那么调整了1px对应1个物理像素的缩放比例后，rem适配方案也要跟着发生改变 也就是16rem = 手机物理像素宽度
+        var w = document.documentElement.clientWidth * dpr / 16;
+        styleNode.innerHTML = "html{font-size:" + w + "px!important}";
+        document.head.appendChild(styleNode);
+    })()
+</script>
+
+</html>

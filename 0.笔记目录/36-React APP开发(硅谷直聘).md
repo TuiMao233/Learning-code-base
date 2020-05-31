@@ -668,6 +668,14 @@ const dashen = () => {
 export default withRouter(dashen);
 ~~~
 
+## 编译后页面空白
+
+`/package.json`
+
+~~~json
+"homepage": "./", // 所有资源根路径
+~~~
+
 # 自定义redux和react-redux
 
 ## 理解redux模块
