@@ -42,10 +42,10 @@ export function lockNumber(number, leftInter, rightInter) { // 锁定值在指�
 }
 export function isArray(val) { // 判断数组
     return Object.prototype.toString.call(val) === '[object Array]'
-    return Array.isArray(val)
-    return val.constructor === Array
-    return val.__proto__ === Array.prototype
-    return val instanceof Array
+    // return Array.isArray(val)
+    // return val.constructor === Array
+    // return val.__proto__ === Array.prototype
+    // return val instanceof Array
 }
 export function isMobile(str) { // 手机号码判断
     return /^1[3456789]\d{9}$/.test(str)

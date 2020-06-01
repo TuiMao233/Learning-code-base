@@ -12,15 +12,15 @@
 
 ## 项目技术栈
 
-![技术栈](D:\web学习库\0.笔记目录\img\React web App\技术栈.png)
+![技术栈]( \\img\React web App\技术栈.png)
 
 ## 前端路由
 
-![前端路由](D:\web学习库\0.笔记目录\img\React web App\前端路由.png)
+![前端路由]( \\img\React web App\前端路由.png)
 
 ## API接口
 
-![API接口](D:\web学习库\0.笔记目录\img\React web App\API接口.png)
+![API接口]( \\img\React web App\API接口.png)
 
 ## 流程及开发方法
 
@@ -56,7 +56,7 @@
 
 ## 前端React-cli目录设计
 
-![目录设计](D:\web学习库\0.笔记目录\img\React web App\目录设计.png)
+![目录设计]( \\img\React web App\目录设计.png)
 
 # 项目初始化
 
@@ -127,7 +127,7 @@ module.exports = override(
 
 ## 应用中使用的antd组件
 
-![antd组件](D:\web学习库\0.笔记目录\img\React web App\antd组件.png)
+![antd组件]( \\img\React web App\antd组件.png)
 
 ## antd-mobile 组件使用
 

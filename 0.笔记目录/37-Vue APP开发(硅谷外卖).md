@@ -13,19 +13,19 @@
 
 ## 技术选型
 
-![批注](D:\web学习库\0.笔记目录\img\Vue web App\批注.png)
+![批注]( \\img\Vue web App\批注.png)
 
 ## 前端路由
 
-![批注2](D:\web学习库\0.笔记目录\img\Vue web App\批注2.png)
+![批注2]( \\img\Vue web App\批注2.png)
 
 ##  API 接口
 
-![批注3](D:\web学习库\0.笔记目录\img\Vue web App\批注3.png)
+![批注3]( \\img\Vue web App\批注3.png)
 
 ## 项目 vue 组件
 
-![批注4](D:\web学习库\0.笔记目录\img\Vue web App\批注4.png)
+![批注4]( \\img\Vue web App\批注4.png)
 
 ## 流程及开发方法
 
@@ -540,6 +540,6 @@ import 'fiters'
 **启动打包状态可视化：**`npm run build --report`
 **启动打包：**`npm run build`
 
-![批注5](D:\web学习库\0.笔记目录\img\Vue web App\批注5.png)
+![批注5]( \\img\Vue web App\批注5.png)
 
 ###### ###

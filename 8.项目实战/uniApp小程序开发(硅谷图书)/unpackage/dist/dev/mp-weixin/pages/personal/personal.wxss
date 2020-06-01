@@ -1,0 +1,49 @@
+.header {
+  background-color: #8cc242;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  justify-items: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
+  padding: 20px 0;
+}
+.header .header-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 15px;
+}
+.header .user {
+  width: 60px;
+  height: 30px;
+  padding: 0 5px;
+  margin: 0;
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #659a1c;
+}
+.saoma {
+  font-size: 15px;
+  color: #FFFFFF;
+  line-height: 18px;
+  text-align: right;
+  padding-right: 10px;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+          flex: 1;
+}
+.saoma:hover {
+  background: none;
+  color: #FFFFFF;
+}
+.saoma image {
+  vertical-align: middle;
+  width: 60px;
+  height: 60px;
+}
+

@@ -1,5 +1,5 @@
 <template>
-  <div class="book_detail" v-if="bookData.book_name">
+  <div class="book_detail" v-if="bookData">
     <span class="header">{{bookData.book_name}}</span>
     <image :src="bookData.image" />
     <div class="book_msg">
@@ -19,7 +19,7 @@
 <script>
 export default {
   data: () => ({
-    bookData: {
+    bookData: { // 单本书的数据
       book_name: "平凡的世界",
       author: "路遥",
       publishing: "机械工业出版社",

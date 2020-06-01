@@ -10,7 +10,7 @@
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#8CC242",
-        "navigationBarTitleText": "小程序基本编写",
+        "navigationBarTitleText": "B5图书",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
