@@ -29,12 +29,11 @@ export function splitArray(arr, len) { // 分隔二维数组
     let arr_length = arr.length;
     let newArr = [];
     for (let i = 0; i < arr_length; i += len) {
-        console.log(i)
         newArr.push(arr.slice(i, i + len));
-        console.log(i)
     }
     return newArr;
 }
+
 export function lockNumber(number, leftInter, rightInter) { // 锁定值在指定区间 [leftInterval, rightInterval]
     if (number < leftInterval) { number = leftInterval }
     if (number > rightInterval) { number = rightInterval }

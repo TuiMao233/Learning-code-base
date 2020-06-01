@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <swiper indicator-dots autoplay circular>
       <swiper-item 
 	  v-for="src_path in carouselImg" 
@@ -21,13 +21,42 @@
         <span  ></span>
       </header>
       <div class="merch_list">
-        <div class="item" v-for="(item, index) in books" :key="index">
-          <div class="item_content" @click="goToDetail(index)">
-            <image :src="item.item_image" mode="widthFix"/>
-            <span class="name">《{{item.book_name}}》</span>
-            <span class="author">{{item.author}}-{{item.publishing}}</span>
-          </div>
-        </div>
+		  <div class="left_books">
+			<div class="item" 
+			v-for="(item, index) in splitArray(books, (books.length) / 2)[0]"
+			:key="index"
+			@click="goToDetail(index)"
+			>
+				<image class="layer" :src="item.item_image"></image>
+				<div class="layer">《{{item.book_name}}》</div>
+				<div class="layer">作者: {{item.author}}</div>
+				<div class="layer">出版社: {{item.publishing}}</div>
+				<div class="layer">
+					<span class="price">
+						<span style="font-size: 13px;">￥</span> {{item.price}}
+					</span>
+					<span class="payment">2338人付款</span>
+				</div>
+			</div>
+		  </div>
+		  <div class="right_books">
+			<div class="item"
+			v-for="(item, index) in splitArray(books, (books.length-1) / 2)[1]"
+			:key="index"
+			@click="goToDetail(books.length / 2 + index - 1)"
+			>
+				<image class="layer" :src="item.item_image" mode="widthFix"></image>
+				<div class="layer">《{{item.book_name}}》</div>
+				<div class="layer">作者: {{item.author}}</div>
+				<div class="layer">出版社: {{item.publishing}}</div>
+				<div class="layer">
+					<span class="price">
+						<span style="font-size: 13px;">￥</span> {{item.price}}
+					</span>
+					<span class="payment">2338人付款</span>
+				</div>
+			</div>	
+		  </div>
       </div>
     </div>
   </div>
@@ -39,14 +68,22 @@ import { getCarouselImg } from '@/mock_data'
 export default {
   data: () => ({
 	  carouselImg: [],
-	  books: app.$vm._data.books
+	  books: app.$vm._data.books,
   }),
   mounted() {
   	this.carouselImg = getCarouselImg()
   },
   methods: {
     goToBookList () { uni.navigateTo({ url: '/pages/book_list/book_list' }); },
-    goToDetail (index) { uni.navigateTo({ url: `/pages/book_detail/book_detail?index=${index}` }); }
+    goToDetail (index) { uni.navigateTo({ url: `/pages/book_detail/book_detail?index=${index}` }); },
+	splitArray (arr, len) { // 分隔二维数组
+	    let arr_length = arr.length;
+	    let newArr = [];
+	    for (let i = 0; i < arr_length; i += len) {
+	        newArr.push(arr.slice(i, i + len));
+	    }
+	    return newArr;
+	}
   },
 };
 </script>
@@ -56,10 +93,46 @@ export default {
 swiper swiper-item image {
   width: 100%;
 }
+.home, page {
+	background-color: #F1F1F1;
+	height: 100%;
+}
 .content {
+	
+	.merch_list {
+		padding: 10px;
+		display:flex;
+		.left_books, .right_books {
+			width: 50%;
+			padding: 6px;
+			.item {
+				border: 3rpx solid #CCCCCC;
+				text-align: center;
+				font-size: 12px;
+				border-radius: 15px;
+				overflow: hidden;
+				background-color: #FFFFFF;
+				margin-bottom: 10px;
+				padding-bottom: 10px;
+				image { width: 100%; max-height: 170px; }
+				.layer {
+					margin-bottom: 3px;
+				}
+				.price {
+					color: red;
+					font-size: 16px;
+					margin-right: 5px;
+				}
+				.payment {
+					font-size: 10px;
+					color: #808080;
+				}
+			}
+	  }
+	}
   header {
     padding: 10px 15px;
-	background-color: #F1F1F1;
+	background-color: #E5E5E5;
     .head_text {
       font-size: 16px;
     }
@@ -69,31 +142,6 @@ swiper swiper-item image {
 	  height: 22px;
     }
   }
-  .merch_list {
-    .clearfix();
-    .item {
-      position: relative;float: left;box-sizing: border-box;
-      .grid-border(solid 1rpx rgba(0, 0, 0, 0.3));
-      width: 50%;padding-bottom: 50%;
-      .item_content {
-        position: absolute;display: flex;
-        left: 0;right: 0;top: 0;bottom: 0;
-        flex-direction: column;align-items: center;
-        margin-top: 15px;
-        image {
-			width: 100px;
-			height: 100px;
-		}
-        .name {
-          font-size: 15px;margin-top: 5px;
-          height: 17.5%;display: block;
-        }
-        .author {
-          font-size: 12px;margin-top: 5px;
-          height: 17.5%;display: block;
-        }
-      }
-    }
-  }
+  
 }
 </style>

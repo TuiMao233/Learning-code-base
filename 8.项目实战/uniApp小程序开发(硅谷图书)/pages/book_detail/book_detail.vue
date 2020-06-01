@@ -6,24 +6,21 @@
       <section>作者：{{bookData.author}}</section>
       <section>出版社：{{bookData.publishing}}</section>
       <section>出版日期：{{bookData.date}}</section>
-      <section>定价：￥{{bookData.price}}</section>
+      <section>定价：<span class="price">￥{{bookData.price}}</span></section>
     </div>
     <button  open-type="share">分享给朋友</button>
     <span class="about_header">作品简介</span>
     <span
       class="about_text"
-    >xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+    >{{bookData.details}}</span>
   </div>
 </template>
 
 <script>
 	const app = getApp()
 export default {
-  data: () => ({
-    bookData: null
-  }),
+  data: () => ({ bookData: null }),
   onLoad(query) {
-	console.log(app.data)
 	this.bookData = app.$vm._data.books[query.index]
   },
   onShareAppMessage() {
@@ -33,6 +30,11 @@ export default {
 </script>
 
 <style lang="less">
+	.price {
+		color: red;
+		font-size: 16px;
+		margin-right: 5px;
+	}
 .book_detail {
   display: flex;
   flex-direction: column;

@@ -109,7 +109,7 @@ window.onload = function () {
 		cont.style.height = LiHeight + 'px'
 	
 	// 窗口变化自适应
-	window.onresize = function(){ 
+	window.onresize = function(){
 		bodyHeight = document.body.getBoundingClientRect().height // body高度
 		LiHeight = bodyHeight - cont.getBoundingClientRect().y // body高度 - 元素y偏移量 = 剩余空间的高度
 		cont.style.height = LiHeight + 'px'// cont的高度是剩余空间的高度
@@ -124,16 +124,16 @@ window.onload = function () {
 
 	var book = cont.children[0] // book(书)元素 利用top值来实现翻页效果
 	var page = 0 // 代表第几页
-// 翻页器:根据符号判断是往前翻还是往后翻
-function pageTur(str) {
-	if(str == "+"){
-		pege = (page >= 4) ? 4 : page++ ,// 超过页数时保持页数 没有超过则减一页数
-		book.style.top = - page * LiHeight + 'px'  // 页数 * 高度 = 翻多少页的偏移量
-	}else{
-		pege = (page <= 0) ? 0 : page -- // 超过页数时保持页数 没有超过则减一页数
-		book.style.top = - page * LiHeight + 'px'
-	}updater(page)// 执行更新器
-}
+	// 翻页器:根据符号判断是往前翻还是往后翻
+	function pageTur(str) {
+		if(str == "+"){
+			pege = (page >= 4) ? 4 : page++ ,// 超过页数时保持页数 没有超过则减一页数
+			book.style.top = - page * LiHeight + 'px'  // 页数 * 高度 = 翻多少页的偏移量
+		}else{
+			pege = (page <= 0) ? 0 : page -- // 超过页数时保持页数 没有超过则减一页数
+			book.style.top = - page * LiHeight + 'px'
+		}updater(page)// 执行更新器
+	}
 	
 	
 	// 页面跳转器
@@ -325,7 +325,7 @@ function canvaAppend(canvas) { // canvas创建动画属性设置
 		quantity: 370, 		// 注入速度  1 -> 400	0或者空串是默认值340
 		frameNum: 80, 		// 动画速度  1 - 1000	0或者空串是默认值60
 		injection(arr) { // 注入器
-			var r =Math.random()*6+2;
+			var r = Math.random()*6+2;
 			var x = Math.random()*canvas.width;
 			var y = canvas.height - r;
 			var deg =0;
@@ -338,7 +338,7 @@ function canvaAppend(canvas) { // canvas创建动画属性设置
 				deg: 0,startX: x, startY: y, step: Math.random()*20+10,
 			})
 		},
-		changer(arr) { // 变化器
+		changer(arr) {	// 变化器
 			// console.log(arr[1].dd)
 			for (var i = 0; i < arr.length; i++) { // 变化器:每次执行圆的信息都会发送改变
 				arr[i].deg+=5
@@ -360,7 +360,7 @@ function canvaAppend(canvas) { // canvas创建动画属性设置
 				ctx.fill() // 进行绘制
 				ctx.restore();
 			}
-		}	
+		}
 	})
 }
 // 动画功能函数

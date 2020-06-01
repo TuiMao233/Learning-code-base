@@ -39,7 +39,7 @@ export default {
 		font-size: 16.5px;
 		justify-content: space-between;
 		margin-right: 5px;
-		font-size: 15px;
+		font-size: 14px;
 		.price {
 			float: right;
 			color: red;

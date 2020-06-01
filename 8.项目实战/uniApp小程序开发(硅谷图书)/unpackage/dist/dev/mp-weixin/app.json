@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/personal/personal",
+    "pages/myCollection/myCollection",
     "pages/home/home",
+    "pages/personal/personal",
     "pages/book_list/book_list",
     "pages/index/index",
     "pages/book_detail/book_detail",

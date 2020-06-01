@@ -1,3 +1,37 @@
+.surface {
+  padding: 18px 0;
+  margin: 0 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.surface:not(:last-child) {
+  border-bottom: 1rpx solid rgba(0, 0, 0, 0.3);
+}
+.surface .column {
+  font-size: 13px;
+}
+.surface .column:not(:last-child) {
+  margin-bottom: 18px;
+}
+.surface .column .icon {
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 15px;
+}
+.surface .column .icon.right-arrow {
+  float: right;
+  width: 15px;
+  height: 15px;
+}
 .header {
   background-color: #8cc242;
   display: -webkit-box;

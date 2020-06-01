@@ -123,6 +123,8 @@ num.toString(2);  //二进制: "1010"
 num.toString(8);  //八进制: "12"
 num.toString(16);  //十六进制: "a"
 
+(1231421.1231412).toFixed(1) // 1231421.1
+
 var value1 = 10;
 var value2 = true;
 var value3 = null;

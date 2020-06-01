@@ -26,7 +26,7 @@
   -webkit-justify-content: space-between;
           justify-content: space-between;
   margin-right: 5px;
-  font-size: 15px;
+  font-size: 14px;
 }
 .book_item .book_msg .price {
   float: right;

@@ -12,10 +12,46 @@
 				<image src="../../static/images/icon/扫码.png" mode="" @click="headleSaoma" />看书
 			</view>
 		</div>
-		
-		<div class="">
-			<view></view>
+
+		<div class="surface">
+			<view class="column">
+				<image class="icon" mode="widthFix" src="../../static/images/personal/wodeshoucang.png" />
+				我的收藏
+				<image class="icon right-arrow" mode="widthFix" src="../../static/images/personal/右箭头.png" />
+			</view>
 		</div>
+
+		<div class="surface">
+			<view class="column">
+				<image class="icon" mode="widthFix" src="../../static/images/personal/weibiaoti2fuzhi08.png" />
+				收货地址
+				<image class="icon right-arrow" mode="widthFix" src="../../static/images/personal/右箭头.png" />
+			</view>
+			<view class="column">
+				<image class="icon" mode="widthFix" src="../../static/images/personal/gouwuche.png" />
+				购物车
+				<image class="icon right-arrow" mode="widthFix" src="../../static/images/personal/右箭头.png" />
+			</view>
+		</div>
+
+		<div class="surface">
+			<view class="column">
+				<image class="icon" mode="widthFix" src="../../static/images/personal/dianpu.png" />
+				官方商店
+				<image class="icon right-arrow" mode="widthFix" src="../../static/images/personal/右箭头.png" />
+			</view>
+			<view class="column">
+				<image class="icon" mode="widthFix" src="../../static/images/personal/bangzhu.png" />
+				帮助与反馈
+				<image class="icon right-arrow" mode="widthFix" src="../../static/images/personal/右箭头.png" />
+			</view>
+			<view class="column">
+				<image class="icon" mode="widthFix" src="../../static/images/personal/haoping.png" />
+				给我们好评
+				<image class="icon right-arrow" mode="widthFix" src="../../static/images/personal/右箭头.png" />
+			</view>
+		</div>
+
 	</div>
 </template>
 
@@ -53,6 +89,40 @@
 
 <style lang="less">
 	@import "../../utils/style-units.less";
+	@LandRsize: 15px; // 左右间隔尺寸
+	@TandBsize: 18px; // 上下间隔尺寸
+
+	.surface {
+		padding: @TandBsize 0;
+		margin: 0 @LandRsize;
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+
+		&:not(:last-child) {
+			border-bottom: 1rpx solid rgba(0, 0, 0, .3);
+		}
+
+		.column {
+			font-size: 13px;
+
+			&:not(:last-child) {
+				margin-bottom: @TandBsize;
+			}
+
+			.icon {
+				vertical-align: middle;
+				width: 20px;
+				height: 20px;
+				margin-right: @LandRsize;
+				&.right-arrow{
+					float: right;
+					width: 15px;
+					height: 15px;
+				}
+			}
+		}
+	}
 
 	.header {
 		background-color: #8cc242;
