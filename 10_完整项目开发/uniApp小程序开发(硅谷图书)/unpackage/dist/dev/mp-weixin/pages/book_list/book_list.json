@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "book-item": "/templates/book_item"
+  }
+}

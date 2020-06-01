@@ -1,0 +1,4 @@
+page,
+.index,
+swiper,
+swiper image{height:100%}swiper swiper-item{position:relative}swiper swiper-item button{background:rgba(0,0,0,.5);color:#fff;border:solid 1rpx #fff;font-size:15px;position:absolute;top:80%;left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%)}
