@@ -35,7 +35,7 @@
 
 安装扩展：`VueDevtools`
 
-![TSGJ](.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/TSGJ.jpg?raw=true)
+![TSGJ](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/TSGJ.jpg?raw=true)
 
 ## MVVM概念
 
@@ -1193,7 +1193,7 @@ mounted () {
 
 ## props通信
 
-![消息订阅系统](D:/web学习库/7.高级框架/Vue/0.vue笔记https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/消息订阅系统.jpg?raw=true)
+![子组件传递数据](./img/React/子组件传递数据.jpg)
 
 ### 通信流程
 
@@ -1206,7 +1206,7 @@ mounted () {
 
 ## 消息订阅系统
 
-![消息订阅系统](D:/web学习库/0.笔记目录/img/消息订阅系统.jpg?raw=true)
+![消息订阅系统](./img/React/消息订阅系统.jpg)
 
 ### 通信流程
 
@@ -1240,7 +1240,7 @@ mounted () {
 
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
-![单页面应用](D:.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/单页面应用.jpg?raw=true)
+![单页面应用](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/单页面应用.jpg?raw=true)
 
 ##  Vue 路由管理器
 
@@ -1302,7 +1302,7 @@ const app = new Vue({
 </div>
 ~~~
 
-![1574341010](.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/1574341010.png?raw=true)
+![1574341010](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/1574341010.png?raw=true)
 
 [^注意]:当在入口函数引入路由，则代表所有组件都已经有了路由器，所以其他静态组件也能使用路由
 

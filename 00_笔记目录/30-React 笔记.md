@@ -25,7 +25,7 @@
 
 用JS对象树表示DOM树的结构；然后用这个树构建一个真正的DOM树插到文档当中，当状态变更的时候，重新构造一棵新的对象树。然后用新的树和旧的树进行比较，记录两棵树差异，把差异应用到真实DOM树上，视图就更新了
 
-<img src="https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/图片2.png?raw=true" alt="图片2"  />
+<img src="./img/React/图片2.png" alt="图片2"  />
 
 把树形结构按照层级分解，只比较同级元素，给列表结构的每个单元添加唯一的 key 属性，方便比较，
 
@@ -37,9 +37,12 @@ React 只会匹配相同 class 的 component（这里面的 class 指的是组�
 
 ## React 基本使用
 
-### 相关JS库
+### 相关JS库&插件
 
-react.js: **React的核心库**、react-dom.js: 提供**操作DOM的react扩展库**、babel.min.js: 解析JSX语法代码**转为纯JS语法代码的库**
+**react.js：**React的核心库
+**react-dom.js：**提供操作DOM的react扩展库
+**babel.min.js：**解析JSX语法代码转为纯JS语法代码的库
+**React Developer Tools：**提供浏览器调试
 
 **页面引入**
 
@@ -48,8 +51,6 @@ react.js: **React的核心库**、react-dom.js: 提供**操作DOM的react扩展�
 <script type="text/javascript" src="./js/react-dom.development.js"></script>
 <script type="text/javascript" src="./js/babel.min.js"></script>
 ~~~
-
-
 
 ### 基础编码
 
@@ -62,11 +63,14 @@ react.js: **React的核心库**、react-dom.js: 提供**操作DOM的react扩展�
 </script>
 ~~~
 
+### 引入图片
 
-
-### React Developer Tools
-
-![调试工具](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/调试工具.jpg?raw=true)
+~~~jsx
+import imgBase64 from './a.png'
+const img = <img src={imgBase64} />
+// or
+const img = <img src={require('./a.png')} />
+~~~
 
 
 
@@ -153,17 +157,18 @@ ReactDOM.render(vDom2,document.querySelector('#test2'))
 
 <div id="test2"><h3 id="LIXIAOLONG">i like you!</h3></div>
 
+
 # 数据双向绑定
 
 ## 让元素值与状态数据绑定
 
-1. **绑定动态数据：**![1](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/1.jpg?raw=true)![2](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/2.jpg?raw=true)*（此时input的值是固定的）*
-2. **input绑定输入事件：**![3](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/3.jpg?raw=true)
-3. **根据input的值改变动态数据：**![4](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/4.jpg?raw=true)
+1. **绑定动态数据：**![1](./img/React/input/1.jpg)![2](./img/React/input/2.jpg)*（此时input的值是固定的）*
+2. **input绑定输入事件：**![3](./img/React/input/3.jpg)
+3. **根据input的值改变动态数据：**![4](./img/React/input/4.jpg)
 
 # 生命周期钩子
 
-![图片1](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/图片1.png?raw=true)
+![图片1](./img/React/图片1.png)
 
 ## 生命周期流程
 
@@ -395,7 +400,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## props通信
 
-![子组件传递数据](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/子组件传递数据.jpg?raw=true)
+![子组件传递数据](./img/React/子组件传递数据.jpg)
 
 ### 通信流程
 
@@ -408,7 +413,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## 消息订阅系统
 
-![消息订阅系统](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/消息订阅系统.jpg?raw=true)
+![消息订阅系统](./img/React/消息订阅系统.jpg)
 
 ### 通信流程
 
@@ -427,7 +432,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
-<img src="https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/1583466607(1).jpg?raw=true" alt="1583466607(1)" style="zoom: 67%;" />
+<img src="./img/React/1583466607(1).jpg" alt="1583466607(1)" style="zoom: 67%;" />
 
 ### react-router
 
@@ -847,7 +852,7 @@ export const AppStateSus = stateSubStore({count},{
 //   ψ(*｀ー´)ψ绑定多个store, 并进行筛选需要的数据(可选)
 /* export const AppStateSub = storePushToStateAll(
     { stores, filter:['comments'] },
-    { delComment, initComment,addComment }
+    { delComment, initComment, addComment }
 ) */
 ~~~
 
@@ -914,5 +919,5 @@ export default createStore(store, composeWithDevTools(applyMiddleware(thunk))  )
 
 ### 4.浏览器查看调试工具
 
-![rudex调试工具](/img/React/rudex调试工具.jpg?raw=true)
+![rudex调试工具](./img/React/rudex调试工具.jpg)
 
