@@ -35,7 +35,7 @@
 
 安装扩展：`VueDevtools`
 
-![TSGJ](.\img\vue\TSGJ.jpg)
+![TSGJ](.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/TSGJ.jpg?raw=true)
 
 ## MVVM概念
 
@@ -86,7 +86,7 @@ Data Bindings-->View:进行DOM绑定监听数据
     ew Vue({
 	el:"#app",
 	data:{
-		imgUrl:https://cn.vuejs.org/images/logo.png  
+		imgUrl:https://cn.vuejs.org/images/logo.png?raw=true  
 	 }
 })
 </script>
@@ -412,7 +412,7 @@ Vue transition 允许我们只设置隐藏或者显示的样式, 这样切换的
 .[name]-enter-top, .[name]-leave {/*显示的样式*/}
 ~~~
 
-![](https://cn.vuejs.org/images/transition.png)
+![](https://cn.vuejs.org/images/transition.png?raw=true)
 
 
 
@@ -461,7 +461,7 @@ Vue transition 允许我们只设置隐藏或者显示的样式, 这样切换的
 
 ## 生命周期流程
 
-![Vue 实例生命周期](https://cn.vuejs.org/images/lifecycle.png)
+![Vue 实例生命周期](https://cn.vuejs.org/images/lifecycle.png?raw=true)
 
 ## Vue生命周期函数
 
@@ -1006,7 +1006,7 @@ Vue CLI v4.3.1
 #↓↓↓↓↓↓↓#
 
 Vue CLI v4.3.1		# 安装相应包, 等待创建项目中
-✨  Creating project in D:\......
+✨  Creating project in D:/......
 ⚙️  Installing CLI plugins. This might take a while...
 
 #↓↓↓↓↓↓↓#
@@ -1194,7 +1194,7 @@ mounted () {
 
 ## props通信
 
-![消息订阅系统](D:\web学习库\7.高级框架\Vue\0.vue笔记\img\vue\消息订阅系统.jpg)
+![消息订阅系统](D:/web学习库/7.高级框架/Vue/0.vue笔记https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/消息订阅系统.jpg?raw=true)
 
 ### 通信流程
 
@@ -1207,7 +1207,7 @@ mounted () {
 
 ## 消息订阅系统
 
-![消息订阅系统](D:/web学习库/0.笔记目录/img/消息订阅系统.jpg)
+![消息订阅系统](D:/web学习库/0.笔记目录/img/消息订阅系统.jpg?raw=true)
 
 ### 通信流程
 
@@ -1241,7 +1241,7 @@ mounted () {
 
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
-![单页面应用](D:.\img\vue\单页面应用.jpg)
+![单页面应用](D:.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/单页面应用.jpg?raw=true)
 
 ##  Vue 路由管理器
 
@@ -1303,7 +1303,7 @@ const app = new Vue({
 </div>
 ~~~
 
-![1574341010](.\img\vue\1574341010.png)
+![1574341010](.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/1574341010.png?raw=true)
 
 [^注意]:当在入口函数引入路由，则代表所有组件都已经有了路由器，所以其他静态组件也能使用路由
 
@@ -1434,7 +1434,7 @@ vx->子组件B:传输数据
 
 ### Vuex总流程图
 
-![Vuex流程图](./img/vue/Vuex流程图.png)
+![Vuex流程图](./img/vue/Vuex流程图.png?raw=true)
 
 ### 什么情况下应该使用 Vuex？
 
@@ -1656,7 +1656,7 @@ vue add element		# 添加element插件
 
 ## vue-cli@4 UI中引入
 
-![](https://user-images.githubusercontent.com/10095631/43555082-b9414998-962a-11e8-83ab-cda066a61093.png)
+![](https://user-images.githubusercontent.com/10095631/43555082-b9414998-962a-11e8-83ab-cda066a61093.png?raw=true)
 
 ## 自定义主题样式
 

@@ -2,7 +2,7 @@
 
 webpack 是一种前端资源构建工具，一个静态模块打包器(module bundler)。 在 webpack 看来, 前端的所有资源文件(js/json/css/img/less/...)都会作为模块处理。 它将根据模块的依赖关系进行静态分析，打包生成对应的静态资源(bundle)
 
-![1582766241(1)](.\img\webpack\wepack官方图.jpg)
+![1582766241(1)](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/webpack/wepack官方图.jpg?raw=true)
 
 ## webpack 五个核心
 
@@ -34,8 +34,8 @@ webpack 是一种前端资源构建工具，一个静态模块打包器(module b
 
 **node绝对路径与相对路径片段拼接：**`path.resolve(absoPath, relaPath)` 
 **相对路径(rela)：**`build/js`
-**绝对路径(abso)：**`D:\web学习库\6.自动化构建工具\webpack\02.webpack初体验`
-**resolve拼接：**`D:\web学习库\6.自动化构建工具\webpack\02.webpack初体验\build\js`
+**绝对路径(abso)：**`D:/web学习库/6.自动化构建工具/webpack/02.webpack初体验`
+**resolve拼接：**`D:/web学习库/6.自动化构建工具/webpack/02.webpack初体验/build/js`
 
 **配置接口`js`文件**
 
@@ -96,7 +96,7 @@ module.exports = {
 	mode: 'development',			 // 开发模式
 	// module{rules}插件配置的集合
 	module: {rules:[ // rules是loader配置
-      {	 test: /\.css$/,
+      {	 test: //.css$/,
 				// 配置所需的loader插件进行处理
 				// use数组中loader执行顺序：从右到左，从下到上 依次执行
 				// 顺序可以利用reverse进行倒叙排序 这样符合人类思维
@@ -104,7 +104,7 @@ module.exports = {
 				// css-loader: 将css文件变成commonjs模块加载js中，里面内容是样式字符串
 				// style-loader: 创建style标签,将js中的样式字符串资源插入行,添加到head中生成
 			},
-			{	test: /\.less$/,
+			{	test: //.less$/,
 				use: ['style-loader', 'css-loader', 'less-loader'],
 				// less-loader: 将less编译为css,然后在通过 css-loader,style-loader创建的style标签插入head中
 			}
@@ -167,11 +167,11 @@ module.exports = {
 	mode: 'development',			 // 开发模式
 	module: {rules:[
     // 处理less
-    {test: /\.less$/,use: ['style-loader', 'css-loader', 'less-loader']},
+    {test: //.less$/,use: ['style-loader', 'css-loader', 'less-loader']},
     // 解析html为字符串，这样操作html标签的方法才能拿到数据
-    {	test: /\.html$/,loader: 'html-loader' },
+    {	test: //.html$/,loader: 'html-loader' },
     // 处理html字符串中url链接的jpg|png|gif文件
-    {	test: /\.(jpg|png|gif)$/,
+    {	test: //.(jpg|png|gif)$/,
 			loader: 'url-loader',
 			options: {
        // 当文件小于多少时转换为base64-uri
@@ -204,9 +204,9 @@ module.exports = {
 	mode: 'development',			 // 开发模式
 	module: {rules:[
     // 处理css
-    {test: /\.css$/, use: ['style-loader', 'css-loader']},
+    {test: //.css$/, use: ['style-loader', 'css-loader']},
     // 打包其他资源 
-    {exclude: /\.(css|js|html|less|jpg|png|gif)$/, // 排除css/js/html资源
+    {exclude: //.(css|js|html|less|jpg|png|gif)$/, // 排除css/js/html资源
      loader: 'file-loader',
      options: {name: '[hash:10].[ext]'}// 资源重命名
      }
@@ -232,9 +232,9 @@ module.exports = {
 	mode: 'development',			 // 开发模式
 	module: {rules:[
     // 处理css
-    {test: /\.css$/, use: ['style-loader', 'css-loader']},
+    {test: //.css$/, use: ['style-loader', 'css-loader']},
     // 打包其他资源 
-    {exclude: /\.(css|js|html|less)$/,  loader: 'file-loader',options: {name: '[hash:10].[ext]'}}
+    {exclude: //.(css|js|html|less)$/,  loader: 'file-loader',options: {name: '[hash:10].[ext]'}}
   ]}
   // 复制html到指定位置,并自动引入打包输出
   plugins: [new HtmlWebpackPlugin({template: './src/index.html'})],	
@@ -267,20 +267,20 @@ module.exports = {
 	mode: 'development',			// 开发/生成模式
 	module: {rules:[ // 插件配置
 		{   // 打包css样式
-			test: /\.css$/,
+			test: //.css$/,
 			use:['style-loader','css-loader']
 		},{ // 编译打包less样式
-			test: /\.less$/,
+			test: //.less$/,
 			use:['style-loader','css-loader','less-loader']
 		},{ // 解析html为字符串
-			test: /\.html$/,
+			test: //.html$/,
 			loader: 'html-loader'
 		},{ // 处理html字符串的图片url,并打包图片
-			test: /\.(jpg|png|gif)$/,
+			test: //.(jpg|png|gif)$/,
 			loader: 'url-loader',
 			options: {limit: 8*1024, esModule: false, name:'[hash:10].[ext]'}
 		},{ // 处理打包其他资源
-			exclude: /\.(css|js|html|less|jpg|png|gif)$/,
+			exclude: //.(css|js|html|less|jpg|png|gif)$/,
 			loader: 'file-loader',
 			options: {name: '[hash:10].[ext]'}
 		}

@@ -25,7 +25,7 @@
 
 用JS对象树表示DOM树的结构；然后用这个树构建一个真正的DOM树插到文档当中，当状态变更的时候，重新构造一棵新的对象树。然后用新的树和旧的树进行比较，记录两棵树差异，把差异应用到真实DOM树上，视图就更新了
 
-<img src=".\img\React\图片2.png" alt="图片2"  />
+<img src="https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/图片2.png?raw=true" alt="图片2"  />
 
 把树形结构按照层级分解，只比较同级元素，给列表结构的每个单元添加唯一的 key 属性，方便比较，
 
@@ -66,7 +66,7 @@ react.js: **React的核心库**、react-dom.js: 提供**操作DOM的react扩展�
 
 ### React Developer Tools
 
-![调试工具](.\img\React\调试工具.jpg)
+![调试工具](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/调试工具.jpg?raw=true)
 
 
 
@@ -153,33 +153,32 @@ ReactDOM.render(vDom2,document.querySelector('#test2'))
 
 <div id="test2"><h3 id="LIXIAOLONG">i like you!</h3></div>
 
-
 # 数据双向绑定
 
 ## 让元素值与状态数据绑定
 
-1. **绑定动态数据：**![1](.\img\React\input\1.jpg)![2](.\img\React\input\2.jpg)*（此时input的值是固定的）*
-2. **input绑定输入事件：**![3](.\img\React\input\3.jpg)
-3. **根据input的值改变动态数据：**![4](.\img\React\input\4.jpg)
+1. **绑定动态数据：**![1](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/1.jpg?raw=true)![2](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/2.jpg?raw=true)*（此时input的值是固定的）*
+2. **input绑定输入事件：**![3](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/3.jpg?raw=true)
+3. **根据input的值改变动态数据：**![4](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/input/4.jpg?raw=true)
 
 # 生命周期钩子
 
-![图片1](.\img\React\图片1.png)
+![图片1](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/图片1.png?raw=true)
 
 ## 生命周期流程
 
 ~~~apl
 a. 第一次初始化渲染显示: ReactDOM.render()
-   \* constructor(): 创建对象初始化state
-   \* componentWillMount() : 将要插入回调
-   \* render() : 用于插入虚拟DOM回调
-   \* componentDidMount() : 已经插入回调
+   /* constructor(): 创建对象初始化state
+   /* componentWillMount() : 将要插入回调
+   /* render() : 用于插入虚拟DOM回调
+   /* componentDidMount() : 已经插入回调
 b. 每次更新state: this.setSate()
-   \* componentWillUpdate() : 将要更新回调
-   \* render() : 更新(重新渲染)
-   \* componentDidUpdate() : 已经更新回调
+   /* componentWillUpdate() : 将要更新回调
+   /* render() : 更新(重新渲染)
+   /* componentDidUpdate() : 已经更新回调
 c. 移除组件: ReactDOM.unmountComponentAtNode(containerDom)
-   \* componentWillUnmount() : 组件将要被移除回调
+   /* componentWillUnmount() : 组件将要被移除回调
 ~~~
 
 ## 常用钩子
@@ -396,7 +395,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## props通信
 
-![子组件传递数据](.\img\React\子组件传递数据.jpg)
+![子组件传递数据](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/子组件传递数据.jpg?raw=true)
 
 ### 通信流程
 
@@ -409,7 +408,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 ## 消息订阅系统
 
-![消息订阅系统](.\img\React\消息订阅系统.jpg)
+![消息订阅系统](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/消息订阅系统.jpg?raw=true)
 
 ### 通信流程
 
@@ -428,7 +427,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
-<img src=".\img\React\1583466607(1).jpg" alt="1583466607(1)" style="zoom: 67%;" />
+<img src="https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React/1583466607(1).jpg?raw=true" alt="1583466607(1)" style="zoom: 67%;" />
 
 ### react-router
 
@@ -915,5 +914,5 @@ export default createStore(store, composeWithDevTools(applyMiddleware(thunk))  )
 
 ### 4.浏览器查看调试工具
 
-![rudex调试工具](\img\React\rudex调试工具.jpg)
+![rudex调试工具](/img/React/rudex调试工具.jpg?raw=true)
 

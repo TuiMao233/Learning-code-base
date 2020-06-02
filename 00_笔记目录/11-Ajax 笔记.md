@@ -6,7 +6,7 @@
 
 ## HTTP 请求交互的基本过程
 
-![请求流程](.\img\axios\请求流程.png)
+![请求流程](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/axios/请求流程.png?raw=true)
 
 1. 前后应用从浏览器端向服务器发送 HTTP 请求(请求报文)
 2. 后台服务器接收到请求后, 调度服务器应用处理请求, 向浏览器端返回 HTTP 响应(响应报文)
@@ -121,7 +121,7 @@ $ json-server --watch --port 53000 db.json
 输出类似以下内容，说明启动成功。
 
 ```
-\{^_^}/ hi!
+/{^_^}/ hi!
 
 Loading db.json
 Done
@@ -154,7 +154,7 @@ http://localhost:53000/course/1000
 
 ## Ajax工作原理
 
-![](.\img\ajax\Ajax工作原理.png)
+![](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/ajax/Ajax工作原理.png?raw=true)
 
 `Ajax`并不是一项新技术，它实际上是几种技术，每种技术各尽其职，以一种全新的方式聚合在一起
 服务器端语言：服务器需要具备向浏览器发送特定信息的能力。Ajax与服务器端语言无关。

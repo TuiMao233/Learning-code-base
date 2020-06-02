@@ -35,11 +35,10 @@
 线程就相当于工厂中的工人
 
 **单线程：**JS是单线程，在执行JS代码的时候网页是停止渲染的。
-![js是单线程的](/img/js是单线程的.jpg)
 
 **多线程：**主流的语言，如Java
 
-![多线程处理机制](./img/nodejs/多线程处理机制.jpg)
+![多线程处理机制](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/nodejs/多线程处理机制.jpg?raw=true)
 
 # Node.js 概念
 

@@ -74,7 +74,7 @@ Google开源的 前端JS 结构化 框架
 </body>
 ~~~
 
-![理解第一个Angular应用](\img\angularJS\理解第一个Angular应用.png)
+![理解第一个Angular应用](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img\angularJS\理解第一个Angular应用.png)
 
 ## 表达式可操作数据
 
@@ -120,7 +120,7 @@ Google开源的 前端JS 结构化 框架
 </body>
 ~~~
 
-![双向数据绑定](\img\angularJS\双向数据绑定.png)
+![双向数据绑定](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/angularJS/双向数据绑定.png?raw=true)
 
 # 函数控制器 （v1.2）
 

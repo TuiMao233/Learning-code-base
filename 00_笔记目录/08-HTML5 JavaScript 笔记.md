@@ -174,7 +174,7 @@ ctx.restore();
 
 ## canvas 绘制矩形与样式
 
-<img src=" \img\HTM5 JavaScript\1.png" alt="1" style="zoom:67%;float:left" />
+<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/1.png?raw=true" alt="1" style="zoom:67%;float:left" />
 
 ~~~html
 <canvas class="test" width="400" height="300"></canvas>
@@ -199,7 +199,7 @@ ctx.restore();
 
 ## canvas 路径_绘制
 
-<img src=" \img\HTM5 JavaScript\2.png" alt="2" style="zoom:67%;float:left" />
+<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/2.png?raw=true" alt="2" style="zoom:67%;float:left" />
 
 ~~~html
 <canvas class="test" width="400" height="300"></canvas>
@@ -225,7 +225,7 @@ ctx.restore();
 
 ## canvas 圆_绘制
 
-<img src=" \img\HTM5 JavaScript\3.png" alt="3" style="zoom: 67%; float: left;" />`arc(x, y, radius, startAngle, endAngle, anticlockwise)`
+<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/3.png?raw=true" alt="3" style="zoom: 67%; float: left;" />`arc(x, y, radius, startAngle, endAngle, anticlockwise)`
 以`x，y`为圆心
 以`radius`为半径的圆弧（圆）
 从`startAngle`（起点）开始,到`endAngle`（终点）结束
@@ -250,14 +250,16 @@ ctx.stroke();ctx.restore() 	//////////////////////////////
 
 ## canvas 弧线_绘制
 
-`ctx.moveTo(x0,y0)`<img src=" \img\HTM5 JavaScript\4.png" alt="4" style="zoom: 67%; float: left;" />
+`ctx.moveTo(x0,y0)`<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/4.png?raw=true" alt="4" style="zoom: 67%; float: left;" />
 `ctx.arcTo(x1,y1,x2,y2,r)`
 以`x0,y0`为起点
 以`x1,y1`为中点
 以`x2,y2`为终点
 以`r`为弧的半径
 
-~~~html
+
+
+~~~js
 <canvas class="test" width="400" height="300"></canvas>
 <script>
 // 角度转弧度函数
@@ -272,11 +274,9 @@ ctx.stroke();ctx.restore() 	//////////////////////////////
 </script>
 ~~~
 
-
-
 ## canvas 二次贝塞尔曲线_绘制
 
-`ctx.moveTo(x0,y0)`<img src=" \img\HTM5 JavaScript\5.png" alt="5" style="zoom: 33%; float: left;" />
+`ctx.moveTo(x0,y0)`<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/5.png?raw=true" alt="5" style="zoom: 33%; float: left;" />
 `ctx.quadraticCurveTo(x1,y1,x2,y2)`
 以`x0,y0`为起点		
 
@@ -303,15 +303,11 @@ ctx.stroke();ctx.restore() 	//////////////////////////////
 
 ## canvas 三次贝塞尔曲线
 
-`ctx.moveTo(x0,y0)`<img src=" \img\HTM5 JavaScript\6.png" alt="6" style="zoom: 50%;float: left;" />
+<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/6.png?raw=true" alt="6" style="zoom: 50%;float: left;" />
+
+`ctx.moveTo(x0,y0)`
 `ctx.quadraticCurveTo(x1,y1,x2,y2,x3,y3)`
-以`x0,y0`为起点		
-
-以`x1,y1`为中点1		
-
-以`x2,y2`为中点2		
-
-以`x3,y3`为终点
+以`x0,y0`为起点		以`x1,y1`为中点1		以`x2,y2`为中点2		以`x3,y3`为终点
 
 ~~~html
 <canvas class="test" width="400" height="300"></canvas>
@@ -332,7 +328,7 @@ ctx.stroke();ctx.restore() 	//////////////////////////////
 
 ## canvas 移动画布瞄点
 
-canvas默认的瞄点为`0,0`但可以设置瞄点在某个地方<img src=" \img\HTM5 JavaScript\7.png" alt="7" style="zoom: 25%; float: left;" />
+canvas默认的瞄点为`0,0`但可以设置瞄点在某个地方<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/7.png?raw=true" alt="7" style="zoom: 25%; float: left;" />
 `ctx.translate(x,y)`
 
 
@@ -355,7 +351,7 @@ ctx.stroke();ctx.restore() 	//////////////////////////////
 
 ## canvas 旋转图形
 
-`ctx.rotate(弧度)` <img src=" \img\HTM5 JavaScript\8.png" alt="8" style="zoom:33%;float:left" />
+`ctx.rotate(弧度)` <img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/8.png?raw=true" alt="8" style="zoom:33%;float:left" />
 
 
 
@@ -399,7 +395,7 @@ ctx.stroke();ctx.restore() 	//////////////////////////////
 
 ## canvas 引入图片
 
-`ctx.drawImage(image,x,y,width,height)`<img src=" \img\HTM5 JavaScript\9.png" alt="9" style="zoom: 33%; float: left;" />
+`ctx.drawImage(image,x,y,width,height)`<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/9.png?raw=true" alt="9" style="zoom: 33%; float: left;" />
 `image` 可以是`image` 也可以是`canvas` 对象
 以`x,y`点为起始坐标
 以`width,height`为指定宽高
@@ -421,7 +417,7 @@ img.onload = function(){ // 该图片加载完成的回调
 
 ## canvas 设置背景
 
-<img src=" \img\HTM5 JavaScript\10.png" alt="10" style="zoom:50%;float:left" /> `ctx.createPattern(image,repetition)`
+<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/10.png?raw=true" alt="10" style="zoom:50%;float:left" /> `ctx.createPattern(image,repetition)`
 
 `image` 图形源		
 
@@ -443,7 +439,7 @@ img.onload = function(){
 
 ## canvas 线性渐变
 
-`var gradient = ctx.createLinearGradient(x1,y1,x2,y2)`<img src=" \img\HTM5 JavaScript\11.png" alt="11" style="zoom: 50%; float: left;" />
+`var gradient = ctx.createLinearGradient(x1,y1,x2,y2)`<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/11.png?raw=true" alt="11" style="zoom: 50%; float: left;" />
 以`x1,y1`为渐变起点		以`x2,y2`为渐变终点
 
 `gradient.addColorStop(position,color)`
@@ -465,7 +461,7 @@ ctx.fillRect(0, 0, 300, 300)
 
 ## canvas 径向渐变
 
-`createRadialGradient(x1,y1,r1,x2,y2,r2)`<img src=" \img\HTM5 JavaScript\12.png" alt="12" style="zoom: 33%; float: left;" />
+`createRadialGradient(x1,y1,r1,x2,y2,r2)`<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/12.png?raw=true" alt="12" style="zoom: 33%; float: left;" />
 
 前三个值参数定义另一个以`x1,y1`为原点，半径为`r1`的圆
 
@@ -552,15 +548,11 @@ function setPxInfo(imgdata, x, y, color) {
 
 ## canvas 马赛克矩形
 
-选取一个马赛克矩形<img src=" \img\HTM5 JavaScript\13.png" alt="13" style="zoom: 80%;float:left" />
+选取一个马赛克矩形<img src=" https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/13.png" alt="13" style="zoom: 80%;float:left" />
 
 从马赛克矩形中随机抽出一个像素点的信息（rgba）
 
 将整个马赛克矩形中的像素点信息统一调成随机抽出的那个
-
-
-
-
 
 
 
@@ -854,7 +846,7 @@ drag.ev(div)
 </datalist>
 ~~~
 
-![1583247935(1)](.\img\HTM5 JavaScript\1583247935(1).jpg)
+![1583247935(1)](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/HTM5 JavaScript/1583247935(1).jpg?raw=true)
 
 ## 字体拼音
 

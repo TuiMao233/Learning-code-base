@@ -12,15 +12,15 @@
 
 ## 项目技术栈
 
-![技术栈](\img\React web App\技术栈.png)
+![技术栈](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/技术栈.png?raw=true)
 
 ## 前端路由
 
-![前端路由]( \\img\React web App\前端路由.png)
+![前端路由](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/前端路由.png?raw=true)
 
 ## API接口
 
-![API接口]( \\img\React web App\API接口.png)
+![API接口](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/API接口.png?raw=true)
 
 ## 流程及开发方法
 
@@ -56,7 +56,7 @@
 
 ## 前端React-cli目录设计
 
-![目录设计]( \\img\React web App\目录设计.png)
+![目录设计](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/目录设计.png?raw=true)
 
 # 项目初始化
 
@@ -127,7 +127,7 @@ module.exports = override(
 
 ## 应用中使用的antd组件
 
-![antd组件]( \\img\React web App\antd组件.png)
+![antd组件](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/antd组件.png?raw=true)
 
 ## antd-mobile 组件使用
 
@@ -417,7 +417,7 @@ function show() {
   }
 }
 <Grid
-    data={this.headerArr}	// 传入每个宫格的文本以及图片[{text:'头像1', icon:require('a.png')}...]
+    data={this.headerArr}	// 传入每个宫格的文本以及图片[{text:'头像1', icon:require('a.png?raw=true')}...]
     columnNum={5} // 一行显示的列数
     onClick={this.handleChange}	// 每个宫格的回调 回调参数是(el:{text,icon}, index:0)
   	carouselMaxRow={3} // 行最大限制
@@ -435,8 +435,8 @@ const TabBarItem = TabBar.Item;
 <TabBar>
 	<TabBarItem 
   	key={route.path}
-    icon={{uri:require(`.img/a.png`)}} // 默认样式 
-    selectedIcon={{uri:require(`.img/a-selected.png`)}} // 选中样式
+    icon={{uri:require(`.img/a.png?raw=true`)}} // 默认样式 
+    selectedIcon={{uri:require(`.img/a-selected.png?raw=true`)}} // 选中样式
     selected={true} // 是否被选中
     title={'个人信息'} // 标题框字体是什么 
     onPress={ ()=>{...} } // 标题框点击事件
@@ -448,7 +448,7 @@ const TabBarItem = TabBar.Item;
 
 ~~~jsx
 import { Result } from "antd-mobile";
-import img from '../img/p.png';
+import img from '../img/p.png?raw=true';
 <Result
 	img={{<img src={img}/>}} // 图片
   title={'张山'} // 结果文本
@@ -496,7 +496,7 @@ const CardBody = Card.Body; // 卡片的内容
 <Card>
   <CardHeader
   	title={} // 头部信息(右侧)
-    thumb={require('./img/p.png')} // 头部图标(右边)
+    thumb={require('./img/p.png?raw=true')} // 头部图标(右边)
   />
   <CardBody> {/* 卡片内容 */}
   	This is content of `Card` 
@@ -599,10 +599,10 @@ console.log('浏览器端向服务器发送消息:', {name: 'Tom', date: Date.no
 小图片由路径引入, 引入方式支持`ES6,require`
 
 ~~~jsx
-import imgBase64 from './a.png'
+import imgBase64 from './a.png?raw=true'
 const img = <img src={imgBase64} />
 // or
-const imgBase64 require('./a.png')
+const imgBase64 require('./a.png?raw=true')
 const img = <img src={imgBase64} />
 ~~~
 

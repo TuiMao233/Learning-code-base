@@ -13,19 +13,19 @@
 
 ## 技术选型
 
-![批注](\img\Vue web App\批注.png)
+![批注](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/Vue web App/批注.png?raw=true)
 
 ## 前端路由
 
-![批注2](\img\Vue web App\批注2.png)
+![批注2](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/Vue web App/批注2.png?raw=true)
 
 ##  API 接口
 
-![批注3]( \\img\Vue web App\批注3.png)
+![批注3]( https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/Vue web App/批注3.png?raw=true)
 
 ## 项目 vue 组件
 
-![批注4]( \\img\Vue web App\批注4.png)
+![批注4]( https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/Vue web App/批注4.png?raw=true)
 
 ## 流程及开发方法
 
@@ -452,7 +452,7 @@ export default {
 
 [^注意]: 文档参考官方介绍
 
-![](https://raw.githubusercontent.com/ustbhuangyi/better-scroll/master/packages/vuepress-docs/docs/.vuepress/public/assets/images/schematic.png)
+![](https://raw.githubusercontent.com/ustbhuangyi/better-scroll/master/packages/vuepress-docs/docs/.vuepress/public/assets/images/schematic.png?raw=true)
 
 # 实现组件懒加载
 
@@ -479,7 +479,7 @@ import Vue from 'vue'
 import VueLazyload from 'vue-lazyload'
 Vue.use(VueLazyload, {
   preLoad: 1.3, // 预先加载??(可选)
-  error: 'dist/error.png', // 加载错误图片(可选)
+  error: 'dist/error.png?raw=true', // 加载错误图片(可选)
   loading: 'dist/loading.gif',	// 加载中图片(可选)
   attempt: 1 // ??(可选)
 })
@@ -489,7 +489,7 @@ Vue.use(VueLazyload, {
 
 ~~~vue
 <template>
-	<img v-lazy="./img/a.jpg"/>
+	<img v-lazy="./img/a.jpg?raw=true"/>
 </template>
 <script>
 </script>
@@ -540,6 +540,6 @@ import 'fiters'
 **启动打包状态可视化：**`npm run build --report`
 **启动打包：**`npm run build`
 
-![批注5]( \\img\Vue web App\批注5.png)
+![批注5]( https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/Vue web App/批注5.png?raw=true)
 
 ###### ###
