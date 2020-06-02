@@ -1,3 +1,7 @@
+## 项目介绍
+
+该项目是使用uni-app, uni-ui, flyio等主体技术搭建的图书浏览应用
+
 ## 图书列表
 
 ![](./README_IMAGE/图书列表.jpg)
