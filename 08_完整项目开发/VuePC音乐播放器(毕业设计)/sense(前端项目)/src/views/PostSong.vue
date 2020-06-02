@@ -56,7 +56,7 @@
 
 <script>
 import axios from "axios";
-import { mapState, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data: () => ({
     mp3File: null,
@@ -127,7 +127,6 @@ export default {
       // 将需要提交的文件，和附带的数据，append  FormData中 然后提交
       const {
         mp3File,
-        $message,
         audio_name,
         album_name,
         singer_name,

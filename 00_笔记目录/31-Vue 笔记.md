@@ -231,7 +231,6 @@ var vm =new Vue({
 </div>
 <script>
 var vm =new Vue({
-var vm =new Vue({
 	el:"#demo",
 	data:{ftCol:'red',ftSz:20},
 	methods:{

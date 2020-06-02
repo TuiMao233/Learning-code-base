@@ -9,9 +9,9 @@
     </div>
     <div class="center-controls">
       <div class="song_msg" v-if="playerSongList[songIndex].audio_name">
-        {{playerSongList[songIndex].audio_name}} |
-        {{playerSongList[songIndex].album_name}} |
-        {{playerSongList[songIndex].singer_name}}
+        {{playerSongList[songIndex].audio_name}} 
+        {{' | ' + playerSongList[songIndex].album_name}}
+        {{' | ' + playerSongList[songIndex].singer_name}}
       </div>
       <AudioProgress
         :audio="$refs.audio"

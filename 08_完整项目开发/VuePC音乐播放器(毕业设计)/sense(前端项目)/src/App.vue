@@ -6,7 +6,7 @@
           <div class="masking" v-show="scroll_pos > 80"></div>
         </transition>
         <div class="user_head" @click="goToPersonal">
-          <el-image 
+          <el-image
             class="head_img"
             shape="circle"
             fit="cover"
@@ -52,13 +52,26 @@
       </el-aside>
 
       <el-main>
-        <keep-alive> <!-- 利用keep-alive标签包裹显示路由 -->
+        <keep-alive>
+          <!-- 利用keep-alive标签包裹显示路由 -->
           <router-view></router-view>
         </keep-alive>
-        
       </el-main>
+
       <div class="footer">
         <AudioPlayer />
+      </div>
+
+      <div class="test_play" :class="{active: testShow}">
+        <i
+          :class="{
+            'el-icon-arrow-left': testShow==false,
+            'el-icon-arrow-right': testShow==true,
+          }"
+          @click="testShow = !testShow"
+        ></i>
+        <i class="el-icon-video-play" @click="testPlay"></i>
+        <span>测试播放</span>
       </div>
     </el-container>
   </div>
@@ -70,32 +83,74 @@ import { reqAutoLogin } from "./api";
 import { mapState, mapActions } from "vuex";
 import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 export default {
+  components: { AudioPlayer },
+  computed: { ...mapState(["userInfo"]) },
   data: () => ({
-    scroll_pos: 0
+    scroll_pos: 0,
+    testShow: false
   }),
-  computed: {
-    ...mapState(["userInfo"])
-  },
-  // 绑定浏览器滚动事件, 获取滚动值
   async mounted() {
+    // 绑定浏览器滚动事件, 获取滚动值, 用户主动登录
     onScroll(window, scroll_pos => (this.scroll_pos = scroll_pos));
     const result = await reqAutoLogin();
     if (result.code !== 0) return false;
     this.receiveUserInfo(result.data);
   },
   methods: {
-    ...mapActions(["receiveUserInfo"]),
+    ...mapActions(["receiveUserInfo", "receiveSongList"]),
     goToPersonal() {
       if (!this.userInfo.email || this.$route.path === "/personal") return;
       this.$router.replace("/personal");
+    },
+    testPlay() {
+      // 点击测试播放器
+      this.receiveSongList([
+         {audio_name: "パプリカ",
+          audio_path: "http://music.163.com/song/media/outer/url?id=1418457693.mp3",
+          album_img_path: "http://p1.music.126.net/lvpvj1nNG99DQuOgYrRg0A==/109951164647181123.jpg?param=130y130",
+          singer_name: "sasakure.UK",
+          album_name: "トンデモ未来空奏図"},
+         {audio_name: "トンデモ未来のユクスエ",
+          audio_path: "http://music.163.com/song/media/outer/url?id=26440356.mp3",
+          album_img_path: "http://p1.music.126.net/b6cwIaAUy5MXSm3iNC0KNg==/109951163352158677.jpg?param=130y130",
+          singer_name: "米津玄師",
+          album_name: "パプリカ"},
+      ]);
     }
-  },
-  components: { AudioPlayer }
+  }
 };
 </script>
 
 <style lang="less">
 @import "./assets/style/index.less";
+.test_play {
+  position: fixed;
+  width: 100px;
+  height: 38px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  right: -90px;
+  top: 150px;
+  border: solid 1px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  align-items: center;
+  user-select: none; //文字不可选
+  i {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  span {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  transition: 0.5s;
+  &.active {
+    right: -5px;
+  }
+}
+
 .footer {
   position: fixed;
   left: 240px;
@@ -143,7 +198,9 @@ export default {
       position: absolute;
       top: 12px;
       right: 15px;
-      .white { color: white !important; }
+      .white {
+        color: white !important;
+      }
       .head_img {
         float: none !important;
         opacity: 1 !important;

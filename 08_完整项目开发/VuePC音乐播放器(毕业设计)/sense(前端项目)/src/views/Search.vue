@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 import SongList from "../components/SongList";
 import { reqSearchSong } from "../api";
 export default {
@@ -23,7 +22,7 @@ export default {
     songList: []
   }),
   created() {
-    document.onkeydown = e => {
+    document.onkeydown = () => {
       if (window.event.keyCode == 13) this.searchSong();
     };
   },

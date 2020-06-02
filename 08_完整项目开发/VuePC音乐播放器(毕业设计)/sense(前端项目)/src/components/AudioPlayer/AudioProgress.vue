@@ -70,8 +70,7 @@ export default {
     },
     setAudioCurrentTime(percent) {
       // 输入百分比改变歌曲时间
-      const { duration, currentTime } = this.audio;
-      const percent_one = duration / 100;
+      const percent_one = this.audio.duration / 100;
       this.audio.currentTime = percent_one * percent;
     },
     mouse(ev) {
@@ -91,7 +90,7 @@ export default {
       // 订阅移动和松开事件
       document.onmousemove = this.move;
       document.onmouseup = this.up;
-      
+
       if (!this.audio || isNaN(this.audio.duration)) {
         const message = "元数据加载过程比较缓慢, 请耐心等待.....";
         return this.$message({ type: "warning", message });
@@ -116,7 +115,6 @@ export default {
     },
     up(ev) {
       if (!this.audio || isNaN(this.audio.duration)) return false;
-      const circleEl = this.$refs.circle;
       const widthPercent_one = this.ittnWidth / 100;
       const slidingPercent = this.slidingsetX / widthPercent_one;
       this.setAudioCurrentTime(slidingPercent);
