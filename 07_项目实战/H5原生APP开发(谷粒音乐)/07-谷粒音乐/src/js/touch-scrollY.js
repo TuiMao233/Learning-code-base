@@ -40,10 +40,9 @@ const touchScrollY = new ReusableDrag({
             // 初始Y轴拖动值
             this.slidingCountY = 0
             this.overVal = 0
-            
         },
         move(ev) {
-            // 获取判断滑动值 
+            // 获取判断滑动值
             this.slidingCountX = ev.touches[0].clientX - this.startClientX
             this.slidingCountY = ev.touches[0].clientY - this.startClientY
             //如果Y/X轴抖动，则直接返回 (防抖动)
@@ -57,7 +56,7 @@ const touchScrollY = new ReusableDrag({
             
             // 执行橡皮筋计算
             // 当滚动条到头了, 并且向上滑
-            if(this.el.scrollTop <= 0 && this.slidingCountY > 0){
+            if(this.el.scrollTop <= 0 && this.slidingCountY > 0) {
                 // 定义未到同步的超出值, 这个值是当没有在头部却拉到头部上去时的值
                 this.overVal = this.overVal === 0 ? this.slidingCountY : this.overVal
                 // 超出值 减去 未到同步的超出值 = 头部超出值
