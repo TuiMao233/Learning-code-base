@@ -1,0 +1,2 @@
+.container,
+page{height:100%;position:relative}textarea{position:absolute;height:auto;width:auto;top:66px;right:0;left:0;bottom:0}.header{padding-top:10px;padding-bottom:10px;display:-webkit-box;display:-webkit-flex;display:flex}
