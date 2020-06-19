@@ -20,5 +20,3 @@ class CountClass extends Component {
         );
     }
 }
-
-export default CountClass;

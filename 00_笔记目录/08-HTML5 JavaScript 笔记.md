@@ -207,7 +207,9 @@ ctx.restore();
     var ctx = testNode.getContext("2d");
     // 线条样式更换
  /* ctx.strokeStyle = "red"		// 线条颜色
-    ctx.lineWidth = 50		    // 线条宽度 */
+    ctx.lineWidth = 50		    // 线条宽度
+    ctx.lineJoin = "bevel"; // 线与线连接的方式bevel(斜角), round(圆角)
+ */
     // 绘制一个三角形
     ctx.moveTo(50,50)		// 初始起点 笔触点
     ctx.lineTo(100,50)		// 第二个点
@@ -487,7 +489,7 @@ ctx.fillRect(-500, -300, 1000, 600)
 ~~~js
 var ctx = testNode.getContext("2d");
 ctx.fillStyle = "darkgreen";  		// 字体的颜色
-ctx.font = "100px sans-serif" 		// 字体样式
+ctx.font = "bold 100px sans-serif" 	// 字体样式
 ctx.textBaseline = "middle";		// 字体上下对其的方式
 ctx.textAlign = "center";			// 字体左右对其的方式
 ctx.fillText("李国超",500,300);	   // 绘制字体
