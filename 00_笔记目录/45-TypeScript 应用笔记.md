@@ -84,21 +84,16 @@ function fun_5(a: number, b: number, ...allNum: number[]) {
 fun_5(6, 8, 456, 4561, 123);
 ~~~
 
-## TS Class 构造函数
-
 ~~~typescript
-class City {
-    cName: string = ''
-    cLevel: number
-    constructor(cName: string, cLevel:number) {
-        this.cName = cName
-        this.cLevel = cLevel
-    }
-    about () {
-        console.log(`兄嘚，你跳【${this.cName}】~此地危险系数为: 【${this.cLevel}】`);  
-    }
+// ts中, 方法的重载, 定义多个方法, 参数统一接受
+function getInfo(name:string):string;
+function getInfo(age:number):number;
+function getInfo(str:any):any{
+    if (typeof str === 'string')
+        return `我叫：${str}`
+    else 
+        return `我的年龄是：${str}`
 }
-const citv:object = new City('p城', 5)
 ~~~
 
 # TypeScript 新增数据类型
@@ -191,3 +186,143 @@ let y:string = test_2()
 ~~~
 
 [^补充]:never类型是ts中的底部类型, 所有类型都是never类型的父类，所以never类型可以赋值给任意类型的变量
+
+# TypeScript Class类 规范
+
+## TS Class 类基本架构
+
+~~~typescript
+class City {
+    // 成员属性
+    cName: string = ''
+    cLevel: number
+    constructor(cName: string, cLevel: number) {
+        // 初始化构造器
+        this.cName = cName
+        this.cLevel = cLevel
+    }
+    about(): void {
+        console.log(`您要跳${this.cName}, 难度系数为${this.cLevel}`);
+    }
+    static count = 50 // 静态属性
+    static fun () {/*...*/} // 静态方法
+}
+// 创建构造对象, 参数未设置默认值或可为空, 默认必传
+const citv = new City('p城', 5)
+console.log(citv.cName) // 'p城'
+console.log(citv.cLevel) // 5
+citv.about() // ....
+~~~
+
+## TS Class 类修饰符
+
+~~~typescript
+class City {
+    // 成员属性
+    private cName: string = '' // 私有属性, 类外部不可访问
+    cLevel!: number // 属性值!:number 代表值可以为空(undefined)
+
+    constructor(cName: string, cLevel: number) {
+        this.cName = cName
+    }
+    // 私有方法, 类外部不可访问
+    private about(): void { console.log(`您要跳${this.cName}, 难度系数为${this.cLevel}``); }
+    // 共有方法, 类外部可访问
+    public about_2(): void {/*...*/}
+	// protected, 派生类公共方法, 类外部不可访问, 但继承类可访问
+	protected about_3(): void {/*...*/}
+}
+const citv = new City('p城', 5)
+
+console.log(citv.cName) // 属性“cName”为私有属性，只能在类“City”中访问。
+console.log(citv.cLevel) // 5
+citv.about() // 属性“about”为私有属性，只能在类“City”中访问。
+
+~~~
+
+## TS Class 继承类
+
+~~~typescript
+class Animal {
+    protected name: string; // 类与子类私有属性, 外部不可访问
+    constructor(theName: string) {
+        this.name = theName;
+    }
+    about (){ console.log(this.name); }
+}
+class Rhino extends Animal { // extends关键字继承父类所有方法
+    constructor() {
+        super('Rhino'); // 调用父类的构造器函数, 获取父类的属性与属性值
+    }
+    getName() {
+        console.log(this.name) //此处的name就是Animal类中的name
+        this.about()
+    }
+}
+~~~
+
+## TS Class 多态类
+
+~~~typescript
+class Animal {
+    eat() {/*...*/}
+}
+class Rhino extends Animal { // extends关键字继承父类所有方法
+    // 类的多态, 每个类都有一样的方法, 不一样的行为
+    // 如果子类没有方法, 则使用当前继承类的方法
+    eat() {/*...*/}
+}
+~~~
+
+## TS Class 抽象类
+
+~~~typescript
+// 抽象类不能直接实例化, 抽象类是给予子类的一个基类
+abstract class Animal {
+    // 定义一个抽象方法, 继承该类时该方法必须定义
+    abstract eat():any;
+}
+// new Animal() // 报错
+class Rhino extends Animal {
+    // 抽象类的子类必须实现抽象类里面的抽象方法
+    eat() {/*...*/}
+}
+~~~
+
+# TypeScript 接口 规范
+
+## 属性接口
+
+~~~js
+// TS 函数中单函数约束
+function printLabel (label:string):void {
+    console.log('')
+}
+printLabel('hahaha') // 必须传入参数
+~~~
+
+~~~js
+// TS 函数中对对象传参中的约束
+function printLabel (labelInfo:{label:string}):void {
+    console.log('')
+}
+printLabel({label: 'hahaha'}) // 必须传入对象, 对象中存在label参数, 并且是字符串
+~~~
+
+~~~typescript
+// 利用接口定义对象参数的约束规范
+interface FullName{
+    firstName: string; // 注意以分号结尾
+    secondName: string;
+}
+function printName (name:FullName){
+    console.log(`${name.firstName}---${name.secondName}`)
+}
+const obj = {
+    age: 20,
+    firstName: '张',
+    secondName: '三'
+}
+printName(obj)
+~~~
+
