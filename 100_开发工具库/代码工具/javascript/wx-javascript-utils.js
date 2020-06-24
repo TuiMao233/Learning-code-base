@@ -95,7 +95,7 @@ export class DrawPosterRect {
         // 添加绘制信息
         row.forEach((item, index) => ctx.fillText(item, x, y + index * fontHeight));
     }
-    /** 绘制器, 有细微bug, 暂时不进行使用 */
+    /** 绘制器, 接收执行器函数, 有细微bug, 不推荐使用 */
     async draw(execute) {
         return false;
         const { ctx } = this
