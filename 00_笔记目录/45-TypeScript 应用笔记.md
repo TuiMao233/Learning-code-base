@@ -291,7 +291,7 @@ class Rhino extends Animal {
 
 # TypeScript 接口 规范
 
-## 属性接口
+## 对象类型接口
 
 ~~~js
 // TS 函数中单函数约束
@@ -312,17 +312,106 @@ printLabel({label: 'hahaha'}) // 必须传入对象, 对象中存在label参数,
 ~~~typescript
 // 利用接口定义对象参数的约束规范
 interface FullName{
-    firstName: string; // 注意以分号结尾
-    secondName: string;
+    firstName: string; // 定义必须接口
+    secondName: string; // 定义必须接口
+    age?: number; // 定义可选接口
 }
 function printName (name:FullName){
     console.log(`${name.firstName}---${name.secondName}`)
 }
-const obj = {
+function printInfo(name:FullName) {
+    console.log(`${name.firstName}---${name.secondName}`)
+}
+printInfo({
+    firstName: '张',
+    secondName: '三'
+})
+printName({
     age: 20,
     firstName: '张',
     secondName: '三'
+})
+~~~
+
+## 函数类型接口
+
+~~~typescript
+// 对方法传入的参数以及返回值进行约束 批量约束 
+interface encypt{
+	(key:string, value:string):string;
 }
-printName(obj)
+var md5:encypt = function (key, value):string{
+	return key + ' ' + value // 模拟加密操作
+}
+console.log(md5('李', '二狗'))
+var sha1:encypt = function(key, value):string{
+	return key + '--' + value
+}
+console.log(sha1('dog', 'zi'))
+~~~
+
+## 索引类型接口
+
+~~~typescript
+// 可索引接口对数组的约束
+interface UserArr {
+    [index: number]: string // 定义索引值必须得是number, 元素值必须得是string
+}
+const arr: UserArr = ['123213213213', '12312321321']
+// 可索引接口对对象的约束
+interface UserObj {
+    [index: string]: string // 定义索引值必须得是number, 元素值必须得是string
+}
+const obj: UserObj = {key: 'value', name: 123} // 报错
+~~~
+
+## 类类型接口
+
+~~~typescript
+// 类类型接口, 与抽象类类似, 但抽象类不可以规范属性, 类接口可以
+interface Animal_ {
+    myName: string;
+    eat(str:number): any;
+}
+class Dow implements Animal_ {
+    myName:string
+    constructor(myName:string) {
+        this.myName = myName
+    }
+    eat(str:number) { }
+}
+~~~
+
+## 接口的继承
+
+~~~typescript
+// 接口的继承
+interface Animal_gf {
+    eat(): void;
+}
+interface Person extends Animal_gf {
+    work(): void;
+}
+class Web implements Person{
+    eat(){}
+    work(){}
+}
+class Prog extends Web implements Person {
+    
+}
+~~~
+
+# TypeScript 泛型 规范
+
+
+
+## 泛型规定函数传参
+
+~~~typescript
+// 泛型支持不特定的数据类型, 要求传入的参数和返回的参数一致
+function getData4<T>(value: T): T {
+    return value
+}
+getData4<number>(123456)
 ~~~
 
