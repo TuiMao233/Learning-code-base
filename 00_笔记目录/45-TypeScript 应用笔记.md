@@ -403,7 +403,11 @@ class Prog extends Web implements Person {
 
 # TypeScript 泛型 规范
 
+泛型，软件工程中，我们不仅要创建一致定义良好的API，同时也要考虑可重用性。组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时提供了十分灵活的功能。
 
+在像C#和Java这样的语言中，可以使用泛型来创建可重用的组件，一个组件可以支持多种类型的语言。这样用户就可以以自己的数据类型来使用组件。
+
+通俗理解就是，泛型就是解决类 接口 方法的重用性、以及对不特定数据类型的支持。
 
 ## 泛型规定函数传参
 
@@ -413,5 +417,288 @@ function getData4<T>(value: T): T {
     return value
 }
 getData4<number>(123456)
+~~~
+
+## 泛型规定类传参
+
+~~~typescript
+// 泛型类
+class MinClass<Type> { // 接收一个泛型类型
+    public list: Type[] = []; // 创建一个泛型数组, 元素类型为泛型中的类型
+    add(num: Type):void { // 创建一个函数, num类型为泛型中的类型
+        this.list.push(num)
+    }
+    min(): Type { // 返回一个属性, 返回类型为泛型中的类型
+        return this.list.reduce(
+            (total, item) => (total > item ? item : total),
+            this.list[0]
+        )
+    }
+}
+const m = new MinClass<number | string>()
+m.add(34214), m.add(312), m.add(33)
+console.log(m.min);
+~~~
+
+## 泛型定义接口
+
+~~~typescript 
+// 第一种定义泛型的方法
+interface ConfigFn {
+    <Type>(value: Type): Type
+}
+const getData: ConfigFn= function<Type>(value:Type):Type {
+    return value
+}
+getData<string>('number')
+// 第二种定义泛型的方法
+interface ConfigFn<Type> {
+    <Type>(value: Type): Type
+}
+const getData = function<Type>(value:Type):Type {
+    return value
+}
+const myGetData:ConfigFn<string> = getData
+~~~
+
+## 将类作为参数的泛型类
+
+~~~typescript
+// 将类作为参数的类型约束
+class User{
+    username: string | indefined;
+    password: string | indefined;
+}
+class MysqlDb {
+    // 定义该方法只能传入User的实例
+    add (user:User):boolean {
+        console.log(user)
+        return true;
+    }
+}
+const u = new User()
+u.username = '张山', u.password = '123456'
+const Db = new MysqlDb()
+Db.add(u)
+
+// -----------------↓↓↓--------------
+
+// 将类作为参数的泛型类
+class User{
+    username: string | indefined;
+    password: string | indefined;
+}
+class MysqlDb<T> {
+    // 定义该方法只能传入User的实例
+    add (user:T):boolean {
+        console.log(user)
+        return true;
+    }
+}
+const u = new User()
+u.username = '张山', u.password = '123456'
+const Db = new MysqlDb<User>() // 将泛型类传入MysqlDb中
+Db.add(u)
+~~~
+
+# TypeScript 命名空间 规范
+
+在代码量较大的情况下，为了避免各种变量命名产生冲突，可将相似功能的函数、类、接口等放置到命名空间内。
+
+同Java的包、.Net的命名空间一样，TypeScript的命名空间可以将代码包括起来，支队外暴露需要在外部访问的对象。命名空间内对象或者属性需要通过export暴露出去，才能在外部访问
+
+## 定义私有命名空间
+
+~~~typescript
+namespace A {
+    export const Animal = 70
+}
+// 两个命名空间不会产生冲突
+namespace B {
+    export const Animal = 60
+}
+console.log(A.Animal) // 70
+console.log(B.Animal) // 60
+~~~
+
+## 引入外部文件命名空间
+
+~~~typescript
+// 旧版引入命名空间
+/// <reference path="./javascript-utils.ts"/>
+
+// 新版引入命名空间
+export namespace A {
+    export const Animal = 70
+}
+// -----------↓-----------    
+const {A} from './modules'
+~~~
+
+# TypeScript 装饰器 规范
+
+装饰器是一种特殊类型的声明，它能够被附加到类声明，方法，属性或参数上，可以修改类的行为。可以这么说，装饰器监视一个方法，可以注入到类、方法、属性参数上扩展类、属性、方法、参数的功能。
+
+常见的装饰器有：类装饰器、属性装饰器、方法装饰器、参数装饰器
+装饰器的写法有：普通装饰器（无法传参）、装饰器工厂（可传参）
+
+装饰器是过去几年中JS最大的成就之一，已是ES7的标准特性之一
+
+装饰器的执行顺序：属性 > 方法 > 方法参数 > 类
+
+## 普通类装饰器(无法传参)
+
+~~~typescript
+// 定义一个普通装饰器
+function logClass(params: any) {
+    console.log(params);
+    // params 就是当前类
+    params.prototype.apiUrl = 'xxx';
+    params.prototype.run = function () {
+        console.log('--我是run方法--');
+    }
+}
+@logClass // 对该构造函数使用装饰器
+class HttpClient {
+    // 添加动态签名
+    [x: string]: any;
+    constructor() { }
+    getData() { }
+}
+const http = new HttpClient()
+console.log(http.apiUrl);
+~~~
+
+## 类装饰器工厂(可传参)
+
+~~~typescript
+// 装饰器工厂(可传参)
+// 定义一个装饰器
+function logClass(params: string) {
+
+    return function (target: any) {
+        console.log(target);
+        // target 就是当前类
+        target.prototype.apiUrl = 'xxx';
+        target.prototype.run = function () {
+            console.log('--我是run方法--');
+        }
+    }
+}
+@logClass('hello') // 对该构造函数使用装饰器
+class HttpClient {
+    // 添加动态签名
+    [x: string]: any;
+    constructor() { }
+    getData() { }
+}
+const http = new HttpClient()
+console.log(http.apiUrl);
+~~~
+
+## 装饰器重载类属性与方法
+
+~~~typescript
+// 重载构造函数
+function logClass(target: any) {
+    // 继承原类, 重载类中的属性与方法
+    return class extends target {
+        apiUrl: any = '我是修改后的数据';
+        getData() { console.log(this.apiUrl); }
+    }
+}
+@logClass
+class HttpClient {
+    apiUrl: string | undefined
+    constructor() {
+        this.apiUrl = '我是构造函数里面的apiUrl'
+    }
+    getData() { console.log(this.apiUrl); }
+}
+
+const http = new HttpClient()
+console.log(http.apiUrl);
+~~~
+
+## 属性装饰器的使用
+
+~~~typescript
+// 定义一个属性装饰器
+function logProperty(params: any) {
+    return function (target: any, attr: any) {
+        // target --> HttpClient.prototype
+        // attr --> 'url'
+        console.log(target);
+        console.log(attr);
+        target[attr] = params
+    }
+}
+class HttpClient {
+    // 在需要装饰的属性上方调用装饰器
+    @logProperty('http:itying.com')
+    public url: any | undefined
+    constructor() { }
+    getData() { }
+}
+const http = new HttpClient()
+~~~
+
+## 方法装饰器的使用
+
+~~~typescript
+function get(params: any) {
+    /** 方法装饰器
+     * @param {string} target  HttpClient.prototype-->方法的原型对象
+     * @param {string} methodName  成员的名称
+     * @param {object} desc  成员方法的描述信息
+     */
+    return function (target: any, methodName: any, desc: any) {
+        // 方法描述器具备类描述器特征, 可以添加, 修改类
+        target.apiUrl = 'xxx'
+        target.run = () => console.log('run');
+
+        // 保存旧方法
+        const oldMethod = desc.value
+        // 对方法参数进行封装, 强制转换为String
+        desc.value = function (...args: any[]) {
+            return args.map(item => String(item))
+            // 执行方法
+            oldMethod.apply(this, args)
+        }
+    }
+}
+class HttpClient {
+    public url: any | undefined
+    // 在需要装饰的函数上方添加装饰器
+    @get('http://www.itying.com')
+    getData(...args: any[]) { console.log('我是getdata方法', args) }
+}
+const http = new HttpClient()
+http.getData(123, 123, 123)
+~~~
+
+## 方法属性装饰器
+
+~~~typescript
+function logParams(params: any) {
+    /** 方法参数装饰器
+     * @param {string} target  HttpClient.prototype-->方法的原型对象
+     * @param {string} methodName  方法名称
+     * @param {object} paramsIndex  参数当前的索引
+     */
+    return function (target: any, methodName: any, paramsIndex: any) {
+        // 方法参数描述器具备类描述器特征, 可以添加, 修改类
+        target.apiUrl = 'xxx'
+        target.run = () => console.log('run');
+    }
+}
+class HttpClient {
+    public url: any | undefined
+    // 在需要装饰的函数参数内传入装饰器
+    getData(@logParams('xxx') uuid: any) {
+        console.log('我是getdata方法', uuid)
+    }
+}
+const http = new HttpClient()
 ~~~
 

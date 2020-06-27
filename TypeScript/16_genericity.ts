@@ -18,21 +18,18 @@ getData4<number>(123456)
 
 
 // 泛型类
-class MinClass<Type> {
-    public list: Type[] = [];
-    add(num: Type) {
+class MinClass<Type> { // 接收一个泛型类型
+    public list: Type[] = []; // 创建一个泛型数组, 元素类型为泛型中的类型
+    add(num: Type) { // 创建一个函数, num类型为泛型中的类型
         this.list.push(num)
     }
-    min(): Type {
-        var minNum = this.list[0]
-        this.list.forEach(item => {
-            if (minNum > item) minNum = item
-        });
-        return minNum
+    min(): Type { // 返回一个属性, 返回类型为泛型中的类型
+        return this.list.reduce(
+            (total, item) => (total > item ? item : total),
+            this.list[0]
+        )
     }
 }
-const m = new MinClass<number|string>()
-m.add(34214)
-m.add(312)
-m.add(33)
+const m = new MinClass<number | string>()
+m.add(34214), m.add(312), m.add(33)
 console.log(m.min);
