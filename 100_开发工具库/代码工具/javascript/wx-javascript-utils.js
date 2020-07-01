@@ -11,8 +11,13 @@ export const wxPromise = (name = "", options = {}) => new Promise((resolve, reje
         fail: reject
     })
 })
-
-
+// 错误信息提示
+export const errorMsg = title => wx.showToast({ icon: 'none', title })
+// 成功信息提示
+export const successMsg = (title, isBack) => {
+    wx.showToast({ icon: 'success', title })
+    if (isBack) setTimeout(() => wx.navigateBack(), 1500);
+}
 /** 创建绘制海报矩形方法, 自动向画笔添加加载绘制图片方法(ctx.loadDrawImage), 绘制换行字体方法(warpFillText)
  * @param  {string} select_str 查询CSS选择器字符串
  * @returns {node, ctx, rpx} 返回canvas实例, 画笔, 适配值
@@ -105,9 +110,10 @@ export class DrawPosterRect {
     }
 }
 // 使用案例
+/* 
 (async function () {
     // 获取绘制工具
-    const { rpx, ctx, node, draw } = await DrawPosterRect.build('#canvas')
+    const { rpx, ctx, node } = await DrawPosterRect.build('#canvas')
     // 设置画布宽高
     node.width = 602 * rpx, node.height = 836 * rpx
 
@@ -135,3 +141,4 @@ export class DrawPosterRect {
 
     ctx.restore()
 })
+ */
