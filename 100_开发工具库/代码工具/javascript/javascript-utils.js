@@ -58,6 +58,20 @@ export function isStrCode(str) { // 判断字符有没有代码字段
 export function removeStrCode(str) { // 剔除字符串代码字段
     return str.replace(/<[\/\!]*[^<>]*>/ig, "")
 }
+// 格式化时间, 传入时间戳, 和时间格式
+export const formatDate = (time, format = 'YY-MM-DD hh:mm:ss') => {
+    const date = new Date(time);
+    const year = date.getFullYear(), month = date.getMonth() + 1, day = date.getDate(), hour = date.getHours(), min = date.getMinutes(), sec = date.getSeconds();
+    const preArr = Array.apply(null, Array(10)).map(function (elem, index) { return '0' + index; });
+    //开个长度为10的数组 格式为 00 01 02 03 
+    const newTime = format.replace(/YY/g, year)
+        .replace(/MM/g, preArr[month] || month)
+        .replace(/DD/g, preArr[day] || day)
+        .replace(/hh/g, preArr[hour] || hour)
+        .replace(/mm/g, preArr[min] || min)
+        .replace(/ss/g, preArr[sec] || sec);
+    return newTime;
+}
 // oLi.nodeName.toLowerCase() 获取标签名
 // event.stopPropagation() 阻止冒泡
 // event.preventDefault()  阻止默认行为
