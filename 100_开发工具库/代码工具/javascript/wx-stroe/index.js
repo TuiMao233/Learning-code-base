@@ -7,13 +7,25 @@ function forIn(object, callback) {    // for in封装
     return object
 }
 class Store {
+    subscriber = [] // 订阅者
     constructor({ state = {}, mutations = {}, actions = {}, getters = {} }) {
         const _this = this
         // 类构造器, 初始化Vuex基本属性
-        this.state = state
+        this.state = forIn(state, key => {
+            let value = state[key]
+            Object.defineProperty(state, key, {
+                set(set_val) {
+                    value = set_val
+                    _this.subscriber.forEach(method => method(key, set_val))
+                },
+                get() {
+                    return value
+                }
+            })
+        })
         this.actions = actions
         this.mutations = mutations
-        this.getters = forIn(getters, (key, method)=>{
+        this.getters = forIn(getters, (key, method) => {
             Object.defineProperty(getters, key, {
                 get() {
                     return method(_this.state)
@@ -50,26 +62,20 @@ class Store {
         p_this.data = {
             ...p_this.data,
             ...states_str.reduce((total, key) => {
-                total[key] = this.getters[key]
+                total[key] = this.state[key]
                 return total
             }, {})
         }
         p_this.setData(p_this.data)
-        // 进行动态监视
-        states_str.forEach(key => {
-            this.watch(key, value => {
-                p_this.setData({ [key]: value })
-            })
-        })
+        this.subscriber.push((key, val) => p_this.setData({ [key]: val }))
     }
     // 映射返回相应的action
-    mapActions(actions_str) {
-        return actions_str.reduce((total, key) => {
-            total[key] = params => {
+    mapActions(actions_str, p_this) {
+        actions_str.forEach(key => {
+            p_this[key] = params => {
                 this.actions[key](this, params)
             }
-            return total
-        }, {})
+        })
     }
     // 映射返回相应的计算属性
     mapGetters(getters_str, p_this) {
@@ -94,41 +100,56 @@ class Store {
 
 
 const store = new Store({
-    state: { count: 0 },
+    state: {
+        count: 0,
+        userInfo: null
+    },
     mutations: {
         // 添加1
-        ADD_COUNT(state) { state.count += 1 }
+        ADD_COUNT(state) { state.count += 1 },
+        // 添加用户
+        ADD_USER_INFO(state, userInfo) { state.userInfo = userInfo }
     },
     actions: {
-        async addCountAsync({ commit }, params) {
+        // 异步增加次数
+        async addCountAsync({ commit }) {
             await new Promise(resolve => setTimeout(resolve, 1000))
-            commit('ADD_COUNT', params)
+            commit('ADD_COUNT')
+        },
+        // 获取用户信息
+        async getUserInfo({ commit }, userInfo) {
+            await new Promise(resolve => setTimeout(resolve, 1000))
+            commit('ADD_USER_INFO', userInfo)
         }
     },
     getters: {
-        calcul (state) {
+        calcul(state) {
             return state.count + 10
         }
     }
 });
 
+
 // 模拟小程序环境
 const page = {
     setData(data) {
         this.data = { ...this.data, ...data }
-        console.log('---setData---', this.data)
+        console.log('---page_1:setData---')
+        console.log(this.data)
     },
     data: {
         a: 6
     },
-    ...store.mapActions(['addCountAsync']),
-
     onLoad() {
-        // store.mapState(['count'], this)
-        store.mapGetters(['calcul'], this)
-        this.addCountAsync()
+        store.mapState(['count', 'userInfo'], this)
+        store.mapActions(['addCountAsync', 'getUserInfo'], this)
+        this.getUserInfo({
+            username: 'Mr_Mao',
+            password: '123456'
+        })
     }
 }
-store.commit('ADD_COUNT')
-console.log(store.getters.calcul)
+
 page.onLoad()
+
+
