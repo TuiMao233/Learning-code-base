@@ -575,7 +575,6 @@ console.log(http.apiUrl);
 // 装饰器工厂(可传参)
 // 定义一个装饰器
 function logClass(params: string) {
-
     return function (target: any) {
         console.log(target);
         // target 就是当前类

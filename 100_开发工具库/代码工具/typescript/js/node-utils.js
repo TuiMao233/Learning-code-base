@@ -1,4 +1,5 @@
 "use strict";
+/// <reference path="./javascript-utils.ts"/>
 var fs = require('fs');
 var path = require('path');
 var NodeUtils = /** @class */ (function () {
