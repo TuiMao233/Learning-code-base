@@ -41,21 +41,7 @@ class Store {
     dispatch(ac_name, params) {
         this.actions[ac_name]({ commit: this.commit.bind(this) }, params)
     }
-    // 监视函数, 用于监听state指定值的改变
-    watch(key, method) {
-        const obj = this.state
-        let value = obj[key]
-        // 初始值存在 则执行一遍
-        Object.defineProperty(obj, key, {
-            set(set_val) {
-                value = set_val
-                method(set_val)
-            },
-            get() {
-                return value
-            }
-        })
-    }
+
     // 映射state与page产生数据绑定
     mapState(states_str, p_this) {
         // 初始化执行改变状态
@@ -79,21 +65,6 @@ class Store {
     }
     // 映射返回相应的计算属性
     mapGetters(getters_str, p_this) {
-        // 初始化执行改变状态
-        p_this.data = {
-            ...p_this.data,
-            ...getters_str.reduce((total, key) => {
-                total[key] = this.getters[key]
-                return total
-            }, {})
-        }
-        p_this.setData(p_this.data)
-        // 进行动态监视
-        getters_str.forEach(key => {
-            this.watch(key, value => {
-                p_this.setData({ [key]: value })
-            })
-        })
     }
 }
 
