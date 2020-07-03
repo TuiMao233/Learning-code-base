@@ -10,6 +10,7 @@ class Store {
     constructor({ state = {}, mutations = {}, actions = {}, getters = {} }) {
         const _this = this
         // 类构造器, 初始化Vuex基本属性
+        this.state = state
         this.actions = actions
         this.mutations = mutations
         this.getters = forIn(getters, (key, method)=>{
