@@ -8,6 +8,7 @@ function forIn(object, callback) {    // for in封装
 }
 class Store {
     subscriber = [] // 订阅者
+    watcher = {} // 监视者
     constructor({ state = {}, mutations = {}, actions = {}, getters = {} }) {
         const _this = this
         // 类构造器, 初始化Vuex基本属性
