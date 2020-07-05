@@ -1,0 +1,33 @@
+{
+	"pages": [
+		"page/homePage/main.js"
+	],
+	"window": {
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#8CC242",
+		"navigationBarTitleText": "B5图书",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"list": [
+			{
+				"pagePath": "pages/home/main",
+				"text": "图书列表",
+				"iconPath": "/static/images/icon/yuedu.png",
+				"selectedIconPath": "/static/images/icon/yuedu-active.png"
+			},
+			{
+				"pagePath": "pages/search/main",
+				"text": "搜索图书",
+				"iconPath": "/static/images/icon/sosuo.png",
+				"selectedIconPath": "/static/images/icon/sosuo-active.png"
+			},
+			{
+				"pagePath": "pages/personal/main",
+				"text": "个人中心",
+				"iconPath": "/static/images/icon/shujia.png",
+				"selectedIconPath": "/static/images/icon/shujia-active.png"
+			}
+		]
+	}
+}

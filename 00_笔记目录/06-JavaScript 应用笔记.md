@@ -786,6 +786,6 @@ const JS_obj = JSON.parse(obj)
 
 ~~~js
 const JS_obj = {"name":"孙悟空","age":18,"gender":"男"}
-const JSON_obj = JSON.stringify(JS_obj)
+const JSON_obj = JSON.stringify(JS_obj, null, "\t")
 ~~~
 

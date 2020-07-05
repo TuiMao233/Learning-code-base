@@ -572,6 +572,11 @@ rs.pipe(ws)
 # 监视文件/文件夹更改写入
 	- fs.watch(path, [, options], callback) => 性能较好
 	- fs.watchFile(path, [, options], callback)
+# 返回文件数据/判断是否是文件或文件夹
+	- fs.lstatSync(path[, options])
+		.isFile() // 是否是文件
+		.isDirectory() // 是否是文件夹
+	- fs.stat(path, [, options], callback)
 ~~~
 
 # 路径系统 (path)

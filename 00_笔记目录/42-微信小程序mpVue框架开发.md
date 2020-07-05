@@ -10,20 +10,20 @@ mpVue (Vue in Mini Program) 美团工程师推出的基于Vue.js封装的用于�
 
 ## 初始化项目
 
-~~~
-1.npm install vue-cli -g   下载vue脚手架
-2.vue init mpvue/mpvue-quickstart my-project  初始化项目
-3.cd my-project  进入项目根目录
-4.npm install  根据package.json安装项目依赖包
-5.npm start || npm run dev  启动初始化项目
+~~~makefile
+1. npm install vue-cli -g   # 下载vue脚手架
+2. vue init mpvue/mpvue-quickstart my-project  # 初始化项目
+3. cd my-project  # 进入项目根目录
+4. npm install  # 根据package.json安装项目依赖包
+5. npm start || npm run dev  # 启动初始化项目
 ~~~
 
 ## 小程序注册
 
-~~~
-1.src/app.json   全局配置文件
-2.src/App.vue   等同于小程序中的app.js, 可写小程序应用实例的声明周期	  函数 || 全局样式
-3.main.js应用入口文件, 声明组件类型，挂载组件
+~~~makefile
+1.src/app.json  # 全局配置文件
+2.src/App.vue  # 等同于小程序中的app.js, 可写小程序应用实例的声明周期	  函数 || 全局样式
+3.main.js # 应用入口文件, 声明组件类型，挂载组件
 ~~~
 
 ## 入口main.js
@@ -43,21 +43,21 @@ app.$mount()
 
 ## 页面文件类型
 
-~~~
-1.	index.vue		等同于原生中的wxml + wxss + js
-2.	main.js			当前组件页面的入口文件，用于生成当前组件实例，并挂载组件
-3.	main.json		当前页面的局部配置文件(注意：index.vue组件最终会被转化为main.wxml以及main.wxss文件, 所以当前的json文件需命名main)
+~~~makefile
+1.	index.vue	#	等同于原生中的wxml + wxss + js
+2.	main.js		#	当前组件页面的入口文件，用于生成当前组件实例，并挂载组件
+3.	main.json	#	当前页面的局部配置文件(注意：index.vue组件最终会被转化为main.wxml以及main.wxss文件, 所以当前的json文件需命名main)
 ~~~
 
 ## src源文件
 
-<img src=" \\img\mpVue\图片1.png" alt="图片1" style="zoom:80%;" />
+<img src=" /img\mpVue\图片1.png" alt="图片1" style="zoom:80%;" />
 
 ## 打包后的dist文件
 
-<img src=" \\img\mpVue\图片2.png" alt="图片2" style="zoom: 67%;" />
+<img src=" /img\mpVue\图片2.png" alt="图片2" style="zoom: 67%;" />
 
-## 定义页面流程
+## 定义page页面流程
 
 `src/pages/index/index.vue`
 

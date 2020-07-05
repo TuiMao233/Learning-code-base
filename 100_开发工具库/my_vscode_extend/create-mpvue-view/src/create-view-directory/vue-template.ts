@@ -1,7 +1,9 @@
-/* index */
+export default function (page_name = '') {
+  return (
+`/* ${page_name} */
 <template xlang="wxml">
   <view>
-index
+${page_name}
   </view>
 </template>
 
@@ -41,4 +43,8 @@ export default {
 
 <style lang="less">
 
-</style>
+</style>`
+)
+} 
+
+

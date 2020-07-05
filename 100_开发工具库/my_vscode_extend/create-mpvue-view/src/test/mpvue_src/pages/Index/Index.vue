@@ -1,7 +1,7 @@
-/* index */
+/* Index */
 <template xlang="wxml">
   <view>
-index
+Index
   </view>
 </template>
 
