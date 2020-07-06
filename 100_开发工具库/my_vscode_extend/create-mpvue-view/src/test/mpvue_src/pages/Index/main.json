@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "index",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "onReachBottomDistance": 50,
+    "navigationStyle":"default"
+  }

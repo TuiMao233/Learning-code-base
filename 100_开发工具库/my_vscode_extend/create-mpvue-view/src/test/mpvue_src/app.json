@@ -1,6 +1,6 @@
 {
 	"pages": [
-		"page/homePage/main.js"
+		"pages/index/main"
 	],
 	"window": {
 		"backgroundTextStyle": "light",

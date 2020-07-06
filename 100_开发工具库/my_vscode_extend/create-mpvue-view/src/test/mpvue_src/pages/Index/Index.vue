@@ -1,8 +1,13 @@
-/* Index */
+/* index */
 <template xlang="wxml">
-  <view>
-Index
-  </view>
+  <div class="index">
+    <!-- 页面头部 -->
+    <div class="header"></div>
+    <!-- 页面内容 -->
+    <div class="main">index</div>
+    <!-- 页面底部 -->
+    <div class="footer"></div>
+  </div>
 </template>
 
 <script>
