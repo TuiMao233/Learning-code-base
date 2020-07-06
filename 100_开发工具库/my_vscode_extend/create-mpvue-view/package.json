@@ -3,8 +3,8 @@
   "displayName": "create-mpvue-view",
   "keywords": ["mpvue", "page", "components"],
   "publisher": "mrmaoddxxaa",
-  "description": "快速创建mpvue中的page和components, 以及在全局json中添加",
-  "version": "1.0.0",
+  "description": "create mpvue-page and mpvue-components",
+  "version": "1.0.1",
 	"engines": {
 		"vscode": "^1.46.0"
 	},

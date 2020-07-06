@@ -30,7 +30,7 @@ export default class {
     if (!appJson) return { status: 2, msg: '创建页面成功! 但app.json未找到' }
     // 进行添加页面路径
     let app_json_data = JSON.parse(appJson.data)
-    app_json_data.pages.push(`page/${view_name}/main.js`)
+    app_json_data.pages.push(`pages/${view_name}/main`)
     app_json_data = JSON.stringify(app_json_data, null, "\t")
     // 修改文件
     fs.writeFile(

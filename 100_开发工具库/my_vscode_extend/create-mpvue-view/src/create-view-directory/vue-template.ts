@@ -2,9 +2,14 @@ export default function (page_name = '') {
   return (
 `/* ${page_name} */
 <template xlang="wxml">
-  <view>
-${page_name}
-  </view>
+  <div class="${page_name}">
+    <!-- 页面头部 -->
+    <div class="header"></div>
+    <!-- 页面内容 -->
+    <div class="main">${page_name}</div>
+    <!-- 页面底部 -->
+    <div class="footer"></div>
+  </div>
 </template>
 
 <script>
