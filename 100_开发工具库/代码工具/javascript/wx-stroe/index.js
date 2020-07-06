@@ -7,7 +7,6 @@ function forIn(object, callback) {    // for in封装
     return object
 }
 class Store {
-    subscriber = [] // 订阅者
     watcher = {} // 监视者
     constructor({ state = {}, mutations = {}, actions = {}, getters = {} }) {
         const _this = this
@@ -17,7 +16,11 @@ class Store {
             Object.defineProperty(state, key, {
                 set(set_val) {
                     value = set_val
-                    _this.subscriber.forEach(method => method(key, set_val))
+                    // 执行监视者相应的订阅
+                    if (!Array.isArray(this.watcher[key])) return;
+                    _this.watcher[key].forEach(
+                        method => method(key, set_val)
+                    )
                 },
                 get() {
                     return value
@@ -42,7 +45,6 @@ class Store {
     dispatch(ac_name, params) {
         this.actions[ac_name]({ commit: this.commit.bind(this) }, params)
     }
-
     // 映射state与page产生数据绑定
     mapState(states_str, p_this) {
         // 初始化执行改变状态
@@ -54,7 +56,12 @@ class Store {
             }, {})
         }
         p_this.setData(p_this.data)
-        this.subscriber.push((key, val) => p_this.setData({ [key]: val }))
+        states_str.map(key => {
+            if (!Array.isArray(this.watcher[key])) this.watcher[key] = [];
+            this.watcher[key].push((key, val) => {
+                p_this.setData({ [key]: val })
+            })
+        })
     }
     // 映射返回相应的action
     mapActions(actions_str, p_this) {
@@ -64,14 +71,14 @@ class Store {
             }
         })
     }
-    // 映射返回相应的计算属性
+    // 映射返回相应的计算属性(未完成)
     mapGetters(getters_str, p_this) {
     }
 }
 
 
 
-const store = new Store({
+wx.$store = new Store({
     state: {
         count: 0,
         userInfo: null
@@ -109,15 +116,12 @@ const page = {
         console.log('---page_1:setData---')
         console.log(this.data)
     },
-    data: {
-        a: 6
-    },
+    data: { a: 6 },
     onLoad() {
         store.mapState(['count', 'userInfo'], this)
         store.mapActions(['addCountAsync', 'getUserInfo'], this)
         this.getUserInfo({
-            username: 'Mr_Mao',
-            password: '123456'
+            username: 'Mr_Mao', password: '123456'
         })
     }
 }

@@ -52,11 +52,11 @@ console.log(add(1, 2));
 ~~~javascript
 const { resolve } = require('path'); // node 内置核心模块，用来处理路径问题。
 module.exports = {
-  // 接口文件
+  	// 接口文件
 	entry: './src/js/index.js', 					
 	// 输出配置
 	output: { 
-		filename: './built.js', 						// 输出文件名
+		filename: './built.js', 			// 输出文件名
 		path: resolve(__dirname, 'build/js') // 输出文件路径配置
 	},
 	mode: 'development' //开发环境

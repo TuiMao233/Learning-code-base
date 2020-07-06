@@ -208,7 +208,8 @@ ctx.restore();
     // 线条样式更换
  /* ctx.strokeStyle = "red"		// 线条颜色
     ctx.lineWidth = 50		    // 线条宽度
-    ctx.lineJoin = "bevel"; // 线与线连接的方式bevel(斜角), round(圆角)
+    ctx.lineJoin = "bevel";     // 线与线连接的方式bevel(斜角), round(圆角)
+    ctx.lineCap = "round"	   // 线头和线尾采用圆角
  */
     // 绘制一个三角形
     ctx.moveTo(50,50)		// 初始起点 笔触点
@@ -222,8 +223,6 @@ ctx.restore();
     ctx.beginPath()
 </script>
 ~~~
-
-​                      
 
 ## canvas 圆_绘制
 

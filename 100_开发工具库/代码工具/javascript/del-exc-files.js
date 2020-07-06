@@ -1,4 +1,4 @@
-delExcFiles(__dirname, '.less')
+
 
 /** 擅长特定字符串后缀名 (!注意, 请先备份代码在执行)
  * @param  {string} exc_str 文件后缀名字符串
@@ -18,3 +18,5 @@ function delExcFiles(current_path, exc_str) {
     // 递归调用方法删除文件
     folder.forEach(file_str => delExcFiles(`${current_path}\\${file_str}`, exc_str));
 }
+
+delExcFiles(__dirname, '.less')
