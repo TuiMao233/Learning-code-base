@@ -1,5 +1,4 @@
-// vuex保持数据精简, 必要时可先存storage(性能优化)
-import { } from './models-types'
+// import * as types from './mutation-types'
 
 export default {
     state: {
