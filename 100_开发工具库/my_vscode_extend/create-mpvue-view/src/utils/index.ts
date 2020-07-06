@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+// 打印信息
 export const logger = (type: string, msg = '', vscode: any) => {
   switch (type) {
     case 'success':
@@ -10,6 +11,7 @@ export const logger = (type: string, msg = '', vscode: any) => {
       return vscode.window.showErrorMessage(`Failed: ${msg}`);
   }
 }
+// 递归查找并读取文件, 未找到返回false
 export const recursionGetFile = (catalog_path: string, file_name: string): Promise<unknown> => {
   return new Promise((resolve) => {
     // 递归调用

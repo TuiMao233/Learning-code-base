@@ -1,8 +1,7 @@
 // 创建插件工具类
 const fs = require('fs')
 const path = require('path')
-import createVueTemplate from './vue-template'
-import createMainTemplate from './main-template'
+import { createMpVueTemplate, createMainJsTemplate, createMainJsonTemplate } from "./template";
 import { recursionGetFile } from '../utils'
 export default class {
   // 生成page页面目录
@@ -17,17 +16,22 @@ export default class {
     catch (error) { return { status: 2, msg: '创建错误, 该文件夹已存在!' } }
     fs.writeFile(
       path.resolve(create_path, view_name, `${view_name}.vue`),
-      createVueTemplate(view_name),
+      createMpVueTemplate(view_name),
       { flag: 'w' }, () => { }
     )
     fs.writeFile(
       path.resolve(create_path, view_name, `main.js`),
-      createMainTemplate(view_name),
+      createMainJsTemplate(view_name),
+      { flag: 'w' }, () => { }
+    )
+    fs.writeFile(
+      path.resolve(create_path, view_name, `main.json`),
+      createMainJsonTemplate(view_name),
       { flag: 'w' }, () => { }
     )
     // 递归查找app.json
     const appJson: any = await recursionGetFile(create_path, 'app.json')
-    if (!appJson) return { status: 2, msg: '创建页面成功! 但app.json未找到' }
+    if (!appJson) return { status: 1, msg: '创建页面成功! 但app.json未找到' }
     // 进行添加页面路径
     let app_json_data = JSON.parse(appJson.data)
     app_json_data.pages.push(`pages/${view_name}/main`)
@@ -48,7 +52,7 @@ export default class {
     // 创建[createComponent].vue
     fs.writeFile(
       path.resolve(create_path, `${view_name}.vue`),
-      createVueTemplate(view_name),
+      createMpVueTemplate(view_name),
       { flag: 'w' }, () => { }
     )
     return { status: 0, msg: '创建组件成功!' }

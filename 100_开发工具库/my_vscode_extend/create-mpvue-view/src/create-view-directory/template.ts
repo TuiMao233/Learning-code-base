@@ -1,6 +1,6 @@
-export default function (page_name = '') {
-  return (
-`/* ${page_name} */
+// 创建mpvue模板
+export const createMpVueTemplate = (page_name = '') => (
+  `/* ${page_name} */
 <template xlang="wxml">
   <div class="${page_name}">
     <!-- 页面头部 -->
@@ -50,6 +50,29 @@ export default {
 
 </style>`
 )
-} 
 
+// 创建main.js模板
+export const createMainJsTemplate = (page_name = '') => {
+  const pageExaName = page_name.slice(0, 1).toUpperCase() + page_name.slice(1)
+  return (
+    `import Vue from 'vue'
+import ${pageExaName} from './${page_name}.vue'
 
+const ${page_name}_app = new Vue(${pageExaName})
+// 挂载当前页面
+${page_name}_app.$mount()`
+  )
+}
+
+// 创建main.json模板
+export const createMainJsonTemplate = (page_name = '') => (
+  `{
+    "navigationBarTitleText": "${page_name}",
+    "navigationBarTextStyle": "black",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "onReachBottomDistance": 50,
+    "navigationStyle":"default"
+  }`
+)

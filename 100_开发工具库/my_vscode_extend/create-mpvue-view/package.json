@@ -4,7 +4,7 @@
   "keywords": ["mpvue", "page", "components"],
   "publisher": "mrmaoddxxaa",
   "description": "create mpvue-page and mpvue-components",
-  "version": "1.0.1",
+  "version": "1.0.3",
 	"engines": {
 		"vscode": "^1.46.0"
 	},

@@ -125,6 +125,8 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() { }
 ~~~
 
+# 插件配置模块与API
+
 ## package.json 插件配置
 
 ~~~json
@@ -325,7 +327,7 @@ export function deactivate() { }
 }
 ~~~
 
-## 常用API
+## 常用扩展插件 API
 
 ~~~js
 // 替换当前编辑器全部内容：
@@ -335,6 +337,9 @@ vscode.window.activeTextEditor.edit(editBuilder => {
 	const text = '新替换的内容';
     editBuilder.replace(new vscode.Range(new vscode.Position(0, 0), end), text);
 });
+~~~
+
+~~~js
 // 打开文件并选中某段文字
 const path = '/Users/somefile.txt';
 const options = {
@@ -346,17 +351,80 @@ const options = {
 	viewColumn: vscode.ViewColumn.Two
 };
 vscode.window.showTextDocument(vscode.Uri.file(path), options);
+~~~
 
+~~~js
+// 信息提示
 vscode.window.showInformationMessage('我是info信息！');
 vscode.window.showErrorMessage('我是错误信息！');
-vscode.window.showInformationMessage('是否要打开小茗同学的博客？', '是', '否', '不再提示').then(result => {
+vscode.window.showInformationMessage('是否要打开小茗同学的博客？', '是', '否', '不再提示')
+    .then(result => {
 	if (result === '是') {
 		exec(`open 'https://haoji.me'`);
 	} else if (result === '不再提示') {
 		// 其它操作
 	}
 });
+~~~
+
+~~~js
 // 修改状态栏
 vscode.window.setStatusBarMessage('你好，前端艺术家！');
+~~~
+
+~~~js
+// 打开输入框
+vscode.window.showInputBox(
+  { // 这个对象中所有参数都是可选参数
+      password:false, // 输入内容是否是密码
+      ignoreFocusOut:true, // 默认false，设置为true时鼠标点击别的地方输入框不会消失
+      placeHolder:'你到底想输入什么？', // 在输入框内的提示信息
+      prompt:'赶紧输入，不输入就赶紧滚', // 在输入框下方的提示信息
+      validateInput:function(text){return text;} // 对输入内容进行验证并返回
+  }).then(function(msg){
+  console.log("用户输入："+msg);
+});
+~~~
+
+~~~js
+// 选取文件
+vscode.window.showOpenDialog(
+  { // 可选对象
+    canSelectFiles: true, // 是否可选文件
+    canSelectFolders: false, // 是否可选文件夹
+    canSelectMany: true, // 是否可以选择多个
+    defaultUri: vscode.Uri.file("/D:/"), // 默认打开本地路径
+    openLabel: '按钮文字说明'
+  }).then(function (msg) {
+    console.log(msg.path);
+  })
+~~~
+
+~~~js
+// 打开选择框
+vscode.window.showQuickPick(
+  [
+    "哈哈哈，你是傻逼吗",
+    "哈哈哈，你是二逼么",
+    "你他妈有病吧",
+    "乖，你是妈的智障"
+  ],
+  {
+    canPickMany: true,
+    ignoreFocusOut: true,
+    matchOnDescription: true,
+    matchOnDetail: true,
+    placeHolder: '温馨提示，请选择你是哪种类型？'
+  })
+  .then(function (msg) {
+    console.log(msg);
+  })
+~~~
+
+# 本地打包或发布
+
+~~~makefile
+npm i vsce -g # 安装vsce打包工具
+vsce package # 打包成vsix文件
 ~~~
 

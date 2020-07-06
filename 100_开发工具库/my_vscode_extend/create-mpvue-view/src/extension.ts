@@ -4,11 +4,8 @@ import { logger } from "./utils";
 const { createPage, createComponent } = new CreateView
 
 export function activate(context: vscode.ExtensionContext) {
-
-  console.log('恭喜，您的扩展“ create-mpvue-view”现已激活！');
-
   const createPageExt = vscode.commands.registerCommand('create-mpvue-view.createPage', uri => {
-    // 拿到路径, 与组件名称, 创建组件
+    // 拿到路径, 与组件名称, 创建页面
     vscode.window.showInputBox({ prompt: '输入页面名称' }).then(async inputValue => {
       if (!inputValue) {
         logger('error', '页面名称不能为空!', vscode);
@@ -17,11 +14,12 @@ export function activate(context: vscode.ExtensionContext) {
       const { status, msg } = await createPage(uri.fsPath, inputValue)
       if (status == 0)
         vscode.window.showInformationMessage(msg);
+      if (status == 1)
+        vscode.window.showWarningMessage(msg);
       if (status == 2)
         vscode.window.showErrorMessage(msg);
     })
   });
-
   const createComponentsExt = vscode.commands.registerCommand('create-mpvue-view.createComponent', uri => {
     // 拿到路径, 与组件名称, 创建组件
     vscode.window.showInputBox({ prompt: '输入组件名称' }).then(inputValue => {
@@ -32,11 +30,12 @@ export function activate(context: vscode.ExtensionContext) {
       const { status, msg } = createComponent(uri.fsPath, inputValue)
       if (status == 0)
         vscode.window.showInformationMessage(msg);
+      if (status == 1)
+        vscode.window.showWarningMessage(msg);
       if (status == 2)
         vscode.window.showErrorMessage(msg);
     })
   });
-
   context.subscriptions.push(createPageExt);
   context.subscriptions.push(createComponentsExt);
 }

@@ -53,11 +53,11 @@ app.$mount()
 
 ## src源文件
 
-<img src=" /img\mpVue\图片1.png" alt="图片1" style="zoom:80%;" />
+<img src=" img/mpVue/图片1.png" alt="图片1" style="zoom:80%;" />
 
 ## 打包后的dist文件
 
-<img src=" /img\mpVue\图片2.png" alt="图片2" style="zoom: 67%;" />
+<img src=" img/mpVue/图片2.png" alt="图片2" style="zoom: 67%;" />
 
 ## 定义page页面流程
 

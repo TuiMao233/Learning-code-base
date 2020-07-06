@@ -11,7 +11,7 @@ TypeScript是一种由微软开发的[开源](https://baike.baidu.com/item/开�
 
 运行 tsc --init 创建tsconfig.json文件
 修改tsconfig.json，设置js文件夹 "outDir": "./js/"
-![1592708340(1)](/img/typescript/1592708340(1).jpg)
+![1592708340(1)](./img/typescript/1592708340(1).jpg)
 
 # TypeScript 语法
 
