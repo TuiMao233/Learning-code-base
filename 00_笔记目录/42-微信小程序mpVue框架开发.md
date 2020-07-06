@@ -16,6 +16,8 @@ mpVue (Vue in Mini Program) 美团工程师推出的基于Vue.js封装的用于�
 3. cd my-project  # 进入项目根目录
 4. npm install  # 根据package.json安装项目依赖包
 5. npm start || npm run dev  # 启动初始化项目
+
+npm install less-loader@4.1.0 --save # 使用less
 ~~~
 
 ## 小程序注册

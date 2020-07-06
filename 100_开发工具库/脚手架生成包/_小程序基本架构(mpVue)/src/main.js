@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import App from './app.vue'
+import store from './store'
+
+Vue.prototype.$store = store
 // 用于启动项目的时候提示信息，设置为false关闭提示
 Vue.config.productionTip = false
 // 开启数据更新量提示(用于性能优化)

@@ -1,7 +1,10 @@
 <script>
-export default {}
+export default {
+  created () {
+  }
+}
 </script>
 
-<style lang="less">
-/* 公共样式 */
+<style>
+
 </style>

@@ -9,8 +9,8 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "touristappid",
-	"projectname": "mpVue%20%E5%9B%BE%E4%B9%A6%E6%8E%A8%E9%80%81",
+	"appid": "wx24af76e297246c4d",
+	"projectname": "second_hand_car",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
 	"condition": {

@@ -1,4 +1,3 @@
-/* index */
 <template xlang="wxml">
   <view>
 index
@@ -39,6 +38,6 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 
 </style>

@@ -1,6 +1,12 @@
 import Vue from 'vue'
-import Index from './index.vue'
+import App from './index'
 
-const index = new Vue(Index)
-// 挂载当前页面
-index.$mount()
+// add this to handle exception
+Vue.config.errorHandler = function (err) {
+  if (console && console.error) {
+    console.error(err)
+  }
+}
+
+const app = new Vue(App)
+app.$mount()
