@@ -7,22 +7,20 @@
 <body>
 <!--
 1. Set容器 : 无序不可重复的多个value的集合体
-  * Set()
-  * Set(array)
-  * add(value)
-  * delete(value)
-  * has(value)
-  * clear()
-  * size
+  * new Set(array) -> 创建一个set实例
+  * add(value) -> 添加数据
+  * delete(value) -> 删除数据
+  * has(value) -> 查找数据
+  * clear() -> 清除容器
+  * size -> 容器长度
 2. Map容器 : 无序的 key不重复的多个key-value的集合体
-  * Map()
-  * Map(array)
-  * set(key, value)//添加
-  * get(key)
-  * delete(key)
-  * has(key)
-  * clear()
-  * size
+  * Map(array) -> 创建map实例
+  * set(key, value) -> 塞进数据
+  * get(key) -> 获取key对应的val值
+  * delete(key) -> 删除数据
+  * has(key) -> 查找数据
+  * clear() -> 清除数据
+  * size -> 容器大小
 -->
 
 <script type="text/javascript">
@@ -40,6 +38,7 @@ set.clear()
 console.log(set)
 
 var map = new Map([['username', '当代大学生'],[60, 'age']])
+map.set('key', 'val')
 console.log(map)
 </script>
 </body>

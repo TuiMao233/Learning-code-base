@@ -296,3 +296,4 @@ console.log(ClassWithStaticMethod.staticMethod());
 // expected output: "static method has been called."
 ~~~
 
+# ESMA Script6 数据类型

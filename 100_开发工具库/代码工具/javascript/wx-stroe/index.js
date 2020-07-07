@@ -120,9 +120,7 @@ const page = {
     onLoad() {
         store.mapState(['count', 'userInfo'], this)
         store.mapActions(['addCountAsync', 'getUserInfo'], this)
-        this.getUserInfo({
-            username: 'Mr_Mao', password: '123456'
-        })
+        this.getUserInfo({ username: 'Mr_Mao', password: '123456' })
     }
 }
 

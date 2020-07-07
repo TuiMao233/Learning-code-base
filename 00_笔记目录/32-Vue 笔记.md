@@ -1739,3 +1739,24 @@ module.exports = {
 }
 ~~~
 
+## vscode 关闭自动添加分号和转换单引号
+
+~~~json
+"vetur.format.defaultFormatterOptions": {
+  "js-beautify-html": {
+    // force-aligned | force-expand-multiline
+    "wrap_attributes": "force-aligned"
+  },
+  "prettyhtml": {
+    "printWidth": 100,
+    "singleQuote": false,
+    "wrapAttributes": false,
+    "sortAttributes": true
+  },
+  "prettier": {
+      "semi": false,
+      "singleQuote": true
+  }
+},
+~~~
+

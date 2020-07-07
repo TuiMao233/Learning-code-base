@@ -135,6 +135,17 @@ String(value3);   // "null"
 String(value4);   // "undefined"
 ~~~
 
+# javaScript的内置方法
+
+~~~js
+// 判断是否是有限大的数
+console.log(isFinite(Infinity))
+// 判断是否是NaN
+console.log(isNaN(NaN))
+// 将字符串转换为对应的数值
+console.log(parseInt('60441sdad'))
+~~~
+
 # javaScript的内置对象
 
 ## Date 对象
@@ -186,11 +197,47 @@ Math.round(Math.random()*10);  //基本均衡获取0到10的随机整数，其�
 
 // 对象初始值
 Math.valueOf()
+
+// 直接去除小数部分
+Math.trunc(5136.3312312123132123)
 ~~~
+
+## Error 对象
+
+~~~js
+// 错误进行处理
+try{
+    // 可能发生错误的代码
+}catch(err){
+    // 只有发生错误时才执行的代码
+}finally{
+    // 无论是否出错，肯定都要执行的代码
+}
+// 抛出自定义错误
+function round(num, d){
+    if(!isNaN(num) && !isNaN(d)){
+        num *= Math.pow(10, d);
+        return num;
+    }else{
+        // 抛出自定义错误
+        throw new Error("参数必须是数字");  
+    }
+}
+~~~
+
+
 
 # 各元素值的常用方法
 
-## 数组原型方法
+## 数值原型/对象方法
+
+~~~js
+// 判断是否是整数
+console.log(Number.isInteger(60.30))
+console.log(Number.isInteger(60.0))
+~~~
+
+## 数组原型/对象方法
 
 ~~~js
 //? 查找一个值在不在数组里,若是存在则返回true,不存在返回false
@@ -240,9 +287,14 @@ Array.prototype.join('')
 Array.prototype.concat()
 //?* 返回数组的可迭代对象。
 Array.prototype.entries()
+
+// 判断数组中是否包含指定value
+Array.prototype.includes(value)
+// 判断value是否是数组
+Array.isArray(value)
 ~~~
 
-## 函数原型方法
+## 函数原型/对象方法
 
 ~~~js
 // 需求：我想执行函数的this不是window,而是上方的obj
@@ -265,7 +317,7 @@ setInterval(function(){ console.log(this) }.bind(obj),1000)
 // bind()是将函数拷贝返回, 并不会执行
 ~~~
 
-## 字符串原型方法
+## 字符串原型/对象方法
 
 ~~~js
 //删除字符串两端的空白符
@@ -280,14 +332,12 @@ String.prototype.lastIndexOf('str')
 String.prototype.search('str')
 
 
-//? 替换字符串，a为替换的RegExp格式, b是替换的字符串
+//? 替换字符串, a为替换的RegExp格式, b是替换的字符串
 String.prototype.replace(a,b)
 //? 方法提取某个字符串的一部分，并返回一个新的字符串，且不会改动原字符串。
 String.prototype.slice(a,[,b])
-//? 截取并返回字符串，范围是从下标为a的字符开始，截取长度为b ,如果省略第二个参数 将裁剪a开始的剩余部分。
+//? 截取并返回字符串, 范围是从下标为a的字符开始，截取长度为b, 如果省略第二个参数 将裁剪a开始的剩余部分。
 String.prototype.substring(a,[,b])
-//? 截取并返回一个字符串中从指定位置开始到指定字符数的字符。(废弃)
-String.prototype.substr(a,[,b])
 
 
 // 把字符串转换为大写
@@ -302,9 +352,18 @@ String.prototype.concat()
 String.prototype.match('www')
 // 获取字符串第*位字符串值(字符串数组查询操作)
 String.prototype.charAt(0)
+
+// 判断是否包含指定的字符串
+String.prototype.includes('str')
+// 判断是否以指定字符串开头
+String.prototype.startsWith('str')
+// 判断是否以指定字符串结尾
+String.prototype.endsWith('str')
+// 重复指定次数字符串并返回
+String.prototype.repeat(3)
 ~~~
 
-## 对象原型方法
+## 对象原型/对象方法
 
 ~~~js
 const obj1 = { name: 66, age: 77 }
@@ -316,6 +375,11 @@ Object.keys(obj1) // ['name','age']
 Object.values(obj1) // [66, 77]
 // 合并返回新对象
 Object.assign(obj1, obj2)
+// 直接操作 __proto__ 隐式原型属性
+let obj3 = {}
+let obj4 = {qian: 5000000000}
+obj3.__proto__ = obj4
+console.log(obj3.qian)
 
 // ES5 转换为真数组	[0:li, 1:li....]
 const lisAll = Array.prototype.slice.call(fakeArr)
@@ -787,5 +851,47 @@ const JS_obj = JSON.parse(obj)
 ~~~js
 const JS_obj = {"name":"孙悟空","age":18,"gender":"男"}
 const JSON_obj = JSON.stringify(JS_obj, null, "\t")
+~~~
+
+# ES6 新增数据类型
+
+## Set容器
+
+~~~js
+/* Set容器 : 无序不可重复的多个value的集合体
+ * new Set(array) -> 创建一个set实例
+ * add(value) -> 添加数据
+ * delete(value) -> 删除数据
+ * has(value) -> 查找数据
+ * clear() -> 清除容器
+ * size -> 容器长度
+ */
+// 创建Set数据结构
+var set = new Set([1,1,1,1,2,3])
+// 添加数据
+set.add(4)
+console.log(set)
+// 是否有该value值
+console.log(set.has(4), set.has(5))
+// 清除容器
+set.clear()
+console.log(set)
+~~~
+
+## Map容器
+
+~~~js
+/* Map容器 : 无序的 key不重复的多个key-value的集合体
+ * Map(array) -> 创建map实例
+ * set(key, value) -> 塞进数据
+ * get(key) -> 获取key对应的val值
+ * delete(key) -> 删除数据
+ * has(key) -> 查找数据
+ * clear() -> 清除数据
+ * size -> 容器大小
+ */
+var map = new Map([['username', '当代大学生'],[60, 'age']])
+map.set('key', 'val')
+console.log(map)
 ~~~
 

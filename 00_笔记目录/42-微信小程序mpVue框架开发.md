@@ -203,4 +203,3 @@ export const reqSubjects = () => get('http://t.yushu.im/v2/movie/top250')
 5)支持 computed 计算属性和 watcher 监听器；模板语法中只支持简单的 js 表达式。可以直接写 div 、span 等标签 
 6)之前会vue的工程师上手mpvue框架的成本较低
 ~~~
-
