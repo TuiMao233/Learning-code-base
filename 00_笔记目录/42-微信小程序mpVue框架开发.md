@@ -203,3 +203,16 @@ export const reqSubjects = () => get('http://t.yushu.im/v2/movie/top250')
 5)支持 computed 计算属性和 watcher 监听器；模板语法中只支持简单的 js 表达式。可以直接写 div 、span 等标签 
 6)之前会vue的工程师上手mpvue框架的成本较低
 ~~~
+
+# mpvue 配置TS
+
+```
+# 安装 vue 与装饰器,mpvue-loader目前支持用TypeScript来写，功能还在完善中(WIP)。需要搭 配vue-property-decorator来使用。
+$ npm install --save vue vue-property-decorator 
+# 安装 typescript
+$ npm install --save typescript@3.3.3333 
+# 安装  typescript 所需loader（注意存在版本兼容问题，需下载指定版本ts-loader与awesome-typescript-loader最新版目前不兼容webpack4以下版本）
+$  npm install --save ts-loader@3.1.1 awesome-typescript-loader@4.0.1
+# 安装声明文件@types/node @types/weixin-app
+$ npm install --save @types/node @types/weixin-app
+```
