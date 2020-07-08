@@ -35,9 +35,7 @@ export default new Vuex.Store({
     },
     [DELETE_USER_SONG_ITEM](state, audio_name) {
       state.userInfo.song_list.splice(
-        state.userInfo.song_list.findIndex(
-          item => item.audio_name == audio_name
-        ), 1
+        state.userInfo.song_list.findIndex(item => item.audio_name == audio_name), 1
       )
     },
     [UNSHIFT_USER_SONG_ITEM](state, songItem) { state.userInfo.song_list.unshift(songItem) },

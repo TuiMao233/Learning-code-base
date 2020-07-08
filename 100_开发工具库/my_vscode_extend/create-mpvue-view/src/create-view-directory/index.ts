@@ -1,8 +1,8 @@
 // 创建插件工具类
-const fs = require('fs')
-const path = require('path')
 import { createMpVueTemplate, createMainJsTemplate, createMainJsonTemplate } from "./template";
 import { recursionGetFile } from '../utils'
+const fs = require('fs')
+const path = require('path')
 export default class {
   // 生成page页面目录
   async createPage(create_path: string, view_name: string) {

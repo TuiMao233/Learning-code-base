@@ -58,12 +58,12 @@ export class DrawPosterRect {
      * @param  {number} h 绘制图片高度(必须)
      * @returns {Promise} 图片绘制成功时返回true, 需ctx.restore()绘制出实体
      */
-    loadDrawImage(path, x, y, w, h) {
+    loadDrawImage({path, x, y, width, height}) {
         const { node, ctx } = this
         return new Promise(resolve => {
             const imageObject = node.createImage()
             imageObject.src = path
-            imageObject.onload = () => { ctx.drawImage(imageObject, x, y, w, h); resolve(true) }
+            imageObject.onload = () => { ctx.drawImage(imageObject, x, y, width, height); resolve(true) }
         })
     }
     /** ctx中添加绘制换行字体方法
