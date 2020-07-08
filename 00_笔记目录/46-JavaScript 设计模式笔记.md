@@ -294,78 +294,77 @@ macroCommand.execute()
 观察者模式又叫发布订阅和消息模式。是设计模式中非常著名也是非常重要的一种模式。这种模式一般会定义一个主题和众多个个体，这里主题可以想象为一个消息中心，里面有各种各样的消息，众多个体可以订阅不同的消息，当未来消息中心发布某条消息的时候，订阅过他的个体就会得到通知。
 
 ~~~js
-// 监视者模式
+/* 观察者模式
+    观察者模式又叫发布订阅和消息模式。是设计模式中非常著名也是非常重要的一种模式。
+    这种模式一般会定义一个主题和众多个个体，这里主题可以想象为一个消息中心，里面有各种各样的消息，
+    众多个体可以订阅不同的消息，当未来消息中心发布某条消息的时候，订阅过他的个体就会得到通知。
+*/
 class Watcher {
-  constructor() {
-    this.observes = {} // 订阅者对象集合
-  }
-  // 发布消息
-  publish(type, value) {
-    if (!Array.isArray(this.observes[type])) { return }
-    this.observes[type].forEach(observe => observe.execute(value))
-  }
-  // 订阅消息
-  subscribe(type, execute) {
-    // 创建一个订阅者
-    const observe = new this.Observe(type, execute)
-    // 添加到消息列表对象
-    if (this.observes[type]) {
-      this.observes[type].push(observe)
-    } else {
-      this.observes[type] = [observe]
+    constructor() {
+        this.observes = {} // 订阅者对象集合
+        this.message = {} // 消息对象结合
     }
-    return observe
-  }
-  // 取消订阅
-  unsubscribe(observe) {
-    if (!Array.isArray(this.observes[observe.type])) { return }
-    // 查找消息列表, 删除对应订阅者
-    for (const i in this.observes[observe.type]) {
-      if (this.observes[observe.type][i].id == observe.id){
-        this.observes[observe.type].splice(i, 1)
-        return
-      }
+    // 发布消息
+    publish(type, value, _isSave) {
+        // 是否保存该消息(有一次保存消息, 那么之后都会保存消息)
+        if (_isSave || this.message[type] !== null) {
+            this.message[type] = value
+        }
+        if (!Array.isArray(this.observes[type])) { return }
+        this.observes[type].forEach(_observe => _observe.execute(value))
     }
-  }
-  // 订阅者
-  Observe = class {
-    constructor(type, execute) {
-      this.type = type
-      this.id = this.Guid()
-      if (typeof execute == 'function') {
-        this.execute = execute
-      }
+    // 订阅消息, 返回订阅者
+    subscribe(type, execute, _isInit) {
+        const _observe = new this.Observe(type, execute)
+        // 添加到消息列表对象中
+        if (this.observes[type]) {
+            this.observes[type].push(_observe)
+        } else {
+            this.observes[type] = [_observe]
+        }
+        // 如果该消息存在, 初始化执行
+        if (this.message[_observe.type] !== null) {
+            _observe.execute(this.message[_observe.type])
+        }
+        return _observe
     }
-    execute(message) {
-      console.log("id: %s, value: %s", this.id, message)
+    // 取消订阅
+    unsubscribe(_observe) {
+        if (!Array.isArray(this.observes[_observe.type])) { return }
+        // 查找消息列表, 删除对应订阅者
+        for (const i in this.observes[_observe.type]) {
+            if (this.observes[_observe.type][i].id == _observe.id) {
+                this.observes[_observe.type].splice(i, 1)
+                // 如果该类型订阅者数组为空，删除数组和消息
+                if (!this.observes[_observe.type].length) {
+                    delete this.observes[_observe.type]
+                    delete this.message[_observe.type]
+                }
+                return
+            }
+        }
+
     }
-    Guid() {
-      const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    // 订阅者构造函数
+    Observe = class {
+        constructor(type, execute) {
+            this.type = type
+            this.id = this.Guid()
+            if (typeof execute == 'function') {
+                this.execute = execute
+            }
+        }
+        execute(message) {
+            console.log("id: %s, value: %s", this.id, message)
+        }
+        Guid() {
+            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+        }
     }
-  }
 }
 
-const watcher = new Watcher()
-// 添加订阅, 返回监视者对象
-const observe_1 = watcher.subscribe('cover_massage', massage => {
-  console.log('observe_1接收到消息, 消息内容是：', massage)
-})
-const observe_2 = watcher.subscribe('cover_massage', massage => {
-  console.log('observe_2接收到消息, 消息内容是：', massage)
-})
-const observe_3 = watcher.subscribe('cover_massage', massage => {
-  console.log('observe_3接收到消息, 消息内容是：', massage)
-})
+export default Watcher
 
-// 发布一条消息
-watcher.publish('cover_massage', '哈哈哈哈啊哈哈')
-
-// 卸除监视者
-watcher.unsubscribe(observe_2)
-console.log('------')
-
-// 发布一条消息
-watcher.publish('cover_massage', '哈哈哈哈啊哈哈')
 ~~~
 
