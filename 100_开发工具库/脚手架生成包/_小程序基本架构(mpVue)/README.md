@@ -69,7 +69,8 @@
 - minapp -> 微信小程序标签、属性的智能补全（同时支持原生小程序、mpvue 和 wepy 框架，并提供 snippets）
 - Vetur -> 为vue文件提供格式化
 - Vue VSCode Snippets -> 为vue文件提供代码提示
-- mpvue snippets 为mpvue提供小程序组件，API 代码片段。
+- mpvue snippets -> 为mpvue提供小程序组件，API 代码片段。
+- Beautify css/sass/scss/less -> 为less提供代码格式化
 # 可选插件
 - CodeMetrics -> 检测代码圈复杂度(优化代码质量)
 - Code Runner -> 运行部分JS代码(调试逻辑用)

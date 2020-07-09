@@ -27,7 +27,7 @@ router.post('/upload_song', async ctx => {
     }
 
     const audioFile = ctx.files['audio'][0]
-    const audio_ext = path.extname(audioFile.originalname);
+    const audio_ext = path.extname(audioFile.originalname)
     if (!audio_ext.match(/mp3/)) return ctx.body = {code:1, msg: '上传失败, 音频文件不正确!'}
     const audioFile_name = `${nanoid(10)}${audio_ext}`
     const dirAudio_name = path.resolve(__dirname, `../public/audio/${audioFile_name}`)
