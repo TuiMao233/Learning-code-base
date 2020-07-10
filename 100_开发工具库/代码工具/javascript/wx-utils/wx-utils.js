@@ -16,3 +16,14 @@ export const successMsg = (title, isBack) => {
   wx.showToast({ icon: 'success', title })
   if (isBack) setTimeout(() => wx.navigateBack(), 1500);
 }
+
+// 过滤input为数字
+export const onFilterNumber = (ev) => {
+  const value = ev.detail.value
+  return value.trim().replace(/\D/g, "");
+}
+// 过滤input为字符串
+export const onFilterString = (ev) => {
+  const value = ev.detail.value
+  return value.trim().replace(/\d/g, "");
+}

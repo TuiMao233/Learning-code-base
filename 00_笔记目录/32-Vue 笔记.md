@@ -1503,29 +1503,66 @@ Vue.use(Vuex)
 export default new Vuex.Store({ state, mutations, actions, getters })
 ~~~
 
+## Vuex 模块规划
 
-
-### 简单模块化状态管理
-
-**自定义扩展插件：**AcMutations
-
-#### 1. 定义目录结构
-
-- `AcMutations` 	 	  / *自定义 AcMutations 框架目录* /
-- `acMutions.js`         /  *定义Vuex方法的地方* /
-- `getters.js`              / *多个getter计算属性函数的对象* /
-- `index.js`                  /*集合所有store对象的集合与管理对象* /
-
-#### 2. 定义Vuex接口 (src / store / index.js)
+### 定义多模块
 
 ~~~js
-/* vuex的核心管理入口模组 */
-import Vue from 'vue'
-import Vuex from 'vuex'
-import AcMutations from './AcMutations/index.js'
-const {state, mutations, actions, getters} = AcMutations
-Vue.use(Vuex)
-export default new Vuex.Store({ state, mutations, actions, getters })
+const moduleA = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... },
+  getters: { ... }
+}
+const moduleB = {
+  state: () => ({ ... }),
+  mutations: { ... },
+  actions: { ... }
+}
+const store = new Vuex.Store({
+  modules: {
+    a: moduleA,
+    b: moduleB
+  }
+})
+store.state.a // -> moduleA 的状态
+store.state.b // -> moduleB 的状态
+~~~
+
+### 模块的局部状态
+
+~~~js
+const moduleA = {
+  state: () => ({
+    count: 0
+  }),
+  mutations: {
+    increment (state) {
+      // 这里的 `state` 对象是模块的局部状态
+      state.count++
+    }
+  },
+  getters: {
+    doubleCount (state) {
+      return state.count * 2
+    }
+  }
+}
+~~~
+
+同样，对于模块内部的 action，想要获取另一个模块的状态或者计算属性，通过以下方式引入
+
+~~~js
+const moduleA = {
+  // ...
+  actions: {
+    incrementIfOddOnRootSum ({ state, commit, rootState,rootGetters  }) {
+      if ((state.count + rootState.count) % 2 === 1) {
+        commit('increment')
+      }
+    }
+  }
+}
 ~~~
 
 ## Vuex 组件中使用
