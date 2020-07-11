@@ -102,11 +102,14 @@ function Gongren() {
     return _fangzi;
   }
 }
+// 创建工人实例
 var gongren = new Gongren();
+// 创建包工头实例
 var baogongtou = new Baogongtou();
+// 包工头调用工人进行建房子
 baogongtou.jianfangzi(gongren);
+// 工人返回一个房子
 var myfangzi = gongren.jiaofang();
-console.log(myfangzi);
 ~~~
 
 ~~~js
@@ -144,7 +147,6 @@ CreateWork.prototype.changeWork = function (work) {
 CreateWork.prototype.changeDes = function (des) {
     this.description = des
 }
-
 ~~~
 
 # 单例模式
@@ -152,7 +154,6 @@ CreateWork.prototype.changeDes = function (des) {
 在传统开发工程师眼里，单例就是保证一个类只有一个实例，实现的方法一般是先判断实例存在与否，如果存在直接返回，如果不存在就创建了再返回，这就确保了一个类只有一个实例对象。在JavaScript里，单例作为一个命名空间提供者，从全局命名空间里提供一个唯一的访问点来访问该对象。
 
 ~~~js
-// 单例模式
 const createSingle = (function () {
     let _unique = null;
     function single () {
@@ -165,9 +166,10 @@ const createSingle = (function () {
         return _unique
     }
 })()
+// 创建a对象和b对象
 const a = createSingle()
 const b = createSingle()
-console.log(a === b)
+console.log(a === b) // 相等
 ~~~
 
 # 装饰器模式
@@ -188,10 +190,15 @@ function carWithAutoMirror(carClass) {
   carClass.hasHeatSeat = true
   carClass.price += 0.8
 }
+// 创建car构造对象
 const car = new Car()
 console.log(car.price)
+
+// 装饰器对car对象进行改造
 carWithHeatSeat(car)
 carWithAutoMirror(car)
+
+// 输出新的car价格
 console.log(car.price)
 ~~~
 
@@ -201,7 +208,7 @@ function Car() {
 }
 Car.prototype.use = function (plugin) {
    if (typeof plugin !== 'function'){
-       throw new Error('页面名称不能为空!');
+       throw new Error('该扩展插件不是方法!');
    }
    this[plugin.name] = plugin
 }
@@ -213,11 +220,15 @@ function carWithAutoMirror() {
   this.hasHeatSeat = true
   this.price += 0.8
 }
+// 创建car构造对象
 const car = new Car()
+// 使用car原型上的use方法添加装饰器
 car.use(carWithHeatSeat)
 car.use(carWithAutoMirror)
+// car原型就带有了两个方法
 car.carWithHeatSeat()
 car.carWithAutoMirror()
+// 输出新的car价格
 console.log(car.price)
 ~~~
 
@@ -294,76 +305,127 @@ macroCommand.execute()
 观察者模式又叫发布订阅和消息模式。是设计模式中非常著名也是非常重要的一种模式。这种模式一般会定义一个主题和众多个个体，这里主题可以想象为一个消息中心，里面有各种各样的消息，众多个体可以订阅不同的消息，当未来消息中心发布某条消息的时候，订阅过他的个体就会得到通知。
 
 ~~~js
-/* 观察者模式
-    观察者模式又叫发布订阅和消息模式。是设计模式中非常著名也是非常重要的一种模式。
-    这种模式一般会定义一个主题和众多个个体，这里主题可以想象为一个消息中心，里面有各种各样的消息，
-    众多个体可以订阅不同的消息，当未来消息中心发布某条消息的时候，订阅过他的个体就会得到通知。
-*/
+/** 观察者构造函数; author: Mr_Mao
+  * 观察者模式又叫发布订阅和消息模式。是设计模式中非常著名也是非常重要的一种模式。
+  * 这种模式一般会定义一个主题和众多个个体，这里主题可以想象为一个消息中心，里面有各种各样的消息，
+  * 众多个体可以订阅不同的消息，当未来消息中心发布某条消息的时候，订阅过他的个体就会得到通知。
+  * 使用方式: 
+  * 订阅消息-> $watcher.subscribe(type, execute)
+  * @param {string} type -> 消息名称
+  * @param {Function} execute -> 接受消息的回调函数
+  * @param {Boolean} _isInit -> 当消息存在时, 是否初始化执行(默认执行)
+  * @returns {observe} 返回订阅者实例, 用于取消订阅
+  * 
+  * 发布消息-> $watcher.publish(type, value, _isSave)
+  * @param {string} type 消息名称
+  * @param {any} value 消息数据
+  * @param {boolean} _isSava 是否保存消息(占用内存)
+  * 
+  * 取消订阅 -> $watcher.unsubscribe(_observe)
+  * @param {observe} 订阅消息返回的订阅者实例(销毁数据，清除缓存)
+  */
 class Watcher {
-    constructor() {
-        this.observes = {} // 订阅者对象集合
-        this.message = {} // 消息对象结合
+  constructor(config = { debugging: false }) {
+    this.observes = {} // 订阅者对象集合
+    this.message = {} // 消息对象结合
+    this.debugging = config.debugging // 是否开启调试模式
+  }
+  // 发布消息
+  publish(type, value, _isSave) {
+    // 是否保存该消息(有一次保存消息, 那么之后都会保存消息)
+    if (_isSave || this.message[type] !== null) {
+      this.message[type] = value
     }
-    // 发布消息
-    publish(type, value, _isSave) {
-        // 是否保存该消息(有一次保存消息, 那么之后都会保存消息)
-        if (_isSave || this.message[type] !== null) {
-            this.message[type] = value
-        }
-        if (!Array.isArray(this.observes[type])) { return }
-        this.observes[type].forEach(_observe => _observe.execute(value))
+    if (this.debugging) {
+      console.log(`观察者发布消息, 共有${this.observes[type] && this.observes[type].length || 0}个订阅者接收消息 ↓`)
+      console.log(`消息名称为: `, type, '消息为: ', value)
     }
-    // 订阅消息, 返回订阅者
-    subscribe(type, execute, _isInit) {
-        const _observe = new this.Observe(type, execute)
-        // 添加到消息列表对象中
-        if (this.observes[type]) {
-            this.observes[type].push(_observe)
-        } else {
-            this.observes[type] = [_observe]
-        }
-        // 如果该消息存在, 初始化执行
-        if (this.message[_observe.type] !== null) {
-            _observe.execute(this.message[_observe.type])
-        }
-        return _observe
+    // 如果该类型订阅者不存在, 不进行forEach
+    if (!Array.isArray(this.observes[type])) { return }
+    
+    this.observes[type].forEach(_observe => _observe.execute(value))
+  }
+  // 订阅消息, 返回订阅者
+  subscribe(type, execute, _isInit = true) {
+    if (!type || !typeof execute == 'function') {
+      return
     }
-    // 取消订阅
-    unsubscribe(_observe) {
-        if (!Array.isArray(this.observes[_observe.type])) { return }
-        // 查找消息列表, 删除对应订阅者
-        for (const i in this.observes[_observe.type]) {
-            if (this.observes[_observe.type][i].id == _observe.id) {
-                this.observes[_observe.type].splice(i, 1)
-                // 如果该类型订阅者数组为空，删除数组和消息
-                if (!this.observes[_observe.type].length) {
-                    delete this.observes[_observe.type]
-                    delete this.message[_observe.type]
-                }
-                return
-            }
-        }
-
+    const _observe = new this.Observe(type, execute)
+    // 添加到消息列表对象中
+    if (this.observes[type]) {
+      this.observes[type].push(_observe)
+    } else {
+      this.observes[type] = [_observe]
     }
-    // 订阅者构造函数
-    Observe = class {
-        constructor(type, execute) {
-            this.type = type
-            this.id = this.Guid()
-            if (typeof execute == 'function') {
-                this.execute = execute
-            }
-        }
-        execute(message) {
-            console.log("id: %s, value: %s", this.id, message)
-        }
-        Guid() {
-            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
-            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-        }
+    // 如果该消息存在, 初始化执行
+    if (!this.message[_observe.type] && _isInit) {
+      _observe.execute(this.message[_observe.type])
     }
+    if (this.debugging) {
+      console.log(`订阅者订阅消息, 消息名称为: `, type, '订阅者ID: ', _observe.id)
+    }
+    return _observe
+  }
+  // 取消订阅
+  unsubscribe(_observe) {
+    if (this.debugging) {
+      console.log('观察者取消该订阅者: ', _observe.id)
+    }
+    if (!Array.isArray(this.observes[_observe.type])) { return }
+    // 查找消息列表, 删除对应订阅者
+    for (const i in this.observes[_observe.type]) {
+      if (this.observes[_observe.type][i].id === _observe.id) {
+        this.observes[_observe.type].splice(i, 1)
+        // 如果该类型订阅者数组为空，删除数组和消息
+        if (!this.observes[_observe.type].length) {
+          delete this.observes[_observe.type]
+          delete this.message[_observe.type]
+        }
+        break;
+      }
+    }
+  }
+  // 订阅者构造函数
+  Observe = class {
+    constructor(type, execute) {
+      this.type = type
+      this.id = this.Guid()
+      if (typeof execute == 'function') {
+        this.execute = execute
+      }
+    }
+    execute(message) {
+      console.log(`id: ${this.id}, value: ${message}`)
+    }
+    Guid() {
+      const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    }
+  }
 }
 
-export default Watcher
+
+// 创建观察者实例, 开启调试模式
+const watcher = new Watcher({ debugging: true })
+
+// 创建多个订阅者
+const observe_1 = watcher.subscribe('user_info', user_info => { })
+const observe_2 = watcher.subscribe('user_info', user_info => { })
+const observe_3 = watcher.subscribe('user_info', user_info => { })
+
+console.log('----------------分割线----------------')
+
+// 发布消息
+watcher.publish('user_info', { name: '毛先生', age: 18 })
+
+console.log('----------------分割线----------------')
+
+// 取消一个订阅
+watcher.unsubscribe(observe_2)
+
+console.log('----------------分割线----------------')
+
+// 发布新的消息
+watcher.publish('user_info', { name: '鄧脂龍', age: 80 })
 ~~~
 
