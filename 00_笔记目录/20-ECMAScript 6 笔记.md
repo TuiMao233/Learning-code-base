@@ -296,4 +296,22 @@ console.log(ClassWithStaticMethod.staticMethod());
 // expected output: "static method has been called."
 ~~~
 
+**class getter setter 定义属性符**
+
+~~~js
+class Phone {
+    get price() {
+        console.log('价格属性被读取了')
+        return 'iloveyou'
+    }
+    set price(newVal) {
+        console.log('价格属性被修改了')
+    }
+}
+let s = new Phone()
+console.log(s.price) // > 价格
+~~~
+
+
+
 # ESMA Script6 数据类型
