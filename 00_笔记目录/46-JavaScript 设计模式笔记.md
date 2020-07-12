@@ -429,3 +429,27 @@ console.log('----------------分割线----------------')
 watcher.publish('user_info', { name: '鄧脂龍', age: 80 })
 ~~~
 
+# 策略者模式
+
+~~~js
+const fromStrategu = (function (){
+  const strategy = {
+    notEmpty: val => val.length ? '' : '请填写内容',
+    isNumber: val => /^[0-9]+(\.[0-9]+)$/.test(val) ? '' : '请填写一个数字',
+    isPhone: val => /^(?:(?:\+|00)86)?1[3-9]\d{9}$/.test(val) ? '' : '手机号格式不正确',
+  }
+  return {
+    validate: function (type, value) {
+      value = value.trim()
+      return strategy[type] ? strategy[type](value) : '没有该检测方法, 请手动添加'
+    },
+    addStrategy: function (type, fn) {
+      if (strategy[type]){
+        return '该方法已存在'
+      }
+      strategy[type] = fn
+    }
+  }
+})()
+~~~
+
