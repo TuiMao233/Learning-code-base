@@ -19,12 +19,17 @@
   align-items: center;
   flex-wrap: @warp;
 }
+.flex (S, @warp: nowrap) {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: @warp;
+}
 .flex (L, @warp: nowrap) {
   display: flex;
-flex-direction: column;
-flex-wrap: @warp;
+  flex-direction: column;
+  flex-wrap: @warp;
 }
-/** 
+/**
 * 箭头匹配模式集合
 * L: 左箭头 R: 右箭头 T: 上箭头 B: 下箭头
 * @w: 箭头宽度

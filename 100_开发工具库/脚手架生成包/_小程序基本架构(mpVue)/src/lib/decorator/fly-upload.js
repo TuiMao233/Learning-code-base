@@ -1,5 +1,41 @@
 // fly.upload装饰器; author: Mr_Mao
+// 对fly添加upload方法, 模拟fly请求执行环境, 自动调用拦截器和返回结果封装
 export default function (context) {
+  // 请求结果处理
+  function handlerResponse(result) {
+    const headers = result.header
+    const request = config
+    const status = result.statusCode
+    const statusText = 'request:ok'
+    let data = null
+    try {
+      data = config.parseJson ? JSON.parse(result.data) : result.data
+    } catch (error) {
+      data = result.data
+    }
+    return { headers, request, status, statusText, data }
+  }
+  // 请求错误处理
+  function handlerError(result) {
+    const message = result.errMsg ? 'request:no' : 'request:ok'
+    const request = config
+    let data = null
+    try {
+      data = config.parseJson ? JSON.parse(result.data) : result.data
+    } catch (error) {
+      data = result.data
+    }
+    const response = {
+      data: data,
+      headers: result.header,
+      status: result.statusCode,
+    }
+    const status = result.statusCode
+    if (!result.errMsg) {
+      return { message, request, response, status }
+    }
+    return { message: result.errMsg, request }
+  }
   context.upload = function (config = {
     url: '',
     name: '',
@@ -10,41 +46,6 @@ export default function (context) {
     timeout: context.config.timeout,
     parseJson: true
   }) {
-    // 请求结果处理
-    function handlerResponse(result) {
-      const headers = result.header
-      const request = config
-      const status = result.statusCode
-      const statusText = 'request:ok'
-      let data = null
-      try {
-        data = config.parseJson ? JSON.parse(result.data) : result.data
-      } catch (error) {
-        data = result.data
-      }
-      return { headers, request, status, statusText, data }
-    }
-    // 请求错误处理
-    function handlerError(result) {
-      const message = result.errMsg ? 'request:no' : 'request:ok'
-      const request = config
-      let data = null
-      try {
-        data = config.parseJson ? JSON.parse(result.data) : result.data
-      } catch (error) {
-        data = result.data
-      }
-      const response = {
-        data: data,
-        headers: result.header,
-        status: result.statusCode,
-      }
-      const status = result.statusCode
-      if (!result.errMsg) {
-        return { message, request, response, status }
-      }
-      return { message: result.errMsg, request }
-    }
     // 保存拦截器
     const response_handler = context.interceptors.response.handler
     const response_onerror = context.interceptors.response.onerror

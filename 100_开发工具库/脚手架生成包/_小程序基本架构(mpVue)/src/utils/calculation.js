@@ -1,3 +1,8 @@
+// 检测数据类型; return: String
+export const checkedTypeof = (target) => Object.prototype.toString.call(target).slice(8, -1)
+// 剔除字符串代码字段; return: String
+export const removeStrCode = str => str.replace(/<[\/\!]*[^<>]*>/ig, "")
+
 // 分隔二维数组
 export function splitArray(arr, len) {
   let arr_length = arr.length;
@@ -29,7 +34,19 @@ export function clone(target) {
   }
   return result
 }
-// 计算格式化时间, 传入时间戳, 和时间格式
+// 传入字符串和长度, 返回字符串, 超出长度以...展示
+export function strEllipsis(str = '', length = 30) {
+  if (str.length > length)
+    return str.slice(0, length).trim() + '...'
+  else
+    return str
+}
+
+/** 格式化时间戳
+ * @param {String} time 传入的时间戳
+ * @param {String} format 需要转换的格式
+ * @returns {String} 2019-12-26 12:06:00
+ */
 export function formatDate(time, format = 'YY-MM-DD hh:mm:ss') {
   const date = new Date(time);
   const year = date.getFullYear(), month = date.getMonth() + 1, day = date.getDate(), hour = date.getHours(), min = date.getMinutes(), sec = date.getSeconds();
