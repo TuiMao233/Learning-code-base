@@ -216,3 +216,106 @@ $  npm install --save ts-loader@3.1.1 awesome-typescript-loader@4.0.1
 # 安装声明文件@types/node @types/weixin-app
 $ npm install --save @types/node @types/weixin-app
 ```
+
+# mpvue 使用echarts
+
+安装：npm i echarts mpvue-echarts --save
+
+## 构建标签
+
+~~~html
+<view class="echarts-wrap">
+	<mpvue-echarts :echarts="echarts" :onInit="initChart" canvasId="demo-canvas" ref="echarts" />
+</view>
+~~~
+
+## 在methods中定义初始化图形函数
+
+~~~js
+let series = [
+  {
+    name: "成交订单",
+    type: "line",
+    data: [18, 36, 65, 30, 78, 40, 33],
+    symbolSize: 8,
+    itemStyle: { borderWidth: 2 }
+  },
+  {
+    name: "新增收购",
+    type: "line",
+    data: [12, 50, 51, 35, 70, 30, 20],
+    symbolSize: 8,
+    itemStyle: { borderWidth: 2 }
+  }
+];
+data: () => ({
+    echarts
+})
+methods: {
+    // 初始化图形
+    initChart(canvas, width, height, dpr) {
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr
+      });
+      canvas.setChart(chart);
+      const option = {
+        color: ["#d34632", "#29a2f2"],
+        seriesCnt: 2,
+        // 标题配置
+        title: {
+          textStyle: {
+            color: "#333333",
+            fontWeight: "bold"
+          },
+          text: "数据分析",
+          left: "center"
+        },
+        // 图例配置
+        legend: {
+          type: "plain",
+          bottom: "10%"
+        },
+        // 网格配置
+        grid: { containLabel: true },
+        // 提示框组件
+        tooltip: { trigger: "axis" },
+
+        // x轴配置
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+          // show: false
+        },
+        // y轴配置
+        yAxis: {
+          splitLine: {
+            // 分割线配置
+            lineStyle: { type: "dashed" }
+          }
+        },
+        // 线条数据
+        series: series
+      };
+      chart.setOption(option);
+      return chart;
+    }
+  }
+~~~
+
+## 动态渲染数据
+
+标签添加ref
+
+~~~html
+<mpvue-echarts :echarts="echarts" :onInit="initChart" canvasId="demo-canvas" ref="echarts" />
+~~~
+
+使用$refs动态渲染
+
+~~~js
+this.$refs.echarts.init();
+~~~
+
