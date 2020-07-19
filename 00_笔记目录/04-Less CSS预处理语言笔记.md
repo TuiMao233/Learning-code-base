@@ -12,16 +12,16 @@
 ## 注释
 
 ~~~less
-//这是见不得人的注释
-/*这是想给人看见的注释*/
+// 这是见不得人的注释
+/* 这是想给人看见的注释 */
 ~~~
 
 ## 变量
 
 ~~~less
-@color: pink;			/*变量可以是css属性值*/
-@m: margin;				/*变量可以是css属性*/
-@selector: #wrap;	/*变量可以是选择器*/
+@color: pink;			/* 变量可以是css属性值 */
+@m: margin;				/* 变量可以是css属性 */
+@selector: #wrap;	/* 变量可以是选择器 */
 ~~~
 
 ## hover使用
@@ -63,14 +63,14 @@
 ## 引入外部less文件
 
 ~~~less
-@import "triangle.less";//引用库文件
+@import "triangle.less";// 引用库文件
 ~~~
 
 ## 匹配模式
 
 ~~~less
 .triangle(A){}
-.triangle(B){} //匹配B
+.triangle(B){} // 匹配B
 .triangle(C){}
 
 #warp {.triangle(B)}

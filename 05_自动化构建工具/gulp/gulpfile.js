@@ -60,7 +60,7 @@ function hodWacth() {
 	// 自动开启链接
 	open('http://localhost:5000'); //npm install open --save-dev
 	// 监视目标文件
-	wacth()
+	wacth();
 }
 // 注册基础任务
 exports.javascript = javascript 
