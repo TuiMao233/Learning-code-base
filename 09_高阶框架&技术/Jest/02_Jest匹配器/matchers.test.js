@@ -1,28 +1,65 @@
-test('测试严格相等',()=>{
-  const a = {number:'007'}   
-  expect(a).toBe(a) // -> 通过?
-}) 
-test('测试内容相等',()=>{
-  const a = {number:'007'}   
-  expect(a).toEqual({number:'007'}) // -> 通过
+// jest 匹配器
+test('严格相等', () => {
+  const a = { number: '007' }
+  expect(a).toBe(a) // -> 通过
 })
-test('测试null匹配',()=>{
-  const a = null   
-  expect(a).toBeNull() // -> 通过
-}) 
-test('测试undefined匹配',()=>{
-  const a = undefined   
-  expect(a).toBeUndefined() // -> 通过
-}) 
-test('测试不为undefined匹配',()=>{
-  const a = 'jspang'  
-  expect(a).toBeDefined() // -> 通过
-}) 
-test('测试为true匹配',()=>{
-  const a = 1
-  expect(a).toBeTruthy() // 不通过
-}) 
-test('测试为false匹配',()=>{
-  const a = 0
-  expect(a).toBeFalsy() // 通过
+test('内容相等', () => {
+  const a = { number: '007' }
+  expect(a).toEqual({ number: '007' }) // -> 通过
+})
+test('null匹配', () => {
+  expect(null).toBeNull() // -> 通过
+})
+test('undefined匹配', () => {
+  expect(undefined).toBeUndefined() // -> 通过
+})
+test('不为undefined匹配', () => {
+  expect('jspang').toBeDefined() // -> 通过
+})
+test('为true匹配', () => {
+  expect(1).toBeTruthy() // 不通过
+})
+test('为false匹配', () => {
+  expect(0).toBeFalsy() // 通过
+})
+
+
+test('大于指定值的数匹配', () => {
+  expect(10).toBeGreaterThan(9) // ->通过
+})
+test('小于指定值的数匹配', () => {
+  expect(10).toBeLessThan(11) // ->通过
+})
+test('大于等于指定值的数匹配', () => {
+  expect(10).toBeGreaterThanOrEqual(10) // ->通过
+})
+test('小于等于指定值的数匹配', () => {
+  expect(10).toBeLessThanOrEqual(10) // ->通过
+})
+
+test('匹配浮点数结果(忽略精度存在问题)', () => {
+  const one = 0.1
+  const tow = 0.2
+  expect(one + tow).toBeCloseTo(0.3) // ->通过
+})
+
+test('匹配字符串是否存在指定字符串', () => {
+  const str = "谢大脚,刘英,小红"
+  expect(str).toMatch('谢大脚')
+})
+
+test('匹配数组/Set中某个元素', () => {
+  const arr = ["谢大脚", "刘英", "小红"]
+  const set = new Set(arr)
+  expect(arr).toContain('谢大脚') // -> 通过
+  expect(set).toContain('谢大脚') // -> 通过
+})
+
+const throwNewErrorFunc = () => { throw new Error('this is Error') }
+test('匹配该函数是否抛出错误',() => {
+  expect(throwNewErrorFunc).toThrow() // -> 通过
+  // 匹配该异常字符串是否符合
+  expect(throwNewErrorFunc).toThrow('this is Error') // -> 通过
+  // 匹配不存在异常(not)
+  expect(throwNewErrorFunc).not.toThrow() // -> 不通过
 })
