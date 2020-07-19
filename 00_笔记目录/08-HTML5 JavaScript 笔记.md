@@ -495,7 +495,13 @@ ctx.fillText("李国超",500,300);	   // 绘制字体
 console.log(ctx.measureText("李国超"));// 字体的信息
 ~~~
 
+**ctx.textBaseline参数**
 
+![](https://www.w3school.com.cn/i/textBaseline.gif)
+
+**ctx.textAlign参数**
+
+![](https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=106681115,2680268055&fm=15&gp=0.jpg)
 
 ## canvas 像素操作
 
