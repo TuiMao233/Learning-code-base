@@ -12,7 +12,7 @@ const reg = /<li>.*?<a>(.*?)<\/a>/s
 // 调用方法
 const result = str.matchAll(reg)
 for (const v of result) {
-  console.log(v)
+  console.log(v) // 肖申克, 阿甘正传
 }
 // 扩展运算符
 const arr = [...result]

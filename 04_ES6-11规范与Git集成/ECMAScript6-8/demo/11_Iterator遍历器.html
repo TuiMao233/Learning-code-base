@@ -69,7 +69,7 @@
 			let nextIndex = 0
 			console.log(this)
 			return {
-				next : function() {
+				next () {
 					console.log(this)
 					let bool =  nextIndex < this.length
 					return {value: (bool ? this[nextIndex++]:undefined), done: !bool}

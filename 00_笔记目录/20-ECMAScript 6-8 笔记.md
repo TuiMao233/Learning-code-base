@@ -195,32 +195,6 @@ let s5 = Symbol.for('test') // 没有这个变量则声明一个
 let s6 = Symbol.for('test') // 如果已经存在了.则获取这个sym
 ~~~
 
-## symbol.iterator 遍历器
-
-iterator是一种接口机制，为各种不同的数据结构提供统一的访问机制，使得数据结构的成员能够按某种自定义次序排列
-
-```
-工作原理：
-  - 创建一个指针对象(遍历器对象)，指向数据结构的起始位置。
-  - 第一次调用next方法，指针自动指向数据结构的第一个成员
-  - 接下来不断调用next方法，指针会一直往后移动，直到指向最后一个成员
-  - 每调用next方法返回的是一个包含value和done的对象，{value: 当前成员的值,done: 布尔值}
-    * value表示当前成员的值，done对应的布尔值表示当前的数据的结构是否遍历结束。
-    * 当遍历结束的时候返回的value值是undefined，done值为false
-```
-**自定义送代器**
-
-~~~javascript
-var myIterable = {}
-myIterable[Symbol.iterator] = function* () {
-    yield 1;
-    yield 2;
-    yield 3;
-}
-[...myIterable] // [1, 2, 3]
-
-~~~
-
 ## generator 状态机函数
 
 ~~~javascript
@@ -239,7 +213,55 @@ console.log(MG.next('aaaaaaaaaaaaaaaaaaaaa')) // aaaaaaaaaaaaaaaaaaaaa hello 暂
 console.log(MG.next()) // 执行完成 返回的结果
 ~~~
 
-## async 同步流程表达异步操作函数
+## symbol.iterator 遍历器
+
+iterator是一种接口机制，为各种不同的数据结构提供统一的访问机制，使得数据结构的成员能够按某种自定义次序排列
+
+```
+工作原理：
+  - 创建一个指针对象(遍历器对象)，指向数据结构的起始位置。
+  - 第一次调用next方法，指针自动指向数据结构的第一个成员
+  - 接下来不断调用next方法，指针会一直往后移动，直到指向最后一个成员
+  - 每调用next方法返回的是一个包含value和done的对象，{value: 当前成员的值,done: 布尔值}
+    * value表示当前成员的值，done对应的布尔值表示当前的数据的结构是否遍历结束。
+    * 当遍历结束的时候返回的value值是undefined，done值为false
+```
+**自定义送代器**
+
+~~~js
+let targetData = {
+  [Symbol.iterator]: function () {
+    let nextIndex = 0
+    console.log(this)
+    return {
+      next () {
+        console.log(this)
+        let bool =  nextIndex < this.length
+        return {value: (bool ? this[nextIndex++]:undefined), done: !bool}
+      }
+    }
+  },
+  username: '60',
+  age: 50
+}
+for (let i of targetData) {
+  console.log(i)
+}
+~~~
+
+**状态机自定义送代器**
+
+~~~javascript
+var myIterable = {}
+myIterable[Symbol.iterator] = function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+[...myIterable] // [1, 2, 3]
+~~~
+
+## async 同步流程表达异步函数
 
 ~~~javascript
 function foo() {return new Promise(resolve => {setTimeout(resolve, 2000)})}
@@ -248,7 +270,6 @@ async function test() {
 	await foo() // 当前的promise操作完成就往下执行
 	console.log('执行结束', new Date().toTimeString())
 };test()
-
 ~~~
 
 ## class 类定义构造方法
@@ -314,4 +335,4 @@ console.log(s.price) // > 价格
 
 
 
-# ESMA Script6 数据类型
+# ESMAScript6-8 数据类型
