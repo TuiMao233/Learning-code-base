@@ -21,7 +21,7 @@ export default {
       type: String,
       default: "按钮"
     }
-  },
+  }
 };
 </script>
 

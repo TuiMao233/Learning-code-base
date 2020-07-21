@@ -32,14 +32,3 @@ export const redirectTo = (url = "", params = {}) => wx.navigateBack({ url: para
 export const reLaunch = (url = "", params = {}) => wx.reLaunch({ url: paramsAnaly(url, params) })
 export const switchTab = (url = "", params = {}) => wx.switchTab({ url: paramsAnaly(url, params) })
 export const navigateBack = (delta = 0) => wx.navigateBack({ delta })
-
-// 过滤input为数字
-export const onFilterNumber = (ev) => {
-  const value = ev.detail.value
-  return value.trim().replace(/\D/g, "");
-}
-// 过滤input为字符串
-export const onFilterString = (ev) => {
-  const value = ev.detail.value
-  return value.trim().replace(/\d/g, "");
-}
