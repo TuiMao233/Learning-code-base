@@ -69,11 +69,13 @@
 ## 匹配模式
 
 ~~~less
-.triangle(A){}
+.triangle(T, 15px, 15rpx){
+    
+}
 .triangle(B){} // 匹配B
 .triangle(C){}
 
-#warp {.triangle(B)}
+#warp {.triangle(T, 15px, 15px)}
 ~~~
 
 ## less运算
