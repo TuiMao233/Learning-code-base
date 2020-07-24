@@ -1,4 +1,3 @@
-// axios配置js, 向外暴露配置好的axios
 import axios from 'axios';
 import { Notification } from 'element-ui';
 

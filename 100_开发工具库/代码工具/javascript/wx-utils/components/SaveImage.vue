@@ -38,7 +38,7 @@ export default {
         filePath: this.imageUrl,
         success: res => {},
         fail: err => {
-          console.log(err)
+          console.log(err);
           if (err.errMsg == "saveImageToPhotosAlbum:fail auth deny") {
             this.is_save = false;
             wx.showModal({

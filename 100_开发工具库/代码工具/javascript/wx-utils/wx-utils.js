@@ -32,6 +32,7 @@ export const navigateTo = (url = "", params = {}) => wx.navigateTo({ url: params
 export const redirectTo = (url = "", params = {}) => wx.navigateBack({ url: paramsAnaly(url, params) })
 export const reLaunch = (url = "", params = {}) => wx.reLaunch({ url: paramsAnaly(url, params) })
 export const switchTab = (url = "", params = {}) => wx.switchTab({ url: paramsAnaly(url, params) })
+<<<<<<< HEAD
 export const navigateBack = (delta = 0) => wx.navigateBack({ delta })
 
 // 过滤input为数字
@@ -68,3 +69,6 @@ export const choiceLocation = async () => {
   }
   console.log(location)
 }
+=======
+export const navigateBack = (delta = 0) => wx.navigateBack({ delta })
+>>>>>>> b693619857b4f10a1d828526decdc26bf95bdb88
