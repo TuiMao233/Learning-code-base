@@ -251,7 +251,7 @@ html.style.fontSize = document.documentElement.clinetWidth + 'px'
 // 假如我们要在总宽750px的div上放一个200px宽高的盒子，也就是750px = 1rem，那么就是200 / 750 ≈0.26rem
 
 // 但是小数点并不方便计算，所以可以将满屏的宽度分成多个rem尺寸, 这里是16个rem等于满屏
-html.style.fontSize = document.documentElement.clinetWidth / 16 + 'px' 
+html.style.fontSize = document.documentElement.clinetWidth / 16 + 'px'
 // 假如我们要在总宽750px的div上放一个200px宽高的盒子，也就是750px = 16rem，那么就是(200 / 750) * 16 ≈ 4.26rem
 </script>
 
@@ -261,10 +261,10 @@ html.style.fontSize = document.documentElement.clinetWidth / 16 + 'px'
 -->
 <script>
 (function(){
-    var html = document.querySelector('html')
-	var styleNode = document.createElement('style')
-	var rem_size = document.documentElement.clinetWidth / 16
-	styleNode.innerHTML = "html{font-size:"+rem_size+"px!important}"  
+    var styleNode = document.createElement("style");
+	var w = document.documentElement.clientWidth/16;
+	styleNode.innerHTML = "html{font-size:"+w+"px!important}";
+	document.head.appendChild(styleNode);
 })
 </script>
 ~~~
