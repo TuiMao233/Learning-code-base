@@ -1672,7 +1672,49 @@ mounted () {
 
 # ElementUI的使用
 
-## vue-cli@4 文件中引入
+## vue-cli@2 文件中引入
+
+~~~makefile
+npm i element-ui -S # 安装
+npm install babel-plugin-component -D # 按需引入插件
+
+#↓↓↓.babelrc↓↓↓#
+
+{
+  "presets": [["es2015", { "modules": false }]],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+}
+~~~
+
+**页面中引入**
+
+~~~js
+import Vue from 'vue';
+import { Button, Select } from 'element-ui';
+import App from './App.vue';
+
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
+/* 或写为
+ * Vue.use(Button)
+ * Vue.use(Select)
+ */
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+~~~
+
+## vue-cli@3/4 文件中引入
 
 ~~~makefile
 vue create my-app	# vue-cli创建项目
@@ -1692,7 +1734,7 @@ vue add element		# 添加element插件
 	Installing additional dependencies...
 ~~~
 
-## vue-cli@4 UI中引入
+## vue-cli@3/4 UI中引入
 
 ![](https://user-images.githubusercontent.com/10095631/43555082-b9414998-962a-11e8-83ab-cda066a61093.png?raw=true)
 
@@ -1737,6 +1779,280 @@ Vue.use(Button);
 <style>
 </style>
 ~~~
+
+# VeeValidate的使用
+
+vee validate 一个轻量级的 [vue](http://www.fly63.com/tag/vue)表单验证插件。基于模板的验证既熟悉又易于设置。验证[html](http://www.fly63.com/tag/html)输入和[vue](http://www.fly63.com/tag/vue)组件，生成本地化错误，可扩展，它可以完成所有操作。
+
+安装：`npm i vee-validate --save`
+
+## 入门使用
+
+~~~js
+// ValidationProvider是验证提供者, 该组件通过作用域插槽为模板提供验证错误。
+// VeeValidate不附带任何验证规则, 由extend函数添加验证规则
+import { ValidationProvider, extend } from 'vee-validate';
+// vee-validate/dist/rules是vee-validate官方提供暴露的多种验证规则
+import { required, email } from 'vee-validate/dist/rules';
+// 添加必填规则
+extend('required', required);
+// 添加邮箱规则
+extend('email', email);
+// 注册验证提供者组件, 组件通过作用域插槽为模板提供验证错误
+Vue.component('ValidationProvider', ValidationProvider);
+~~~
+
+~~~vue
+<!-- 
+rules为规则字符串表达式, 用|分开为多个规则同时共用
+v被称为槽的道具, 它可以让类似的组件ValidationProvider将信息发送到该插槽, 
+这里可以使用ES6的对象扩展, 使事情变得更简洁
+-->
+<ValidationProvider rules="required|email" v-slot="{ errors }">
+  <input v-model="email">
+  <p>{{ errors[0] }}</p>
+</ValidationProvider>
+~~~
+
+v插槽更多功能：https://logaretm.github.io/vee-validate/guide/state.html#flags
+第三方UI库使用：https://logaretm.github.io/vee-validate/guide/3rd-party-libraries.html#element-ui
+
+## 自定义规则
+
+### 基本使用语法
+
+~~~js
+import { extend } from 'vee-validate';
+// extend函数接受规则的名称以及用于该规则的验证函数和其他参数。
+extend('positive', {
+  validate(value) {
+    return value >= 0;
+  },
+  // 字符串占位符, 占位符内容由ValidationProvider组件name参数提供
+  message: '{__field__}不能为空'
+});
+~~~
+
+~~~html
+<ValidationProvider rules="positive" v-slot="{ errors }">
+  <input v-model="value" type="text">
+  <span>{{ errors[0] }}</span>
+</ValidationProvider>
+~~~
+
+### 单参数使用
+
+~~~js
+import { extend } from 'vee-validate';
+// 使用验证规则的扩展形式并定义params包含参数名称的属性
+// args发送给该validate方法的第二个参数是一个对象，其中包含在params数组中指定的键。
+extend('min', { // 接收参数, 定义最小值规则
+  validate(value, args) {
+    return value.length >= args.length;
+  },
+  params: ['length']
+});
+~~~
+
+~~~html
+<!-- 模板中使用(规则字符串表达式) -->
+<ValidationProvider rules="required|min:3" v-slot="{ errors }">
+  <input v-model="value" type="text">
+  <span>{{ errors[0] }}</span>
+</ValidationProvider>
+<!-- 模板中使用(对象表达式) -->
+<ValidationProvider rules="{required:true,min:3}" v-slot="{ errors }">
+  <input v-model="value" type="text">
+  <span>{{ errors[0] }}</span>
+</ValidationProvider>
+~~~
+
+### 多参数使用
+
+~~~js
+import { extend } from 'vee-validate';
+
+extend('minmax', {
+  validate(value, {length}) {
+    return length >= args.min && length <= args.max;
+  },
+  params: ['min', 'max']
+});
+~~~
+
+## 本土化设置
+
+vee-validate具有40多个可用于交付的验证的语言环境，但是默认情况下不会安装它们，因为它们的开销很大，因此需要导入所需的语言环境。公开的`localize`帮助程序使您可以向验证消息中添加新的语言环境
+
+```js
+import { localize } from 'vee-validate';
+import en from 'vee-validate/dist/locale/en.json';
+import zh_CN from 'vee-validate/dist/locale/zh_CN.json';
+// 安装英语与中文简体配置.
+localize({ en, zh_CN });
+```
+
+更多配置：https://logaretm.github.io/vee-validate/guide/localization.html#using-the-default-i18n
+
+## 验证提供者(ValidationProvider)
+
+`ValidationProvider`组件是包装您的输入并使用[作用域插槽](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots)提供验证状态的组件。
+
+这些是插槽范围内可用的属性，可通过以下方式访问`v-slot`：
+
+| Name        |            Type            | Description                                                  |
+| :---------- | :------------------------: | :----------------------------------------------------------- |
+| errors      |         `string[]`         | 错误消息列表。                                               |
+| failedRules |   `[x: string]: string`    | 失败规则的映射对象，其中 (rule, message) 为 (key, value)     |
+| aria        | `{ [x: string]: string }`  | 为可访问性映射aria属性的对象。                               |
+| classes     | `{ [x: string]: boolean }` | 根据验证状态配置的类的映射对象。                             |
+| validate    |   `(e: any) => Promise`    | 用作事件处理程序以触发验证的函数。对于不使用v模型的字段很有用。 |
+| reset       |        `() => void`        | 重置提供程序上的验证状态的函数。                             |
+| valid       |    `boolean|undefined`     | 如果该字段有效。                                             |
+| invalid     |    `boolean|undefined`     | 如果该字段无效。                                             |
+| pristine    |         `boolean`          | 如果从未操纵该字段值。                                       |
+| dirty       |         `boolean`          | 如果字段值已被操纵。                                         |
+| pending     |         `boolean`          | 指示是否正在进行字段验证。                                   |
+| required    |         `boolean`          | 如果该字段为必须项。                                         |
+| validated   |         `boolean`          | 如果该字段已至少验证一次。                                   |
+| passed      |         `boolean`          | 如果该字段已经过验证并且有效。                               |
+| failed      |         `boolean`          | 如果该字段已经过验证并且无效。                               |
+
+由于插槽作用域可以利用ES6扩展的优势，因此您可以选择加入其中的任何属性，并在认为合适时传递到插槽模板
+
+~~~html
+<ValidationProvider rules="required" v-slot="{ errors }">
+  <div>
+    <input type="text" v-model="value">
+    <span>{{ errors[0] }}</span>
+  </div>
+</ValidationProvider>
+~~~
+
+## 验证观察者(ValidationObserver)
+
+`ValidationObserver`是你的包装形式和使用它在嵌套的所有字段提供汇总的验证状态的组件[范围的插槽](https://vuejs.org/v2/guide/components-slots.html#Scoped-Slots)。
+
+由于ValidationObserver的solt插槽属性基本与验证提供者(ValidationProvider)一直，这里只挑一些重点内容。
+
+| Name         | Type                              | Description                                                  |
+| ------------ | --------------------------------- | ------------------------------------------------------------ |
+| validate     | `() => Promise<boolean>`          | 为所有提供程序触发验证的方法。除非“silent”为true，否则更改子程序状态。 |
+| handleSubmit | `(cb: Function) => Promise<void>` | 像validate一样调用验证并更改提供程序的状态，只接受在验证成功时才运行的回调。 |
+| reset        | `() => void`                      | 为所有提供程序重置验证状态的方法。                           |
+
+~~~html
+<ValidationObserver v-slot="{ handleSubmit }">
+  <!-- 当所有表单完成时, 提交才会调用onSubmit方法 -->
+  <form @submit.stop.prevent="handleSubmit(onSubmit)">
+    <!-- 该项可有多个ValidationProvider组件组成的input -->
+  </form>
+</ValidationObserver>
+<ValidationObserver v-slot="{ passed }">
+  <!-- 当提交时, 调用onSubmit传入表单验证状态 -->
+  <form @submit.stop.prevent="onSubmit(passed)">
+    <!-- 该项可有多个ValidationProvider组件组成的input -->
+  </form>
+</ValidationObserver>
+~~~
+
+## Jest 测试VeeValidate
+
+**jest.config.js**
+
+~~~js
+transform: {
+    ...
+  'vee-validate/dist/rules': 'babel-jest',
+},
+transformIgnorePatterns: [
+  '<rootDir>/node_modules/(?!vee-validate/dist/rules)',
+]
+~~~
+
+**comp.vue**
+
+~~~vue
+<ValidationProvider rules="required" v-slot="{ errors }" ref="provider">
+  <input v-model="value" type="text">
+  <span class="error">{{ errors[0] }}</span>
+</ValidationProvider>
+~~~
+
+**comp.test.js**
+
+~~~js
+// 创建环境
+const wrapper = mount(MyComponent, { sync: false });
+// 查找input, 设置值未空
+wrapper.find('input').setValue('');
+// 刷新, 挂起验证
+await flushPromises();
+// 从参考中获取错误消息
+const error = wrapper.vm.$refs.provider.errors[0];
+// 验证错误
+expect(error).toBeTruthy();
+~~~
+
+## 完整实例
+
+~~~js
+import Vue from 'vue'
+// 引入验证组件, 汇总验证状态组件, 验证添加工具, 语言环境设置
+import {
+  ValidationProvider,
+  ValidationObserver,
+  extend, localize
+} from 'vee-validate';
+import * as rules from "vee-validate/dist/rules";
+import zh_CN from "vee-validate/dist/locale/zh_CN.json";
+// 进行按需引入规则
+['required', 'email', 'min', 'max'].forEach(key => {
+  extend(key, rules[key])
+})
+
+// 本土化设置
+// localize('zh_CN', zh_CN)
+localize({zh_CN})
+// 全局安装VeeValidate组件
+Vue.component("ValidationObserver", ValidationObserver);
+Vue.component("ValidationProvider", ValidationProvider);
+~~~
+
+~~~html
+<template>
+  <validation-observer ref="observer" v-slot="{ passed }">
+    <form @submit.stop.prevent="onSubmit(passed)">
+      <!-- 设置名称表单与验证 -->
+      <validation-provider :rules="{required:true, min:3}" v-slot="{ error }">
+        <input v-model="name" type="text">
+        <span>{{error[0]}}</span>
+      </validation-provider>
+      <!-- 设置邮箱表单与验证 -->
+      <validation-provider rules="required|email" v-slot="{ error }">
+        <input v-model="email" type="text">
+        <span>{{error[0]}}</span>
+      </validation-provider>
+    </form>
+  </validation-observer>
+</template>
+<script>
+export default {
+  data: ()=> ({
+    name: "",
+    email: ""
+  }),
+  methods: {
+    // 当表单提交时调用, 接收验证状态
+    onSubmit(passed){
+      if (!passed) return console.log('表单项未通过验证');
+    }
+  }
+}
+</script>
+~~~
+
+
 
 # Vue 常见问题
 
