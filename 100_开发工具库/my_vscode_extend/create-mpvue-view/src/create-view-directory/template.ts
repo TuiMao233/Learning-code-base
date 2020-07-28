@@ -26,6 +26,7 @@ export default {
   // vue生命周期函数--组件销毁前
   beforeDestory() {},
 
+  
   // 小程序生命周期函数--监听页面加载
   onLoad (options) {},
   // 小程序生命周期函数--监听页面初次渲染完成
@@ -34,16 +35,18 @@ export default {
   onShow() {},
   // 小程序生命周期函数--监听页面隐藏
   onHide() {},
+  // 小程序生命周期函数--监听页面卸载
+  onUnload () {},
   // 小程序页面相关事件处理函数--监听用户下拉动作
   onPullDownRefresh() {},
   // 小程序页面上拉触底事件的处理函数
   onReachBottom() {},
   // 小程序用户点击右上角分享
-  /* onShareAppMessage() {}, */
+  // onShareAppMessage() {}, 
   // 小程序页面相关事件处理函数--监听页面滚动
-  /* onPageScroll() {}, */
+  // onPageScroll() {},
   // 小程序页面相关事件处理函数--tab页点击
-  /* onTabItemTap() {} */
+  // onTabItemTap() {}
 };
 </script>
 
