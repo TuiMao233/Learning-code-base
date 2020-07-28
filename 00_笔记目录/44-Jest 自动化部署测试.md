@@ -16,7 +16,7 @@
 
 ## [Jest前端测试框架优点介绍](https://jspang.com/detailed?id=63#toc311)
 
-- 比较新：喜新厌旧是人的天性，出来后你总想动手尝试一下，这个就和家花没有野花香是一个道理。作为一个程序员，你更要有拥抱全新知识的态度。绝不能固步自封，顽固不化。（你们这些小年青永远体会不了老男人去洗浴中心的喜悦和机械心情的）
+- 比较新：喜新厌旧是人的天性，出来后你总想动手尝试一下，这个就和家花没有野花香是一个道理。作为一个程序员，你更要有拥抱全新知识的态度。绝不能固步自封，顽固不化。
 - 基础很好：曾是框架的基础就是性能好、功能多、简单易用，Jest在这三个方面你可以完全放心。绝对是一把好手，干就完事了。
 - 速度快： 单独模块测试功能，比如说有两个模块A和B，以前都测试过了，这时候你只改动A模块，在次测试，模块B不会再跑一次，而是直接测试A模块。这就好比你去‘大宝剑’，你所有技师都试过了一次，下次你再来，直接就找最好的就行了。不用再测试一遍。（安心、放心）
 - API简单 ：等你基础知识学完后，你就会发现API非常简单，数量也少。
@@ -123,6 +123,8 @@ in "package.json"? » (Y/n) # 运行测试脚本是否使用package.json中?
 
 # 自动化测试
 jest --watchAll
+# 测试覆盖率
+jest --coverage
 ~~~
 
 ## Jest.config.js配置项
@@ -137,40 +139,7 @@ module.exports = {
 };
 ~~~
 
-# Jest 匹配器
-
-~~~js
-test('测试严格相等',()=>{
-  const a = {number:'007'}   
-  expect(a).toBe({number:'007'}) // -> 通过?
-}) 
-test('测试内容相等',()=>{
-  const a = {number:'007'}   
-  expect(a).toEqual({number:'007'}) // -> 通过
-})
-test('测试null匹配',()=>{
-  const a = null   
-  expect(a).toBeNull() // -> 通过
-}) 
-test('测试undefined匹配',()=>{
-  const a = undefined   
-  expect(a).toBeUndefined() // -> 通过
-}) 
-test('测试不为undefined匹配',()=>{
-  const a = 'jspang'  
-  expect(a).toBeDefined() // -> 通过
-}) 
-test('测试为true匹配',()=>{
-  const a = 0
-  expect(a).toBeTruthy() // 不通过
-}) 
-test('测试为false匹配',()=>{
-  const a = 0
-  expect(a).toBeTruthy() // 通过
-}) 
-~~~
-
-# Jest 配置支持ES6 模块化
+## Jest 配置支持ES6 模块化
 
 **安装babel模块**
 
@@ -196,3 +165,239 @@ cnpm i @babel/core@7.4.5 @babel/preset-env@7.4.5 --dev # 安装
 
 **运行jest命令：**`jest`
 
+# Jest 匹配器
+
+## 内容匹配
+
+~~~js
+test('测试严格相等',()=>{
+  const a = {number:'007'}   
+  expect(a).toBe({number:'007'}) // -> 不通过, toBe为完全匹配才算通过
+}) 
+test('测试内容相等',()=>{
+  const a = {number:'007'}   
+  expect(a).toEqual({number:'007'}) // -> 通过
+})
+~~~
+
+## 空 / 不存在匹配
+
+~~~js
+test('测试null匹配',()=>{
+  const a = null   
+  expect(a).toBeNull() // -> 通过
+}) 
+test('测试undefined匹配',()=>{
+  const a = undefined   
+  expect(a).toBeUndefined() // -> 通过
+})
+test('测试不为undefined匹配',()=>{
+  const a = 'jspang'  
+  expect(a).toBeDefined() // -> 通过
+}) 
+~~~
+
+## 布尔值匹配
+
+~~~js
+test('测试为true匹配',()=>{
+  const a = 0
+  expect(a).toBeTruthy() // 不通过
+}) 
+test('测试为false匹配',()=>{
+  const a = 0
+  expect(a).toBeTruthy() // 通过
+}) 
+~~~
+
+## 数值匹配
+
+~~~js
+test('大于指定值的数匹配', () => {
+  expect(10).toBeGreaterThan(9) // ->通过
+})
+test('小于指定值的数匹配', () => {
+  expect(10).toBeLessThan(11) // ->通过
+})
+test('大于等于指定值的数匹配', () => {
+  expect(10).toBeGreaterThanOrEqual(10) // ->通过
+})
+test('小于等于指定值的数匹配', () => {
+  expect(10).toBeLessThanOrEqual(10) // ->通过
+})
+test('匹配浮点数结果(忽略精度存在问题)', () => {
+  const one = 0.1
+  const tow = 0.2
+  expect(one + tow).toBeCloseTo(0.3) // ->通过
+})
+~~~
+
+## 字符串匹配
+
+~~~js
+test('匹配字符串是否存在指定字符串', () => {
+  const str = "谢大脚,刘英,小红"
+  expect(str).toMatch('谢大脚')
+})
+~~~
+
+## 数组 / Set匹配
+
+~~~js
+test('匹配数组/Set中某个元素', () => {
+  const arr = ["谢大脚", "刘英", "小红"]
+  const set = new Set(arr)
+  expect(arr).toContain('谢大脚') // -> 通过
+  expect(set).toContain('谢大脚') // -> 通过
+})
+~~~
+
+## 错误匹配
+
+~~~js
+const throwNewErrorFunc = () => { throw new Error('this is Error') }
+test('匹配该函数是否抛出错误',() => {
+  expect(throwNewErrorFunc).toThrow() // -> 通过
+  // 匹配该异常字符串是否符合
+  expect(throwNewErrorFunc).toThrow('this is Error') // -> 通过
+  // 匹配不存在异常(not)
+  expect(throwNewErrorFunc).not.toThrow() // -> 不通过
+})
+~~~
+
+# 异步回调测试
+
+在工作中我们很多方法都包含异步操作，所以测试异步代码成了工作中必不可少的一部分。
+
+~~~js
+import axios from 'axios'
+export const fetchData = fn => {
+  axios.get('http://a.jspang.com/jestTest.json')
+    .then(response => fn(response.data))
+}
+export const pmsFetchData = () => (
+  axios.get('http://a.jspang.com/jestTest.json')
+    .then(response => response.data)
+)
+export const fetchThreeData = () => (
+  axios.get('http://a.jspang.com/jestTest.json')
+    .then(response => response.data)
+)
+~~~
+
+## promise 异步测试
+
+~~~js
+test('异步方法测试', done => {
+  // promise需返回, 且done要放在请求完毕后
+  return pmsFetchData().then(data => {
+    expect(data).toEqual({
+      success: true
+    })
+    // done代表所有操作已完成
+    done()
+  })
+})
+~~~
+
+## async 异步测试
+
+~~~js
+test('async异步方法测试', async done => {
+  // promise需返回, 且done要放在请求完毕后
+  const data = await pmsFetchData();
+  expect(data).toEqual({
+    success: true
+  });
+  // done代表所有操作已完成
+  done();
+})
+~~~
+
+## 404 错误测试
+
+~~~js
+test('异步404错误测试', done => {
+  expect.assertions(1) // 断言, 必须执行一次expect(不然则不通过)
+  // promise需返回, 且done要放在请求完毕后
+  return fetchThreeData().catch(err => {
+    expect(err.toString().indexOf('404') > -1).toBe(true)
+    // done代表所有操作已完成
+    done()
+  })
+})
+~~~
+
+# Jest 钩子回调与分组测试
+
+~~~js
+export default class {
+  gongzhu(number) {
+    this.user = number == 1 ? '大脚' : '刘英'
+  }
+  anjiao() {
+    this.fuwu = this.user + '走进房间为你足疗'
+  }
+  anmo() {
+    this.fuwu = this.user + '走进房间为你按摩'
+  }
+}
+~~~
+
+## 四个钩子回调
+
+~~~js
+// beforeAll: 测试案例执行之前
+beforeAll(()=>console.log('beforeAll: 吃完饭后，走进了红浪漫区域'))
+// afterAll: 测试案例执行之后
+afterAll(()=>console.log('afterAll: 有钱人的生活就是这么枯燥且乏味'))
+// beforeEach: 每个测试用例执行前
+beforeEach(()=>console.log('beforeEach: 给了300元后'))
+// afterEach: 每个测试用例之后
+afterEach(()=>console.log('afterEach: 完成后, 我心满意足的坐在沙发上'))
+test('测试 大脚足疗 方法', ()=>{
+  baojian.gongzhu(1)
+  baojian.anjiao()
+  expect(baojian.fuwu).toEqual('大脚走进房间为你足疗')
+})
+test('测试 刘英按摩 方法', ()=>{
+  baojian.gongzhu(2)
+  baojian.anmo()
+  expect(baojian.fuwu).toEqual('刘英走进房间为你按摩')
+})
+~~~
+
+## 分组测试
+
+~~~js
+import NewBaoJian from './newBaoJian'
+const baojian = new NewBaoJian()
+describe('大脚相关服务', () => {
+  test('测试 大脚足疗 方法', () => {
+    baojian.gongzhu(1)
+    baojian.anjiao()
+    expect(baojian.fuwu).toEqual('大脚走进房间为你足疗')
+  })
+  test('测试 大脚泰式保健 方法', () => {
+    baojian.gongzhu(1)
+    baojian.taishi()
+    expect(baojian.fuwu).toEqual('大脚走进房间为你_泰式保健')
+  })
+})
+describe('刘英相关服务', () => {
+  test('测试 刘英按摩 方法', () => {
+    baojian.gongzhu(2)
+    baojian.anmo()
+    expect(baojian.fuwu).toEqual('刘英走进房间为你按摩')
+  })
+  test('测试 刘英宫廷御疗 方法', () => {
+    baojian.gongzhu(2)
+    baojian.gongting()
+    expect(baojian.fuwu).toEqual('刘英走进房间为你_宫廷御疗')
+  })
+})
+~~~
+
+## 钩子函数作用域
+
+钩子函数在父级分组可作用域子集，类似继承。钩子函数同级分组作用域互不干扰，各起作用。先执行外部的钩子函数，在执行内部的钩子函数

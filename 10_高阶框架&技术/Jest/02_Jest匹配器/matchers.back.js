@@ -1,3 +1,17 @@
+/*
+ * @Author: Mr_Mao
+ * @Date: 2020-07-19 14:17:22
+ * @LastEditTime: 2020-07-28 21:11:38
+ * @LastEditors: Mr_Mao
+ * @佛祖保佑，永无bug
+ */ 
+/*
+ * @Author: Mr_Mao
+ * @Date: 2020-07-19 14:17:22
+ * @LastEditTime: 2020-07-28 21:08:51
+ * @LastEditors: Mr_Mao
+ * @佛祖保佑，永无bug
+ */ 
 // jest 匹配器
 test('严格相等', () => {
   const a = { number: '007' }
@@ -36,7 +50,6 @@ test('大于等于指定值的数匹配', () => {
 test('小于等于指定值的数匹配', () => {
   expect(10).toBeLessThanOrEqual(10) // ->通过
 })
-
 test('匹配浮点数结果(忽略精度存在问题)', () => {
   const one = 0.1
   const tow = 0.2

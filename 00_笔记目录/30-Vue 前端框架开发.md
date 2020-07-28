@@ -11,9 +11,9 @@
 动态的html页面，包含了一些JS语法代码，双括号表达式。指令（以V-开通的自定义标签属性）
 
 ~~~html
-<div id="box">				<!-- v-model:双向数据绑定 -->
+<div id="box">	<!-- v-model:双向数据绑定 -->
 	<input type="text" v-model="message" />
-	<p>		<!-- {{}}单向数据绑定 -->
+	<p>	 <!-- {{}}单向数据绑定 -->
 	  Hello	{{message}}
 	</p> 
 </div>
@@ -35,7 +35,7 @@
 
 安装扩展：`VueDevtools`
 
-![TSGJ](.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/TSGJ.jpg?raw=true)
+![TSGJ](img/vue/TSGJ.jpg)
 
 ## MVVM概念
 
@@ -1314,7 +1314,7 @@ mounted () {
 
 ## props通信
 
-![消息订阅系统](D:/web学习库/7.高级框架/Vue/0.vue笔记https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/消息订阅系统.jpg?raw=true)
+![消息订阅系统](img/vue/消息订阅系统.jpg)
 
 ### 通信流程
 
@@ -1361,7 +1361,7 @@ mounted () {
 
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
-![单页面应用](D:.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/单页面应用.jpg?raw=true)
+![单页面应用](img/vue/单页面应用.jpg)
 
 ##  Vue 路由管理器
 
@@ -1423,7 +1423,7 @@ const app = new Vue({
 </div>
 ~~~
 
-![1574341010](.https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/vue/1574341010.png?raw=true)
+![1574341010](img/vue/1574341010.png)
 
 [^注意]:当在入口函数引入路由，则代表所有组件都已经有了路由器，所以其他静态组件也能使用路由
 
