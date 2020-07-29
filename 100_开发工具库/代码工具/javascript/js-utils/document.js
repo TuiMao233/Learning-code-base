@@ -15,10 +15,18 @@ export const removeClass = (el, className) => {
   el.className = isClassName ? removeClass(el, className) : addClass(el, className)
 }
 // 切换类名
-export const toggleClass = (el, className) =>{
+export const toggleClass = (el, className) => {
   // addClass() removeClass()
   var isClassName = el.className.indexOf(className) !== -1
   el.className = isClassName ? removeClass(el, className) : addClass(el, className)
+}
+
+// 跳转到新的页面
+export const ejectWindow = url => {
+  const a = document.createElement('a')
+  a.href = "http://wpa.qq.com/msgrd?v=3&uin=951416545&site=qq&menu=yes"
+  a.target = "_blank"
+  a.click()
 }
 
 // oLi.nodeName.toLowerCase() 获取标签名

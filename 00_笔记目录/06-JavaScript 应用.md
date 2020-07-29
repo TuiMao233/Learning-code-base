@@ -756,6 +756,12 @@ document.onkeyup = function (event){
 
 ~~~js
 console.log(window);
+
+// 打开一个新窗口
+window.open(url, [name], [configuration])
+// url， 为要新打开页面的url
+// name，为新打开窗口的名字，可以通过此名字获取该窗口对象
+// configuration，为新打开窗口的一些配置项，比如是否有菜单栏、滚动条、长高等等信息
 ~~~
 
 ## navigator
