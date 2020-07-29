@@ -47,6 +47,12 @@ FlutterSDK下载地址: https://flutter.io/sdk-archive/#windows
 
 #↓↓↓↓↓↓↓↓↓↓#
 
+# 国内环境配置环境变量
+export PUB_HOSTED_URL=https://pub.flutter-io.cn
+export FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+
+#↓↓↓↓↓↓↓↓↓↓#
+
 # 运行flutter命令
 在Flutter安装目录的flutter文件下找到flutter_console.bat，双击运行并启动flutter命令行。
 
