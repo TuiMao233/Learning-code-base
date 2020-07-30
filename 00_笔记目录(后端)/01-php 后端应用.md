@@ -50,6 +50,44 @@ if ($count_1 == $count_2) {
 ?> // 代表php代码的结束, 不填写默认在编译时自动添加
 ~~~
 
+## 操作符集
+
+~~~php
+/*
+= 赋值运算
+
++ 累加 - 相减 * 乘法
+/ 除法 % 余数
+
+> 大于 >= 大于等于
+< 小于 <= 小于等于
+== 等于 != 不等于
+=== 全等于 !== 不全等于
+
+|| 逻辑或 && 逻辑且
+! 取反
+
+. 串连接 .= 拼接并赋值(js中的+=)
+
+@ 错误抑制
+
+xx ? xx : xx 三元表达式
+
+++ 原值+1 -- 原值-1
+
++= 相加并赋值 .= 拼接并赋值
+*= 相乘并赋值 /= 相除并赋值
+%= 相余并赋值
+
+& 按位与 -> 两个数都为1, 结果为1, 否则为0
+| 按位或 -> 两个数应该为1, 结果为1, 否则为0
+~ 按位非 -> 0/1之前取反
+^ 按位异或 -> 两个相同则为0, 不同则1
+<< 按位左移 -> 整个数(32位), 向左移动一位, 右边补0
+>> 按位右移 -> 整个数(32位), 向右移动一位 (正数补0, 负数补1)
+*/
+~~~
+
 ## 变量传值
 
 ~~~php
@@ -125,7 +163,7 @@ $obj = new class {};
 class obj {};
 // 数组型 -> 用于存放有序/无序数据, 一个下标对应一个值
 $arr = array( 0 => '110', 1 => '120' );
-$arr2 = [32131,123213,12312];
+$arr2 = [32131, 123213, 12312];
 $arr[3] = '1201';
 $arr['numc'] = '1313'; // php允许使用字符串作为下标
 
@@ -164,6 +202,13 @@ var_dump(false); // bool(false)
 // 使用判断类型函数 is_[类型/类型简写](值)
 var_dump(is_int($a)); // bool(false)
 var_dump(is_string($a)); // bool(true)
+~~~
+
+## 伪类型
+
+~~~php
+Number // -> 整数或浮点数
+mixed // 任意类型
 ~~~
 
 # php 函数类型
@@ -237,6 +282,12 @@ function display () {
 };
 $fun_name();
 ~~~
+
+## 匿名函数
+
+`跟前端匿名函数特性一致`
+
+# php 自带函数
 
 ## 输出与时间函数
 
@@ -316,5 +367,161 @@ define('LOCAL_HOST', '11023612315');
 ~~~php
 // include.php
 echo LOCAL_HOST; // -> 11023612315
+~~~
+
+# 系统错误代号
+
+php中所有看到的错误代码在php中都被定义成了系统常量（可以直接使用）
+
+## 系统错误
+
+~~~php
+E_PARSE; // 编译错误
+E_ERROR; // fatal error 致密错误, 会导致代码不能正确继续执行（出错的位置断掉）
+E_WARNING; // warning 警告错误, 不会影响代码执行, 但可能得到意想不到的结果
+E_NOTICE; // notice 通知错误, 不会影响代码执行
+~~~
+
+## 用户错误
+
+用户在使用自定义错误触发的时候，会使用到的错误代号（系统不会用到）
+
+~~~php
+E_USER_ERROR;
+E_USER_WARNING;
+E_USER_NOTICE;
+~~~
+
+## 其他错误
+
+~~~php
+E_ALL; // 代表所有错误
+E_ALL & ~E_NOTICE; // 排除通知级别
+E_WARNING | E_NOTICE; // 只要警告和通知
+~~~
+
+## 触发错误函数
+
+~~~php
+header('Content-type:text/html;charset=utf-8');
+$b = 0;
+if ($b == 0){
+  trigger_error('除数不能为0'); // 该函数默认报错为E_USER_NOTICE
+  trigger_error('除数不能为0', E_USER_ERROR); // 设置为错误
+}
+~~~
+
+## 错误配置
+
+可以在运行php脚本设置，也可以在php.ini中配置，脚本中定义的配置项级别比配置文件高。
+
+~~~php
+Error_reporting(); // 设置对应错误显示级别
+Ini_set('配置文件的配置项', '配置值'); // 设置脚本中配置
+Ini_set('error_reporting', E_ALL); // 是否开启错误
+Ini_set('display_errors', 1); // 是否开启错误
+~~~
+
+## 自定义错误处理
+
+最简单的错误处理：trgger_errors()函数，该函数默认不会阻止系统报错。
+
+php系统提供了一种用户处理错误的机制；用户自定义错误处理函数，然后将该函数增加到系统错误的句柄中，然后系统会在碰到错误之后，使用用户定义的错误函数。
+
+**使用set_error_handler定义自定义错误**
+
+~~~php
+// 对应参数为错误处理回调, 第二个是错误的级别
+set_error_handler(callback $error_handler, [, E_ALL | E_STRICT]);
+handler(
+  int $errno, // 
+  string $errstr,
+  [, string $errfile],
+  [, int $errline],
+  [, array $errcontext]
+)
+~~~
+
+~~~php
+function my_error($errno, $errstr, $errfile, $errline){
+  // 判断: 当前会碰到的错误有哪些??
+  if (!(error_reporting() & $errno)) return false;
+  // 判断错误类型
+  switch($errno){
+    case E_ERROR:
+    case E_USER_ERROR:
+      echo "fatal error in file {$errfile} on line {$errline} <br/>";
+      echo "error info: {$errstr}";
+      break;
+    case E_WARNING:
+    case E_USER_WARNING:
+      echo "Warning in file {$errfile} on line {$errline} <br/>";
+      echo "error info: {$errstr}";
+      break;
+    case E_NOTICE:
+    case E_USER_NOTICE:
+      echo "Notice in file {$errfile} on line {$errline} <br/>";
+      echo "error info: {$errstr}";
+      break;
+  }
+}
+set_error_handler(my_error);
+~~~
+
+# php 字符串扩展
+
+~~~php
+header('Content-type:text/html;charset=utf-8');
+$str1 = '151651323';
+$str2 = '你好中国123';
+// 得到字符串字节数-> 13 15
+echo strlen($str1), strlen($str2);
+~~~
+
+## 多字节字符串扩展模块
+
+加载php mbstring扩展=>php.ini=>extension=php.mbstring.dll
+
+~~~php
+// 得到字符串长度(不指定字符集标准)-> 13 15
+echo mb_strlen($str1), mb_strlen($str2);
+// 指定字符集标准-> 
+echo mb_strlen($str1, "utf-8"), mb_strlen($str2, "utf-8");
+~~~
+
+## 相关函数
+
+~~~php
+// implode('拼接字符', [数组]) -> 数组以指定字符串进行转换拼接为字符串
+var_dump(implode(',', [131,131])); // -> string "131,131"
+// implode('拼接字符', [数组]) -> 数组以指定字符串进行转换拼接为字符串
+var_dump(explode(',', '131,131')); // -> array [131, 131]
+
+// trim(string, [, string]) -> 默认为去除两边空格, 也可指定去除的内容(两边)
+
+// substr(string, start_index, [, end_index]) -> 位置开始截取字符串, 不指定截取长度默认到最后
+var_dump(substr('123456', 0, 3)); // -> string "123"
+// strstr(string, string [, end_index]) -> 由匹配字符开始截取, 特性与substr一致
+var_dump(substr('abcde f g', 'c')); // -> string "cde f g"
+
+// strtoupper('abc') -> ABC
+// ucfirst('abc') -> abc
+
+// strpos(string, string) -> 字符在目标字符串出现的位置(左寻找)
+var_dump(strpos('123a3b2a', 'a')); // -> int 3
+// strrpos(string, string) -> 字符在目标字符串出现的位置(右寻找)
+var_dump(strpos('123a3b2a', 'a')); // -> int 7
+
+// str_replace($匹配目标, $替换内容, 目标字符串) -> 将部分字符串替换
+var_dump(str_replace('a', 'b', 'aaaaa')); // -> string bbbbb
+
+// sprintf(特殊字符串, args....) -> 根据字符串占位符, 定义格式化字符串
+$name = "王海峰";
+$age = 18;
+var_dump(sprintf('我叫%s, 今年%d', $name, $age)); // -> 我叫王海峰 今年18
+
+// str_repeat(string, int) -> 字符串重复多次
+var_dump(str_repeat('abc', 3)); // -> abcabcabc
+// str_shuffle(string) -> 打乱字符串顺序
 ~~~
 
