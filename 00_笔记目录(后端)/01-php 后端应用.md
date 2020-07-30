@@ -22,3 +22,185 @@ PHP即“[超文本](https://baike.baidu.com/item/超文本)[预处理器](https
 - PHP的解释运行机制，在 PHP 中，所有的[变量](https://baike.baidu.com/item/变量/3956968)都是页面级的，无论是[全局变量](https://baike.baidu.com/item/全局变量/4725296)， 还是[类](https://baike.baidu.com/item/类/6824577)的[静态成员](https://baike.baidu.com/item/静态成员/9569025)，都会在页面执行完毕后被清空。
 - 设计缺陷，缺少关注PHP被称作是不透明的语言，因为没有[堆栈](https://baike.baidu.com/item/堆栈/1682032)追踪，各种脆弱的输入。没有一个明确的设计哲学。早期的PHP受到Perl的影响，带有out参数的标准库又是有C语言引入，面向对象的部分又是从 [C++](https://baike.baidu.com/item/C%2B%2B/99272)和[Java](https://baike.baidu.com/item/Java/85979)学来的。
 - 对递归的不良支持，PHP并不擅长递归。它能容忍的[递归函数](https://baike.baidu.com/item/递归函数/5634537)的数量限制和其他语言比起来明显少。
+
+# PHP 环境配置细节
+
+### 暂无...
+
+# PHP 基本使用
+
+## 基本语法
+
+~~~php
+<?php // 代表php代码的开始
+// 由$为前缀定义变量
+$count_1 = 50;
+$count_2 = 50;
+if ($count_1 == $count_2) {
+  echo '数值匹配成功'; // 输出语句, 浏览器访问时自动被编译为字符串
+  unset($count_1); // 卸除变量
+  echo $count_1; // 变量卸除后, 变量一则不存在, echo无任何效果
+}
+?> // 代表php代码的结束, 不填写默认在编译时自动添加
+~~~
+
+## 变量传值
+
+~~~php
+<?php
+$var1 = 50;
+$var2 = $var1; // $var2引用$var1内存地址
+echo $var2.'<br />'; // 50
+$var2 = 60; // 当$var2重新赋值时, 将重新开辟一条内存存放数据, 与$var1完全不相干
+echo '$var1:'.$var1.'$var2:'.$var2; // $var1:50$var2:60
+~~~
+
+## 常量定义
+
+~~~php
+/* 1、常量不需要'$'符号，一旦使用，系统就认为是变量
+ * 2、常量的名字组成由字母、数字和下划线组合
+ * 3、常量是不允许被修改的 */
+<?php
+// 方式一: 使用函数定义常量: define
+define('PI',3.14);
+echo PI.'---'; // 3.14
+
+// 方式二: 使用count关键字定义
+const PII=3;
+echo PII.'---'; // 3
+
+// count关键字不允许定义特殊字符, 定义特殊字符采用函数定义, 由constant函数输出
+define('-_-', '这是一个神奇的常量');
+echo constant('-_-');
+~~~
+
+## 系统常量与魔术变量
+
+~~~js
+echo '<br/>';
+echo 'php版本号: '.PHP_VERSION.'<br/>';
+echo '整形大小: '.PHP_INT_SIZE.'<br/>';
+// 如带-符号的整数则为负数
+echo '整形能表示的最大的数: '.PHP_INT_MAX.'<br/>';
+~~~
+
+在php中还有一些特殊的常量，他们有双下划线开始+常量名+双下划线结束，这种常量称之为系统魔术常量：魔术常量的之通常会跟着环境变化，但用户改变不了。
+
+~~~php
+echo '当前脚本执行绝对路径: '.__DIR__.'<br/>';
+echo '当前脚本执行绝对路径(带文件名): '.__FILE__.'<br/>';
+echo '当前所属的脚本行数: '.__LINE__.'<br/>';
+
+echo '当前所属的命名空间: '.__NAMESPACE__.'<br/>';
+echo '当前所属的类: '.__CLASS__.'<br/>';
+echo '当前所属的方法: '.__METHOD__.'<br/>';
+~~~
+
+## php 八种数据类型
+
+数据类型，在php中指的是存储的数据本身类型，而本身变量的类型。php是一种弱语言，变量本身没有数据类型。
+
+~~~php
+/* 基本数据类型 */
+$integer = 500; // 整数型 -> 系统分配四个字节储存,表示整数类型
+$float = 4.56; // 浮点型 -> 系统分配八个字节储存，表示小数或者整数存不下的整数
+$string = "啦啦啦"; // 字符型 -> 系统根据实际长度分配，表示字符串
+$boolean = true; // 布尔型
+
+/* 复合数据类型 */
+// 对象型 -> 用于存放无序数据, 一个键对应一个值
+$obj = new class {};
+class obj {};
+// 数组型 -> 用于存放有序/无序数据, 一个下标对应一个值
+$arr = array( 0 => '110', 1 => '120' );
+$arr[3] = '1201';
+$arr['numc'] = '1313'; // php允许使用字符串作为下标
+
+/* 特殊数据类型 */
+// 资源型 -> 存放资源数据（php外部数据，如数据库、文件）
+// 空类型 -> null
+$null = null;
+~~~
+
+## 类型转换
+
+ 在PHP中有两种类型转换方式
+自动转换：系统根据需求自己判定，自己转换（用的比较多，效率偏低）
+强制（手动）转换：认为根据需要的目标类型转换
+
+在转换的过程中，用的比较多的就是转布尔类型（判断）和转数值类型（算数运算）
+
+其他类型转布尔类型：true或flase，在php中比较少类型转换为flase
+
+~~~php
+$a = 'abc1.1.1';
+$b = '1.1.1abc';
+// echo $a + 600; 自动转换 -> php7会报错
+// 强制转换 -> (类型)$变量;
+
+// 字符串转数值规则: 第一个字符串是字母 则为0
+echo (integer)$a; // 0
+echo (integer)$b; // 1
+echo '--';
+// 布尔值无法正常echo显示, 当true时echo为1, false时无任何反应
+echo true;
+// 布尔值输出采用var_dump函数
+var_dump(true); // bool(true)
+var_dump(false); // bool(false)
+
+// 使用判断类型函数 is_[类型/类型简写](值)
+var_dump(is_int($a)); // bool(false)
+var_dump(is_string($a)); // bool(true)
+~~~
+
+## 函数以及作用域
+
+~~~php
+// 默认的代码空间为全局空间
+// 在全局空间定义常量时, 最终会被系统纳入到超全局变量中-> $GLOBALS['global']
+$global = 'global area';
+
+function echoWorld()
+{
+  // 在php中, 函数内部不允许直接访问全局变量
+  // echo $global; // 报错
+
+  // 需访问全局变量时, 使用$GLOBALS常量进行访问
+  echo $GLOBALS['global']; // global area
+
+  // 使用global关键字创建可访问全局变量
+  global $global;
+  echo $global; // global area
+
+  // 可在函数内部使用global创建可访问全局变量(需执行该函数才会存在噢~)
+  global $local;
+  $local = 156156156;
+}
+echoWorld();
+
+echo $local; // 156156156
+~~~
+
+## 静态变量
+
+~~~php
+<?php
+/* 静态变量的使用场景->
+ * 为了统计当前函数被调用的次数
+ * 为了统筹函数多次调用得到的不同结果
+ */
+function display(){
+  // 定义变量
+  $local = 1;
+  // 定义静态变量, 当函数再次访问时, 会寻找之前的静态变量
+  // 如果查找到之前的变量, 那么该静态变量的值则为之前变量的值
+  // 赋值符号将不是=1, 而是=之前的值
+  static $count = 1;
+  echo '<br>', $local++, '-', $count++;
+}
+display(); // 1-1
+display(); // 1-2
+display(); // 1-3
+~~~
+
