@@ -40,6 +40,12 @@ if ($count_1 == $count_2) {
   echo '数值匹配成功'; // 输出语句, 浏览器访问时自动被编译为字符串
   unset($count_1); // 卸除变量
   echo $count_1; // 变量卸除后, 变量一则不存在, echo无任何效果
+    
+  // 错误抑制符
+  @('wadwada'+'wdwandia');
+    
+  // 模板字符串
+  echo "count_1:{$count_1}"
 }
 ?> // 代表php代码的结束, 不填写默认在编译时自动添加
 ~~~
@@ -75,10 +81,12 @@ define('-_-', '这是一个神奇的常量');
 echo constant('-_-');
 ~~~
 
-## 系统常量与魔术变量
+## 系统/魔术变量
 
 ~~~js
 echo '<br/>';
+echo 'get请求参数: '.$_GET.'<br/>';
+echo 'post请求参数: '.$_POST.'<br/>';
 echo 'php版本号: '.PHP_VERSION.'<br/>';
 echo '整形大小: '.PHP_INT_SIZE.'<br/>';
 // 如带-符号的整数则为负数
@@ -97,11 +105,14 @@ echo '当前所属的类: '.__CLASS__.'<br/>';
 echo '当前所属的方法: '.__METHOD__.'<br/>';
 ~~~
 
-## php 八种数据类型
+# php 数据类型
+
+## 八种数据类型
 
 数据类型，在php中指的是存储的数据本身类型，而本身变量的类型。php是一种弱语言，变量本身没有数据类型。
 
 ~~~php
+<?php
 /* 基本数据类型 */
 $integer = 500; // 整数型 -> 系统分配四个字节储存,表示整数类型
 $float = 4.56; // 浮点型 -> 系统分配八个字节储存，表示小数或者整数存不下的整数
@@ -114,6 +125,7 @@ $obj = new class {};
 class obj {};
 // 数组型 -> 用于存放有序/无序数据, 一个下标对应一个值
 $arr = array( 0 => '110', 1 => '120' );
+$arr2 = [32131,123213,12312];
 $arr[3] = '1201';
 $arr['numc'] = '1313'; // php允许使用字符串作为下标
 
@@ -153,6 +165,8 @@ var_dump(false); // bool(false)
 var_dump(is_int($a)); // bool(false)
 var_dump(is_string($a)); // bool(true)
 ~~~
+
+# php 函数类型
 
 ## 函数以及作用域
 
@@ -202,5 +216,105 @@ function display(){
 display(); // 1-1
 display(); // 1-2
 display(); // 1-3
+~~~
+
+## 函数默认值
+
+~~~php
+function setCount ($number = 1) {
+  echo $number; // 1
+}
+~~~
+
+## 可变函数
+
+~~~php
+<?php
+// 可变函数：当前有一个变量所保存到的值, 刚好是一个函数名称, 那么将可以使用变量+()来充当函数名使用
+$fun_name = 'display';
+function display () {
+  echo 'xxx';
+};
+$fun_name();
+~~~
+
+## 输出与时间函数
+
+~~~php
+<?php
+// print(), 类似于echo输出提供的内容, 返回1
+print '161561561';
+print('123123');
+
+// print_r(), 类似于var_dump, 但比var_dump简单
+// 不会输出数据的类型, 只会输出值
+print_r([
+  'adas' => 123, 123213, 1231
+]);
+
+// date()：按照指定格式对对应的时间戳(从1970年格林威治时间开始计算的秒数)
+// 没有输入指定时间戳，则默认当前的时间戳
+echo date('Y 年 m 月 d 日 H:i:s') . '<br>';
+// time()：获取当前时间对应的时间戳
+echo time() . '<br>';
+// microtime()：获取微妙级别的时间
+echo microtime() . '<br>';
+// Strtotime()：获取指定时间
+echo strtotime('tomorrow 10 hours');
+~~~
+
+## 数值与function函数
+
+~~~php
+/** 数值相关函数
+ * max(num,num)：数之间最大的值
+ * min(num,num)：比较两个数中较小的值
+ * rand([,$min], [,$max])：得到一个随机数,指定区间的随机整数
+ * mt_rand([,$min], [,$max])：与rand一样,只是底层结构不一样,效率比rand高（建议使用）
+ * round(num)：四舍五入
+ * ceil(num)：向上取整
+ * floor(num)：向下取整
+ * pow(num, num)：求指定数字的指定数次结果：pow(2,8) == 2^8 == 256
+ * abs(num/-num)：绝对值
+ * sqrt(num)：求平方根
+ * */
+/** 函数相关的函数
+ * function_exists($function_name)：判断指定函数(名称)是否在内存中存在
+ * func_get_arg($index)：获取函数中指定索引的参数
+ * func_get_args(void)：函数中获取所有的参数（数组）
+ * func_num_args()：函数的参数数量
+ * */
+function test($a,$b){
+    //获取指定参数
+    var_dump(func_get_arg(0));
+    echo '<br>';
+    //获取所有参数
+    var_dump(func_get_args());
+    echo '<br>';
+    //获取参数数量
+    var_dump(func_num_args());
+};
+test(60,70);
+~~~
+
+# php 文件模块
+
+## include 与 include_once
+
+include：系统碰到一次，执行一次；如果对同一个文件进行多次加载，那么系统就会执行多次；
+
+lnclude_once：系统碰到多次，也会执行一次；
+
+require：include报错并不会阻塞代码执行，但require会阻塞代码执行；
+
+~~~php
+// include_1.php
+<?php
+define('LOCAL_HOST', '11023612315');
+~~~
+
+~~~php
+// include.php
+echo LOCAL_HOST; // -> 11023612315
 ~~~
 

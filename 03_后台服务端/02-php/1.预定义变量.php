@@ -1,9 +1,3 @@
-<!DOCTYPE HTML> 
-	<head>
-		
-	</head>
-	<body>
-	</body>
 <?php
 $var1 = 50; //定义变量
 $var2 = 50; //定义变量同事赋值
