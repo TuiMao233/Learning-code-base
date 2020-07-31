@@ -1,15 +1,21 @@
 #进入哪个数据库，只有进入了库，才可以对库里面的表单进行查询
 USE test;
+
 #显示表结构
 DESC tab;
+
 #显示表所有字段信息
 SELECT * FROM tab;
+
 #显示表单个字段信息
 SELECT `name` FROM tab;
+
 #显示表单个字段信息,并且筛选清除重复项
 SELECT DISTINCT `name` FROM tab;
+
 #显示表字段信息,并且在字段头部取别名
 SELECT `name` AS 名称,age AS 身高 FROM tab;
+
 #select可以做运算
 SELECT 10+10;
 SELECT 10%9;

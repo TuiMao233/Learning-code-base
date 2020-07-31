@@ -1,3 +1,12 @@
+/*
+ * @Author: 毛先生
+ * @Date: 2020-07-13 14:14:32
+ * @LastEditTime: 2020-07-31 17:51:49
+ * @LastEditors: 毛先生
+ * @Description: 
+ * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
+ */ 
+
 /** 创建绘制海报矩形方法, 自动向画笔添加加载绘制图片方法(ctx.loadDrawImage), 绘制换行字体方法(warpFillText)
  * @param  {string} select_str 查询CSS选择器字符串
  * @returns {node, ctx, rpx} 返回canvas实例, 画笔, 适配值
@@ -28,17 +37,27 @@ export class DrawPoster {
     const ctx = node.getContext('2d')
     return new this({ rpx, node, ctx })
   }
-
+  /** 微信-创建本地图片地址 */
+  static downloadImgUrl(url) {
+    return new Promise((resolve, reject) => {
+      wx.downloadFile({
+        url,
+        success: (val) => resolve(val.tempFilePath),
+        fail: reject
+      })
+    })
+  }
   /** ctx中添加等待绘制图片方法
-   * @param  {string} path 本地图片地址(必须)
+   * @param  {string} url 网络图片地址(必须)
    * @param  {number} x 绘制x轴位置(必须)
    * @param  {number} y 绘制y轴位置(必须)
    * @param  {number} w 绘制图片宽度(必须)
    * @param  {number} h 绘制图片高度(必须)
    * @returns {Promise} 图片绘制成功时返回true, 需ctx.restore()绘制出实体
    */
-  loadDrawImage = ({ path, x, y, width, height }) => {
+  loadDrawImage = async ({ url, x, y, width, height }) => {
     const { node, ctx } = this
+    const path = await DrawPoster.downloadImgUrl(url)
     return new Promise(resolve => {
       const imageObject = node.createImage()
       imageObject.src = path
@@ -80,13 +99,13 @@ export class DrawPoster {
     row.forEach((item, index) => ctx.fillText(item, x, y + index * fontHeight));
   }
   /** ctx中添加绘制矩形方法
-   * @param {number} x x坐标轴
-   * @param {number} y y坐标轴
-   * @param {number} w 宽度
-   * @param {number} h 高度
-   * @param {number} r 圆角半径
+   * @param {number} x x坐标轴(必须)
+   * @param {number} y y坐标轴(必须)
+   * @param {number} w 宽度(必须)
+   * @param {number} h 高度(必须)
+   * @param {number} r 圆角半径 默认为0
    */
-  roundRect = (x, y, w, h, r, c = '#000') => {
+  roundRect = (x, y, w, h, r=0) => {
     const ctx = this.ctx
     if (w < 2 * r) { r = w / 2; }
     if (h < 2 * r) { r = h / 2; }
@@ -235,4 +254,3 @@ export class DrawPoster {
   const posterImgUrl = await createImgUrl();
   console.log("绘制生成本地地址:", posterImgUrl);
 })
-
