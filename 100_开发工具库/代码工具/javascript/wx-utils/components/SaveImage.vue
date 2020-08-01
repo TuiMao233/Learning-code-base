@@ -33,7 +33,7 @@ export default {
       }
     },
     // 保存图片
-    async saveImage() {
+    saveImage() {
       wx.saveImageToPhotosAlbum({
         filePath: this.imageUrl,
         success: res => {},

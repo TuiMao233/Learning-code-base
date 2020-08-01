@@ -31,11 +31,15 @@ export const getNodeInfos = ({
 }
 
 // 使用案例：
-(async function () {
-  const nodeInfos = await getNodeInfos({
-    selectStr: '.header', // 选择器字符串
-    nodesRefs: ['boundingClientRect', 'fields'], // 选择哪些节点属性
-    fieldsOptions: { size: true, rect: true } // fields的配置, 默认无配置->{}
-  })
-  console.log(nodeInfos) // ->  {boundingClientRect:{...}, fields:{...}}
+/**
+ * @param {string} selectStr 选择器名称
+ * @param {array} nodesRefs 获取哪些节点(NodesRef)信息, 支持所有微信节点信息的获取
+ * @param {object} fieldsOptions 对fields(NodesRef)节点信息的配置，默认为空对象
+ * @param {Function} filter 可选项, 对最终结果的筛选 (res) => (res.top)
+ */
+const nodeInfos = await getNodeInfos({
+  selectStr: '.header', // 选择器字符串
+  nodesRefs: ['boundingClientRect', 'fields'], // 选择哪些节点属性
+  fieldsOptions: { size: true, rect: true } // fields的配置, 默认无配置->{}
 })
+console.log(nodeInfos) // ->  {boundingClientRect:{...}, fields:{...}}
