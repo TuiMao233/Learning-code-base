@@ -1,8 +1,8 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-08-01 14:24:43
- * @LastEditTime: 2020-08-01 15:02:26
- * @LastEditors: 毛先生
+ * @LastEditTime: 2020-08-01 21:46:43
+ * @LastEditors: Mr_Mao
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
@@ -14,7 +14,7 @@ export default class DrawPoster {
   /** canvas画笔 */
   private ctx: any;
   /** 绘制器容器 */
-  private executeOnion: Array<any> = []
+  private executeOnion: Array<() => Promise<Boolean>> = []
   constructor(rpx: number, node: any, ctx: any) {
     this.rpx = rpx
     this.node = node
@@ -126,7 +126,6 @@ export default class DrawPoster {
     ctx.fill();//填充
     ctx.closePath();//剪裁
   }
-  
   /** 构建绘制海报矩形方法, 传入canvas选择器字符串, 返回绘制对象 */
   static async build(select_str: string) {
     // 由于画布并没有像其他的一样支持小程序独有的 rpx 自适应尺寸单位, 所以要获取rpx适配的值
@@ -165,7 +164,7 @@ export default class DrawPoster {
     return result;
   }
   /** 创建canvas本地地址 @returns {string} 本地地址 k*/
-  public createImgUrl = (): Promise<any> => {
+  public createImgUrl = (): Promise<string> => {
     const { node } = this
     return new Promise(resolve => {
       wx.canvasToTempFilePath({
@@ -175,7 +174,7 @@ export default class DrawPoster {
         destWidth: node.width,
         destHeight: node.height,
         canvas: node,
-        success(res) {
+        success(res: any) {
           resolve(res.tempFilePath)
         }
       })
