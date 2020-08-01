@@ -187,6 +187,14 @@ let y:string = test_2()
 
 [^补充]:never类型是ts中的底部类型, 所有类型都是never类型的父类，所以never类型可以赋值给任意类型的变量
 
+## TS 对象记载(Record)
+
+Record 用于定义对象中key值与val值的类型，使用泛型定义，由 `,` 区别key与val的关系
+
+~~~typescript
+const obj:Record<string , number> = {dwd: 60};
+~~~
+
 # TypeScript Class类 规范
 
 ## TS Class 类基本架构
