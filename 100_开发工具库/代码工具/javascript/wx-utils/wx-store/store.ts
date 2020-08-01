@@ -1,14 +1,12 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-08-01 15:47:16
- * @LastEditTime: 2020-08-01 20:02:20
- * @LastEditors: 毛先生
+ * @LastEditTime: 2020-08-01 21:37:52
+ * @LastEditors: Mr_Mao
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
-import Watcher from './watcher';
 import { forIn } from './utlis'
-const watcher = new Watcher({ debugging: true })
 
 // 构造器接口
 interface EStore {
@@ -36,30 +34,38 @@ class Store implements EStore {
   getters: Record<string, (state: any) => void>;
   [name: string]: any;
 
-  private definebinding: Record<string, Record<string, (state: any) => any>>
-  private getters_name: string = ""
-  constructor({ state, mutations, actions, getters }: EStore) {
-    this._initState(state)
-    this._initGetters(getters)
+  private definebinding: Record<string, Array<string>> = {}
+  private getter_name: string | null
+  constructor({ state, mutations={}, actions={}, getters }: EStore) {
+    this.defineReactive(state)
     this.state = state
+    this.defineComputed(getters)
     this.getters = getters
     this.mutations = mutations
     this.actions = actions
   }
   /** 处理state, 加入属性修饰符 */
-  private _initState(state: any) {
-    const _this = this
+  private defineReactive(state: any) {
     forIn(state, key => {
       let oldValue = state[key]
       Object.defineProperty(state, key, {
-        get() {
-          if(_this.getters_name) {
-            
+        get: () => {
+          // 如果getter_name存在, 添加到绑定对象中
+          if (this.getter_name) {
+            if (Array.isArray(this.definebinding[key])) {
+              this.definebinding[key].push(this.getter_name)
+            } else {
+              this.definebinding[key] = [this.getter_name]
+            }
           }
           return oldValue
         },
-        set(val) {
-          _this.getters.getCount
+        set: val => {
+          setTimeout(() => {
+            if (this.definebinding[key]) {
+              this.definebinding[key].forEach(g_key => this.getters[g_key])
+            }
+          })
           oldValue = val
         }
       })
@@ -67,20 +73,22 @@ class Store implements EStore {
     return state
   }
   /** 处理getters, 加入属性修饰符 */
-  private _initGetters(getters: object) {
-    const _this = this
+  private defineComputed(getters: object) {
     forIn(getters, key => {
       // 保存回调
       const cb = getters[key]
-
+      this.getter_name = key
       // 修改get修饰符
       Object.defineProperty(getters, key, {
         set() { },
-        get() {
-          console.log('getters---')
-          return cb.call(_this, _this.state)
+        get: () => {
+          const val = cb.call(this, this.state)
+          console.log(`getter-${key}: `, val)
+          return val
         }
       })
+      getters[key];
+      this.getter_name = null;
     })
   }
   // 提交函数
@@ -103,7 +111,7 @@ class Store implements EStore {
   }
 }
 
-const store = new Store({
+const $store = new Store({
   state: {
     count: 2,
     count_2: 6
@@ -115,9 +123,15 @@ const store = new Store({
     addOneCount({ commit }) { commit('ADD_ONE_COUNT') }
   },
   getters: {
-    getCount(state) {
+    // 统计所有count
+    statisticsCount(state) {
       return state.count + state.count_2
+    },
+    total(state) {
+      return state.count
     }
   }
 })
-console.log(store.getters.getCount)
+
+$store.state.count = 100
+
