@@ -144,7 +144,12 @@ console.log(isFinite(Infinity))
 console.log(isNaN(NaN))
 // 将字符串转换为对应的数值
 console.log(parseInt('60441sdad'))
+
+// 返回值的类型字符串(null不适用)
+console.log(typeof '600') // 'string'
 ~~~
+
+###### ###
 
 # javaScript的内置对象
 
@@ -226,8 +231,6 @@ function round(num, d){
     }
 }
 ~~~
-
-
 
 # 各元素值的常用方法
 

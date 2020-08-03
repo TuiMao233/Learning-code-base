@@ -10,7 +10,23 @@ MySQL所使用的 SQL 语言是用于访问[数据库](https://baike.baidu.com/i
 
 # mysql 环境配置
 
-## 暂无....
+## 服务的启动与停止
+
+~~~mysql
+# 方式一: 通过命令行开启
+NET START <服务名称>
+NET STOP <服务名称>
+# 方式二: 计算机--右键--管理--服务
+~~~
+
+## mysql登录与退出
+
+~~~mysql
+# 登录数据库
+mysql [-h主机名称 -p端口号] -u用户名 -p密码
+# 退出数据库
+exit | ctrl+c
+~~~
 
 # mysql 基本使用
 
@@ -96,7 +112,222 @@ SELECT * FROM <表名称>;
 SELECT 100;
 # 输出表达式
 SELECT 100/50;
+SELECT 10+10;
+SELECT 10%9;
+SELECT 10/5;
 # 输出版本号
 SELECT VERSION();
+
+# 输出结果起别名
+SELECT 100%98 AS <别名名称>
+# 输出查询起别名
+SELECT <字段1> AS <字段1别名>,
+	   <字段2> AS <字段2别名>
+FROM <表名称>
+# 别名输出特殊字符
+SELECT 100%98 AS '_out'
+# 可忽略AS关键字
+SELECT 100%98 '_out'
+
+# 查询字段时去除重复字段
+SELECT DISTINCT <字段1> FROM <表名称>
+# IFNULL函数 -> 字段为null指定为某个值
+SELECT IFNULL(<字段名称>, <值>) FROM <表名称>
+
+# CONCAT函数 -> 多个字段或字符串拼接为一个字段
+SELECT CONCAT(<字段|字符串>, .....) AS 结果 FROM <表名称>
+~~~
+
+# SELECT 查询
+
+## 条件查询
+
+~~~mysql
+# 基本语法
+SELECT <指定字段> FROM <表名称> WHERE <单/多个条件>
+
+# 简单条件运算符: > < = != <> >= <=
+SELECT * FROM <表名称> WHERE <字段名称> > 1200
+
+# 模糊查询: % 任意多个字符, _ 任意单个字符, \用于转义特殊字符
+SELECT * FROM WHERE <字段名称> LIKE "%a%"
+
+# 逻辑运算符: and(&&), or(||), not(!)
+# 空运算: is null, is not null
+SELECT * FROM WHERE <字段名称> < 5000 AND <字段名称> IS NOT NULL
+
+# 计算员工年薪(练习)
+SELECT 
+	name,
+	salary*12*(1+IFNULL(bonus, 0)) AS 年薪
+FROM tab
+~~~
+
+## 查询排序
+
+~~~mysql
+# 基本语法(单字段)
+SELECT * FROM ORDER BY <字段名称> <排序方式>;
+# 基本语法(多字段)
+SELECT * FROM ORDER BY
+<字段名称1> <排序方式>,
+<字段名称2> <排序方式>;
+
+# 查询员工信息, 工资由高到低
+SELECT * FROM tab ORDER BY salary ASC;
+# 查询员工信息, 工资由低到高
+SELECT * FROM tab ORDER BY salary DESC;
+
+# 条件与排序的结合查询
+SELECT * FROM tab
+WHERE salary >= 500
+ORDER BY age ASC;
+~~~
+
+# mysql 常见函数
+
+## 字符串函数
+
+~~~mysql
+# length() -> 字符串字节长度
+SELECT length('嘻嘻嘻') -- 9
+
+# concat() -> 拼接字符串
+SELECT concat(<字段名称|字符串>, ...) FROM <表名称>
+
+# upper() -> 转为大写
+SELECT upper('dark doctor') -- DARK DOCTOR
+# lower() -> 转为小写
+SELECT lower('dark doctor') -- dark doctor
+
+# substr()/substring() -> 截取字符串
+SELECT substr('闪电侠爱上了一个魏大勋', 4); -- 爱上了一个魏大勋
+SELECT substr('闪电侠爱上了一个魏大勋',1,3); -- 闪电侠
+
+# instr() -> 查询字符串在目标字符串出现的所有, 找不到则返回 0
+SELECT instr('内马尔爱上了魏霞则','魏霞则'); -- 7
+
+# trim() -> 去除前后空格(默认)或指定字符
+SELECT trim(' 张翠山 '); -- 张翠山
+
+# lpad() -> 指定长度, 左填充字符串
+SELECT lead('若相惜', 10, 'w'); -- wwwwwww若相惜
+# rpad() -> 指定长度, 又填充字符串
+SELECT rpad('若相惜', 10, 'w'); -- 若相惜wwwwwww
+
+# replace() -> 替换指定字符串
+SELECT replace('魏大勋魏大勋-得唔得闲', '得唔得闲', '唔得闲'); -- 魏大勋魏大勋-唔得闲
+~~~
+
+## 数值函数
+
+~~~mysql
+# round() -> 四舍五入(可指定小数点长度)
+SELECT round(1.65); -- 2
+SELECT round(-1.6545,2); -- 1.65
+
+# ceil() -> 向上取整
+SELECT ceil(1.001); -- 2
+SELECT ceil(-1.001); -- -1
+
+# floor() -> 向下取整
+SELECT floor(-9.9); -- -9
+
+# truncate() -> 指定小数点长度
+SELECT truncate(1.65999, 1); -- 1.6
+
+# mod(a, b) -> 取余(a-a/b*b)
+SELECT mod(10, 3); -- 1
+SELECT 10%3; -- 1
+~~~
+
+## 日期函数
+
+~~~mysql
+# now() -> 当前系统日期与时间
+SELECT now();
+# curdate() -> 返回当前系统日期
+SELECT curdate();
+# curtime() -> 返回当前系统时间
+SELECT curtime();
+
+# 获取年部分
+SELECT year(now()); -- 2020
+SELECT year('1998-1-1'); -- 1998
+# 获取月部分
+SELECT month(now()); -- 15
+
+# 日期转换为字符串
+SELECT DATE_FORMAT(NOW(),'%Y年%m月%d日');
+~~~
+
+## 其他函数
+
+~~~mysql
+# version() -> 版本号
+SELECT version(); --  5.7.31-log
+# database() -> 当前数据库
+SELECT database(); -- performance_schema
+# user() -> 数据库用户信息
+SELECT user(); -- root@localhost
+~~~
+
+## 流程控制函数
+
+~~~mysql
+# if() -> if else 效果
+SELECT if(10 > 5, '大', '小') -- 大
+
+# 判断是否有奖金(练习)
+SELECT
+  name,
+  bonus,
+  IF(bonus IS NULL, '没奖金，呵呵', '有奖金，嘻嘻')
+FROM tab;
+
+# case 关键字 -> switch case 效果
+case <字段名称|表达式>
+  when <值1> then <字段|表达式>
+  when <值2> then <字段|表达式>
+  else <字段|表达式>
+end
+
+# 根据身高计算工资(练习)
+SELECT
+  salary 原始工资,
+  case age
+    when 1.64 then salary * 1.1
+    when 1.77 then salary * 1.2
+  	else salary
+  end as 新工资
+FROM tab;
+~~~
+
+## 分组函数
+
+分组函数用作与一组字段的统计与计算使用，分组函数又称为聚合函数或统计函数或组函数
+
+~~~mysql
+# sum() -> 字段的总和
+SELECT sum(<字段名称>) FROM <表名称>;
+# avg() -> 平均值
+SELECT avg(<字段名称>) FROM <表名称>;
+# min() -> 最小值
+SELECT min(<字段名称>) FROM <表名称>;
+# max() -> 最大值
+SELECT max(<字段名称>) FROM <表名称>;
+# count() -> 字段个数
+SELECT count(<字段名称>) FROM <表名称>;
+~~~
+
+# UPDATA 修改
+
+~~~mysql
+# 基本语法(单字段)
+UPDATE <表名称> SET <字段名称> = <新值>;
+# 基本语法(多字段)
+UPDATE <表名称> SET
+<字段名称1> <排序方式>,
+<字段名称2> <排序方式>;
 ~~~
 

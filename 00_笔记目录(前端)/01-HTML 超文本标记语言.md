@@ -101,3 +101,16 @@ HTML 提供了许多可一起使用的元素，这些元素能用来创建一个
 | `<element>`  | `<element>`元素被定义在最新的 HTML DOM 元素中。              |
 | `<slot> `    | 作为 [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) 技术套件的一部分。 |
 | `<template>` | 该元素是一种用于保存客户端内容机制，该内容在加载页面时不会呈现，但随后可以(原文为 may be)在运行时使用JavaScript实例化。 |
+
+# script 延迟脚本
+
+~~~html
+<!-- 页面解析后执行 -->
+<script defer="defer">console.log('defer-1')</script>
+<script defer="defer">console.log('defer-1')</script>
+
+<!-- 页面解析后执行(同步运行) -->
+<script async="async">console.log('defer-1')</script>
+<script async="async">console.log('defer-1')</script>
+~~~
+

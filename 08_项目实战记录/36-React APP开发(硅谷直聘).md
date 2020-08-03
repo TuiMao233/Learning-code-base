@@ -12,15 +12,15 @@
 
 ## 项目技术栈
 
-![技术栈](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/技术栈.png?raw=true)
+![技术栈](img/React web App/技术栈.png?raw=true)
 
 ## 前端路由
 
-![前端路由](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/前端路由.png?raw=true)
+![前端路由](img/React web App/前端路由.png?raw=true)
 
 ## API接口
 
-![API接口](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/API接口.png?raw=true)
+![API接口](img/React web App/API接口.png?raw=true)
 
 ## 流程及开发方法
 
@@ -56,7 +56,7 @@
 
 ## 前端React-cli目录设计
 
-![目录设计](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/React web App/目录设计.png?raw=true)
+![目录设计](img/React web App/目录设计.png?raw=true)
 
 # 项目初始化
 

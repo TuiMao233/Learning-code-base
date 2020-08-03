@@ -21,6 +21,7 @@ SELECT * FROM tab;
 #1.length
 SELECT LENGTH('嘻嘻嘻');
 
+# 查询系统常量 字段中有char的字段
 SHOW VARIABLES LIKE '%char%';
 
 #2.concat 拼接字符串
@@ -130,8 +131,11 @@ SELECT USER();
 #1.if函数：if else 的效果
 SELECT IF(10<5,'大','小');
 
-SELECT `name`,bonus,IF(bonus IS NULL,'没奖金，呵呵','有奖金，嘻嘻')
-FROM tab; 
+SELECT
+  `name`,
+  bonus,
+  IF(bonus IS NULL, '没奖金，呵呵', '有奖金，嘻嘻')
+FROM tab;
 
 #2.case函数的使用一：switch case 的效果
 /*
@@ -142,10 +146,11 @@ when 常量2 then 要显示的值2或语句2;
 else 要显示的值n或语句n;
 end
 */
-SELECT salary 原始工资, `name`,
-CASE age
-WHEN 1.64 THEN salary *1.1
-WHEN 1.77 THEN salary *1.2
-ELSE salary
-END AS 新工资
+SELECT 
+  salary 原始工资,
+  CASE age
+    WHEN 1.64 THEN salary *1.1
+    WHEN 1.77 THEN salary *1.2
+    ELSE salary
+  END AS 新工资
 FROM tab;
