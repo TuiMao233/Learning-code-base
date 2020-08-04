@@ -35,5 +35,25 @@ uni.showToast...
 https://ext.dcloud.net.cn/
 ~~~
 
+## vscode 中使用
 
+uni-app 是一个用 vue 语法来开发小程序、App、H5 的框架，其官方推荐的开发工具为 HBuilderX，使用起来有很好的开发体验。
+
+不过，由于 HBuilderX 没有 Linux 版以及很多前端之前已经习惯了 vscode，不想更换编辑器。直接使用 vscode 开发 uni-app，其体验很好。
+
+~~~makefile
+# 拷贝项目模板
+vue create -p dcloudio/uni-preset-vue my-project
+
+#↓↓↓↓↓↓#
+Preset options:
+? 请选择 uni-app 模板  
+  默认模板
+> 默认模板(TypeScript) 
+  Hello uni-app        
+  登录模板
+  看图模板
+  新闻/资讯类模板      
+  自定义模板
+~~~
 

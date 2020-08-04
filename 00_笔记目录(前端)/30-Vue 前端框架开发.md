@@ -413,7 +413,16 @@ Vue transition 允许我们只设置隐藏或者显示的样式, 这样切换的
 
 ![](https://cn.vuejs.org/images/transition.png?raw=true)
 
+## Vue 模板占位符
 
+~~~html
+<view>
+  <text class="title">{{title}}</text>
+  <template v-for="(item, index) in 6">
+    <div :key="index">{{item}}</div>
+  </template>
+</view>
+~~~
 
 ## Vue 事件修饰符
 
@@ -451,10 +460,6 @@ Vue transition 允许我们只设置隐藏或者显示的样式, 这样切换的
 <input v-on:keyup.enter="submit">
 .enter	.tab	.delete (捕获“删除”和“退格”键)	.esc	.space	.up	.down	.left	.right
 ~~~
-
-
-
-
 
 # Vue 实例对象生命周期
 
@@ -607,8 +612,6 @@ mounted () {
 	)
 }
 ~~~
-
-
 
 # Vue 源码分析
 
