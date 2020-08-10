@@ -1,0 +1,92 @@
+<!--
+ * @Author: 毛先生
+ * @Date: 2020-08-04 17:24:16
+ * @LastEditTime: 2020-08-04 17:25:38
+ * @LastEditors: 毛先生
+ * @Description: 
+ * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
+-->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+</head>
+
+<body>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+  <button id="btn">测试</button>
+  <script defer>
+    class Moyu {
+      constructor(width, src) {
+        this.width = width
+        this.src = src
+        this.SIDE = 32 // favcion边长32px
+      }
+      initCanvas() {
+        this.canvas = document.createElement('canvas')
+        this.canvas.width = this.canvas.height = this.SIDE
+      }
+      initVideo() {
+        let video = document.createElement('video')
+        video.width = this.width
+        video.controls = "controls"
+        video.src = this.src
+        video.crossOrigin = "anonymous"
+        video.autoplay = "autoplay"
+        document.body.appendChild(video)
+
+        this.video = video
+        this.bindVideoEvents()
+      }
+      bindVideoEvents() {
+        this.video.addEventListener('timeupdate', () => {
+          this.videoToImage()
+        }, false)
+      }
+      videoToImage() {
+        const context = this.canvas.getContext('2d')
+        context.clearRect(0, 0, this.SIDE, this.SIDE)
+        context.drawImage(this.video, 0, 0, this.SIDE, this.SIDE)
+        this.setFavico()
+      }
+      setFavico() {
+        const url = this.canvas.toDataURL('image/png')
+        let icons = [...document.querySelector('head').querySelectorAll('link')]
+          .filter(link => {
+            const rel = link.getAttribute('rel') || ''
+            return rel.indexOf('icon') > -1
+          })
+        if (icons.length) {
+          icons.forEach(icon => icon.setAttribute('href', url))
+        } else {
+          const icon = document.createElement('link')
+          icon.setAttribute('rel', 'icon')
+          icon.setAttribute('href', url)
+          document.querySelector('head').appendChild(icon)
+        }
+      }
+      init() {
+        this.initCanvas()
+        this.initVideo()
+      }
+    }
+
+    const m = new Moyu('200', 'ji')
+    m.init()
+  </script>
+</body>
+
+</html>
