@@ -1,7 +1,7 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-07-13 14:14:32
- * @LastEditTime: 2020-07-31 17:51:49
+ * @LastEditTime: 2020-08-11 08:44:28
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
@@ -12,8 +12,9 @@
  * @returns {node, ctx, rpx} 返回canvas实例, 画笔, 适配值
  * @example const { node, ctx, rpx } = await DrawPoster.build('#canvas')
  */
-export class DrawPoster {
-  constructor({ rpx, node, ctx }) {
+export default class DrawPoster {
+  constructor( rpx, node, ctx ) {
+    
     this.rpx = rpx
     this.node = node
     this.ctx = ctx
@@ -35,7 +36,7 @@ export class DrawPoster {
     })
     // 获取画笔
     const ctx = node.getContext('2d')
-    return new this({ rpx, node, ctx })
+    return new DrawPoster( rpx, node, ctx )
   }
   /** 微信-创建本地图片地址 */
   static downloadImgUrl(url) {
@@ -156,9 +157,7 @@ export class DrawPoster {
     this.executeOnion = []
     return result;
   }
-  /** 创建canvas本地地址
-   * @returns {string} 本地地址
-   */
+  /** 创建canvas本地地址 @returns {string} 本地地址 */
   createImgUrl = async () => {
     const { node } = this
     return new Promise(resolve => {
@@ -176,81 +175,3 @@ export class DrawPoster {
     })
   }
 }
-// 使用案例
-(async function () {
-  const { node, draw, awaitCreate, createImgUrl } = await DrawPoster.build("#canvas");
-  const { windowWidth, windowHeight } = wx.getSystemInfoSync();
-  node.width = windowWidth;
-  node.height = windowHeight;
-
-  // 背景与图片框架的绘制
-  draw(async (ctx, rpx) => {
-    // 背景绘制
-    ctx.fillStyle = "#F4F4F4";
-    ctx.fillRect(0, 0, node.width, node.height);
-    // 卡片矩形绘制
-    ctx.fillStyle = "#fff";
-    ctx.roundRect(15 * rpx, 179 * rpx, 345 * rpx, 365.5 * rpx, 10 * rpx);
-    // 窗布绘制
-    await ctx.loadDrawImage({
-      x: 88 * rpx,
-      y: 174.94 * rpx,
-      path: lcClothImgUrl, // 本地图片地址
-      width: 198.98 * rpx,
-      height: 36 * rpx
-    });
-    // 二维码绘制
-    await ctx.loadDrawImage({
-      x: 85 * rpx,
-      y: 308.5 * rpx,
-      path: lcQRCodeUrl, // 本地图片地址
-      width: 205.5 * rpx,
-      height: 205.5 * rpx
-    });
-  });
-
-  // 顶部字体绘制
-  draw(async (ctx, rpx) => {
-    // 字体默认样式
-    ctx.textBaseline = "top";
-    ctx.textAlign = "start";
-    ctx.fillStyle = "white";
-    // 名称绘制
-    ctx.font = `bold ${22 * rpx}px sans-serif`;
-    ctx.fillText(name, 76.2 * rpx, 38.5 * rpx);
-    // 标签和手机号绘制
-    ctx.font = `${14 * rpx}px sans-serif`;
-    ctx.fillText(`${label}  ${phone}`, 76.2 * rpx, 69.5 * rpx);
-    // 地址绘制
-    ctx.fillText(address, 76.2 * rpx, 94.5 * rpx);
-  });
-
-  // 卡片字体绘制
-  draw(async (ctx, rpx) => {
-    // 名片字段
-    ctx.fillStyle = "white";
-    ctx.font = `bold ${22 * rpx}px sans-serif`;
-    ctx.textBaseline = "middle";
-    ctx.textAlign = "center";
-    ctx.fillText("个人名片", node.width / 2, 195 * rpx);
-    ctx.restore();
-
-    ctx.fillStyle = "#333333";
-    ctx.font = `bold ${12 * rpx}px sans-serif`;
-    ctx.warpFillText({
-      text: `您好，我是${address}车行经理何生，我负责${address}车行的商务合作，如果您在汽车方面等商务合作需求，请直接咨询我。`,
-      maxWidth: 300.97 * rpx,
-      fontHeight: 20 * rpx,
-      layer: 3,
-      x: 37 * rpx,
-      y: 241.21 * rpx
-    });
-  });
-
-  // 等待绘制
-  const result = await awaitCreate();
-  console.log("draw绘制状况:", result);
-
-  const posterImgUrl = await createImgUrl();
-  console.log("绘制生成本地地址:", posterImgUrl);
-})
