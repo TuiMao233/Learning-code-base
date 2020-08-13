@@ -147,6 +147,9 @@ console.log(parseInt('60441sdad'))
 
 // 返回值的类型字符串(null不适用)
 console.log(typeof '600') // 'string'
+
+// 判断构造函数的prototype是否出现在某个实例对象的原型链上
+console.log({} instanceof Object)
 ~~~
 
 ###### ###
