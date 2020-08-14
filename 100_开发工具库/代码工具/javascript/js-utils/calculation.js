@@ -1,3 +1,11 @@
+/*
+ * @Author: 毛先生
+ * @Date: 2020-07-10 09:22:49
+ * @LastEditTime: 2020-08-14 13:00:24
+ * @LastEditors: 毛先生
+ * @Description: 
+ * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
+ */
 // 检测数据类型; return: String
 export const checkedTypeof = (target) => Object.prototype.toString.call(target).slice(8, -1)
 // 剔除字符串代码字段; return: String
@@ -59,4 +67,28 @@ export function formatDate(time, format = 'YY-MM-DD hh:mm:ss') {
     .replace(/mm/g, preArr[min] || min)
     .replace(/ss/g, preArr[sec] || sec);
   return newTime;
+}
+// 反编译日期格式
+export function formatRelieve(date_str = "2020-06-10") {
+  const date = date_str.replace(/-/g, '/')
+  const timestamp = new Date(date).getTime()
+  return timestamp
+}
+// 过滤不必要数据
+export function clearUseless({ target, clear_keys }) {
+  const exp = new RegExp(clear_keys)
+  for (const key in target) {
+    if (target.hasOwnProperty(key)) {
+      const isNotNull = !(!target[key] && typeof (target[key]) != "undefined" && target[key] != 0)
+      if (isNotNull) {
+        exp.test(key) && delete target[key]
+      } else {
+        delete target[key]
+      }
+      if (typeof target[key] == 'object') {
+        target[key] = clearUseless({ target: target[key], clear_keys })
+      }
+    }
+  }
+  return target
 }

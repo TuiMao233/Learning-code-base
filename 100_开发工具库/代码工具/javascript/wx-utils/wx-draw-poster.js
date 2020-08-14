@@ -1,7 +1,7 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-07-13 14:14:32
- * @LastEditTime: 2020-08-11 08:44:28
+ * @LastEditTime: 2020-08-12 10:11:51
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
@@ -14,7 +14,6 @@
  */
 export default class DrawPoster {
   constructor( rpx, node, ctx ) {
-    
     this.rpx = rpx
     this.node = node
     this.ctx = ctx
