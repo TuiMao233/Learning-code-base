@@ -57,3 +57,11 @@ Preset options:
   自定义模板
 ~~~
 
+## 配置代码检测
+
+~~~makefile
+yarn add eslint eslint-plugin-prettier @vue/cli-plugin-eslint eslint-plugin-vue prettier -D
+
+yarn add @vue/eslint-config-prettier @vue/eslint-config-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+~~~
+

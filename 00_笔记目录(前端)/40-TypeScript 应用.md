@@ -728,6 +728,16 @@ const http = new HttpClient()
 
 # TypeScript 扩展语法
 
+## 如何声明对象中某个属性
+
+~~~ts
+const obj = {
+    age: <string|number>60 // 不推荐
+    age: 60 as string|number
+}
+obj.age = "60"
+~~~
+
 ## 定义类型
 
 ~~~typescript
@@ -753,6 +763,10 @@ type k2 = keyof {
   小红: string;
   小芳: string;
 }
-const arr:Array<k2> = ['小明']
+// 继承某个泛型对象的属性
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+const arr: Array<k2> = ['小明']
 ~~~
 
