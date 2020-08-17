@@ -91,7 +91,7 @@ function getInfo(age:number):number;
 function getInfo(str:any):any{
     if (typeof str === 'string')
         return `我叫：${str}`
-    else 
+    else
         return `我的年龄是：${str}`
 }
 ~~~
@@ -713,7 +713,7 @@ function logParams(params: any) {
     return function (target: any, methodName: any, paramsIndex: any) {
         // 方法参数描述器具备类描述器特征, 可以添加, 修改类
         target.apiUrl = 'xxx'
-        target.run = () => console.log('run');
+        target.run = () => console.log('run')
     }
 }
 class HttpClient {

@@ -1,11 +1,11 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-07-10 09:22:49
- * @LastEditTime: 2020-08-01 13:59:47
+ * @LastEditTime: 2020-08-12 10:16:10
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
- */ 
+ */
 // 封装所有微信API为promise
 export const wxPromise = (key = "", options = {}) => new Promise((success, fail) => {
   wx[key]({ ...options, success, fail })
@@ -35,6 +35,18 @@ const paramsAnaly = (url = "", params = {}) => {
   const queryStr = Object.keys(params).map(key => `${key}=${params[key]}`)
   if (queryStr.length > 0) { url += '?' + queryStr.join("&") }
   return url
+}
+const methods = {
+  // 过滤input为数字
+  onFilterNumber({ mp }) {
+    const value = mp.detail.value;
+    return value.trim().replace(/[^0-9.]/g, "");
+  },
+  // 处理输入框事件
+  onHandleBlur(ev, key) {
+    const val = ev.target.value;
+    this[key] = val;
+  }
 }
 export const navigateTo = (url = "", params = {}) => wx.navigateTo({ url: paramsAnaly(url, params) })
 export const redirectTo = (url = "", params = {}) => wx.navigateBack({ url: paramsAnaly(url, params) })
