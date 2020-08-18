@@ -409,6 +409,23 @@ class Prog extends Web implements Person {
 }
 ~~~
 
+## 巧妙查找类型
+
+~~~typescript
+interface Person {
+  addr: {
+    city: string;
+    street: string;
+    num: number;
+  }
+}
+const Addr: Person["addr"] = {
+  city: "city",
+  street: "street",
+  num: 0
+}
+~~~
+
 # TypeScript 泛型 规范
 
 泛型，软件工程中，我们不仅要创建一致定义良好的API，同时也要考虑可重用性。组件不仅能够支持当前的数据类型，同时也能支持未来的数据类型，这在创建大型系统时提供了十分灵活的功能。
@@ -707,5 +724,49 @@ class HttpClient {
     }
 }
 const http = new HttpClient()
+~~~
+
+# TypeScript 扩展语法
+
+## 如何声明对象中某个属性
+
+~~~ts
+const obj = {
+    age: <string|number>60 // 不推荐
+    age: 60 as string|number
+}
+obj.age = "60"
+~~~
+
+## 定义类型
+
+~~~typescript
+// type 关键字可定义类型, 泛型, 等各种类型
+type t1 = string;
+const str:t1 = "666"
+~~~
+
+## 定义键值
+
+~~~typescript
+// 用于定义指定字符串
+type k1 = keyof {
+  小明: string;
+  小红: string;
+  小芳: string;
+}
+const str:k1 = "小白" // 报错
+
+// 用于定义指定数组
+type k2 = keyof {
+  小明: string;
+  小红: string;
+  小芳: string;
+}
+// 继承某个泛型对象的属性
+function getProperty<T, K extends keyof T>(obj: T, key: K) {
+    return obj[key];
+}
+const arr: Array<k2> = ['小明']
 ~~~
 

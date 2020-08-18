@@ -166,7 +166,7 @@ ctx.beginPath()
 //ctx.stroke(50,50,100,100)///
 //////////////////////////////
 ctx.rect()
-ctx.restore();
+ctx.restore()
 </script>				
 ~~~
 
