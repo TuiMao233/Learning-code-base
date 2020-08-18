@@ -1,11 +1,11 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-07-13 14:14:32
- * @LastEditTime: 2020-08-12 10:11:51
+ * @LastEditTime: 2020-08-15 14:49:56
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
- */ 
+ */
 
 /** 创建绘制海报矩形方法, 自动向画笔添加加载绘制图片方法(ctx.loadDrawImage), 绘制换行字体方法(warpFillText)
  * @param  {string} select_str 查询CSS选择器字符串
@@ -13,7 +13,7 @@
  * @example const { node, ctx, rpx } = await DrawPoster.build('#canvas')
  */
 export default class DrawPoster {
-  constructor( rpx, node, ctx ) {
+  constructor(rpx, node, ctx) {
     this.rpx = rpx
     this.node = node
     this.ctx = ctx
@@ -35,7 +35,7 @@ export default class DrawPoster {
     })
     // 获取画笔
     const ctx = node.getContext('2d')
-    return new DrawPoster( rpx, node, ctx )
+    return new DrawPoster(rpx, node, ctx)
   }
   /** 微信-创建本地图片地址 */
   static downloadImgUrl(url) {
@@ -105,7 +105,7 @@ export default class DrawPoster {
    * @param {number} h 高度(必须)
    * @param {number} r 圆角半径 默认为0
    */
-  roundRect = (x, y, w, h, r=0) => {
+  roundRect = (x, y, w, h, r = 0) => {
     const ctx = this.ctx
     if (w < 2 * r) { r = w / 2; }
     if (h < 2 * r) { r = h / 2; }
@@ -158,7 +158,8 @@ export default class DrawPoster {
   }
   /** 创建canvas本地地址 @returns {string} 本地地址 */
   createImgUrl = async () => {
-    const { node } = this
+    const { node, executeOnion, awaitCreate } = this
+    executeOnion.length && await awaitCreate()
     return new Promise(resolve => {
       wx.canvasToTempFilePath({
         x: 0, y: 0,

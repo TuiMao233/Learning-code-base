@@ -57,3 +57,253 @@ Preset options:
   自定义模板
 ~~~
 
+# uni-app 常见问题
+
+## 使用mp-echarts
+
+### 更改 mpvue-echarts.vue 组件
+
+~~~html
+<template>
+	<canvas v-if="canvasId" class="ec-canvas" :id="canvasId" :canvasId="canvasId" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" @error="error"></canvas>
+</template>
+
+<script>
+import WxCanvas from './wx-canvas';
+export default {
+	props: {
+		canvasId: {
+			type: String,
+			default: 'ec-canvas'
+		},
+		lazyLoad: {
+			type: Boolean,
+			default: false
+		},
+		disableTouch: {
+			type: Boolean,
+			default: false
+		},
+		throttleTouch: {
+			type: Boolean,
+			default: false
+		}
+	},
+	// #ifdef H5
+	mounted() {
+		if (!this.lazyLoad) this.init();
+	},
+	// #endif
+	// #ifndef H5
+	onReady() {
+		if (!this.lazyLoad) this.init();
+	},
+	// #endif
+	methods: {
+		setChart(chart){
+			this.chart = chart
+		},
+		init() {
+			const { canvasId } = this;
+			this.ctx = wx.createCanvasContext(canvasId, this);
+			this.canvas = new WxCanvas(this.ctx, canvasId);
+			const query = wx.createSelectorQuery().in(this);
+			query
+				.select(`#${canvasId}`)
+				.boundingClientRect(res => {
+					if (!res) {
+						setTimeout(() => this.init(), 50);
+						return;
+					}
+					this.$emit('onInit', {
+						width: res.width,
+						height: res.height
+					});
+				})
+				.exec();
+		},
+		canvasToTempFilePath(opt) {
+			const { canvasId } = this;
+			this.ctx.draw(true, () => {
+				wx.canvasToTempFilePath({
+					canvasId,
+					...opt
+				});
+			});
+		},
+		touchStart(e) {
+			const { disableTouch, chart } = this;
+			if (disableTouch || !chart || !e.mp.touches.length) return;
+			const touch = e.mp.touches[0];
+			chart._zr.handler.dispatch('mousedown', {
+				zrX: touch.x,
+				zrY: touch.y
+			});
+			chart._zr.handler.dispatch('mousemove', {
+				zrX: touch.x,
+				zrY: touch.y
+			});
+		},
+		touchMove(e) {
+			const { disableTouch, throttleTouch, chart, lastMoveTime } = this;
+			if (disableTouch || !chart || !e.mp.touches.length) return;
+			if (throttleTouch) {
+				const currMoveTime = Date.now();
+				if (currMoveTime - lastMoveTime < 240) return;
+				this.lastMoveTime = currMoveTime;
+			}
+			const touch = e.mp.touches[0];
+			chart._zr.handler.dispatch('mousemove', {
+				zrX: touch.x,
+				zrY: touch.y
+			});
+		},
+		touchEnd(e) {
+			const { disableTouch, chart } = this;
+			if (disableTouch || !chart) return;
+			const touch = e.mp.changedTouches ? e.mp.changedTouches[0] : {};
+			chart._zr.handler.dispatch('mouseup', {
+				zrX: touch.x,
+				zrY: touch.y
+			});
+			chart._zr.handler.dispatch('click', {
+				zrX: touch.x,
+				zrY: touch.y
+			});
+		}
+	}
+};
+</script>
+
+<style scoped>
+.ec-canvas {
+	width: 100%;
+	height: 100%;
+	flex: 1;
+}
+</style>
+~~~
+
+### 在页面中使用
+
+~~~html
+<template>
+	<mpvue-echarts @onInit="initChart" canvasId="demo-canvas" ref="lineChart" />
+</template>
+<script>
+// 引入定制echarts
+import echarts from "echarts/dist/diy_echarts";
+// 引入mpvue-echarts
+import mpvueEcharts from "mpvue-echarts";
+// 设置默认数据
+let series = [
+  {
+    name: "成交订单",
+    type: "line",
+    data: [],
+    symbolSize: 8,
+    itemStyle: { borderWidth: 2 },
+  },
+  {
+    name: "新增收购",
+    type: "line",
+    data: [],
+    symbolSize: 8,
+    itemStyle: { borderWidth: 2 },
+  },
+];
+let xAxisData = [];
+export default {
+    components: { mpvueEcharts },
+    methods: {
+        // 初始化图形
+        initChart(e) {
+            const { width, height } = e;
+            const canvas = this.$refs.lineChart.canvas;
+            echarts.setCanvasCreator(() => canvas);
+            const lineChart = echarts.init(canvas, null, {
+				width: width,
+        		 height: height,
+      		});
+            canvas.setChart(lineChart);
+            lineChart.setOption({
+                color: ["#d34632", "#29a2f2"],
+                seriesCnt: 2,
+                // 标题配置
+                title: {
+                  textStyle: {
+                    color: "#333333",
+                    fontWeight: "bold",
+                  },
+                  text: "数据分析",
+                  left: "center",
+                },
+                // 图例配置
+                legend: {
+                  type: "plain",
+                  bottom: "10%",
+                },
+                // 网格配置
+                grid: { containLabel: true },
+                // 提示框组件
+                tooltip: { trigger: "axis" },
+
+                // x轴配置
+                xAxis: {
+                  type: "category",
+                  boundaryGap: false,
+                  data: xAxisData,
+                  axisLine: {
+                    lineStyle: {
+                      color: "#999",
+                    },
+                  },
+                  // show: false
+                },
+                // y轴配置
+                yAxis: {
+                  // 分割线配置
+                  splitLine: { lineStyle: { type: "dashed" } },
+                  axisLine: {
+                    lineStyle: { color: "#999" },
+                  },
+                },
+                // 线条数据
+                series,
+              });
+              this.$refs.lineChart.setChart(lineChart, true);
+        	}
+    }
+}
+</script>
+~~~
+
+### 重新渲染数据
+
+当数据改变时，改变 series 与 xAxisData 数据后，调用方法重新渲染。
+
+~~~html
+<template>
+	<mpvue-echarts @onInit="initChart" canvasId="demo-canvas" ref="lineChart" />
+</template>
+<script>
+import echarts from "echarts/dist/diy_echarts";
+import mpvueEcharts from "mpvue-echarts";
+let series = [/*....*/];
+let xAxisData = [/*....*/];
+export default {
+    components: { mpvueEcharts },
+    methods: {
+        initChart() { /*....*/ }
+		getData () {
+             // 获取数据操作....
+    		series = [/*....*/];
+    		xAxisData = [/*....*/];
+    		// 图形重新渲染
+    		this.$refs.lineChart.init();
+        }
+    }
+}
+</script>
+~~~
+

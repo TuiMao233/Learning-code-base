@@ -1,7 +1,7 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-07-10 09:22:49
- * @LastEditTime: 2020-08-14 13:00:24
+ * @LastEditTime: 2020-08-18 14:19:34
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
@@ -74,7 +74,7 @@ export function formatRelieve(date_str = "2020-06-10") {
   const timestamp = new Date(date).getTime()
   return timestamp
 }
-// 过滤不必要数据
+// 过滤空的与不必要数据
 export function clearUseless({ target, clear_keys }) {
   const exp = new RegExp(clear_keys)
   for (const key in target) {
@@ -91,4 +91,15 @@ export function clearUseless({ target, clear_keys }) {
     }
   }
   return target
+}
+// 按需浅拷贝对象
+export function shallowClone({ target, clear_keys }) {
+  const exp = new RegExp(clear_keys)
+  const new_obj = Object.keys(target).reduce((total, key) => {
+    if (exp.test(key)) {
+      total[key] = target[key]
+    }
+    return total
+  }, {})
+  return new_obj
 }
