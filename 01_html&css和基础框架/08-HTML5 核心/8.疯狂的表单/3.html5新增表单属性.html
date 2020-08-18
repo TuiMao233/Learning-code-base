@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--
+			placeholder :输入框提示信息
+				适用于form,以及type为text,search,url,tel,email,password类型的input
+			怎么选择placeholder?
+				::-webkit-input-placeholder-
+			
+			autofocus	:指定表单获取输入焦点
+			
+			pattern		:正则验证 pattern= "\d{1,5}"
+				
+			required    :此项是必填项
+			
+			formaction 	:在submit里定义提交地址
+		-->
+		<center>
+		<form action="http://www.baidu.com" method="post">
+			<input type="text" autofocus/>
+			<input type="text" required/>
+			<input type="text" />
+			<input type="submit"/>
+			<input type="submit" formaction="http://www.bilibili.com"/>
+		</form>
+	</body>
+</html>

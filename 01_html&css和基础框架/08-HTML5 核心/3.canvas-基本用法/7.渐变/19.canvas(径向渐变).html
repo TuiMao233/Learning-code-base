@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		html,
+		body {
+			height: 100%;
+			overflow: hidden;
+		}
+
+		body {
+			background: pink;
+		}
+
+		canvas {
+			background: darkgray;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+	<canvas class="test" width="1000" height="600">
+		<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+	</canvas>
+</body>
+<script>
+	/*
+	 * canvas渐变 (径向渐变)
+	 * 			createRadialGradient(x1,y1,r1,x2,y2,r2)
+	 * 			前三个值参数定义另一个以（x1，y1）为原点，半径为r1的园
+	 * 			后三个参数则定义另一个以（x2，y2）为原点，半径为r2的园
+	 */
+	window.onload = function () {
+		var testNode = document.querySelector(".test");
+		function ang(d) { return d * Math.PI / 180; }
+		if (testNode.getContext) {
+			var ctx = testNode.getContext("2d");
+			ctx.translate(500, 300);
+			var gradient = ctx.createRadialGradient(0, 0, 100, 0, 0, 300);
+			gradient.addColorStop(0, "red") 		//第一个
+			gradient.addColorStop(0.5, "yellow") //第二个
+			gradient.addColorStop(0.8, "pink") //第二个
+			gradient.addColorStop(1, "green")	//第三个
+			ctx.fillStyle = gradient;
+			ctx.fillRect(-500, -300, 1000, 600)
+		}
+	}
+</script>
+
+</html>

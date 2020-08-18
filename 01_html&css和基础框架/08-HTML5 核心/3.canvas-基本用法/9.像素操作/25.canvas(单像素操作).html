@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		html,
+		body {
+			height: 100%;
+			overflow: hidden;
+		}
+
+		body {
+			background: pink;
+		}
+
+		canvas {
+			background: darkgray;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+	<canvas class="test" width="1000" height="600">
+		<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+	</canvas>
+</body>
+<script>
+	/*
+								createImageData(100,100);
+											 w   h
+								imageData.data
+							width:横向上像素点的个数
+							height:轴向上像素点的个数
+							data:数组
+					
+						putImageData()方法去对场景进行像素数据的写入
+						putImageData(myImgeData,dx,dy)
+							dx和dy是场景的设备坐标
+	*/
+
+	//默认创建出来的rgba(0,0,0,0);
+	window.onload = function () {
+		var canvas = document.querySelector(".test");
+		function ang(d) { return d * Math.PI / 180; }
+		if (canvas.getContext) {
+			var ctx = canvas.getContext("2d");
+			ctx.save();
+			ctx.fillStyle = "gold";
+			ctx.beginPath();
+			ctx.fillRect(0, 0, 200, 200);
+			ctx.restore();
+			var imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height); //获取整张canvas的像素信息
+			for (var i = 0; i < 50; i++) {
+				// setPxInfo(imgdata, x, y, [r,g,b,a]) 更改一个像素的样式
+				setPxInfo(imgdata, 0 + i, 30, [0, 0, 0, 255]);
+				ctx.putImageData(imgdata, 0, 0);
+			}
+
+		}
+
+
+		//! 获取单个像素信息
+		function getPxInfo(imgdata, x, y) {
+			var color = [];
+			var data = imgdata.data;
+			var w = imgdata.width;
+			var h = imgdata.height;
+			color[0] = data[(y * w + x) * 4];
+			color[1] = data[(y * w + x) * 4 + 1];
+			color[3] = data[(y * w + x) * 4 + 2];
+			color[4] = data[(y * w + x) * 4 + 3];
+			return color;	[r,g,b,a]
+		}
+
+		//! 设置单个像素
+		function setPxInfo(imgdata, x, y, color) {
+			var data = imgdata.data;
+			var w = imgdata.width;
+			var h = imgdata.height;
+			data[(y * w + x) * 4] = color[0];
+			data[(y * w + x) * 4 + 1] = color[1];
+			data[(y * w + x) * 4 + 2] = color[2];
+			data[(y * w + x) * 4 + 3] = color[3];
+		}
+
+
+		//			function getPxInfo (ctx,x,y){
+		//					var	color = ctx.getImageData(x,y,1,1).data;
+		//					return color;
+		//				}
+
+		//			function setPxInfo (ctx,x,y,color) {
+		//				ctx.getImageData(x,y,1,1).data[0] = color[0];
+		//				ctx.getImageData(x,y,1,1).data[1] = color[1];
+		//				ctx.getImageData(x,y,1,1).data[2] = color[2];
+		//				ctx.getImageData(x,y,1,1).data[3] = color[3];
+		//				var imageData = ctx.getImageData(x,y,1,1);
+		//				ctx.putImageData(imageData,x,y);
+		//			}
+	}
+
+
+</script>
+
+</html>

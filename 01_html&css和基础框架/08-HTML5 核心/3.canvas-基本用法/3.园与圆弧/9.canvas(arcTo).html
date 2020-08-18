@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				background: darkgray;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+		<script src="jquery-1.12.4.js"></script>
+	 	
+	</head>
+	<body>
+		<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+		<canvas class="test" width="400" height="300">
+			<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+		</canvas>
+	</body>
+	<script>
+		/*
+		 * arc(x, y, radius, startAngle, endAngle, anticlockwise)
+		 * 画一个以（x，y）为圆心的以radius为半径的圆弧（圆），从startAngle（起点）开始,到endAngle（终点）结束
+		 * 按照anticlockwise给定的方向（默认顺时针）来生成
+		 * 角度转换弧度方式 (角度*Math.PI/180)
+		 */
+		window.onload=function(){
+			var testNode = document.querySelector(".test");
+			
+			/*角度转弧度函数*/
+			function ang(d){return d*Math.PI/180;}
+			
+			if(testNode.getContext){
+				var ctx = testNode.getContext("2d");
+				ctx.stroke();
+				
+				ctx.beginPath();
+				/*清空路径*/
+
+				ctx.moveTo(150,100);
+				/*创建起点*/
+				ctx.arcTo(200, 100, 200, 200, 50);
+				/*创建圆弧路径*/
+				
+				ctx.stroke();
+			}
+		}
+	</script>
+</html>

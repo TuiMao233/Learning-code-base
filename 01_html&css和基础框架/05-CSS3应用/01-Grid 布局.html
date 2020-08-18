@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .warp {
+      display: grid;
+      /* 定义每一列的列宽 */
+      grid-template-columns: repeat(auto-fill, 100px);
+      /* 定义每一行的行高 */
+      grid-template-rows: repeat(3, 100px);
+    }
+
+    .warp div {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .warp div:nth-child(2n+0) {
+      background: rgb(190, 108, 108);
+    }
+
+    .warp div:nth-child(2n+1) {
+      background: #8893f8;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="warp">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+  </div>
+</body>
+
+</html>

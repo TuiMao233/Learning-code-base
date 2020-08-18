@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				background: darkgray;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	 	<!--
+	 		canvas提供三种方法绘制矩形：
+	 		---绘制一个填充的矩形（填充色默认为黑色）
+	 		   fillRect(x, y, width, height)
+	 		---绘制一个矩形的边框(默认边框为：1像素黑色)
+	 		   strokeRect(x, y, width, height)
+	 		---清除指定矩形区域， 让清除部分完全透明
+	 		   clearRect(x, y, width, height)
+	 	-->
+	</head>
+	<body>
+		<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+		<canvas class="test" width="400" height="300">
+			<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+		</canvas>
+	</body>
+	<script>
+		window.onload=function(){
+			//querySelector身上有坑 
+			//拿到画布
+			var canvas = document.querySelector(".test");
+			if(canvas.getContext){
+				var ctx = canvas.getContext("2d");
+				/*初始起点,笔触*/
+				ctx.moveTo(50,50);
+				/*第二个点*/
+				ctx.lineTo(100,50);
+				/*第三个点*/
+				ctx.lineTo(100,100);
+				/*第四个点,回到起点*/
+				ctx.lineTo(50,50); 
+				// ctx.closePath(); //自动寻回笔触点
+
+
+				/*点与点用线链接为轮廓*/
+				ctx.stroke();
+				/*点与点用实心链接为块*/
+				// ctx.fill();
+			}
+		}
+	</script>
+</html>

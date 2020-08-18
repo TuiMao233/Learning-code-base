@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				background: darkgray;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+		<canvas class="test" width="1000" height="600">
+			<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+		</canvas>
+	</body>
+	<script>
+		/*
+		 * 1.createPattern(image,repetition)
+		 * 		image:图像源
+		 * 		repetition:
+		 * 				"repeat"
+		 * 				"repeat-x"
+		 * 				"repeat-y"
+		 * 				"no-repeat"
+		 */
+		window.onload=function(){
+			var testNode = document.querySelector(".test");
+			function ang(d){return d*Math.PI/180;}
+			if(testNode.getContext){
+				var ctx = testNode.getContext("2d");
+				var img = new Image();
+				img.src = "tg.png";	
+				img.onload = function(){//图片加载完
+				draw();
+				}
+				function draw(){
+					ctx.fillStyle = ctx.createPattern(img,"no-repeat");
+					ctx.fillRect(0,0,600,600)
+				}
+		}}
+	</script>
+</html>

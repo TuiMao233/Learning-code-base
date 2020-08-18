@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				background: darkgray;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+		<canvas class="test" width="1000" height="600">
+			<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+		</canvas>
+	</body>
+	<script>
+		/*
+		 * canvas提供两种方法绘制文本
+		 * 		fillText(test,x,y)
+		 * 		 	在指定的（x，y）位置填充制定文字
+		 * 		strokeTest(text,x,y)
+		 * 			在指定的（x，y）位置填充文本边框
+		 * 文本样式
+		 * 		font = value
+		 * 			当前我们用来绘制文本的样式，这个字符串使用和css font属性相同的语法
+		 * 			默认的字体是10px sans-serif
+		 * 			font属性指定时，必须要有大小和字体，缺一不可
+		 * 		textAlign = value
+		 * 			文字对其选项，可选值有：left，right，center，
+		 * 		textBaseline = value
+		 * 			文字对其选项，可选值有：top bottom middle
+		 * 		
+		 * 		mesureText
+		 * 			measureText() 方法返回一个TextMetrics 对象，包含关于文本尺寸的信息（例如文本的宽度）
+		 */
+		window.onload=function(){
+			var testNode = document.querySelector(".test");
+			function ang(d){return d*Math.PI/180;}
+			if(testNode.getContext){
+				var ctx = testNode.getContext("2d");
+				ctx.fillStyle = "darkgreen";  	//字体的颜色
+				ctx.font = "100px sans-serif" 	//字体样式
+				ctx.textBaseline = "middle";	//字体上下对其的方式
+				ctx.textAlign = "center";		//字体左右对其的方式
+				ctx.fillText("李国超",500,300);	//绘制字体
+				var obj = ctx.measureText("李国超"); 	//字体的信息
+				console.log(obj);
+		}}
+	</script>
+</html>

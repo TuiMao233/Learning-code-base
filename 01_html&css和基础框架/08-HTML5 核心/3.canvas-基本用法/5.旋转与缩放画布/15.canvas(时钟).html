@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="{CHARSET}">
+	<title></title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		html,
+		body {
+			height: 100%;
+			overflow: hidden;
+		}
+
+		body {
+			background: pink;
+		}
+
+		canvas {
+			background: darkgray;
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			margin: auto;
+		}
+	</style>
+
+</head>
+
+<body>
+	<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+	<canvas class="test" width="1000" height="600">
+		<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+	</canvas>
+</body>
+<script>
+	/*
+	 * bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y)
+	 * 绘制二次贝塞尔曲线,cp1x,cp1y为第一个控制点,cp2x,cp2y为第二个控制点,x,y为结束点
+	 */
+
+	window.onload = function () {
+		//! canvas绘制工具封装
+		function canvasDrawInit(canvasContext, interceptStyle, interceptShape) {
+			var canvasObj = {}
+			var ctx = canvasContext
+			function canvasDraw(style, shape) {
+				if (!ctx) { return }
+				ctx.save()	////////////////////////////
+				style(ctx)
+				ctx.beginPath()////////////////////////////
+				shape(ctx)
+				ctx.restore();////////////////////////////
+			}
+			return canvasDraw
+		}
+		//! 角度转弧度函数封装
+		function ang(d) { return d * Math.PI / 180; }
+
+		var testNode = document.querySelector(".test");
+		if (typeof testNode.getContext === 'function') {
+			//! 获取画笔
+			var ctx = testNode.getContext('2d')
+			//! 创建绘制工具
+			var canvasDraw = canvasDrawInit(ctx)
+		}
+
+
+		function clockAnim() {
+			//! 清空画布
+			ctx.clearRect(0, 0, testNode.width, testNode.height)
+			//! 获取时间
+			var start = new Date();
+			
+			//! 外围圆
+			canvasDraw(
+				(ctx) => { // 样式区
+					ctx.lineWidth = 4;
+					ctx.strokeStyle = "darkcyan";
+				},
+				(ctx) => { // 绘制区
+					ctx.translate(500, 300);
+					ctx.arc(0, 0, 200, 0, ang(360));
+					ctx.stroke();
+				}
+			)
+
+			//! 刻度针
+			var r = 0;
+			for (var i = 0; i < 61; i++) {
+				canvasDraw(
+					(ctx) => { // 样式区
+						ctx.lineWidth = 4;
+						ctx.lineCap = "round";
+						ctx.strokeStyle = "rgba(0,0,0,.8)"
+					},
+					(ctx) => { // 绘制区
+						ctx.translate(500, 300);
+						ctx.rotate(ang(r));
+						if (r % 30) {
+							ctx.moveTo(0, 180);
+							ctx.lineTo(0, 174);
+						} else {
+							ctx.moveTo(0, 180);
+							ctx.lineTo(0, 168);
+						}
+						/*创建结构*/
+						ctx.stroke();
+					}
+				)
+				if (r < 360) { r += 6; } else { r = 0 }
+			}
+
+			//! 时针
+			canvasDraw(
+				(ctx) => {
+					ctx.lineWidth = 4;
+					ctx.strokeStyle = "black";
+					ctx.fillStyle = "black";
+				},
+				(ctx) => {
+					ctx.translate(500, 300);
+					ctx.rotate(ang(start.getHours() * 6));
+					ctx.arc(0, 0, 10, 0, ang(360));
+					ctx.moveTo(0, -130);
+					ctx.lineTo(0, 35);
+					ctx.stroke();
+				}
+			)
+
+			//! 分针
+			canvasDraw(
+				(ctx) => {
+					ctx.lineWidth = 4;
+					ctx.strokeStyle = "black";
+					ctx.fillStyle = "black";
+				},
+				(ctx) => {
+					ctx.translate(500, 300);
+					ctx.rotate(ang(start.getMinutes() * 6));
+					ctx.arc(0, 0, 10, 0, ang(360));
+					ctx.moveTo(0, -150);
+					ctx.lineTo(0, 35);
+					ctx.stroke();
+				}
+			)
+
+			//! 秒针
+			canvasDraw(
+				(ctx) => {
+					ctx.lineWidth = 2;
+					ctx.strokeStyle = "darkred";
+					ctx.fillStyle = "darkred";
+				},
+				(ctx) => {
+					ctx.translate(500, 300);
+					ctx.rotate(ang(start.getSeconds() * 6));
+					ctx.arc(0, 0, 5, 0, ang(360));
+					ctx.moveTo(0, -175);
+					ctx.lineTo(0, 50);
+					ctx.stroke();
+					ctx.fill();
+				}
+			)
+
+			//! 具体时间显示
+			canvasDraw(
+				(ctx) => { // 样式区
+					ctx.fillStyle = "rgba(0,0,0,.8)"
+					ctx.font = "30px sans-serif" 	//字体样式
+					ctx.textBaseline = "center";	//字体上下对其的方式
+					ctx.textAlign = "center";		//字体左右对其的方式
+				},
+				(ctx) => { // 绘制区
+					ctx.translate(500, 300);
+					var Time = start.toLocaleTimeString().slice(2)
+					ctx.fillText(Time, 0, -75);	//绘制字体
+				}
+			)
+		}
+
+
+
+		clockAnim();
+		setInterval(function () { clockAnim(); }, 1000)
+	};
+
+</script>
+
+</html>

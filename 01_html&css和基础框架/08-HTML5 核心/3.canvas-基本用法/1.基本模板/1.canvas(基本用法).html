@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="{CHARSET}">
+		<title></title>
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			body{
+				background: pink;
+			}
+			canvas{
+				background: darkgray;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<!--在支持canvas的浏览器,是会忽略掉canvas标签内的内容-->
+		<canvas class="test" width="200" height="300">
+			<span>您的浏览器被支持画布元素,请您换成帅帅的谷歌浏览器</span>
+		</canvas>
+	</body>
+	<script>
+		window.onload=function(){
+			//querySelector身上有坑 
+			//拿到画布
+			var testNode = document.querySelector(".test");
+			if(testNode.getContext){
+				var ctx = testNode.getContext("2d");
+			}
+		}
+	</script>
+</html>

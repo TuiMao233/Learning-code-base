@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no" />
+		<title></title>
+		
+		<style>
+			*{margin: 0;padding: 0;}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			canvas{
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				margin: auto;
+			}
+			#warp,ul,ul>li{
+				height: 100%;
+			}
+			ul>li{
+				background-size: 100% 100%;
+			}
+			canvas{
+				position: absolute;
+				left: 0;
+				top: 0;
+				display : block;
+				transition: 1.5s;
+				opacity: 1;
+			}
+			button{
+				width: 100px;
+				height: 50px;
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin: auto;
+			}
+		</style>
+	 	
+	</head>
+	<body>
+		<div id="warp">
+			<canvas class="test" width="450" height="450">
+				<span>您的浏览器不支持画布元素,请您换成帅帅的谷歌浏览器</span>
+			</canvas>
+			<button>点击下载</button>
+			<ul>
+				<li></li>
+			</ul>
+		</div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			function ang(d){return d*Math.PI/180;}
+			var canvas = document.querySelector(".test");
+			var flag = 0;
+			var but = document.querySelector("button");
+			if(canvas.getContext){
+				var ctx = canvas.getContext("2d");
+				var img = new Image;
+				img.src = "ggk.png";
+				img.onload = function(){
+					canvas.width = img.width;
+					canvas.height = img.height;
+					ctx.drawImage(img,0,0,canvas.width,canvas.height);
+					//! 谷歌不能导出跨域的画布
+					var result = canvas.toDataURL();
+					but.onclick = function(){
+						window.open(result);
+					}
+				}
+				
+			}}
+	</script>
+</html>

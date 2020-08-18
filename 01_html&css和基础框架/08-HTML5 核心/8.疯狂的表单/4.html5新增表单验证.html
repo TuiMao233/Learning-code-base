@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<center>
+		<form action="" method="post">
+			<input type="text"/>
+			<input type="submit" value="提交" />
+		</form>
+	</body>
+	<script type="text/javascript">
+		window.onload = function (){
+			var inputEl = document.querySelector("input");
+			var sumb = document.querySelector("input[type=submit]");
+			inputEl.addEventListener("invalid",function(){ //表单验证失败时
+				console.log("验证失败了")
+				console.log(inputEl.validity);
+			})
+			/*
+			 * input.validity属性
+			 * 			valueMissing	：输入值为空时返回true
+			 * 			typeMismatch	：控件值与预期类型不匹配返回true
+			 * 			patternMismatch	：输出值不满足pattern正则返回true
+			 * 	
+			 * 			tooLong			：超过maxLength最大限制时返回ture
+			 * 			rangeUnderflow	：验证的range最小值返回true
+			 * 			rangeOverflow	：验证的range最大值返回true
+			 * 			stepMismatch	：验证range的当前值是否符合min、max及step的规则返回true
+			 * 		
+			 * 			customError		：不符合自定义验证返回true
+			 * 				setCustomValidity
+			 * 
+			 * 关闭验证
+			 * 		formnovalidate属性
+			 * 
+			 * 自定义验证
+			 */
+			sumb.onclick = function(){
+				if(inputEl.value == "dzl"){
+					inputEl.setCustomValidity("请不要输出傻吊的名字");
+				}else{
+					inputEl.setCustomValidity("");
+				}
+			}
+		}
+	</script>
+</html>

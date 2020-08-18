@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			html,body{
+				height: 100%;
+				overflow: hidden;
+			}
+			#test{
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 200px;
+				height: 200px;
+				background: pink;
+			}
+			
+			#zaw{
+				position: absolute;
+				left: 600px;
+				top: 200px;
+				width: 200px;
+				height: 200px;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="test"></div>
+		<img src="img/tg.png" id="zaw" />
+	</body>
+	<script src="js/damu.js"></script>
+	<script type="text/javascript">
+		
+		/*
+		 拖拽的思路:
+			1.拿到鼠标点击元素时，元素一开始的位置
+			2.拿到鼠标移动的距离
+				鼠标点击的位置
+				鼠标移动时，实时的位置
+				鼠标移动实时的距离=(鼠标移动时，实时的位置 - 鼠标点击的位置)
+			3.确定鼠标移动后,元素的位置
+				元素一开始的位置+鼠标移动的距离
+		*/
+		
+		window.onload=function(){
+			var testNode = document.querySelector("#test");
+			var imgNode = document.querySelector("img");
+			//拿到鼠标点击元素时，元素一开始的位置
+			damu.drag(testNode,true,100,imgNode);
+			
+		}
+		
+	</script>
+</html>
