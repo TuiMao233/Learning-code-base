@@ -180,7 +180,7 @@ function sum (num) {
 
 ## 规矩集合
 
-~~~makefile
+~~~js
 "no-var": 2,//禁止使用var表达式
 "no-alert": 0,//禁止使用alert confirm prompt
 "no-array-constructor": 2,//禁止使用数组构造器
