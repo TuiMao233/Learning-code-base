@@ -1,7 +1,7 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-07-10 09:22:49
- * @LastEditTime: 2020-08-18 14:19:34
+ * @LastEditTime: 2020-08-19 12:08:03
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
@@ -92,14 +92,24 @@ export function clearUseless({ target, clear_keys }) {
   }
   return target
 }
-// 按需浅拷贝对象
-export function shallowClone({ target, clear_keys }) {
-  const exp = new RegExp(clear_keys)
-  const new_obj = Object.keys(target).reduce((total, key) => {
-    if (exp.test(key)) {
-      total[key] = target[key]
-    }
-    return total
-  }, {})
-  return new_obj
+// 按需拷贝对象
+const object = {
+  id: 6,
+  username: "毛先生",
+  carshop: {
+    address: "广东省惠州市"
+  }
+}
+const cloneObject = appointClone({
+  target: object,
+  clone_keys: `
+  
+  `
+})
+console.log(cloneObject)
+
+function appointClone({ target, clone_keys }) {
+  const new_object = {}
+
+  return new_object
 }

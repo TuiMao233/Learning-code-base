@@ -763,6 +763,7 @@ type k2 = keyof {
   小红: string;
   小芳: string;
 }
+const arr:[k2] = ["小明"]
 // 继承某个泛型对象的属性
 function getProperty<T, K extends keyof T>(obj: T, key: K) {
     return obj[key];

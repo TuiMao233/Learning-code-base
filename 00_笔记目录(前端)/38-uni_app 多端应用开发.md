@@ -313,3 +313,39 @@ export default {
 yarn add eslint eslint-plugin-prettier @vue/cli-plugin-eslint eslint-plugin-vue prettier -D
 
 yarn add @vue/eslint-config-prettier @vue/eslint-config-typescript @typescript-eslint/eslint-plugin @typescript-eslint/parser -D
+
+~~~
+
+## socket 链接流程
+
+~~~js
+  socket: function () {
+    wx.connectSocket({
+      url: 'wss://baoyuan.wsandos.com:7272',
+      success:function(e){
+        console.log(e);return false;
+      }
+    });
+    wx.onSocketMessage(function (res) {    //接收服务端消息
+      var data = JSON.parse(res.data);
+      if(data.type == 'init'){    //登录事件，向后台发送client_id绑定用户id
+        wx.request({
+          url: baseUrl + '/Socket/bindUid',    //baseUrl:https://baoyuan.wsandos.com
+          data: {
+            client_id: data.client_id
+          },
+          method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+          success: function (res) {
+            console.log(res.data);
+          },
+          fail: function (res) {
+            console.log(res.data);
+          }
+        })
+      }else{
+        console.log(data);
+      }
+    });
+  },
+~~~
+

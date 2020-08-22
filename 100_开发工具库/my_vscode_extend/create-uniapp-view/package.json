@@ -8,7 +8,7 @@
   ],
   "publisher": "mrmaoddxxaa",
   "description": "快速创建uniapp视图与组件!",
-  "version": "1.1.0",
+  "version": "1.1.5",
   "engines": {
     "vscode": "^1.47.0"
   },
