@@ -8,23 +8,24 @@
   <style>
     .warp {
       display: grid;
-      /* 定义每一列的列宽 */
-      grid-template-columns: repeat(auto-fill, 100px);
-      /* 定义每一行的行高 */
-      grid-template-rows: repeat(3, 100px);
+      grid-template-columns: 100px 100px 100px;
+      grid-template-rows: 100px 100px 100px;
     }
 
-    .warp div {
-      font-size: 28px;
+    .warp {
+      text-align: center;
+      line-height: 100px;
+      font-size: 21px;
       font-weight: bold;
+      color: #ffffff;
     }
 
-    .warp div:nth-child(2n+0) {
-      background: rgb(190, 108, 108);
+    .warp div:nth-child(odd) {
+      background: rgb(255, 68, 68);
     }
 
-    .warp div:nth-child(2n+1) {
-      background: #8893f8;
+    .warp div:nth-child(even) {
+      background: rgb(51, 54, 255);
     }
   </style>
 </head>
@@ -40,6 +41,7 @@
     <div>7</div>
     <div>8</div>
     <div>9</div>
+    <div>9999999999999999999999</div>
   </div>
 </body>
 

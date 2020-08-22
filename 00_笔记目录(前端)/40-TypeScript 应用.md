@@ -770,3 +770,5 @@ function getProperty<T, K extends keyof T>(obj: T, key: K) {
 const arr: Array<k2> = ['小明']
 ~~~
 
+
+
