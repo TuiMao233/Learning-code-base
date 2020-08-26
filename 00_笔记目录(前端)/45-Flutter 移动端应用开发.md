@@ -106,3 +106,6 @@ flutter doctor --android-licenses
 运行时会卡在Running ‘gradle assembleDebug, 因为Gradle的Maven仓库在国外, 可以使用阿里云的镜像地址。
 
 具体参考：http://www.195440.com/2749
+
+
+
