@@ -1,7 +1,7 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-08-01 15:59:15
- * @LastEditTime: 2020-08-11 08:43:31
+ * @LastEditTime: 2020-08-26 11:36:03
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
@@ -14,6 +14,7 @@ export const getNodeInfos = ({
   selectorQuery = 'select', // 选择器(默认单选)
   filter = null // 过滤特定属性函数 -> (res) => (res.top)
 }) => {
+  
   return new Promise((resolve) => {
     const query = wx.createSelectorQuery()[selectorQuery](selectStr)
     const nodeRefInfos = nodesRefs.reduce((total, _refName) => {

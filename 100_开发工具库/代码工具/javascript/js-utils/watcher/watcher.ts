@@ -1,7 +1,7 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-08-01 17:19:10
- * @LastEditTime: 2020-08-01 19:04:23
+ * @LastEditTime: 2020-08-21 09:29:33
  * @LastEditors: 毛先生
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
@@ -55,9 +55,33 @@ export default class Watcher {
         // 如果该类型订阅者数组为空，删除数组和消息
         if (!this.observes[_observe.type].length) {
           delete this.observes[_observe.type]
+          delete this.messages[_observe.type]
         }
         break;
       }
     }
   }
 }
+
+// 创建观察者实例, 开启调试模式
+const watcher = new Watcher({ debugging: true })
+
+// 创建多个订阅者
+const observe_1 = watcher.subscribe('user_info', user_info => { })
+const observe_2 = watcher.subscribe('user_info', user_info => { })
+const observe_3 = watcher.subscribe('user_info', user_info => { })
+
+console.log('----------------分割线----------------')
+
+// 发布消息
+watcher.publish('user_info', { name: '毛先生', age: 18 })
+
+console.log('----------------分割线----------------')
+
+// 取消一个订阅
+watcher.unsubscribe(observe_2)
+
+console.log('----------------分割线----------------')
+
+// 发布新的消息
+watcher.publish('user_info', { name: '鄧脂龍', age: 80 })
