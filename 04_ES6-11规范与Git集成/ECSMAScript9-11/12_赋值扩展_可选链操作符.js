@@ -1,5 +1,5 @@
 // 可选链操作符: ?.
-function main (config) {
+function main(config) {
   // 这样组成的链式选择赋值, 太麻烦了
   // const dbHost = config && config.db && config.db.host
 
@@ -10,6 +10,7 @@ function main (config) {
 main({
   db: {
     host: '192.168.1.100',
+    port: "2000",
     username: 'root'
   },
   cache: {
@@ -20,6 +21,6 @@ main({
 
 // 函数的调用
 const obj = {
-  fn: ()=> (console.log('fn执行'))
+  fn: () => (console.log('fn执行'))
 }
 obj.fn?.()
