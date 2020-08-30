@@ -1,3 +1,11 @@
+<!--
+ * @Author: 毛先生
+ * @Date: 2020-06-08 10:45:37
+ * @LastEditTime: 2020-08-21 13:36:26
+ * @LastEditors: 毛先生
+ * @Description: 
+ * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
+-->
 <!DOCTYPE html>
 <html>
 
@@ -35,7 +43,7 @@
     // 添加上传进度监听事件
     onUploadProgress: e => {
       const completeProgress = ((e.loaded / e.total * 100) | 0) + "%";
-      console.log(completeProgress)
+      console.log(completeProgress);
       this.progress = completeProgress;
     }
   }

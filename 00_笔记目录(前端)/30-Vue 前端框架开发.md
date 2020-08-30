@@ -86,7 +86,7 @@ Data Bindings-->View:进行DOM绑定监听数据
     ew Vue({
 	el:"#app",
 	data:{
-		imgUrl:https://cn.vuejs.org/images/logo.png?raw=true  
+		imgUrl: "https://cn.vuejs.org/images/logo.png?raw=true"
 	 }
 })
 </script>
@@ -1330,7 +1330,7 @@ mounted () {
 
 ## 消息订阅系统
 
-![消息订阅系统](D:/web学习库/0.笔记目录/img/消息订阅系统.jpg?raw=true)
+![消息订阅系统](img/vue/消息订阅系统.jpg)
 
 ### 通信流程
 
@@ -1360,23 +1360,21 @@ mounted () {
 
 ## 路由基本概念
 
-### SPA
-
 单页 Web 应用（single page web ），整个应用只有一个完整的页面，点击页面中的链接不会刷新页面, 本身也不会向服务器发请求，当点击路由链接时, 只会做页面的局部更新，数据都需要通过 ajax 请求获取, 并在前端异步展现
 
 ![单页面应用](img/vue/单页面应用.jpg)
+
+###### ###
 
 ##  Vue 路由管理器
 
 Vue Router 是 [Vue.js](http://cn.vuejs.org/) 官方的路由管理器。它和 Vue.js 的核心深度集成，让构建单页面应用变得易如反掌！！！
 
-### 路由基本架构
-
-#### 1. 定义路由组件
+### 定义路由组件
 
 路由组件装载着需要的内容，通常这类组件放在 *src/views* 文件夹内`(About.vue、Home.vue)`
 
-#### 2. 定义路由器js
+### 定义路由控制器
 
 ~~~js
 // src/rouder/index.js：
@@ -1402,7 +1400,7 @@ export default new VueRouter({
 })
 ~~~
 
-#### 3. Vue 入口函数引入路由
+### Vue 入口函数引入路由
 
 ~~~js
 import Vue from 'vue'
@@ -1416,7 +1414,7 @@ const app = new Vue({
 }).$mount('#app')
 ~~~
 
-#### 4. 静态组件使用路由组件
+### 静态组件使用路由组件
 
 ~~~html
 <div id="app">
@@ -1430,7 +1428,7 @@ const app = new Vue({
 
 [^注意]:当在入口函数引入路由，则代表所有组件都已经有了路由器，所以其他静态组件也能使用路由
 
-#### 5. 路由组件缓存
+### 路由组件缓存
 
 可让显示路由保存值和自身，在刷新页面时或重新启动浏览器不会消失
 
@@ -1440,7 +1438,7 @@ const app = new Vue({
 </keep-alive>
 ~~~
 
-## 静态组件操作路由
+## 组件中操作路由
 
 ### 组件实例访问路由
 
@@ -1464,38 +1462,143 @@ new Vue({
 })
 ~~~
 
-### 路由链接占位符传值
+## 路由跳转时传入参数
 
-**一、定义一个路由，并输入一个占位符(":xxx")**
+### 路径中传入占位符(params)
 
 ~~~js
-// src/rouder/index.js
-// 引入
-import Home from './Home.vue'
-// 路由配置
+// 定义路由占位符id
 roates: [{ path: '/home/:id', commponent: Home }]
 ~~~
 
-**二、任意组件利用router.push改变路径，并在占位符位置传入任意值**
+~~~html
+<!-- 定义标签内跳转, 传入id为6 -->
+<router-link :to="/home/6">User</router-link>
+~~~
 
 ~~~js
-pushShow (id) {     
-    this.$router.push('/home/${id}') 
+/* 定义命令跳转, 传入id为6 */
+this.$router.push("/home/6")
+~~~
+
+### 对象中传入占位符(params)
+
+~~~html
+<!-- 定义标签内跳转, 传入id为6 -->
+<router-link :to="{path: '/home', params: {id: 60}}">User</router-link>
+~~~
+
+~~~js
+/* 定义命令跳转, 传入id为6 */
+this.$router.push({path: "/home", params: {id: 60}})
+~~~
+
+### 对象中传入查询参数(query)
+
+~~~html
+<!-- 定义标签内跳转, 传入id为6 -->
+<router-link :to="{path: '/home', query: {id: 60}}">User</router-link>
+~~~
+
+~~~js
+/* 定义命令跳转, 传入id为6 */
+this.$router.push({path: "/home", query: {id: 60}})
+~~~
+
+## 路由参数或占位符变化
+
+### 使用watch进行监听
+
+~~~js
+/* 定义路由组件接受变化 */
+watch: {
+    // 全局监听
+    $route (to, form) {},
+    // 单独监听
+    "$route.params.id" (to, form) {}
 }
 ~~~
 
-**三、路由组件获取"id"占位符值**
+### 使用 beforeRouteUpdate 导航守卫
 
 ~~~js
-watch: {
-    $route: function (route) {
-    	//  监视占位符值
-		if (route.params.id) {
-			const id = route.params.id
-			// 从数据库中寻找有相同标识的数据并返回
-			this.logoData = this.userData.find(user => id === user.id)
-		}
-	}
+const User = {
+  template: '...',
+  beforeRouteUpdate (to, from, next) {
+    // 对路线变化做出反应...
+    // 不要忘记调用 next()
+  }
+}
+~~~
+
+##  导航守卫(路由拦截器)
+
+### 全局前置守卫
+
+使用 `router.beforeEach` 注册一个全局前置守卫：
+
+```js
+const router = new VueRouter({ ... })
+
+router.beforeEach((to, from, next) => {
+  // ...
+})
+```
+
+当一个导航触发时，全局前置守卫按照创建顺序调用。守卫是异步解析执行，此时导航在所有守卫 resolve 完之前一直处于 **等待中**。具体参数参考：
+
+[全局前置守卫]: https://router.vuejs.org/zh/guide/advanced/navigation-guards.html#%E5%85%A8%E5%B1%80%E5%89%8D%E7%BD%AE%E5%AE%88%E5%8D%AB
+
+### 全局后置钩子
+
+可以注册全局后置钩子，然而和守卫不同的是，这些钩子不会接受 `next` 函数也不会改变导航本身：
+
+```js
+router.afterEach((to, from) => {
+  // ...
+})
+```
+
+### 路由独享守卫
+
+在路由配置上直接定义 `beforeEnter` 守卫：
+
+```js
+const router = new VueRouter({
+  routes: [
+    {
+      path: '/foo',
+      component: Foo,
+      beforeEnter: (to, from, next) => {
+        // ...
+      }
+    }
+  ]
+})
+```
+
+### 组件内的守卫
+
+可以在路由组件内直接定义以下路由导航守卫：
+
+~~~js
+const Foo = {
+  template: `...`,
+  beforeRouteEnter (to, from, next) {
+    // 在渲染该组件的对应路由被 confirm 前调用
+    // 不！能！获取组件实例 `this`
+    // 因为当守卫执行前，组件实例还没被创建
+  },
+  beforeRouteUpdate (to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+  },
+  beforeRouteLeave (to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+  }
 }
 ~~~
 
@@ -2171,8 +2274,6 @@ export default {
 }
 </script>
 ~~~
-
-
 
 # Vue 常见问题
 
