@@ -771,5 +771,10 @@ function getProperty<T, K extends keyof T>(obj: T, key: K) {
 const arr: Array<k2> = ['小明']
 ~~~
 
+## 利用Record定义key值
 
+~~~typescript
+type DiffKeys<K extends string | number | symbol> = keyof Record<K, any>
+const key:DiffKeys<"GET"|"POST"> = "GET"
+~~~
 
