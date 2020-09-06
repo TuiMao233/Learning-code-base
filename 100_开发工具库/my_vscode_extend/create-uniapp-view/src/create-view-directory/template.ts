@@ -15,11 +15,8 @@ export function createViewTemplate(options: CreateViewTemplateOptions) {
   const style_type = options.style_type && options.style_type !== 'css' ? ` lang="${options.style_type}"` : '';
   const strike = options.view_name.replace(/([A-Z])/g, "-$1").toLocaleLowerCase();
   const view_name = strike.indexOf("-") === 0 ? strike.slice(1) : strike;
-  return `
-<template>
-  <div class="${view_name}">
-    ${view_name}
-  </div>
+  return `<template>
+  <div class="${view_name}">${view_name}</div>
 </template>
 
 <script${options.typescript ? ' lang="ts"' : ''}>
@@ -32,7 +29,7 @@ export default ${options.typescript ? 'Vue.extend(' : ''}{
   watch: {},
 
   // 周期函数--监听页面加载
-  onLoad(options) {},
+  onLoad() {},
   // 周期函数--监听页面初次渲染完成
   onReady() {},
   // 周期函数--监听页面显示
@@ -46,13 +43,12 @@ export default ${options.typescript ? 'Vue.extend(' : ''}{
   // 页面处理函数--监听用户上拉触底
   onReachBottom() {},
   // 页面处理函数--监听页面滚动
-  onPageScroll(event) {},
+  /* onPageScroll(event) {}, */
   // 页面处理函数--用户点击右上角分享
   /* onShareAppMessage(options) {}, */
 }${options.typescript ? ')' : ''};
 </script>
 
-<style${style_type}>
-</style>
+<style${style_type}></style>
 `;
 }
