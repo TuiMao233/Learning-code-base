@@ -1165,7 +1165,7 @@ A账户想要给B账户下的仓库提交代码，**1.添加Collaborators使用h
 
 `git clone [远程仓库url]（克隆时不需要 git init）`
 
-![git-add-url](https://github.com/TuiMao233/Learning_code/blob/master/00_笔记目录/img/GitHub-add/git-add-url.jpg?raw=true)
+![git-add-url](img/GitHub-add/git-add-url.jpg?raw=true)
 
 **默认克隆时为远程仓库起的别名为 origin。**
 `$ git remote > [origin]`
