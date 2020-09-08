@@ -1,3 +1,11 @@
+/*
+ * @Author: 毛先生
+ * @Date: 2020-06-08 10:45:36
+ * @LastEditTime: 2020-08-29 13:56:35
+ * @LastEditors: 毛先生
+ * @Description: 
+ * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
+ */
 
 // 引入爬取热门电影函数
 const moviesCrawler = require('./movies_crawler');
@@ -10,31 +18,31 @@ const saveTrailers = require('../save/save_trailer')
 // 引入上传至七牛云数据库方法
 const upDatatoQiniu = require('../qiniu')
 /* 爬取热门电影 */
-async function moviesCrawlerStart () {
-    const result = await moviesCrawler()
-    console.log(`-----数据爬取成功,共爬取${result.length}条数据-----`)
-    console.log(`-----数据格式为以下-----`)
-    console.log(result[0])
-    const {Model, mongoose} = await saveMovies(result)
-    console.log('-----准备上传至七牛服务器-----')
-    await upDatatoQiniu(Model, 'poster_url', 'poster_key')
-    console.log(`-----数据爬取完毕,准备关闭数据库-----`)
-    mongoose.disconnect()
+async function moviesCrawlerStart() {
+  const result = await moviesCrawler()
+  console.log(`-----数据爬取成功,共爬取${result.length}条数据-----`)
+  console.log(`-----数据格式为以下-----`)
+  console.log(result[0])
+  const { Model, mongoose } = await saveMovies(result)
+  console.log('-----准备上传至七牛服务器-----')
+  await upDatatoQiniu(Model, 'poster_url', 'poster_key')
+  console.log(`-----数据爬取完毕,准备关闭数据库-----`)
+  mongoose.disconnect()
 }
 
 /* 爬取预告片电影 */
-async function trailerCrawlerStart () {
-    const result = await trailerCrawler()
-    console.log(`-----数据爬取成功,共爬取${result.length}条数据-----`)
-    console.log(`-----数据格式为以下-----`)
-    console.log(result[0])
-    const {Model, mongoose} = await saveTrailers(result)
-    console.log('-----准备上传至七牛服务器-----')
-    await upDatatoQiniu(Model, 'poster_url', 'poster_key')
-    await upDatatoQiniu(Model, 'video_cover_url', 'video_cover_key')
-    await upDatatoQiniu(Model, 'video_url', 'video_key')
-    console.log(`-----数据爬取完毕,准备关闭数据库-----`)
-    mongoose.disconnect()
+async function trailerCrawlerStart() {
+  const result = await trailerCrawler()
+  console.log(`-----数据爬取成功,共爬取${result.length}条数据-----`)
+  console.log(`-----数据格式为以下-----`)
+  console.log(result[0])
+  const { Model, mongoose } = await saveTrailers(result)
+  console.log('-----准备上传至七牛服务器-----')
+  await upDatatoQiniu(Model, 'poster_url', 'poster_key')
+  await upDatatoQiniu(Model, 'video_cover_url', 'video_cover_key')
+  await upDatatoQiniu(Model, 'video_url', 'video_key')
+  console.log(`-----数据爬取完毕,准备关闭数据库-----`)
+  mongoose.disconnect()
 }
 
 // 执行爬取热门电影

@@ -2,83 +2,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>电影预告</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://cdn.bootcss.com/dplayer/1.25.0/DPlayer.min.css" rel="stylesheet">
-    <style>
-        .card-title,
-        .navbar-brand {
-            font-weight: bold;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>电影预告</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="https://cdn.bootcss.com/dplayer/1.25.0/DPlayer.min.css" rel="stylesheet">
+  <style>
+    .card-title,
+    .navbar-brand {
+      font-weight: bold;
+    }
 
-        .card {
-            font-size: 13px;
-        }
+    .card {
+      font-size: 13px;
+    }
 
-        .card-img-top {
-            width: 100%;
-            height: 300px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
+    .card-img-top {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
 
-        .play_mask {
-            position: absolute;
-            top: 0;
-            right: 0;
-            left: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, .5);
-            font-size: 20px;
-            line-height: 300px;
-            text-align: center;
-            font-weight: bold;
-            color: #ffffff;
-        }
+    .play_mask {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, .5);
+      font-size: 20px;
+      line-height: 300px;
+      text-align: center;
+      font-weight: bold;
+      color: #ffffff;
+    }
 
-        .btn.btn-link {
-            text-decoration: none;
-            color: #3d3d3d
-        }
+    .btn.btn-link {
+      text-decoration: none;
+      color: #3d3d3d
+    }
 
-        html,
-        body {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
+    html,
+    body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
 
-        .mask {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background-color: rgba(0, 0, 0, .5);
-            z-index: 5;
-            display: none;
-        }
+    .mask {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-color: rgba(0, 0, 0, .5);
+      z-index: 5;
+      display: none;
+    }
 
-        #dplayer {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-        }
+    #dplayer {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+    }
 
-        .content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-        }
-    </style>
+    .content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+  </style>
 </head>
 <script>
-    {/* {
+  {/* {
   title: '大红包',
   like: 3726,
   doban_id: 33457717,
@@ -103,143 +103,137 @@
 </script>
 
 <body>
-    <div class="mask">
-        <div id="dplayer">
-            <!-- 弹幕播放器架构 -->
-        </div>
+  <div class="mask">
+    <div id="dplayer">
+      <!-- 弹幕播放器架构 -->
     </div>
-    <div class="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand">电影预告片</a>
-            <form class="form-inline" action="/search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </nav>
-        <!-- 定义默认路径 -->
-        <% var prefix = 'http://q8nsngnuu.bkt.clouddn.com/' %>
-        <% findResult.forEach(function (item, index){ %>
+  </div>
+  <div class="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand">电影预告片</a>
+      <form class="form-inline" action="/search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </nav>
+    <!-- 定义默认路径 -->
+    <% var prefix = 'http://q8nsngnuu.bkt.clouddn.com/' %>
+    <% findResult.forEach(function (item, index){ %>
+    <div class="card">
+      <!-- 预告片详情页 -->
+      <div class="card-img-top" style="background-image: url(<%= prefix+item.poster_key %>);"
+        <% if (item.video_key) { %> data-cover-url=<%= prefix+item.video_cover_key %>
+        data-video-url=<%= prefix+item.video_key %> data-id=<%= item.doban_id %> videoPlay <% } %>>
+        <% if (item.video_key) { %>
+        <div class="play_mask">点击播放</div>
+        <% } %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title"><%= item.title %></h5>
+        <p class="card-text summary">
+          &nbsp;&nbsp;
+          <%= item.summary %>
+        </p>
+      </div>
+      <div class="accordion" id="accordionExample">
         <div class="card">
-            <!-- 预告片详情页 -->
-            <div class="card-img-top" style="background-image: url(<%= prefix+item.poster_key %>);"
-                <% if (item.video_key) { %>
-                    data-cover-url= <%= prefix+item.video_cover_key %>
-                    data-video-url= <%= prefix+item.video_key %>
-                    data-id= <%= item.doban_id %>
-                    videoPlay
-                <% } %>>
-                <% if (item.video_key) { %>
-                    <div class="play_mask">点击播放</div>
-                <% } %>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"><%= item.title %></h5>
-                <p class="card-text summary">
-                    &nbsp;&nbsp;
-                    <%= item.summary %>
-                </p>
-            </div>
-            <div class="accordion" id="accordionExample">
-                <div class="card">
-                    <div class="card-header" id="headingThree">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link btn-block text-left collapsed" type="button"
-                                data-toggle="collapse" data-target="#collapse_<%= index %>" aria-expanded="false"
-                                aria-controls="collapse_<%= index %>">
-                                查看电影详情
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapse_<%= index %>" class="collapse" aria-labelledby="headingThree"
-                        data-parent="#accordionExample">
-                        <ul class="list-group">
-                            <li class="list-group-item">类型：<%= item.genre %></li>
-                            <li class="list-group-item">导演：<%= item.director %></li>
-                            <li class="list-group-item">编剧：<%= item.screenwriter %></li>
-                            <li class="list-group-item">主演：<%= item.starring %></li>
-                            <li class="list-group-item">上映日期：<%= item.release_area %></li>
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse"
+                data-target="#collapse_<%= index %>" aria-expanded="false" aria-controls="collapse_<%= index %>">
+                查看电影详情
+              </button>
+            </h2>
+          </div>
+          <div id="collapse_<%= index %>" class="collapse" aria-labelledby="headingThree"
+            data-parent="#accordionExample">
+            <ul class="list-group">
+              <li class="list-group-item">类型：<%= item.genre %></li>
+              <li class="list-group-item">导演：<%= item.director %></li>
+              <li class="list-group-item">编剧：<%= item.screenwriter %></li>
+              <li class="list-group-item">主演：<%= item.starring %></li>
+              <li class="list-group-item">上映日期：<%= item.release_area %></li>
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <% var delayDay = Math.floor((Date.now() - item.createTime) / 86400000) %>
-                <p class="card-text"><small class="text-muted"> <%= delayDay == 0 ? '当' : delayDay %>天前更新</small></p>
-            </div>
-            </>
-            <% }) %>
+            </ul>
+          </div>
         </div>
+      </div>
+      <div class="container">
+        <% var delayDay = Math.floor((Date.now() - item.createTime) / 86400000) %>
+        <p class="card-text"><small class="text-muted"> <%= delayDay == 0 ? '当' : delayDay %>天前更新</small></p>
+      </div>
+      </>
+      <% }) %>
     </div>
+  </div>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.5.0/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script>
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.bootcss.com/dplayer/1.25.0/DPlayer.min.js"></script>
 <script>
-    $(function () {
-        const dp = new DPlayer({
-            container: document.getElementById('dplayer'),
-            danmaku: {api: '<%= url %>/'}
-        });
-        let isPlayerShow = false
-        // 蒙版点击消失
-        $('.mask').click(function (event) {
-            // 暂停播放
-            dp.pause()
-            // 设置播放时间
-            dp.seek(0)
-            // 淡出盒子
-            $('.mask').fadeOut(500)
-        })
-        // 索引蒙版点击显示
-        $('[videoPlay]').click(function (event) {
-            const url = $(this).data('video-url')
-            const pic = $(this).data('cover-url')
-            const id = $(this).data('id')
-            /* 切换视频 */
-            dp.switchVideo(
-                { url, pic },
-                {id, api: '<%= url %>/'}
-            )
-            dp.play()
-            /* 淡入盒子 */
-            $('.mask').fadeIn(500)
-        })
-        // 阻止冒泡
-        $('#dplayer').click(function (evnet) {
-            event.stopPropagation()
-        })
-
-        /* 
-            1. 加载弹幕
-               请求地址: http://localhost:3000/v3
-               请求方式: GET
-               返回值: json字符串
-                {code: 0, data:[
-                    [
-                        3.3964, // 弹幕发送时间
-                        0,      // 弹幕的类型
-                        16777215, // 弹幕的颜色
-                        "DIYgod", // 弹幕的发送者
-                        "11111" // 弹幕的内容
-                    ],
-                    ......
-                ]}
-            2. 发送弹幕
-               请求地址: http://localhost:3000/v3
-               请求方式: POST
-               请求体参数:
-                author: "testuser"  弹幕发送者
-                color: 16777215 弹幕颜色
-                id: "demo"   弹幕池ID
-                text: '123456' 弹幕的内容
-                time: 0 弹幕的发送时间
-                type: 0 弹幕的类型
-               需要响应的内容:
-                {code: 0, data:{}}
-        */
+  $(function () {
+    const dp = new DPlayer({
+      container: document.getElementById('dplayer'),
+      danmaku: { api: '<%= url %>/' }
+    });
+    let isPlayerShow = false
+    // 蒙版点击消失
+    $('.mask').click(function (event) {
+      // 暂停播放
+      dp.pause()
+      // 设置播放时间
+      dp.seek(0)
+      // 淡出盒子
+      $('.mask').fadeOut(500)
     })
+    // 索引蒙版点击显示
+    $('[videoPlay]').click(function (event) {
+      const url = $(this).data('video-url')
+      const pic = $(this).data('cover-url')
+      const id = $(this).data('id')
+      /* 切换视频 */
+      dp.switchVideo(
+        { url, pic },
+        { id, api: '<%= url %>/' }
+      )
+      dp.play()
+      /* 淡入盒子 */
+      $('.mask').fadeIn(500)
+    })
+    // 阻止冒泡
+    $('#dplayer').click(function (evnet) {
+      event.stopPropagation()
+    })
+
+    /* 
+        1. 加载弹幕
+           请求地址: http://localhost:3000/v3
+           请求方式: GET
+           返回值: json字符串
+            {code: 0, data:[
+                [
+                    3.3964, // 弹幕发送时间
+                    0,      // 弹幕的类型
+                    16777215, // 弹幕的颜色
+                    "DIYgod", // 弹幕的发送者
+                    "11111" // 弹幕的内容
+                ],
+                ......
+            ]}
+        2. 发送弹幕
+           请求地址: http://localhost:3000/v3
+           请求方式: POST
+           请求体参数:
+            author: "testuser"  弹幕发送者
+            color: 16777215 弹幕颜色
+            id: "demo"   弹幕池ID
+            text: '123456' 弹幕的内容
+            time: 0 弹幕的发送时间
+            type: 0 弹幕的类型
+           需要响应的内容:
+            {code: 0, data:{}}
+    */
+  })
 </script>
 
 </html>

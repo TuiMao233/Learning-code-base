@@ -293,7 +293,7 @@ git update-index --add new.txt git write-tree
 ## 分支操作
 
 **创建分支：** `git branch branchname`
-**切换分支：**`git checkout  branchname`
+**切换分支：**`git checkout branchname`
 **创建&切换分支：**`git checkout -b branchname`
 **创建&指定提交对象：**`git branch branchname 提交对象hash` 
 **版本穿梭(时光机)：** `git branch branchname commitHash`

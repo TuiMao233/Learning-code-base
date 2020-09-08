@@ -1,8 +1,15 @@
+/*
+ * @Author: 毛先生
+ * @Date: 2020-06-08 10:45:36
+ * @LastEditTime: 2020-08-29 13:58:43
+ * @LastEditors: 毛先生
+ * @Description: 
+ * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
+ */
 // 预告片爬虫程序
 
 const puppeteer = require('puppeteer');
 const url = 'https://movie.douban.com/coming'
-const { resolve } = require('path')
 
 const options = {
     args: ['--no-sandbox'], // --no-sandbox 以沙盒模式打开
