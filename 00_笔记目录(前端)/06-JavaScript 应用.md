@@ -161,13 +161,13 @@ console.log({} instanceof Object)
 Date 对象用于处理日期和时间。
 
 ~~~js
-const dateObj = new Date(); 			      // 创建date对象, 默认将当前时间日期当做初始值
-const fullYear = dateObj.getFullYear()  // 年
-const mont = dateObj.getMonth() + 1; 	  // 月, 1~31 从0开始算 所以0=1
-const day = dateObj.getDate(); 			    // 日
-const week = dateObj.getDay(); 			    // 星期, 1~7 从1开始算
-const hours = dateObj.getHours(); 		  // 小时
-const minutes = dateObj.getMinutes(); 	// 分钟
+const dateObj = new Date(); 	// 创建date对象, 默认将当前时间日期当做初始值
+const fullYear = dateObj.getFullYear()	// 年
+const mont = dateObj.getMonth() + 1;	// 月, 1~31 从0开始算 所以0=1
+const day = dateObj.getDate(); 			// 日
+const week = dateObj.getDay(); 			// 星期, 1~7 从1开始算
+const hours = dateObj.getHours(); 		// 小时
+const minutes = dateObj.getMinutes();	// 分钟
 const seconds = dateObj.getSeconds(); 	// 秒
 
 dateObj.setDate(day)  // 设置date对象 一个月中的一天的一个数值（1 ~ 31）。

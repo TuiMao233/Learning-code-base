@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="{CHARSET}">
+  <title></title>
+  <style>
+    #box1 {
+      width: 200px;
+      height: 200px;
+      background-color: brown;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    #box2 {
+      width: 200px;
+      height: 200px;
+      background-color: seagreen;
+      position: absolute;
+      top: 300px;
+      cursor: pointer;
+    }
+
+    #span {
+      background-color: blue;
+    }
+  </style>
+  <script type="text/javascript">
+    window.onload = function () {
+      document.queryCommandEnabled('box1').onclick(function (ev) {
+        ev || event
+        el.preventDefault()
+      })
+    }
+  </script>
+
+</head>
+
+<body>
+  asdsadsada
+  <div id="box1"></div>
+  <div id="box2"></div>
+</body>
+
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<script>
+  function handleFiles(files) {
+    var div = document.getElementById('display');
+    for (var i = 0; i < files.length; i++) {
+      var img = document.createElement('img');
+      // 每次使用URL.createObjectURL()方法，都会在内存里面生成一个 URL 实例。
+      img.src = URL.createObjectURL(files[i]);
+      div.appendChild(img);
+    }
+    // 果不再需要该方法生成的 URL 字符串，为了节省内存，可以使用URL.revokeObjectURL()方法释放这个实例。
+    URL.revokeObjectURL();
+  }
+</script>
+
+<body>
+  <div id="display" />
+  <input type="file" id="fileElem" multiple accept="image/*" onchange="handleFiles(this.files)">
+</body>
+
+</html>

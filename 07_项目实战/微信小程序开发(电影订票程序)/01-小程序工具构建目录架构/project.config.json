@@ -5,20 +5,28 @@
 	},
 	"setting": {
 		"urlCheck": true,
+		"scopeDataCheck": false,
+		"coverView": true,
 		"es6": true,
 		"postcss": true,
+		"compileHotReLoad": false,
 		"preloadBackgroundData": false,
 		"minified": true,
-		"newFeature": true,
 		"autoAudits": false,
-		"coverView": true,
-		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"newFeature": true,
+		"uglifyFileName": false,
+		"uploadWithSourceMap": true,
+		"useIsolateContext": true,
+		"nodeModules": false,
+		"enhance": false,
+		"useCompilerModule": false,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": true
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.0.4",
 	"appid": "wx24af76e297246c4d",
-	"projectname": "%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91(%E7%94%B5%E5%BD%B1%E8%AE%A2%E7%A5%A8%E7%A8%8B%E5%BA%8F)",
+	"projectname": "01-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%B7%A5%E5%85%B7%E6%9E%84%E5%BB%BA%E7%9B%AE%E5%BD%95%E6%9E%B6%E6%9E%84",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

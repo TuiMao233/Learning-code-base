@@ -14,8 +14,6 @@ dom.setProperty('name','xxx')
 dom.removeAttribute('name')
 ~~~
 
-###### 
-
 ## 操作类方法
 
 ~~~js
@@ -27,8 +25,6 @@ dom.classList.remove('dl') // --> <dom class="">
 dom.classList.toggle('dl') // --> <dom class="dl">
 dom.classList.toggle('dl') // --> <dom class="">
 ~~~
-
-###### 
 
 ## 自定义元素属性
 
@@ -43,7 +39,16 @@ div.dataset.sdl = "wc"
 </script>
 ~~~
 
-###### 
+## 禁用元素事件
+
+~~~html
+<style>
+    .button {
+        pointer-events: none;
+    }
+</style>
+<div class="button"></div>
+~~~
 
 # HTML5 ViAudio 音视频标签
 
