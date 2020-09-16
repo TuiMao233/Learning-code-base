@@ -29,15 +29,17 @@ exports.recursionGetFile = (current_path, file_name) => {
         function recursion(app_path) {
             const recurs_path = path.resolve(app_path, file_name);
             // 递归出口: 路径是根路径, 停止递归
-            if (recurs_path.length == (3 + file_name.length))
+            if (recurs_path.length === (3 + file_name.length)) {
                 return false;
+            }
             // 文件是否存在
             fs.access(recurs_path, function (error) {
                 if (!error) {
                     // 递归出口: 文件存在, 返回文件信息
                     fs.readFile(recurs_path, (error, data) => {
-                        if (error)
+                        if (error) {
                             return resolve(null);
+                        }
                         resolve({ path: recurs_path, data: data.toString() });
                     });
                     // 递归点: 当该文件不存在, 往上一级目录总

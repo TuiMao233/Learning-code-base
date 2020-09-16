@@ -26,7 +26,7 @@ export default async function createUniAppView(options: EcreateUniAppView) {
 
   fs.writeFile(
     path.resolve(create_path, view_name, `${view_name}.vue`),
-    createViewTemplate({ view_name, typescript, style_type }),
+    createViewTemplate({ view_name, typescript, style_type, component }),
     { flag: "w" }, () => { }
   );
 

@@ -36,7 +36,7 @@ function createUniAppView(options) {
         catch (error) {
             return { type: 'error', msg: '创建错误, 该文件夹已存在!' };
         }
-        fs.writeFile(path.resolve(create_path, view_name, `${view_name}.vue`), template_1.createViewTemplate({ view_name, typescript, style_type }), { flag: "w" }, () => { });
+        fs.writeFile(path.resolve(create_path, view_name, `${view_name}.vue`), template_1.createViewTemplate({ view_name, typescript, style_type, component }), { flag: "w" }, () => { });
         if (component) {
             return { type: 'success', msg: '创建组件成功!' };
         }
