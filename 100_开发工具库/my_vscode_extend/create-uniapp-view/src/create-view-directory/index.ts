@@ -45,7 +45,7 @@ export default async function createUniAppView(options: EcreateUniAppView) {
   let app_json_data = JSON.parse(appJson.data);
   app_json_data.pages.push({
     path: `pages/${view_name}/${view_name}`,
-    stype: { navigationBarTitleText: view_name }
+    style: { navigationBarTitleText: view_name }
   });
   app_json_data = JSON.stringify(app_json_data, null, "\t");
   // 修改文件
