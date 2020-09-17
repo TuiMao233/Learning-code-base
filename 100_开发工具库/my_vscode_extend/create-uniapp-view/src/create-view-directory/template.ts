@@ -42,8 +42,6 @@ export default ${options.typescript ? 'Vue.extend(' : ''}{
   deactivated() {},
   // 组件周期函数--监听组件销毁之前
   beforeDestroy() {},
-  // 组件周期函数--监听组件销毁之后
-  destroy() {},
 }${options.typescript ? ')' : ''};
 </script>
 
