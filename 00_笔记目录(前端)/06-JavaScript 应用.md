@@ -262,10 +262,10 @@ Array.prototype.shift()
 
 
 //! 截取返回指定长度的数组(不会改变原数组)
-Array.prototype.slice(start, End)
+Array.prototype.slice(start, [,End])
 //! 方法向/从数组中添加/删除项目(改变原数组)，然后返回被删除的项目。
 //! 第一个参数是项的索引, 第二个参数是删除的个数(0表示不删), 第三个参数是插入的元素(可不选)
-Array.prototype.splice(index,howmany,item1,...)
+Array.prototype.splice(index, howmany, item1, ...)
 //! 将数组反转
 ['1','2','3'].reverse() // '3', '2', '1'
 
