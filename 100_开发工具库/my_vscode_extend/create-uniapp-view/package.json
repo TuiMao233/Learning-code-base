@@ -49,11 +49,11 @@
     "commands": [
       {
         "command": "create-uniapp-view.createPage",
-        "title": "创建uniapp页面"
+        "title": "新建uniapp页面"
       },
       {
         "command": "create-uniapp-view.createComponent",
-        "title": "创建uniapp组件"
+        "title": "新建uniapp组件"
       }
     ],
     "menus": {
@@ -61,12 +61,12 @@
         {
           "group": "navigation@9",
           "command": "create-uniapp-view.createPage",
-          "title": "创建uniapp页面"
+          "title": "新建uniapp页面"
         },
         {
           "group": "navigation@9",
           "command": "create-uniapp-view.createComponent",
-          "title": "创建uniapp组件"
+          "title": "新建uniapp组件"
         }
       ]
     }
