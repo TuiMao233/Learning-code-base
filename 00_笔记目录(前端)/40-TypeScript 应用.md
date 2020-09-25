@@ -778,3 +778,17 @@ type DiffKeys<K extends string | number | symbol> = keyof Record<K, any>
 const key:DiffKeys<"GET"|"POST"> = "GET"
 ~~~
 
+## 利用Extract定义value值
+
+~~~js
+interface Obj {
+    name: string
+}
+const obj = {
+    name: "毛先生"
+}
+function ():Obj[Extract<keyof Obj, string>] {
+    return obj[name]
+}
+~~~
+

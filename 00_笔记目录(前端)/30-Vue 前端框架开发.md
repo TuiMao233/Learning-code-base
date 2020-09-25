@@ -461,6 +461,22 @@ Vue transition 允许我们只设置隐藏或者显示的样式, 这样切换的
 .enter	.tab	.delete (捕获“删除”和“退格”键)	.esc	.space	.up	.down	.left	.right
 ~~~
 
+## Vue 模板过滤器
+
+~~~js
+// 定义过滤器
+Vue.filter("dateFileter", (value, ...args)=> {
+    return "..." // ...
+})
+~~~
+
+~~~html
+<!-- 字符串模板使用过滤器 -->
+<time>{{time | dateFileter}}</time>
+<!-- 命令模板使用过滤器 -->
+<div v-bind:time="time | dateFileter"></div>
+~~~
+
 # Vue 实例对象生命周期
 
 ## 生命周期流程
@@ -1290,7 +1306,7 @@ mounted () {
 </script>
 ~~~
 
-## 子组件接受父组件标签
+## 子组件solt接受父组件标签
 
 **一、父组件利用子组件标签，传入实体标签**
 
@@ -1306,12 +1322,16 @@ mounted () {
 
 ~~~html
 <!-- 输出父组件标签 -->
-<div>
+<父组件标签>
 	<slot name="xxx">父组件对应xxx的标签结构</slot>
 	<div>组件确定的标签结构</div>
 	<slot name="yyy">父组件对应yyy的标签结构</slot>
-</div>
+</父组件标签>
 ~~~
+
+## 父组件接受slot子组件事件
+
+## 父组件接受slot子组件属性
 
 # 子组件间通信
 

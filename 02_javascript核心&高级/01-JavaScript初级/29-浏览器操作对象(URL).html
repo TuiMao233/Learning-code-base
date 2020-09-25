@@ -11,6 +11,7 @@
   window.onload = function () {
     // URL作为构造函数，可以生成 URL 实例。它接受一个表示 URL 的字符串作为参数。如果参数不是合法的 URL，会报错。
     var url = new URL('http://user:passwd@www.example.com:4097/path/a.html?x=111#part1');
+    console.log(url.searchParams)
     console.log(url)
     /* {
       hash: "#part1"

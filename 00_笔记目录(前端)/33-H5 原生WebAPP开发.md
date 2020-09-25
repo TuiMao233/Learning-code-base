@@ -272,8 +272,8 @@ html.style.fontSize = document.documentElement.clinetWidth / 16 + 'px'
 ### 利用less简化计算rem
 
 ~~~less
-@rem: 设计图总宽/16rem // 每像素对应的css像素
-width: 70/@rem // css像素*rem值 则等于70对设计图总宽对应的rem值
+@rem: 设计图总宽/16rem // 每一rem对应多少px
+width: 70/@rem // css像素/rem值 = 则等于70对设计图总宽对应的rem值
 ~~~
 
 ## 利用viewport进行适配

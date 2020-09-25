@@ -101,6 +101,23 @@ video.pause()		// 媒体暂停
 video.load()		// 媒体重载
 ~~~
 
+## 音视频事件回调
+
+~~~js
+// 媒体元数据加载完毕,现在所有的属性包含了它们应有的有效信息
+audio.addEventListener("loadedmetadata", ()=>{})
+// 当媒介被用户或程序暂停时
+audio.addEventListener("pause", ()=>{})
+// 当媒介被用户或程序播放时
+audio.addEventListener("play", ()=>{})
+// 当媒介播放位置被用户或程序播放时
+audio.addEventListener("timeupdate", ()=>{})
+// 当媒介音量被用户或程序播放时
+audio.addEventListener("volumechange", ()=>{})
+// 当媒介已到达媒体结尾时
+audio.addEventListener("ended", ()=>{})
+~~~
+
 ## 组成播放器要素
 
 ~~~cd
