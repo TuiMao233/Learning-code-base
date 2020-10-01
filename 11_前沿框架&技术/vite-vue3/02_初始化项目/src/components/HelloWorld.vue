@@ -10,13 +10,13 @@
   </div>
 </template>
 
-<script  setup="props" lang="ts">
+<script setup="props" lang="ts">
 import { ref } from "vue";
 declare const props: {
   msg: string
 }
-export const count = ref(0);
-export const inc = () => count.value++;
+export const count = ref(0)
+export const inc = () => count.value++
 
 if (count.value === 0) {
   count.value++
