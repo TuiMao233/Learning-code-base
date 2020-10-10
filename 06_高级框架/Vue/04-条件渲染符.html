@@ -3,12 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<title></title>
-		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 	<style type="text/css">
-		*{
-			display: none;
-		}
 	</style>
 	<body>
 		<!--
@@ -27,12 +23,12 @@
 			<button @click="ok=!ok">点击</button>
 		</div>
 	</body>
-	
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<script type="text/javascript">
 	var vm =new Vue({
 			el:'#demo',
 			data:{
-				ok:false
+				ok: false
 			}
 		})
 		

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-		<script src="js/vue.js"></script>
-	</head>
-	<body>
-		<!-- 
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <!-- 
 			1.模板的理解：
 			动态的html页面
 			包含了一些JS语法代码
@@ -27,41 +28,43 @@
 					v-on:click='xxx'
 				简洁写法
 		 -->
-		
-		<div id="app">
-			<h2>双大括号表达式</h2>
-			<p>{{msg}}</p>				<!-- I Will Back!! -->
-			<p>{{msg.toUpperCase()}}</p><!-- 嵌套js代码：全部大写 -->
-			<p v-html="msge"></p>		<!-- innerHTML -->
-			<p v-text="msge"></p>		<!-- innerText -->
-			
-			<br />
-			
-			<h2>2.指令一：强制数据绑定</h2>
-			<img width="20" src="imgUrl" /><br />
-			<img width="20" v-bind:src="imgUrl" /><br />
-			<img width="20" :src="imgUrl" />
-			
-			<h2>3.指令二：绑定事件监听</h2>
-			<button v-on:click="test">点击</button>
-			<button @click="test('abc')">点击</button>
-			
-		</div>
-	</body>
-	<script type="text/javascript">
-		new Vue({
-			el:"#app",
-			data:{
-				msg:"I Will Back!!",
-				msge:"<a href='http://www.baidu.com'>I Will Back!!</a>",
-				imgUrl:"https://cn.vuejs.org/images/logo.png"
-			},
-			methods:{
-				test(a) {
-					a.isTrusted ? alert("我没传入形参啦") : alert(a);;
-				}
-			}
-		})
-		
-	</script>
+
+  <div id="app">
+    <h2>双大括号表达式</h2>
+    <p>{{msg}}</p> <!-- I Will Back!! -->
+    <p>{{msg.toUpperCase()}}</p><!-- 嵌套js代码：全部大写 -->
+    <p v-html="msge"></p> <!-- innerHTML -->
+    <p v-text="msge"></p> <!-- innerText -->
+
+    <br />
+
+    <h2>2.指令一：强制数据绑定</h2>
+    <img width="20" src="imgUrl" /><br />
+    <img width="20" v-bind:src="imgUrl" /><br />
+    <img width="20" :src="imgUrl" />
+
+    <h2>3.指令二：绑定事件监听</h2>
+    <button v-on:click="test">点击</button>
+    <button @click="test('abc')">点击</button>
+
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: "#app",
+    data: {
+      msg: "I Will Back!!",
+      msge: "<a href='http://www.baidu.com'>I Will Back!!</a>",
+      imgUrl: "https://cn.vuejs.org/images/logo.png"
+    },
+    methods: {
+      test(a) {
+        a.isTrusted ? alert("我没传入形参啦") : alert(a);;
+      }
+    }
+  })
+
+</script>
+
 </html>
