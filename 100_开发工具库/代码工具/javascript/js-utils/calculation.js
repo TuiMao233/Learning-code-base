@@ -92,24 +92,25 @@ export function clearUseless({ target, clear_keys }) {
   }
   return target
 }
-// 按需拷贝对象
-const object = {
-  id: 6,
-  username: "毛先生",
-  carshop: {
-    address: "广东省惠州市"
+// 返回只执行一次的函数
+export function once(fn) {
+  let called = false
+  return function () {
+    if (!called) {
+      called = true
+      fn.apply(this, arguments)
+    }
   }
 }
-const cloneObject = appointClone({
-  target: object,
-  clone_keys: `
-  
-  `
-})
-console.log(cloneObject)
-
-function appointClone({ target, clone_keys }) {
-  const new_object = {}
-
-  return new_object
+// 闭包缓存函数执行结果
+export function cached(fn) {
+  const cache = Object.create(null);
+  return function cachedFn(...args) {
+    const key = JSON.stringify(args)
+    if (!cache[key]) {
+      let result = fn(...args);
+      cache[key] = result;
+    }
+    return cache[key]
+  }
 }
