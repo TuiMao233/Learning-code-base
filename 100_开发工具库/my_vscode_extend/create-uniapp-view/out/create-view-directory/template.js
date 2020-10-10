@@ -11,7 +11,7 @@ function createViewTemplate(options) {
 </template>
 
 <script${options.typescript ? ' lang="ts"' : ''}>
-import Vue from "vue";
+import Vue from 'vue';
 export default ${options.typescript ? 'Vue.extend(' : ''}{
   props: {},
   data: () => ({}),
@@ -43,7 +43,7 @@ export default ${options.typescript ? 'Vue.extend(' : ''}{
 </template>
 
 <script${options.typescript ? ' lang="ts"' : ''}>
-import Vue from "vue";
+import Vue from 'vue';
 export default ${options.typescript ? 'Vue.extend(' : ''}{
   components: {},
   data: () => ({}),
