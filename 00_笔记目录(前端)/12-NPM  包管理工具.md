@@ -41,11 +41,11 @@
 	• npm publish
 ~~~
 
-## NPM 包的引入机制
+# NPM 包的引入机制
 
 通过`npm`下载的包，直接通过包名引入即可。`node`在使用模块名称来引入模块时，它会先在当前目录的node_modules中寻找是否含有该模块。如果有则直接使用，如果没有则去上一级目录的`node_modules`中寻找，如果有则直接使用，如果没有则再去上一级目录寻找，直到找到磁盘的根目录，如果依然没有，则报错。
 
-## NPM 本地仓库地址配置
+# NPM 本地仓库地址配置
 
 1. **配置本地仓库地址**
    在指定目录创建`node_global`和`node_cache`
@@ -57,22 +57,28 @@ npm config set prefix "D:\nodejs\node_global"
 npm config set cache "D:\nodejs\node_cache"
 ~~~
 
-## NPM 基本配置命令
+# NPM 基本配置命令
 
 1. **检测本地仓库**
    `npm list -global`
+   
 2. **配置镜像站**
    `npm install -g cnpm --registry=https://registry.npm.taobao.org`
    `npm config set registry https://registry.npm.taobao.org`
+   
+   `npm config set registry http://registry.npmjs.org`
+   
 3. **查看c盘配置文件仓库地址**
    `C:\Users\Administrator\.npmrc`
+
 4. **添加新的环境变量**
    `环境变量NODE_PATH内容是：D:\nodejs\node_global\node_modules`
+
 5. **编辑环境变量PATH**
    `D:\nodejs\node_global`
 
 
-## package 文件代码解析
+# package 文件代码解析
 
 ~~~javascript
 {
@@ -89,7 +95,7 @@ npm config set cache "D:\nodejs\node_cache"
 }
 ~~~
 
-## JS 中引入NPM 包
+# JS 中引入NPM 包
 
 ~~~javascript
 // node.js语法：require('包名')
