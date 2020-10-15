@@ -792,3 +792,11 @@ function ():Obj[Extract<keyof Obj, string>] {
 }
 ~~~
 
+## 使用 & 合并接口声明
+
+~~~type
+const a = { name: "", phone: "" } as { name:string } & { phone:string };
+a.name
+a.phone
+~~~
+

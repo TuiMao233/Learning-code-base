@@ -288,7 +288,21 @@ git update-index --add new.txt git write-tree
 **退回版本并创建、切换该分支**：首先`git reflog`找到旧版本hash值，在调用` git branch -b 分支名 提交对象hash`
 **直接退回旧版本：**`git reset [分支hash]`：将`HEAD`、`Index`、`Working`直接跳到所对应分支上
 
+## 提交注释规范
 
+一般情况下，提交 GIT 时的注释可以分成几类，可以用几个动词开始：
+
+- added( 新加入的需求 )
+- fixed( 修复 bug )
+- changed( 完成的任务 )
+- updated( 完成的任务，或者由于第三方模块变化而做的变化 )
+
+尽量将注释缩减为一句话，不要包含详细的内容。
+假如有 Issues 系统，其中可以包含 Issue 的 ID。比如：Issue #123456
+包含作者的信息。比如 by Bruce
+完整例子：
+`git commit -m 'Issue #[issue number] by [username]: [Short summary of the change].'`
+Related articles
 
 ## 分支操作
 
