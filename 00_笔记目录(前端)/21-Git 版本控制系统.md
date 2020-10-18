@@ -293,7 +293,7 @@ git update-index --add new.txt git write-tree
 一般情况下，提交 GIT 时的注释可以分成几类，可以用几个动词开始：
 
 - add( 新加入的需求 )
-- fixe( 修复 bug )
+- fix( 修复 bug )
 - change( 完成的任务 )
 - update( 完成的任务，或者由于第三方模块变化而做的变化 )
 
