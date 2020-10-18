@@ -395,6 +395,20 @@ const lisAll = Array.prototype.slice.call(fakeArr)
 const lisAll2 = Array.from(fakeArr)
 ~~~
 
+# javaScript的常用技巧
+
+## 利用数组填充赋值
+
+~~~js
+new Array(5).fill("1"); // 创建数组, 5个子元素, 填充为字符串1
+~~~
+
+## 利用数组填充复制字符串
+
+~~~js
+new Array(5).fill("1").join(""); // 创建数组, 5个子元素, 填充为1, 组装成字符串
+~~~
+
 # 字符串的正则表达式
 
 ## 表达式常用方法
