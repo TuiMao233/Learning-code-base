@@ -800,3 +800,23 @@ a.name
 a.phone
 ~~~
 
+## 使用typeof转换为类型
+
+~~~typescript
+const state = {
+  a: 123,
+  b: 123
+};
+interface Store {
+  state: typeof state;
+}
+~~~
+
+## 用 P 代表泛型中的key值
+
+~~~js
+type Computed<S> = {
+  [P in keyof S]: () => S[P];
+};
+~~~
+
