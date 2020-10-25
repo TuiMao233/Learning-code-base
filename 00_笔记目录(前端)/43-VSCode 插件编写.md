@@ -448,5 +448,13 @@ const ddd: www;
 ddd.fuc;
 ~~~
 
+# vscode实用插件
+
+quokka（代码调试）
+
+code Runner（代码调试）
+
+any-rule（正则大全）
+
 
 
