@@ -820,3 +820,29 @@ type Computed<S> = {
 };
 ~~~
 
+## ReturnType 获取函数返回值
+
+~~~js
+const getUserInfo = () => {};
+type returnType = ReturnType<typeof getUserInfo>;
+~~~
+
+## Parameters 获取函数参数
+
+~~~js
+const fuc = () => (a: number, b: number) => {};
+type FucParams = Parameters<typeof fuc>;
+~~~
+
+## 使用三元判断是否为空
+
+~~~js
+T extends null | undefined ? never : T
+~~~
+
+## NonNullable 监测内容不为空
+
+~~~js
+NonNullable<T>
+~~~
+

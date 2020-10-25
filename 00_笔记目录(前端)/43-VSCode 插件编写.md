@@ -430,3 +430,23 @@ vsce package # 打包成vsix文件
 
 
 
+# vscode 编写技巧
+
+~~~js
+// 关键字高亮
+/**
+ *
+ * 定义promise的`uni`
+ * 用于覆盖原本错误的类型
+ */
+// 指名废弃api
+interface www {
+  /** @deprecated 当前版本已弃用 */
+  fuc: () => void;
+}
+const ddd: www;
+ddd.fuc;
+~~~
+
+
+
