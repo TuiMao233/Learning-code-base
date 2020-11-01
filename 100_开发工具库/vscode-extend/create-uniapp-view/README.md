@@ -1,4 +1,7 @@
-# create-uniapp-view README
+## create-uniapp-view 简述
+
+**vscode 扩展插件**
+
 **右键目录文件夹快速创建univue-view!**
 
 **创建视图页面时将自动添加pages.json中!**

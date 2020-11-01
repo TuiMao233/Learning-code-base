@@ -176,7 +176,7 @@ ReactDOM.render(vDom2,document.querySelector('#test2'))
 
 ## 生命周期钩子
 
-![图片1](./img/React/tupian1.png)
+![图片1](img/React/tupian1.png)
 
 ### 生命周期流程
 

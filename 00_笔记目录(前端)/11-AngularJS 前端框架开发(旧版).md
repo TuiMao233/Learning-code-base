@@ -115,7 +115,7 @@ Google开源的 前端JS 结构化 框架
 ### **数据绑定**
 
 当改变View中的数据, Model对象的对应属性也会随之改变:  ng-model指令  数据从`View-->Model`
-当Model域对象的属性发生改变时, 页面对应数据随之更新:  {{}}表达式  数据从`Model-->View``
+当Model域对象的属性发生改变时, 页面对应数据随之更新:  `{{}}`表达式  数据从`Model-->View``
 ``ng-model`是双向数据绑定, 而`{{}}`是单向数据绑定
 
 ~~~html
@@ -253,16 +253,16 @@ angular.module('MyApp',[])
 `Angular`为`HTML`页面扩展的: 自定义标签属性或标签
 与`Angular`的作用域对象`(scope)`交互,扩展页面的动态表现力
 
- * **ng-app:** 指定模块名，angular管理的区域
-  * **ng-model：** 双向绑定，输入相关标签
-  * **ng-init：** 初始化数据
-  * **ng-click：** 调用作用域对象的方法（点击时）
-  * **ng-controller:** 指定控制器构造函数名，内部会自动创建一个新的子作用域（外部的）
-  * **ng-bind：** 解决使用{{}}显示数据闪屏（在很短时间内显示{{}}）
-  * **ng-repeat：** 遍历数组显示数据， 数组有几个元素就会产生几个新的作用域
+ * ng-app: 指定模块名，angular管理的区域
+  * ng-model： 双向绑定，输入相关标签
+  * ng-init： 初始化数据
+  * ng-click： 调用作用域对象的方法（点击时）
+  * ng-controller: 指定控制器构造函数名，内部会自动创建一个新的子作用域（外部的）
+  * ng-bind： 解决使用`{{}}`显示数据闪屏（在很短时间内显示`{{}}`）
+  * ng-repeat： 遍历数组显示数据， 数组有几个元素就会产生几个新的作用域
     * $index, $first, $last, $middle, $odd, $even
-  * **ng-show:** 布尔类型， 如果为true才显示
-  * **ng-hide:** 布尔类型， 如果为true就隐藏
+  * ng-show: 布尔类型， 如果为true才显示
+  * ng-hide: 布尔类型， 如果为true就隐藏
 
 ### html元素执行ng-repeat指令遍历数组
 

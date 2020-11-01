@@ -108,7 +108,7 @@ opera-mini	uc-mini
 指屏幕的对角线的长度，单位是英尺，1英尺=2.54厘米
 常见的屏幕尺寸有`2.4、2.8/3.5、3.7、、4.2、5.0、5.5、6.0`等
 
-![手机尺寸](img/web App/dsaniawnida.png)
+![手机尺寸](img/webApp/dsaniawnida.png)
 
 ### 屏幕分辨率
 
