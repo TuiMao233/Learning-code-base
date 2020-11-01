@@ -2,7 +2,7 @@
 title: Promise 异步解决方案
 date: 2020-11-01
 categories:
-  - 
+  - 扩展知识
 tags: 
   - promise
 ---

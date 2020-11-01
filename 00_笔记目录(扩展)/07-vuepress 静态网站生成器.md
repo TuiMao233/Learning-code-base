@@ -2,7 +2,7 @@
 title: vuepress 静态网站生成器
 date: 2020-11-01
 categories:
-  - 
+  - 扩展知识
 tags: 
   - vuepress
 ---

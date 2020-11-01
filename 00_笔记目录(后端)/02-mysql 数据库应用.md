@@ -2,7 +2,7 @@
 title: mysql 数据库应用
 date: 2020-11-01
 categories:
-  - 
+  - 后端学习笔记
 tags: 
   - mysql
 ---

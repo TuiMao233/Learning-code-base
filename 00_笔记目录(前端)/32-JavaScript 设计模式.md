@@ -2,7 +2,7 @@
 title: JavaScript 设计模式
 date: 2020-11-01
 categories:
-  - 
+  - 前端学习笔记
 tags: 
   - javascript
 ---
