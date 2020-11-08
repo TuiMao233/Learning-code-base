@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @Description:
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
-const template_1 = require("./template");
+const template_1 = require("../template");
 const utils_1 = require("../utils");
 const fs = require("fs");
 const path = require("path");

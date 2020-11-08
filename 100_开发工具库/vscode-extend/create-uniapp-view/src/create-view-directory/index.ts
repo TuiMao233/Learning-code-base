@@ -6,7 +6,7 @@
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
-import { createViewTemplate } from "./template";
+import { createViewTemplate } from "../template";
 import { recursionGetFile } from '../utils';
 import fs = require('fs');
 import path = require('path');
