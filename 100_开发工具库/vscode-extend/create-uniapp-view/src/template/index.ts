@@ -26,7 +26,7 @@ export function createViewTemplate(options: CreateViewTemplateOptions) {
 </template>
 
 <script${options.typescript ? ' lang="ts"' : ''}>
-import Vue from 'vue';
+${options.typescript ? `import Vue from 'vue';` : ''}
 export default ${options.typescript ? 'Vue.extend(' : ''}{
   ${componentTemplate}
 }${options.typescript ? ')' : ''};
