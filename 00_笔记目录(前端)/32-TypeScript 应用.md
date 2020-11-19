@@ -842,6 +842,13 @@ const fuc = () => (a: number, b: number) => {};
 type FucParams = Parameters<typeof fuc>;
 ~~~
 
+### InstanceType 获取类返回值
+
+~~~typescript
+class DrawPoster {/*...*/}
+type DrawPosterType = InstanceType<typeof DrawPoster>;
+~~~
+
 ### 使用三元判断是否为空
 
 ~~~js
