@@ -1,4 +1,8 @@
-export const pagesTemplate = `components: {},
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.componentTemplate = exports.pagesTemplate = void 0;
+/** 页面内容 */
+exports.pagesTemplate = `components: {},
   data: () => ({}),
   computed: {},
   methods: {},
@@ -24,8 +28,8 @@ export const pagesTemplate = `components: {},
   /* onPageScroll(event) {}, */
   // 页面处理函数--用户点击右上角分享
   /* onShareAppMessage(options) {}, */`;
-
-export const componentTemplate = `props: {},
+/** 组件内容 */
+exports.componentTemplate = `props: {},
   data: () => ({}),
   computed: {},
   methods: {},
@@ -43,3 +47,4 @@ export const componentTemplate = `props: {},
   deactivated() {},
   // 组件周期函数--监听组件销毁之前
   beforeDestroy() {},`;
+//# sourceMappingURL=templates.js.map

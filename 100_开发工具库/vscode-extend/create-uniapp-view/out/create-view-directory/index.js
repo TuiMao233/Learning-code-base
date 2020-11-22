@@ -23,7 +23,7 @@ const fs = require("fs");
 const path = require("path");
 function createUniAppView(options) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { create_path, view_name, component, typescript, style_type } = options;
+        const { create_path, view_name, component, typescript, style_type, subcontract } = options;
         try {
             fs.lstatSync(create_path);
         }
@@ -36,27 +36,57 @@ function createUniAppView(options) {
         catch (error) {
             return { type: 'error', msg: '创建错误, 该文件夹已存在!' };
         }
-        fs.writeFile(path.resolve(create_path, view_name, `${view_name}.vue`), template_1.createViewTemplate({ view_name, typescript, style_type, component }), { flag: "w" }, () => { });
+        fs.writeFile(path.resolve(create_path, view_name, `${view_name}.vue`), template_1.createV2ViewTemplate({ view_name, typescript, style_type, component }), { flag: "w" }, () => { });
         if (component) {
             return { type: 'success', msg: '创建组件成功!' };
         }
-        // 递归查找pages.json
-        const appJson = yield utils_1.recursionGetFile(create_path, 'pages.json');
-        if (!appJson) {
+        // 递归查找 pages.json 与 src 目录
+        const pagesFile = yield utils_1.recursionGetFile(create_path, 'pages.json');
+        const srcDirectory = yield utils_1.recursionGetFile(create_path, 'src');
+        if (!pagesFile) {
             return { type: 'warning', msg: '创建页面成功! 但pages.json未找到' };
         }
+        if (!srcDirectory) {
+            return { type: 'warning', msg: '创建页面成功! 但src未找到' };
+        }
+        // 获取基于 src 目录下的 page 路径
+        const srcSplit = srcDirectory.path.split('\\src\\');
+        const srcPagePath = srcSplit[srcSplit.length - 1].replace(/\\/g, '/');
         // 去除 // 与 /* */ 注释
-        appJson.data = appJson.data.replace(/\/\/.*?\n/sg, "\n");
-        appJson.data = appJson.data.replace(/\/\*.*?\*\//sg, "");
+        pagesFile.data = pagesFile.data.replace(/\/\/.*?\n/sg, "\n");
+        pagesFile.data = pagesFile.data.replace(/\/\*.*?\*\//sg, "");
         // 进行添加数据
-        let app_json_data = JSON.parse(appJson.data);
-        app_json_data.pages.push({
-            path: `pages/${view_name}/${view_name}`,
-            style: { navigationBarTitleText: view_name }
-        });
-        app_json_data = JSON.stringify(app_json_data, null, "\t");
+        let pagesInfo = JSON.parse(pagesFile.data);
+        // 如果不是分包页面
+        if (!subcontract) {
+            pagesInfo.pages.push({
+                path: `${srcPagePath}/${view_name}/${view_name}`,
+                style: { navigationBarTitleText: view_name }
+            });
+        }
+        // 如果是分包页面
+        if (subcontract) {
+            pagesInfo.subPackages = pagesInfo.subPackages || [];
+            const findRootItem = pagesInfo.subPackages.find((item) => {
+                return item.root === srcPagePath;
+            });
+            const pushPageInfo = {
+                path: `${view_name}/${view_name}`,
+                style: { navigationBarTitleText: view_name }
+            };
+            if (!findRootItem) {
+                pagesInfo.subPackages.push({
+                    root: srcPagePath,
+                    pages: [pushPageInfo]
+                });
+            }
+            else {
+                findRootItem.pages.push(pushPageInfo);
+            }
+        }
+        pagesInfo = JSON.stringify(pagesInfo, null, "\t");
         // 修改文件
-        fs.writeFile(appJson.path, app_json_data, { flag: "w" }, () => { });
+        fs.writeFile(pagesFile.path, pagesInfo, { flag: "w" }, () => { });
         return { type: 'success', msg: '创建页面成功' };
     });
 }

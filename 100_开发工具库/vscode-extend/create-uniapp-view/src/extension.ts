@@ -7,46 +7,30 @@
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
 import * as vscode from 'vscode';
-import createUniAppView from './create-view-directory';
-import { logger } from "./utils";
-export function activate(context: vscode.ExtensionContext) {
-  const createPageExt = vscode.commands.registerCommand('create-uniapp-view.createPage', uri => {
+import { getCommandExt } from "./utils";
 
-    // 拿到路径, 与组件名称, 创建页面
-    vscode.window.showInputBox({ prompt: '输入页面名称' }).then(async inputValue => {
-      if (!inputValue) {
-        logger("error", "页面名称不能为空!");
-        throw new Error('页面名称不能为空!');
-      }
-      const typescript = vscode.workspace.getConfiguration().get('create-uniapp-view.typescript');
-      const style_type = vscode.workspace.getConfiguration().get('create-uniapp-view.style');
-      const status = await createUniAppView({
-        create_path: uri.fsPath,
-        view_name: inputValue,
-        typescript, style_type
-      });
-      logger(status.type, status.msg);
-    });
+export function activate(context: vscode.ExtensionContext) {
+  /** 声明创建页面命令 */
+  const createPageExt = getCommandExt({
+    tipsViewNmae: '页面',
+    extname: 'create-uniapp-view.createPage'
   });
-  const createComponentsExt = vscode.commands.registerCommand('create-uniapp-view.createComponent', uri => {
-    // 拿到路径, 与组件名称, 创建组件
-    vscode.window.showInputBox({ prompt: '输入组件名称' }).then(async inputValue => {
-      if (!inputValue) {
-        logger("error", "组件名称不能为空!");
-        throw new Error('组件名称不能为空!');
-      }
-      const typescript = vscode.workspace.getConfiguration().get('create-uniapp-view.typescript');
-      const style_type = vscode.workspace.getConfiguration().get('create-uniapp-view.style');
-      const status = await createUniAppView({
-        create_path: uri.fsPath,
-        component: true,
-        view_name: inputValue,
-        typescript, style_type
-      });
-      logger(status.type, status.msg);
-    });
+  /** 声明创建分包页面目录 */
+  const createSubcontractPage = getCommandExt({
+    tipsViewNmae: '页面',
+    options: { subcontract: true },
+    extname: 'create-uniapp-view.createSubcontractPage'
   });
+  /** 声明创建组件命令 */
+  const createComponentsExt = getCommandExt({
+    tipsViewNmae: '组件',
+    options: { component: true },
+    extname: 'create-uniapp-view.createComponent'
+  });
+
+  /** 进行添加命令 */
   context.subscriptions.push(createPageExt);
+  context.subscriptions.push(createSubcontractPage);
   context.subscriptions.push(createComponentsExt);
 }
 

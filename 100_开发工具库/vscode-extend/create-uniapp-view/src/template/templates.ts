@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.componentTemplate = exports.pagesTemplate = void 0;
 /** 页面内容 */
-exports.pagesTemplate = `components: {},
+export const pagesTemplate = `components: {},
   data: () => ({}),
   computed: {},
   methods: {},
@@ -29,7 +26,7 @@ exports.pagesTemplate = `components: {},
   // 页面处理函数--用户点击右上角分享
   /* onShareAppMessage(options) {}, */`;
 /** 组件内容 */
-exports.componentTemplate = `props: {},
+export const componentTemplate = `props: {},
   data: () => ({}),
   computed: {},
   methods: {},
@@ -47,4 +44,3 @@ exports.componentTemplate = `props: {},
   deactivated() {},
   // 组件周期函数--监听组件销毁之前
   beforeDestroy() {},`;
-//# sourceMappingURL=options-template.js.map

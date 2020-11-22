@@ -9,7 +9,9 @@
 import * as vscode from "vscode";
 import fs = require('fs');
 import path = require('path');
-// 打印信息
+import createUniAppView from '../create-view-directory';
+
+/** 控制台打印信息 */
 export const logger = (type: string, msg = '') => {
   switch (type) {
     case 'success':
@@ -20,9 +22,7 @@ export const logger = (type: string, msg = '') => {
       return vscode.window.showErrorMessage(`Failed: ${msg}`);
   }
 };
-
-type ERecurs = Promise<null | { path: string, data: string }>;
-// 递归查找并读取文件, 未找到返回false
+/** 递归查找并读取文件, 未找到返回false */
 export const recursionGetFile = (current_path: string, file_name: string): ERecurs => {
   return new Promise(resolve => {
     function recursion(app_path: string) {
@@ -33,14 +33,39 @@ export const recursionGetFile = (current_path: string, file_name: string): ERecu
       fs.access(recurs_path, function (error: any) {
         if (!error) {
           // 递归出口: 文件存在, 返回文件信息
-          fs.readFile(recurs_path, (error, data) => {
-            if (error) {return resolve(null);}
-            resolve({ path: recurs_path, data: data.toString() });
-          });
+          const stat = fs.lstatSync(recurs_path);
+          if (stat.isFile()){
+            fs.readFile(recurs_path, (error, data) => {
+              if (error) {return resolve(null);}
+              resolve({ path: recurs_path, data: data.toString() });
+            });
+          }
+          if (stat.isDirectory()){
+            resolve({path: current_path, data: ''});
+          }
           // 递归点: 当该文件不存在, 往上一级目录总
         } else { recursion(path.resolve(app_path, '../')); }
       });
     }
     recursion(current_path);
+  });
+};
+/** 命令基本流程: 拿到路径`uri` -> 组件名称`view_name` -> 创建页面`createUniAppView` */
+export const getCommandExt = (options: GetCommandExtOpts) => {
+  return vscode.commands.registerCommand(options.extname, async uri => {
+    const inputValue = await vscode.window.showInputBox({ prompt: `输入${options.tipsViewNmae}名称` });
+    if (!inputValue) {
+      logger("error", `${options.tipsViewNmae}名称不能为空!`);
+      throw new Error(`${options.tipsViewNmae}名称不能为空!`);
+    }
+    const typescript = vscode.workspace.getConfiguration().get('create-uniapp-view.typescript');
+    const style_type = vscode.workspace.getConfiguration().get('create-uniapp-view.style');
+    const status = await createUniAppView({
+      ...(options.options || {}),
+      create_path: uri.fsPath,
+      view_name: inputValue,
+      typescript, style_type
+    });
+    logger(status.type, status.msg);
   });
 };

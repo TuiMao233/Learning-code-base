@@ -6,19 +6,12 @@
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
-import { createViewTemplate } from "../template";
+import { createV2ViewTemplate } from "../template";
 import { recursionGetFile } from '../utils';
 import fs = require('fs');
 import path = require('path');
-interface EcreateUniAppView {
-  create_path: string,
-  view_name: string,
-  component?: boolean,
-  typescript?: boolean | unknown,
-  style_type?: string | unknown
-}
 export default async function createUniAppView(options: EcreateUniAppView) {
-  const { create_path, view_name, component, typescript, style_type } = options;
+  const { create_path, view_name, component, typescript, style_type, subcontract } = options;
   try { fs.lstatSync(create_path); }
   catch { return { type: 'error', msg: '创建错误, 该路径不是文件夹' }; }
   try { fs.mkdirSync(path.resolve(create_path, view_name)); }
@@ -26,32 +19,61 @@ export default async function createUniAppView(options: EcreateUniAppView) {
 
   fs.writeFile(
     path.resolve(create_path, view_name, `${view_name}.vue`),
-    createViewTemplate({ view_name, typescript, style_type, component }),
+    createV2ViewTemplate({ view_name, typescript, style_type, component }),
     { flag: "w" }, () => { }
   );
 
   if (component) {
     return { type: 'success', msg: '创建组件成功!' };
   }
-  // 递归查找pages.json
-  const appJson = await recursionGetFile(create_path, 'pages.json');
-  if (!appJson) {
+  // 递归查找 pages.json 与 src 目录
+  const pagesFile = await recursionGetFile(create_path, 'pages.json');
+  const srcDirectory = await recursionGetFile(create_path, 'src');
+  if (!pagesFile) {
     return { type: 'warning', msg: '创建页面成功! 但pages.json未找到' };
   }
+  if (!srcDirectory) {
+    return { type: 'warning', msg: '创建页面成功! 但src未找到' };
+  }
+  // 获取基于 src 目录下的 page 路径
+  const srcSplit = srcDirectory.path.split('\\src\\');
+  const srcPagePath = srcSplit[srcSplit.length - 1].replace(/\\/g, '/');
   // 去除 // 与 /* */ 注释
-  appJson.data = appJson.data.replace(/\/\/.*?\n/sg, "\n");
-  appJson.data = appJson.data.replace(/\/\*.*?\*\//sg, "");
+  pagesFile.data = pagesFile.data.replace(/\/\/.*?\n/sg, "\n");
+  pagesFile.data = pagesFile.data.replace(/\/\*.*?\*\//sg, "");
   // 进行添加数据
-  let app_json_data = JSON.parse(appJson.data);
-  app_json_data.pages.push({
-    path: `pages/${view_name}/${view_name}`,
-    style: { navigationBarTitleText: view_name }
-  });
-  app_json_data = JSON.stringify(app_json_data, null, "\t");
+  let pagesInfo = JSON.parse(pagesFile.data);
+  // 如果不是分包页面
+  if (!subcontract) {
+    pagesInfo.pages.push({
+      path: `${srcPagePath}/${view_name}/${view_name}`,
+      style: { navigationBarTitleText: view_name }
+    });
+  }
+  // 如果是分包页面
+  if (subcontract) {
+    pagesInfo.subPackages = pagesInfo.subPackages || [];
+    const findRootItem = pagesInfo.subPackages.find((item: any) => {
+      return item.root === srcPagePath;
+    });
+    const pushPageInfo = {
+      path: `${view_name}/${view_name}`,
+      style: { navigationBarTitleText: view_name }
+    };
+    if (!findRootItem) {
+      pagesInfo.subPackages.push({
+        root: srcPagePath,
+        pages: [pushPageInfo]
+      });
+    }else {
+      findRootItem.pages.push(pushPageInfo);
+    }
+  }
+  pagesInfo = JSON.stringify(pagesInfo, null, "\t");
   // 修改文件
   fs.writeFile(
-    appJson.path,
-    app_json_data,
+    pagesFile.path,
+    pagesInfo,
     { flag: "w" }, () => { }
   );
   return { type: 'success', msg: '创建页面成功' };
