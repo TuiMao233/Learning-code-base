@@ -8,11 +8,12 @@ interface CreateViewV2TemplateOptions {
 }
 
 interface EcreateUniAppView {
-  create_path: string,
-  view_name: string,
-  subcontract?: boolean,
-  component?: boolean,
-  typescript?: boolean | unknown,
+  create_path: string
+  view_name: string
+  subcontract?: boolean
+  component?: boolean
+  directory?: boolean | unknown
+  typescript?: boolean | unknown
   style_type?: string | unknown
 }
 

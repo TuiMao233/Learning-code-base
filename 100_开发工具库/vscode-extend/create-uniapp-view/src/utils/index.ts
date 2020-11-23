@@ -60,11 +60,13 @@ export const getCommandExt = (options: GetCommandExtOpts) => {
     }
     const typescript = vscode.workspace.getConfiguration().get('create-uniapp-view.typescript');
     const style_type = vscode.workspace.getConfiguration().get('create-uniapp-view.style');
+    const directory = vscode.workspace.getConfiguration().get('create-uniapp-view.directory');
     const status = await createUniAppView({
       ...(options.options || {}),
       create_path: uri.fsPath,
       view_name: inputValue,
-      typescript, style_type
+      typescript, style_type,
+      directory
     });
     logger(status.type, status.msg);
   });

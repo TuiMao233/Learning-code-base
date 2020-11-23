@@ -78,7 +78,9 @@ exports.getCommandExt = (options) => {
         }
         const typescript = vscode.workspace.getConfiguration().get('create-uniapp-view.typescript');
         const style_type = vscode.workspace.getConfiguration().get('create-uniapp-view.style');
-        const status = yield create_view_directory_1.default(Object.assign(Object.assign({}, (options.options || {})), { create_path: uri.fsPath, view_name: inputValue, typescript, style_type }));
+        const directory = vscode.workspace.getConfiguration().get('create-uniapp-view.directory');
+        const status = yield create_view_directory_1.default(Object.assign(Object.assign({}, (options.options || {})), { create_path: uri.fsPath, view_name: inputValue, typescript, style_type,
+            directory }));
         exports.logger(status.type, status.msg);
     }));
 };

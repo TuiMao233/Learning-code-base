@@ -23,7 +23,8 @@ const fs = require("fs");
 const path = require("path");
 function createUniAppView(options) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { create_path, view_name, component, typescript, style_type, subcontract } = options;
+        const { create_path, view_name, component, typescript, style_type, subcontract, directory } = options;
+        // 判断路径是否存在 / 符合创建环境
         try {
             fs.lstatSync(create_path);
         }
@@ -31,12 +32,14 @@ function createUniAppView(options) {
             return { type: 'error', msg: '创建错误, 该路径不是文件夹' };
         }
         try {
-            fs.mkdirSync(path.resolve(create_path, view_name));
+            directory && fs.mkdirSync(path.resolve(create_path, view_name));
         }
         catch (error) {
             return { type: 'error', msg: '创建错误, 该文件夹已存在!' };
         }
-        fs.writeFile(path.resolve(create_path, view_name, `${view_name}.vue`), template_1.createV2ViewTemplate({ view_name, typescript, style_type, component }), { flag: "w" }, () => { });
+        // 获取当前创建页面基本路径
+        const basePagePath = directory ? `${view_name}/${view_name}` : view_name;
+        fs.writeFile(path.resolve(create_path, `${basePagePath}.vue`), template_1.createV2ViewTemplate({ view_name, typescript, style_type, component }), { flag: "w" }, () => { });
         if (component) {
             return { type: 'success', msg: '创建组件成功!' };
         }
@@ -60,7 +63,7 @@ function createUniAppView(options) {
         // 如果不是分包页面
         if (!subcontract) {
             pagesInfo.pages.push({
-                path: `${srcPagePath}/${view_name}/${view_name}`,
+                path: `${srcPagePath}/${basePagePath}`,
                 style: { navigationBarTitleText: view_name }
             });
         }
@@ -71,7 +74,7 @@ function createUniAppView(options) {
                 return item.root === srcPagePath;
             });
             const pushPageInfo = {
-                path: `${view_name}/${view_name}`,
+                path: basePagePath,
                 style: { navigationBarTitleText: view_name }
             };
             if (!findRootItem) {
