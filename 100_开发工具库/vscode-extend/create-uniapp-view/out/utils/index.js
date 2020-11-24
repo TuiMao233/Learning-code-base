@@ -1,6 +1,15 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.recursionGetFile = exports.logger = void 0;
+exports.getCommandExt = exports.recursionGetFile = exports.logger = void 0;
 /*
  * @Author: 毛先生
  * @Date: 2020-08-04 11:05:06
@@ -12,7 +21,8 @@ exports.recursionGetFile = exports.logger = void 0;
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
-// 打印信息
+const create_view_directory_1 = require("../create-view-directory");
+/** 控制台打印信息 */
 exports.logger = (type, msg = '') => {
     switch (type) {
         case 'success':
@@ -23,7 +33,7 @@ exports.logger = (type, msg = '') => {
             return vscode.window.showErrorMessage(`Failed: ${msg}`);
     }
 };
-// 递归查找并读取文件, 未找到返回false
+/** 递归查找并读取文件, 未找到返回false */
 exports.recursionGetFile = (current_path, file_name) => {
     return new Promise(resolve => {
         function recursion(app_path) {
@@ -36,12 +46,18 @@ exports.recursionGetFile = (current_path, file_name) => {
             fs.access(recurs_path, function (error) {
                 if (!error) {
                     // 递归出口: 文件存在, 返回文件信息
-                    fs.readFile(recurs_path, (error, data) => {
-                        if (error) {
-                            return resolve(null);
-                        }
-                        resolve({ path: recurs_path, data: data.toString() });
-                    });
+                    const stat = fs.lstatSync(recurs_path);
+                    if (stat.isFile()) {
+                        fs.readFile(recurs_path, (error, data) => {
+                            if (error) {
+                                return resolve(null);
+                            }
+                            resolve({ path: recurs_path, data: data.toString() });
+                        });
+                    }
+                    if (stat.isDirectory()) {
+                        resolve({ path: current_path, data: '' });
+                    }
                     // 递归点: 当该文件不存在, 往上一级目录总
                 }
                 else {
@@ -51,5 +67,21 @@ exports.recursionGetFile = (current_path, file_name) => {
         }
         recursion(current_path);
     });
+};
+/** 命令基本流程: 拿到路径`uri` -> 组件名称`view_name` -> 创建页面`createUniAppView` */
+exports.getCommandExt = (options) => {
+    return vscode.commands.registerCommand(options.extname, (uri) => __awaiter(void 0, void 0, void 0, function* () {
+        const inputValue = yield vscode.window.showInputBox({ prompt: `输入${options.tipsViewNmae}名称` });
+        if (!inputValue) {
+            exports.logger("error", `${options.tipsViewNmae}名称不能为空!`);
+            throw new Error(`${options.tipsViewNmae}名称不能为空!`);
+        }
+        const typescript = vscode.workspace.getConfiguration().get('create-uniapp-view.typescript');
+        const style_type = vscode.workspace.getConfiguration().get('create-uniapp-view.style');
+        const directory = vscode.workspace.getConfiguration().get('create-uniapp-view.directory');
+        const status = yield create_view_directory_1.default(Object.assign(Object.assign({}, (options.options || {})), { create_path: uri.fsPath, view_name: inputValue, typescript, style_type,
+            directory }));
+        exports.logger(status.type, status.msg);
+    }));
 };
 //# sourceMappingURL=index.js.map

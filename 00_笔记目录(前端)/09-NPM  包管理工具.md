@@ -113,3 +113,67 @@ console.log(math.add(123,456))
 var xxx from 'math'
 ~~~
 
+## 开发 npm 命令行工具
+
+~~~makefile
+# 初始化项目
+npm init
+
+# 修改 package.json 中bin字段
+"bin": {
+    "open-dev": "./index.js"
+}
+
+# 新建 index.js
+#!/usr/bin/env node
+console.log('open-dev')
+# `#!/usr/bin/env node` 的意思是让系统自己去找node的执行程序，该行必不可少。
+
+# 执行 npm link
+npm link
+
+# 运行脚手架工具
+git-tool
+
+# index.js 中 process.argv 可用来获取命令行参数
+#!/usr/bin/env node
+console.log('open-dev')
+console.log(process.argv) # ['...', '...', ....]
+~~~
+
+## commander.js 的使用
+
+完整的 [node.js](http://nodejs.org/) 命令行解决方案，可以用于开发脚手架工具的使用。
+
+### 命令行指令基本使用
+
+~~~js
+#!/usr/bin/env node
+const program = require('commander')
+// 配置命令
+program.option('-d, --debug', '开启调试模式')
+// 读取命令行参数
+program.parse(process.argv)
+// 判断命令行参数
+if (program.debug) {
+    console.log('已开启调试模式....')
+}
+// 命令行运行 `open-dev -d`
+~~~
+
+### 命令行指令携带参数
+
+~~~js
+#!/usr/bin/env node
+// 配置命令, 携带值 <type>
+program.option('-r, --run <type>', '开启微信开发者工具')
+// 读取命令行参数
+program.parse(process.argv);
+// 判断命令行参数
+if (program.run) {
+  // 读取传入值
+  const type = program.opts().run
+  console.log(type)
+}
+~~~
+
