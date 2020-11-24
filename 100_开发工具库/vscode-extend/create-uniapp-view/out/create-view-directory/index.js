@@ -19,6 +19,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 const template_1 = require("../template");
 const utils_1 = require("../utils");
+const comment_json_1 = require("comment-json");
 const fs = require("fs");
 const path = require("path");
 function createUniAppView(options) {
@@ -55,11 +56,8 @@ function createUniAppView(options) {
         // 获取基于 src 目录下的 page 路径
         const srcSplit = srcDirectory.path.split('\\src\\');
         const srcPagePath = srcSplit[srcSplit.length - 1].replace(/\\/g, '/');
-        // 去除 // 与 /* */ 注释
-        pagesFile.data = pagesFile.data.replace(/\/\/.*?\n/sg, "\n");
-        pagesFile.data = pagesFile.data.replace(/\/\*.*?\*\//sg, "");
         // 进行添加数据
-        let pagesInfo = JSON.parse(pagesFile.data);
+        let pagesInfo = comment_json_1.parse(pagesFile.data);
         // 如果不是分包页面
         if (!subcontract) {
             pagesInfo.pages.push({
@@ -87,7 +85,7 @@ function createUniAppView(options) {
                 findRootItem.pages.push(pushPageInfo);
             }
         }
-        pagesInfo = JSON.stringify(pagesInfo, null, "\t");
+        pagesInfo = comment_json_1.stringify(pagesInfo, null, "\t");
         // 修改文件
         fs.writeFile(pagesFile.path, pagesInfo, { flag: "w" }, () => { });
         return { type: 'success', msg: '创建页面成功' };

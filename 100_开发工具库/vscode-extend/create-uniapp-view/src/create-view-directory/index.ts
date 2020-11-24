@@ -8,8 +8,10 @@
  */
 import { createV2ViewTemplate } from "../template";
 import { recursionGetFile } from '../utils';
+import { parse, stringify } from "comment-json";
 import fs = require('fs');
 import path = require('path');
+
 export default async function createUniAppView(options: EcreateUniAppView) {
   const {
     create_path, view_name, component, typescript,
@@ -48,11 +50,8 @@ export default async function createUniAppView(options: EcreateUniAppView) {
   // 获取基于 src 目录下的 page 路径
   const srcSplit = srcDirectory.path.split('\\src\\');
   const srcPagePath = srcSplit[srcSplit.length - 1].replace(/\\/g, '/');
-  // 去除 // 与 /* */ 注释
-  pagesFile.data = pagesFile.data.replace(/\/\/.*?\n/sg, "\n");
-  pagesFile.data = pagesFile.data.replace(/\/\*.*?\*\//sg, "");
   // 进行添加数据
-  let pagesInfo = JSON.parse(pagesFile.data);
+  let pagesInfo = parse(pagesFile.data);
   // 如果不是分包页面
   if (!subcontract) {
     pagesInfo.pages.push({
@@ -79,7 +78,7 @@ export default async function createUniAppView(options: EcreateUniAppView) {
       findRootItem.pages.push(pushPageInfo);
     }
   }
-  pagesInfo = JSON.stringify(pagesInfo, null, "\t");
+  pagesInfo = stringify(pagesInfo, null, "\t");
   // 修改文件
   fs.writeFile(
     pagesFile.path,
