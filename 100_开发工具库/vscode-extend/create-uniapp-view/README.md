@@ -26,12 +26,15 @@
 ![](https://qie-online-sale-qiniu.wsandos.com/1dddw1334.gif)
 
 ## 更新日志
-
+- 1.3.2
+  - 支持pages.json中添加注释
+- 1.3.1
+  - 支持单文件创建
 - 1.3.0
-  1. 新增 nvue 生命周期兼容性提示
-  2. 支持深度目录创建页面
-  3. 支持创建分包页面
-  4. 清除多余语法
+  - 新增 nvue 生命周期兼容性提示
+  - 支持深度目录创建页面
+  - 支持创建分包页面
+  - 清除多余语法
 - 1.2.7
-  1. 更换 `computed` 排版顺序
-  2. 添加 `onPullDownRefresh` 默认释放上拉刷新 `uni.stopPullDownRefresh()`
+  - 更换 `computed` 排版顺序
+  - 添加 `onPullDownRefresh` 默认释放上拉刷新 `uni.stopPullDownRefresh()`

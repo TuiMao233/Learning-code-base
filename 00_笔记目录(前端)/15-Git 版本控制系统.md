@@ -373,10 +373,10 @@ Related articles
 Git 并不会在你输入部分命令时自动推断出你想要的命令。 如果不想每次都输入 完整的 Git 命令，可以通过 git config 文件来轻松地为每一个命令设置一个别名。 `$ git config --global alias.co checkout` 
 
 ~~~ja
-[查看分支] $ git config --global alias.br branch 			
-[进行提交] $ git config --global alias.ci commit				
-[查看状态] $ git config --global alias.st status			  
-[查看暂存] $ git config --global alias.lifs "ls-files -s"   
+[查看分支] $ git config --global alias.br branch
+[进行提交] $ git config --global alias.ci commit
+[查看状态] $ git config --global alias.st status
+[查看暂存] $ git config --global alias.lifs "ls-files -s"
 [分叉历史] $ git config --global alias.brlog "log --oneline --decorate --graph --all"
 ~~~
 
@@ -704,7 +704,7 @@ please contact us at support@github.com
 
 随着你的提交而不断右移的指针。稳定分支的指针总是在提交历史中落后一大截， 而前沿分支的指针往往比较靠前。
 
-![分支右移](/img/Git/fenzhi/1231nio2n1i2o3nio1.jpg)
+![分支右移](img/Git/fenzhi/1231nio2n1i2o3nio1.jpg)
 
 ### 特性分支
 

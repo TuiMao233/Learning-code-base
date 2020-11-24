@@ -1,4 +1,5 @@
 {
+	// 注释一号
 	"pages": [
 		{
 			"path": "pages/index/index",
