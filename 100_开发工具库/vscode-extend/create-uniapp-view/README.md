@@ -2,10 +2,11 @@
 
 右键目录文件夹快速创建`univue-view,` 创建视图页面时将自动添加`pages.json`中!
 
-- 可修改配置, 支持配置`css`预编辑器与是否开启`typescript`模板
+- 可修改配置, 支持配置`css`预编辑器与是否开启`typescript`模板, 以及是否为单文件模式
 - 创建页面, 自动查找路径并添加到 `pages.json -> pages` 中
 - 创建分包页面, 自动查找路径并添加到 `pages.json -> subPackages` 中
 - 支持深度目录创建, 自动查找`src`目录下路径
+- 写入`pages.json`后依然保留注释
 
 ### 基本使用（创建 page | component ）
 
