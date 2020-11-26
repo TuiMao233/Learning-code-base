@@ -27,6 +27,8 @@
 ![](https://qie-online-sale-qiniu.wsandos.com/1dddw1334.gif)
 
 ## 更新日志
+- 1.3.4
+  - 修复右键后无反应 bug
 - 1.3.2
   - 支持pages.json中添加注释
 - 1.3.1
