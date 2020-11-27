@@ -6,7 +6,25 @@
  * @Description: 
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
-import Observe from './observe'
+class Observe {
+  type: string;
+  id: string;
+  constructor(type: string, execute: (message: string) => any) {
+    this.type = type
+    this.id = this.Guid()
+    if (typeof execute == 'function') {
+      this.execute = execute
+    }
+  }
+  private Guid(): string {
+    const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+  }
+  execute(message: string) {
+    console.log(`id: ${this.id}, value: ${message}`)
+  }
+}
+
 export default class Watcher {
   /** 订阅者对象集合 */
   private observes: Record<string, Array<Observe>>;
@@ -70,7 +88,6 @@ const watcher = new Watcher({ debugging: true })
 const observe_1 = watcher.subscribe('user_info', user_info => { })
 const observe_2 = watcher.subscribe('user_info', user_info => { })
 const observe_3 = watcher.subscribe('user_info', user_info => { })
-
 console.log('----------------分割线----------------')
 
 // 发布消息

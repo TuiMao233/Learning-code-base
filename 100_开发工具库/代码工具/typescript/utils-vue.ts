@@ -1,5 +1,9 @@
-import Vue from "vue";
-import { format } from "date-fns";
+declare const Vue:any;
+declare const format:any;
+
+// import Vue from "vue";
+// import { format } from "date-fns";
+
 // 定义媒体时间格式化过滤器
 Vue.filter("mediatime", (timeStamp: number) => {
   let minute = Math.floor(timeStamp / 60).toString();

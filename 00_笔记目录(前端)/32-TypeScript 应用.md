@@ -738,7 +738,7 @@ const http = new HttpClient()
 
 ### 如何声明对象中某个属性
 
-~~~ts
+~~~typescript
 const obj = {
     age: <string|number>60 // 不推荐
     age: 60 as string|number
@@ -746,7 +746,7 @@ const obj = {
 obj.age = "60"
 ~~~
 
-### 定义类型
+### 使用  type 定义类型
 
 ~~~typescript
 // type 关键字可定义类型, 泛型, 等各种类型
@@ -754,7 +754,7 @@ type t1 = string;
 const str:t1 = "666"
 ~~~
 
-### 定义键值
+### 使用 keyof 定义键值
 
 ~~~typescript
 // 用于定义指定字符串
@@ -779,16 +779,9 @@ function getProperty<T, K extends keyof T>(obj: T, key: K) {
 const arr: Array<k2> = ['小明']
 ~~~
 
-### 利用Record定义key值
+### 使用 Extract 定义 value 值
 
 ~~~typescript
-type DiffKeys<K extends string | number | symbol> = keyof Record<K, any>
-const key:DiffKeys<"GET"|"POST"> = "GET"
-~~~
-
-### 利用Extract定义value值
-
-~~~js
 interface Obj {
     name: string
 }
@@ -802,13 +795,13 @@ function ():Obj[Extract<keyof Obj, string>] {
 
 ### 使用 & 合并接口声明
 
-~~~type
+~~~typescript
 const a = { name: "", phone: "" } as { name:string } & { phone:string };
 a.name
 a.phone
 ~~~
 
-### 使用typeof转换为类型
+### 使用 typeof 转换为类型
 
 ~~~typescript
 const state = {
@@ -820,24 +813,32 @@ interface Store {
 }
 ~~~
 
-### 用 P 代表泛型中的key值
+### 用 P 代表泛型中的 key 值
 
-~~~js
+~~~typescript
 type Computed<S> = {
   [P in keyof S]: () => S[P];
 };
 ~~~
 
+### 使用类型中的三元判断是否为空
+
+~~~typescript
+T extends null | undefined ? never : T
+~~~
+
+## TypeScript 高级类型
+
 ### ReturnType 获取函数返回值
 
-~~~js
+~~~typescript
 const getUserInfo = () => {};
 type returnType = ReturnType<typeof getUserInfo>;
 ~~~
 
 ### Parameters 获取函数参数
 
-~~~js
+~~~typescript
 const fuc = () => (a: number, b: number) => {};
 type FucParams = Parameters<typeof fuc>;
 ~~~
@@ -849,15 +850,9 @@ class DrawPoster {/*...*/}
 type DrawPosterType = InstanceType<typeof DrawPoster>;
 ~~~
 
-### 使用三元判断是否为空
-
-~~~js
-T extends null | undefined ? never : T
-~~~
-
 ### NonNullable 监测内容不为空
 
-~~~js
+~~~typescript
 NonNullable<T>
 ~~~
 

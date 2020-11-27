@@ -1,11 +1,3 @@
-/*
- * @Author: 毛先生
- * @Date: 2020-08-11 09:38:30
- * @LastEditTime: 2020-08-11 09:39:57
- * @LastEditors: 毛先生
- * @Description: 
- * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
- */
 // fly.upload装饰器; author: Mr_Mao
 // 对fly添加upload方法, 模拟fly请求执行环境, 自动调用拦截器和返回结果封装
 export default function (context) {
