@@ -1,0 +1,37 @@
+/* ---------------------------初始化样式--------------------------- */
+html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}q:before,q:after{content:''}abbr,acronym{border:0;font-variant:normal}sup{vertical-align:text-top}sub{vertical-align:text-bottom}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;*font-size:100%}legend{color:#000}#yui3-css-stamp.cssreset{display:none}
+/* ---------------------------初始化样式--------------------------- */
+
+
+/* ---------------------------常用功能--------------------------- */
+
+.currency {
+  user-select: none; //文字不可选
+  cursor: -webkit-grab; //拖拽小手手
+  font-weight: bold; // 字体加粗
+  vertical-align: middle; // 文字对齐方向上下居中
+}
+
+// hr分线栏样式(1UIW像素)
+hr {
+	height: 1px;
+	background:#E6E3E3;
+	border:none;
+	opacity: 0.3;
+	@media only screen and (-webkit-device-pixel-ratio:2 ) {.uivew{transform: scaleY(.5);}}
+	@media only screen and (-webkit-device-pixel-ratio:3) {.uivew {transform: scaleY(.33333333333);}}
+}
+
+//字体图标设置
+i {font-family:'iconfont';font-style:normal;}
+
+// 文字溢出处理
+.overflow_test { overflow: hidden; text-overflow:ellipsis; white-space: nowrap;}
+
+// 清楚浮动
+.clear_fix {*zoom: 1;&:after{content: '';display: block;clear: both;}}
+
+// 禁止文字被选中
+.no_select_text {-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+
+/* ---------------------------常用功能--------------------------- */

@@ -1,0 +1,14 @@
+@mixin text-hidden-line($line) {
+ display: -webkit-box;
+ -webkit-box-orient: vertical;
+ -webkit-line-clamp: $line;
+ overflow: hidden;
+}
+
+// or
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

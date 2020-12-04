@@ -1,0 +1,47 @@
+/* ---------------------------语法参考--------------------------- */
+
+/* flex语法 */
+.flex(){/* 注意，设为 Flex 布局以后，子元素的float、clear和vertical-align属性将失效。 */
+	// 行内flex布局
+	display: inline-flex;
+	// felx项目排序方向, 分别为从左往右, 从右往左, 从下往上, 从上往下
+	flex-direction: row | row-reverse | column | column-reverse;
+	// flex项目是否换行，默认不换行:nowrap
+	flex-wrap: nowrap | wrap | wrap-reverse;
+	// 排序方向属性和是否换行属性的简写形式，默认值为row nowrap。
+	flex-flow: <flex-direction> || <flex-wrap>;
+	// 项目在主轴上的对齐方式。
+	justify-content:  justify-content: flex-start | flex-end | center | space-between | space-around;
+	/* 	flex-start（默认值）：左对齐
+		flex-end：右对齐
+		center： 居中
+		space-between：两端对齐，项目之间的间隔都相等。
+		space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。 */
+}
+/* less语法 */
+div {// hover事件
+	&:hover{ }
+}
+div {// 媒体查询
+	width: 1200px;
+	@media (max-width: 1100px){width: 1000px;}
+}
+.scroll-style { // 滚动条样式
+	&::-webkit-scrollbar { // 滚动条整体部分
+		width: 8px;
+	}
+	&::-webkit-scrollbar-thumb{
+		// 滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+		border-radius: 15px;  
+		background-color: rgba(0,0,0,.12);
+		&:hover{
+			background-color: rgba(0,0,0,.27);
+		}
+	}
+	// &::-webkit-scrollbar-track 滚动条的轨道（里面装有Thumb）
+	// &::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+	// &::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+	// &::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+	// &::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+}
+/* ---------------------------语法参考--------------------------- */
