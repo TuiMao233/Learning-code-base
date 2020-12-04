@@ -828,6 +828,36 @@ type Computed<S> = {
 };
 ~~~
 
+### Partial 代表接口属性可选
+
+~~~typescript
+interface Person {
+    name: string;
+    age?: number;
+}
+type OptionalPerson = Partial<Person>
+~~~
+
+### Required 代表接口属性必有
+
+~~~typescript
+interface Person {
+    name: string;
+    age?: number;
+}
+type RequiredPerson = Required<Person>
+~~~
+
+### Readonly 代表接口属性不可修改
+
+~~~typescript
+interface Person {
+    name: string;
+    age?: number;
+}
+type ReadPerson = Readonly<Person>
+~~~
+
 ### ReturnType 获取函数返回值
 
 ~~~js
