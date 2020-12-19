@@ -1,4 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/*
+ * @Author: Mr.Mao
+ * @LastEditors: Mr.Mao
+ * @Date: 2020-11-30 13:48:00
+ * @LastEditTime: 2020-12-19 16:44:44
+ * @Description: 请求错误处理
+ * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
+ */
 
 export const ERROR_STRATEGY = {
   /** 该请求参数不正确 */

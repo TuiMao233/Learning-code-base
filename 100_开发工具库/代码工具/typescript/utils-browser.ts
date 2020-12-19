@@ -1,3 +1,11 @@
+/*
+ * @Author: Mr.Mao
+ * @LastEditors: Mr.Mao
+ * @Date: 2020-11-27 13:03:40
+ * @LastEditTime: 2020-12-19 16:44:15
+ * @Description: 浏览器工具集
+ * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
+ */
 // 监测浏览器环境
 declare const WXEnvironment: any;
 export const inBrowser = typeof window !== 'undefined'

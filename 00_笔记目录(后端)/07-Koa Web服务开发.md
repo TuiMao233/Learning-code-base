@@ -385,9 +385,9 @@ function fileFilter (req, file, cb) {
 
 // 路径, 名称修改器, 默认随机名称且无后缀 (可选)
 const storage = multer.diskStorage({
-  // destination 是确定文件的具体路径
+  // destination 是确定文件的具体路径 (可通过该参数自定义目录)
   destination (req, file, cb) { cb(null, '/tmp/my-uploads') }
-  filename (req, file, cb) { 
+  filename (req, file, cb) {
   	// 获取后缀名
   	const ext = path.extname(file.originalname)
     // 设置默认名 

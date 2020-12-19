@@ -1,3 +1,12 @@
+/*
+ * @Author: Mr.Mao
+ * @LastEditors: Mr.Mao
+ * @Date: 2020-11-27 13:20:37
+ * @LastEditTime: 2020-12-19 16:45:03
+ * @Description: node 工具集
+ * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
+ */
+
 import fs = require('fs')
 import path = require('path')
 
