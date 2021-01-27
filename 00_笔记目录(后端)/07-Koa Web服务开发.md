@@ -180,22 +180,31 @@ app.listen(3000, () => console.log('服务器启动成功'))
 
 ### 静态资源路由(koa-static)
 
-**安装：**npm i koa-static --save
+**安装：**`npm i koa-static --save`
 
 ~~~js
 const static = require('koa-static');
 const Koa = require('koa');
 const app = new Koa();
-const router = require('koa-router')();
 // 指定根路径 为 public目录为静态资源目录
 app.use(static('public'))
 // localhost:4000/a.mp3 --> public/a.mp3
 
-// 指定访问路径/public 为 public目录为静态资源目录(未测试)
-router.get('/public', static('public'))
+app.listen(3000, () => console.log('服务器启动成功'))
+~~~
+
+### 程序指定对应路径(koa-mount)
+
+安装：`npm koa-mount --save`
+
+~~~js
+import koaStatic from 'koa-static'
+import mount from 'koa-mount'
+import Koa from 'koa'
+const app = new Koa()
+app.use(mount('/public', koaStatic(__dirname + '/public')))
 // localhost:4000/public/a.mp3 --> public/a.mp3
 
-app.use(router.routes()).use(router.allowedMethods());
 app.listen(3000, () => console.log('服务器启动成功'))
 ~~~
 
