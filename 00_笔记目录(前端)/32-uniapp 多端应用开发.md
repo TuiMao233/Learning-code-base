@@ -357,3 +357,10 @@ yarn add @vue/eslint-config-prettier @vue/eslint-config-typescript @typescript-e
   },
 ~~~
 
+### 解决多视频播放问题
+
+根据点击后，传入组件 ID 值，通过上下文对象关闭this中储存的上一个上下文播放状态。
+
+### 优化多 video 卡顿
+
+将 video 替换为 image 标签，点击播放时，在替换为 viode
