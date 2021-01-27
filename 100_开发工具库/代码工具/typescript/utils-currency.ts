@@ -1,3 +1,12 @@
+/*
+ * @Author: Mr.Mao
+ * @LastEditors: Mr.Mao
+ * @Date: 2020-11-27 12:57:04
+ * @LastEditTime: 2020-12-19 16:44:24
+ * @Description: 通用工具集
+ * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
+ */
+
 // 检测数据类型; return: String
 export const checkedTypeof = (target: any): string => {
   return Object.prototype.toString.call(target).slice(8, -1)

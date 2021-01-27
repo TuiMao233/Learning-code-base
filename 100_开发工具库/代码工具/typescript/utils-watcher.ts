@@ -1,9 +1,9 @@
 /*
  * @Author: 毛先生
  * @Date: 2020-08-01 17:19:10
- * @LastEditTime: 2020-08-21 09:29:33
- * @LastEditors: 毛先生
- * @Description: 
+ * @LastEditTime: 2020-12-19 16:45:58
+ * @LastEditors: Mr.Mao
+ * @Description: 监视者模块
  * @傻瓜都能写出计算机能理解的程序。优秀的程序员写出的是人类能读懂的代码。
  */
 class Observe {
