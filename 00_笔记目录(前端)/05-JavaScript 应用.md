@@ -308,6 +308,9 @@ Array.prototype.entries()
 Array.prototype.includes(value)
 // 判断value是否是数组
 Array.isArray(value)
+
+// 返回当前数组项中是否通过函数, 通过则返回true, 不然则false
+Array.prototype.some((item)=> item)
 ~~~
 
 ### 函数原型/对象方法
