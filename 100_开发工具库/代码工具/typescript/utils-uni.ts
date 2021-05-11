@@ -2,7 +2,7 @@
  * @Author: Mr.Mao
  * @LastEditors: Mr.Mao
  * @Date: 2020-12-09 14:17:33
- * @LastEditTime: 2020-12-19 16:45:13
+ * @LastEditTime: 2021-05-07 14:43:44
  * @Description: uniapp 选择器模块封装
  * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
  */
@@ -51,4 +51,21 @@ export const querySelectorAll = (selector: string, componentThis?: any) => {
     fields: promisifyFields<UniApp.NodeInfo[]>(query.fields),
     scrollOffset: promisify<UniApp.NodeInfo[]>(query.scrollOffset),
   };
+};
+// 如果有单位，如百分比，px单位等，直接返回，如果是纯粹的数值，则加上rpx单位
+export const analyUnit = (unit: string | number) => {
+  return typeof unit === 'string' && /[^0-9]/g.test(unit) ? unit : unit + 'rpx';
+};
+// 异步提示弹窗
+export const showToast = (options: UniApp.ShowToastOptions) => {
+  const duration = options.duration || 1500;
+  uni.showToast({
+    ...options,
+    duration,
+  });
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, duration);
+  });
 };
