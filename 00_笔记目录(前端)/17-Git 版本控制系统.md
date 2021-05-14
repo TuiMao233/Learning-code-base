@@ -351,7 +351,8 @@ Related articles
 **推送本地项目到远程仓库：**`git push [远程仓库别名] [分支名]`
 **克隆远程仓库到本地：**`git clone [远程仓库url]`
 **拉取远程仓库更新：**`git fetch [remote-name]`  [更新到远程跟踪分支]
-**推送本地分支&创建远程分支：**`git push origin [本地分支名]`
+**推送本地分支&创建远程分支：**`git push [远程仓库别名] [本地分支名]`
+**同步本地所有分支：**`git remote update [远程仓库别名] --prune`
 
 **在新建分支后，可以指定想要跟踪的远程分支**
 `git checkout -b 本地分支名 远程跟踪分支名`
@@ -365,6 +366,22 @@ Related articles
 **删除远程分支：**`git push origin --delete serverfix`
 **列出仍在远程跟踪但是远程已被删除的无用分支：**`git remote prune origin --dry-run` 
 **清除上面命令列出来的远程跟踪：**`git remote prune origin`
+
+
+
+### 标签（版本号）
+
+**列出标签：**`git tag`
+**创建标签：**`git tag [tag-name]`
+**指定分支创建：**`git tag [标签名] [分支名]`
+[打开文本编辑器添加注释]`git tag -a v1.4`  
+[可以指定分支]`git tag -a [标签名] [分支名]` 	
+[可以单行注释]`git tag -a [标签名] [分支名] -m [注释]` 
+**查看标签：**`git show [标签名]`
+**推送远程标签：**`git push [标签名]`
+**删除标签：**`git push -d [标签名]`
+**删除远程标签：**`git push origin :refs/tags/[标签名]`
+**签出标签指定分支：**`git checkout -b [标签名]`
 
 
 
