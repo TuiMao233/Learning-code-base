@@ -124,6 +124,20 @@ function point(x=0, y=0) {
 };point() // 0 0
 ~~~
 
+### 字符串前后查找
+
+~~~js
+let s = 'Hello world!';
+const [a, b, c] = [
+    s.startsWith('Hello', 2),
+    s.endsWith('!'),
+    s.includes('o w')
+];
+console.log(a, b, c); // false true true
+~~~
+
+
+
 ## ECMAScript6 高级语法
 
 ### Promise 对象
@@ -341,7 +355,9 @@ let s = new Phone()
 console.log(s.price) // > 价格
 ~~~
 
-### proxy 代理对象
+### Proxy 生成代理对象
+
+**根据对象代理属性**
 
 ~~~js
 const obj = {
@@ -392,7 +408,11 @@ const observer = new Proxy(obj, {
     return Reflect.ownKeys(target)
   }
 })
+~~~
 
+**根据函数代理参数与调用**
+
+~~~js
 function sum(a, b) { return a + b; }
 const HandlerFunction = new Proxy(sum, {
   /**函数调用的拦截器
