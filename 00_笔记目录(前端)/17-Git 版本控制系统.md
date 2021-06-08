@@ -666,7 +666,7 @@ please contact us at support@github.com
 
 ![问题解决提交](img/Git/case/sdaiomnasdniapo.jpg)
 
-！！！你可以运行你的测试，确保你的修改是正确的，**然后将其合并回你 的 master 分支来部署到线上。** 你可以使用 `git merge` 命令来达到上 述目的
+！！！你可以运行你的测试，确保你的修改是正确的，**然后将其合并回你 的 master 分支来部署到线上。** 你可以使用 `git merge` 命令来达到上述目的
 
 `git checkout master`		`git merge hotfix`
 
