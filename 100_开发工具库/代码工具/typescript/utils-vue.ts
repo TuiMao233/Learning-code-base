@@ -2,12 +2,13 @@
  * @Author: Mr.Mao
  * @LastEditors: Mr.Mao
  * @Date: 2021-02-24 18:18:59
- * @LastEditTime: 2021-05-07 10:19:33
+ * @LastEditTime: 2021-06-08 16:11:03
  * @Description:
  * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
  */
 import { StoreOptions, Store } from 'vuex'
 import { RouteRecordRaw } from 'vue-router'
+import { Component, h, render } from 'vue'
 
 /**
  * 新增动态类型的vuex模块
@@ -21,23 +22,30 @@ export const createModule = <S>(store: StoreOptions<S>) => store as Store<S>
  * @param routes 当前路由列表
  * @param upperPath 上层路由路径
  */
-export const calculRouterActive = (routes: RouteRecordRaw[], upperPath?: string) => {
-  let baseUrl = ''
+ export const calculRouterActive = (routes: RouteRecordRaw[], upperPath?: string) => {
+  let pathMaps: string[] = []
   const recursion = (routes: RouteRecordRaw[], upperPath?: string) => {
     for (const i in routes) {
       const route = routes[i]
-      if (typeof upperPath === 'undefined') {
-        baseUrl = route.path
-      }
+      // 拼接路由绝对路径
       const completePath = upperPath
         ? `${upperPath == '/' ? '/' : upperPath + '/'}${route.path}`
         : route.path
-      if (typeof route.meta === 'undefined') route.meta = {}
-      route.meta.activeMenu = baseUrl
-      if (baseUrl !== completePath) {
-        route.meta.apiActiveMenu = completePath
+      // 记录路由路径信息
+      pathMaps.push(completePath)
+      // 添加路由路径信息
+      if (route.meta) {
+        route.meta.pathMaps = pathMaps
+        route.meta.completePath = completePath
+      } else {
+        route.meta = { pathMaps, completePath }
       }
-      Array.isArray(route.children) && recursion(route.children, completePath)
+      // 再次递归
+      if (Array.isArray(route.children)) {
+        recursion(route.children, completePath)
+      } else {
+        pathMaps = []
+      }
     }
   }
   recursion(routes, upperPath)
@@ -119,4 +127,28 @@ export const setDefaultHomeRoute = (routes: RouteRecordRaw[] = []) => {
   const existHomeRoute = routes.some((v) => v.path === '/')
   if (existHomeRoute) return false
   routes.unshift({ path: '/', redirect: routes[0].path })
+}
+
+/**
+ * 渲染组件实例
+ * @param Constructor 组件
+ * @param props 组件参数
+ * @returns 组件实例
+ */
+ export const renderInstance = <T = Component>(Constructor: T, props: Record<string, any>) => {
+  // 组件消失时, 移除当前实例
+  props.onVanish = () => {
+    render(null, container)
+  }
+  // 创建虚拟节点
+  const container = document.createElement('div')
+  const vnode = h(Constructor, props)
+  // 渲染组件
+  render(vnode, container)
+  if (container.firstElementChild) {
+    document.body.appendChild(container.firstElementChild)
+  }
+  // 这里不需要调用 document.body.removeChild(container.firstElementChild)
+  // 因为调用 render(null, container) 为我们完成了这项工作
+  return vnode.component
 }
