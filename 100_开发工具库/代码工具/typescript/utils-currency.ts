@@ -2,7 +2,7 @@
  * @Author: Mr.Mao
  * @LastEditors: Mr.Mao
  * @Date: 2020-11-27 12:57:04
- * @LastEditTime: 2021-06-08 16:09:11
+ * @LastEditTime: 2021-06-16 18:23:02
  * @Description: 通用工具集
  * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
  */
@@ -47,7 +47,6 @@ export const cached = (fn: Function) => {
 export const filterOutNumber = (str: string) => {
   const filterStr = str.replace(/[^0-9]/g, '')
   const outCount = filterStr !== '' ? Number(filterStr) : filterStr
-  console.log(outCount)
   return outCount
 }
 /**
