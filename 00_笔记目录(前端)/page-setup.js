@@ -2,7 +2,7 @@
  * @Author: Mr.Mao
  * @LastEditors: Mr.Mao
  * @Date: 2020-12-31 15:03:14
- * @LastEditTime: 2021-04-01 23:29:14
+ * @LastEditTime: 2021-06-14 14:19:46
  * @Description: 
  * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
  */
@@ -33,9 +33,9 @@ function pageSetup(options) {
 }
 /* 注意:危险操作!! 执行前请备份资料  */
 pageSetup({
-  fastPage: 7,   // 开始页码
-  lastPage: 38,   // 最后页码
-  addNumber: 1,  // 每个页码操作多少 默认是0
+  fastPage: 25,   // 开始页码
+  lastPage: 41,   // 最后页码
+  addNumber: 10, // 每个页码操作多少 默认是0
   pageSplit: '-', // 分隔页码的符号 11-  11.  11_ 等等
   newPageSplit: '-' // 新的分隔符, 不指定时默认对应pageSplit
 })

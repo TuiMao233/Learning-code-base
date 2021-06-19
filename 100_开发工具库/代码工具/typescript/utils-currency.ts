@@ -2,7 +2,7 @@
  * @Author: Mr.Mao
  * @LastEditors: Mr.Mao
  * @Date: 2020-11-27 12:57:04
- * @LastEditTime: 2021-05-07 10:22:39
+ * @LastEditTime: 2021-06-16 18:23:02
  * @Description: 通用工具集
  * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
  */
@@ -47,7 +47,6 @@ export const cached = (fn: Function) => {
 export const filterOutNumber = (str: string) => {
   const filterStr = str.replace(/[^0-9]/g, '')
   const outCount = filterStr !== '' ? Number(filterStr) : filterStr
-  console.log(outCount)
   return outCount
 }
 /**
@@ -72,6 +71,11 @@ export const paramsAnaly = (url: string, params: Record<string, any>) => {
 export const formatUnix = (timestamp: number, format = 'YYYY-MM-DD HH:mm:ss') => {
   return dayjs.unix(timestamp).format(format)
 }
+/**
+ * 时间戳格式化(时长)
+ * @param timeStamp 格式化时间戳(秒)
+ * @returns 格式时长字符串
+ */
 export const formatMediatime = (timeStamp: number) => {
   let minute = Math.floor(timeStamp / 60).toString();
   let second = Math.floor(timeStamp - Number(minute) * 60).toString();
@@ -156,4 +160,19 @@ export const generateArray = (start: number, end: number) => {
  */
  export const awaitPromise = (code = 1000) => {
   return new Promise((resolve) => setTimeout(resolve, code))
+}
+
+/**
+ * 过滤为价格(两位小数点)
+ * @param value 传入字符
+ */
+ export const filterPrice = (value: string) => {
+  return value
+    .replace(/^[^\d+]/, '')
+    .replace(/[^\d{1,}.\d{1,}|\d{1,}]/g, '')
+    .replace('.', '$#$')
+    .replace(/\./g, '')
+    .replace('$#$', '.')
+    .replace(/\.{2,}/g, '.')
+    .replace(/^(-)*(\d+)\.(\d\d).*$/, '$1$2.$3')
 }
