@@ -1,0 +1,70 @@
+<!--
+ * @Author: Mr.Mao
+ * @Date: 2021-06-19 16:57:35
+ * @LastEditTime: 2021-06-19 17:07:09
+ * @Description: 
+ * @LastEditors: Mr.Mao
+ * @autograph: 任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    html,
+    body,
+    .container {
+      width: 100%;
+      height: 100%;
+      background: black;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .title {
+      padding-top: 50vh;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">Welcome</h1>
+    <h2 class="subtitle">JavaScript Web Animations Api</h2>
+  </div>
+</body>
+<script>
+  const title = document.querySelector('.title')
+  const subtitle = document.querySelector('.subtitle')
+  const titleChange = title.animate(
+    [
+      { opacity: 0, transform: `translateY(-20px)` },
+      { opacity: 1, transform: `translateY(0)` },
+    ],
+    {
+      duration: 2000,
+      easing: 'ease-in-out'
+    }
+  )
+  subtitle.animate(
+    [
+      { opacity: 0, letterSpacing: "-0.5em" },
+      { opacity: 1, letterSpacing: 'initial' }
+    ],
+    {
+      duration: titleChange.effect.getComputedTiming().duration / 2,
+      easing: 'ease-in-out'
+    }
+  )
+</script>
+
+</html>
