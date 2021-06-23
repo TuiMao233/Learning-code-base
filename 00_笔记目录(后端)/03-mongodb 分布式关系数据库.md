@@ -325,7 +325,7 @@ var stuSchema = new Schema({
     unique: true // 为属性定义唯一标识
   }
 	address: String,
-  createTime: { type: Date, default: Date.now() } // 定义创建时间
+  createTime: { type: Date, default: Date.now } // 定义创建时间
 })
 ~~~
 
