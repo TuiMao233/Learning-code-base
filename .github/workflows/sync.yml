@@ -29,7 +29,7 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
       with:
         # 来源仓库
-        source-repo: "https://github.com/TuiMao233/learning-code"
+        source-repo: "git@github.com:TuiMao233/learning-code.git"
         # 目标仓库
         destination-repo: "git@gitee.com:TuiMao233/mao-blog.git"
   reload-pages:
@@ -39,6 +39,7 @@ jobs:
       - name: reload
         uses: mizuka-wu/gitee-pages-action@v1.0.0
         with:
-          repository: linzowo/linzowo
+          repository: TuiMao233/learning-code
           cookie: ${{ secrets.GITEE_COOKIE }}
-          branch: gh_pages
+          directory: documents/.vuepress/dist
+          branch: master
