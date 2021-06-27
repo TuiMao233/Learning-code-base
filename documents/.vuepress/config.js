@@ -1,7 +1,7 @@
 /*
  * @Author: Mr.Mao
  * @Date: 2021-06-25 22:11:23
- * @LastEditTime: 2021-06-27 12:48:59
+ * @LastEditTime: 2021-06-27 15:47:54
  * @Description: 
  * @LastEditors: Mr.Mao
  * @autograph: 任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
@@ -93,11 +93,11 @@ const config = defineConfig({
       },
     },
     // 鼠标点击特效
-    "cursor-effects": {
-      size: 2,                    // size of the particle, default: 2
-      shape: 'star',  // shape of the particle, default: 'star', 'star' | 'circle'
-      zIndex: 999999999           // z-index property of the canvas, default: 999999999
-    },
+    // "cursor-effects": {
+    //   size: 2,                    // size of the particle, default: 2
+    //   shape: 'star',  // shape of the particle, default: 'star', 'star' | 'circle'
+    //   zIndex: 999999999           // z-index property of the canvas, default: 999999999
+    // },
     // 音乐播放器设置
     "meting": {
       meting: {
