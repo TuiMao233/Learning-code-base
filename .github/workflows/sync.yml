@@ -1,0 +1,44 @@
+name: A TO A:GH_PAGES
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Build and Deploy
+      uses: jenkey2011/vuepress-deploy@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        # 你要操作的目标仓库
+        TARGET_REPO: TuiMao233/learning-code
+        # 构建结果存储的分支
+        TARGET_BRANCH: gh_pages
+        # 要使用的构建命令
+        BUILD_SCRIPT: yarn && yarn build
+        # 构建结果存储目录
+        BUILD_DIR: docs/.vuepress/dist/
+  sync:
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sync to Gitee
+      uses: wearerequired/git-mirror-action@master
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+      with:
+        # 来源仓库
+        source-repo: "git@github.com:TuiMao233/learning-code.git"
+        # 目标仓库
+        destination-repo: "git@gitee.com:TuiMao233/mao-blog.git"
+  reload-pages:
+    needs: sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: reload
+        uses: mizuka-wu/gitee-pages-action@v1.0.0
+        with:
+          repository: linzowo/linzowo
+          cookie: ${{ secrets.GITEE_COOKIE }}
+          branch: gh_pages
