@@ -1,0 +1,92 @@
+@font-face {
+  font-family: "MountainsofChristmas";
+  src: url('/fonts/MountainsofChristmas-Bold.ttf'),
+  url('/fonts/MountainsofChristmas-Regular.ttf')
+}
+@font-face {
+  font-family: "FrederickatheGreat";
+  src: url('/fonts/FrederickatheGreat.ttf')
+}
+@font-face {
+  font-family: "谦度手写楷体";
+  src: url('/fonts/谦度手写楷体.ttf')
+}
+@font-face {
+  font-family: "濑户字体简体";
+  src: url('/fonts/濑户字体简体.ttf')
+}
+
+// 导航栏左侧文字
+.navbar .home-link {
+  font-family: "谦度手写楷体";
+}
+// 导航栏右侧文字
+.navbar .links {
+  font-family: "濑户字体简体";
+}
+// 主页介绍
+.info-wrapper {
+  font-family: "濑户字体简体";
+}
+// 标签
+.tags {
+  font-family: "濑户字体简体";
+}
+// 博客項
+.abstract-item {
+  font-family: "濑户字体简体";
+}
+// 主页文字
+.home-blog .hero h1,
+.home-blog .hero .description {
+  color: #e8e8e8;
+}
+.home-blog .hero h1 {
+  font-family: "MountainsofChristmas" !important;
+}
+.home-blog .hero .description {
+  font-family: "FrederickatheGreat" !important;
+  font-size: 30px !important
+}
+// 主页
+.theme-container.no-sidebar {
+  // 加载内容
+  #loader-wrapper .title{
+    font-family: "MountainsofChristmas" !important;
+    position relative;
+    z-index: 1000;
+    color: #ffffff !important;
+  }
+  #loader-wrapper .description {
+    position relative;
+    font-family: "MountainsofChristmas" !important;
+    font-size: 30px !important
+    z-index: 1000;
+    color: #ffffff !important;
+  }
+  #loader-wrapper .loader-main {
+    display none
+  }
+  #loader-wrapper::after {
+    content: "";
+    position: absolute;
+    top 0;
+    bottom 0;
+    left 0;
+    right 0;
+    background-image: url("https://client-static-1254212114.cos.ap-guangzhou.myqcloud.com/images/loading.jpg") !important;
+    filter: blur(3px)
+  }
+}
+
+// 右侧文章标题导航栏
+a.sidebar-link {
+  font-size: 14px !important;
+}
+.page .side-bar {
+  top: 8rem !important;
+  right: 4rem !important;
+}
+.pagation.pagation .pagation-list{
+  font-family: "濑户字体简体";
+}

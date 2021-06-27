@@ -1,0 +1,63 @@
+.abstract-item {
+  background: none;
+  border: 0;
+  box-sizing: border-box;
+  margin: 1em;
+  padding: 1em 1em;
+  position: relative;
+  vertical-align: middle;
+}
+.abstract-item::before, .abstract-item::after {
+  box-sizing: inherit;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.abstract-item {
+  transition: color 0.25s;
+}
+.abstract-item::before, .abstract-item::after {
+  border: 2px solid transparent;
+  width: 0;
+  height: 0;
+}
+
+.abstract-item::before {
+  top: 0;
+  left: 0;
+}
+.abstract-item::after {
+  bottom: 0;
+  right: 0;
+}
+
+.abstract-item:hover {
+  color: $accentColor;
+}
+.abstract-item::before, .abstract-item::after {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  -webkit-transform-origin: center;
+          transform-origin: center;
+}
+.abstract-item::before {
+  border-top: 2px solid $accentColor;
+  border-bottom: 2px solid $accentColor;
+  -webkit-transform: scale3d(0, 1, 1);
+          transform: scale3d(0, 1, 1);
+}
+.abstract-item::after {
+  border-left: 2px solid $accentColor;
+  border-right: 2px solid $accentColor;
+  -webkit-transform: scale3d(1, 0, 1);
+          transform: scale3d(1, 0, 1);
+}
+.abstract-item:hover::before, .abstract-item:hover::after {
+  -webkit-transform: scale3d(1, 1, 1);
+          transform: scale3d(1, 1, 1);
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
