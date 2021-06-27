@@ -21,48 +21,45 @@
   font-family: "谦度手写楷体";
 }
 // 导航栏右侧文字
-.navbar .links {
-  font-family: "濑户字体简体";
-}
+.navbar .links,
 // 主页介绍
-.info-wrapper {
-  font-family: "濑户字体简体";
-}
+.info-wrapper,
 // 标签
-.tags {
-  font-family: "濑户字体简体";
-}
+.tags,
 // 博客項
-.abstract-item {
+.abstract-item,
+// 手机端侧边栏
+.theme-container.sidebar-open > div > div:last-child .sidebar,
+// 分页器
+.pagation.pagation .pagation-list
+{
   font-family: "濑户字体简体";
 }
+
 // 主页文字
 .home-blog .hero h1,
 .home-blog .hero .description {
   color: #e8e8e8;
-}
-.home-blog .hero h1 {
   font-family: "MountainsofChristmas" !important;
 }
 .home-blog .hero .description {
   font-family: "FrederickatheGreat" !important;
   font-size: 30px !important
 }
-// 主页
+
+// 主页加载内容
 .theme-container.no-sidebar {
-  // 加载内容
-  #loader-wrapper .title{
-    font-family: "MountainsofChristmas" !important;
+  #loader-wrapper .title, #loader-wrapper .description{
     position relative;
     z-index: 1000;
     color: #ffffff !important;
   }
-  #loader-wrapper .description {
-    position relative;
+  #loader-wrapper .title {
     font-family: "MountainsofChristmas" !important;
+  }
+  #loader-wrapper .description {
+    font-family: "FrederickatheGreat" !important;
     font-size: 30px !important
-    z-index: 1000;
-    color: #ffffff !important;
   }
   #loader-wrapper .loader-main {
     display none
@@ -75,6 +72,8 @@
     left 0;
     right 0;
     background-image: url("https://client-static-1254212114.cos.ap-guangzhou.myqcloud.com/images/loading.jpg") !important;
+    background-size: cover;
+    background-position: center;
     filter: blur(3px)
   }
 }
@@ -86,7 +85,4 @@ a.sidebar-link {
 .page .side-bar {
   top: 8rem !important;
   right: 4rem !important;
-}
-.pagation.pagation .pagation-list{
-  font-family: "濑户字体简体";
 }
