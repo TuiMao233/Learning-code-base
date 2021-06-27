@@ -49,6 +49,9 @@
 
 // 主页加载内容
 .theme-container.no-sidebar {
+  #loader-wrapper {
+    z-index: 1000000;
+  }
   #loader-wrapper .title, #loader-wrapper .description{
     position relative;
     z-index: 1000;
@@ -56,10 +59,12 @@
   }
   #loader-wrapper .title {
     font-family: "MountainsofChristmas" !important;
+    text-shadow:0px 0px 6px #585858;
   }
   #loader-wrapper .description {
     font-family: "FrederickatheGreat" !important;
     font-size: 30px !important
+    text-shadow:3px 3px 5px #333333;
   }
   #loader-wrapper .loader-main {
     display none
