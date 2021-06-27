@@ -4,6 +4,7 @@ on:
   push:
     paths:
     - 'documents/**'
+    - '.github/workflows/sync.yml'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -45,5 +46,4 @@ jobs:
         with:
           repository: TuiMao233/mao-blog
           cookie: ${{ secrets.GITEE_COOKIE }}
-          directory: documents/.vuepress/dist
           branch: gh_pages
