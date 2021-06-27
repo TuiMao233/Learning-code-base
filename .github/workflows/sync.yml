@@ -1,5 +1,9 @@
 name: A TO A:GH_PAGES
-on: [push]
+# 在什么时候触发更新文档
+on:
+  push:
+    paths:
+    - 'documents/**'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
