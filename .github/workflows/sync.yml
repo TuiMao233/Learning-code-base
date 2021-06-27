@@ -42,4 +42,4 @@ jobs:
           repository: TuiMao233/mao-blog
           cookie: ${{ secrets.GITEE_COOKIE }}
           directory: documents/.vuepress/dist
-          branch: master
+          branch: gh_pages
