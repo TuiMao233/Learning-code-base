@@ -4,9 +4,9 @@
   "description": "毛先生的博客",
   "main": "index.js",
   "scripts": {
-    "docs:dev": "vuepress dev 00_文章文档目录 --temp .temp",
-    "docs:build": "vuepress build 00_文章文档目录",
-    "lint": "eslint 00_文章文档目录",
+    "docs:dev": "vuepress dev documents --temp .temp",
+    "docs:build": "vuepress build documents",
+    "lint": "eslint documents",
     "lint:create": "eslint --init"
   },
   "author": "",
