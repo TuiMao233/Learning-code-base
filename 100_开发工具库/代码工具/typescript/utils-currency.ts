@@ -2,13 +2,13 @@
  * @Author: Mr.Mao
  * @LastEditors: Mr.Mao
  * @Date: 2020-11-27 12:57:04
- * @LastEditTime: 2021-06-16 18:23:02
+ * @LastEditTime: 2021-06-28 16:47:35
  * @Description: 通用工具集
  * @任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
  */
 
 /**
- * 检测数据类型
+ * 获取数据类型
  * @param target 检测对象
  * @returns 返回字符串
  */
