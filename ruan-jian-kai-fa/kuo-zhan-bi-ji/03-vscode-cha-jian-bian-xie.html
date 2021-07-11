@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VSCode 插件编写 | Mr.Mao&#39;s blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="shortcut icon" type="image/x-icon" href="/mao-blog/favicon.ico">
+    <meta name="description" content="For man is man and master of his fate.">
+    
+    <link rel="preload" href="/mao-blog/assets/css/0.styles.c7f09f7b.css" as="style"><link rel="preload" href="/mao-blog/assets/js/app.19e1b50c.js" as="script"><link rel="preload" href="/mao-blog/assets/js/4.512e8a4d.js" as="script"><link rel="preload" href="/mao-blog/assets/js/1.6b005ada.js" as="script"><link rel="preload" href="/mao-blog/assets/js/76.fae4f14d.js" as="script"><link rel="prefetch" href="/mao-blog/assets/js/10.8008c15a.js"><link rel="prefetch" href="/mao-blog/assets/js/11.e6d5e627.js"><link rel="prefetch" href="/mao-blog/assets/js/12.5df4cc14.js"><link rel="prefetch" href="/mao-blog/assets/js/13.64a3b0dc.js"><link rel="prefetch" href="/mao-blog/assets/js/14.92c69349.js"><link rel="prefetch" href="/mao-blog/assets/js/15.fcb00b5c.js"><link rel="prefetch" href="/mao-blog/assets/js/16.177fc3f8.js"><link rel="prefetch" href="/mao-blog/assets/js/17.35b5192e.js"><link rel="prefetch" href="/mao-blog/assets/js/18.4059f020.js"><link rel="prefetch" href="/mao-blog/assets/js/19.d0f23759.js"><link rel="prefetch" href="/mao-blog/assets/js/20.2d4db1fa.js"><link rel="prefetch" href="/mao-blog/assets/js/21.514837fa.js"><link rel="prefetch" href="/mao-blog/assets/js/22.27a37e8b.js"><link rel="prefetch" href="/mao-blog/assets/js/23.897a67bc.js"><link rel="prefetch" href="/mao-blog/assets/js/24.c649adb1.js"><link rel="prefetch" href="/mao-blog/assets/js/25.bccb3f04.js"><link rel="prefetch" href="/mao-blog/assets/js/26.705ac85b.js"><link rel="prefetch" href="/mao-blog/assets/js/27.e4123e2d.js"><link rel="prefetch" href="/mao-blog/assets/js/28.46bcae57.js"><link rel="prefetch" href="/mao-blog/assets/js/29.c4272f05.js"><link rel="prefetch" href="/mao-blog/assets/js/3.2246673a.js"><link rel="prefetch" href="/mao-blog/assets/js/30.28bc60fe.js"><link rel="prefetch" href="/mao-blog/assets/js/31.c3758186.js"><link rel="prefetch" href="/mao-blog/assets/js/32.db3244fa.js"><link rel="prefetch" href="/mao-blog/assets/js/33.06b2e404.js"><link rel="prefetch" href="/mao-blog/assets/js/34.87d9e7a4.js"><link rel="prefetch" href="/mao-blog/assets/js/35.c126287d.js"><link rel="prefetch" href="/mao-blog/assets/js/36.8f3be9db.js"><link rel="prefetch" href="/mao-blog/assets/js/37.b916e469.js"><link rel="prefetch" href="/mao-blog/assets/js/38.d90b2cf2.js"><link rel="prefetch" href="/mao-blog/assets/js/39.6e0ceebe.js"><link rel="prefetch" href="/mao-blog/assets/js/40.1b64d216.js"><link rel="prefetch" href="/mao-blog/assets/js/41.ebf384c2.js"><link rel="prefetch" href="/mao-blog/assets/js/42.9881274f.js"><link rel="prefetch" href="/mao-blog/assets/js/43.53f0eb78.js"><link rel="prefetch" href="/mao-blog/assets/js/44.56761054.js"><link rel="prefetch" href="/mao-blog/assets/js/45.b0ff1d14.js"><link rel="prefetch" href="/mao-blog/assets/js/46.aaaf7c00.js"><link rel="prefetch" href="/mao-blog/assets/js/47.18cca51b.js"><link rel="prefetch" href="/mao-blog/assets/js/48.39030ea6.js"><link rel="prefetch" href="/mao-blog/assets/js/49.9ab0ecf9.js"><link rel="prefetch" href="/mao-blog/assets/js/5.8cda11d4.js"><link rel="prefetch" href="/mao-blog/assets/js/50.0bffed31.js"><link rel="prefetch" href="/mao-blog/assets/js/51.ff3d6c79.js"><link rel="prefetch" href="/mao-blog/assets/js/52.87903e4e.js"><link rel="prefetch" href="/mao-blog/assets/js/53.5759e67a.js"><link rel="prefetch" href="/mao-blog/assets/js/54.be8026fc.js"><link rel="prefetch" href="/mao-blog/assets/js/55.866a8231.js"><link rel="prefetch" href="/mao-blog/assets/js/56.e12d34a8.js"><link rel="prefetch" href="/mao-blog/assets/js/57.57fd273b.js"><link rel="prefetch" href="/mao-blog/assets/js/58.90ce6d0a.js"><link rel="prefetch" href="/mao-blog/assets/js/59.3863dc39.js"><link rel="prefetch" href="/mao-blog/assets/js/6.6d443000.js"><link rel="prefetch" href="/mao-blog/assets/js/60.9e201b5f.js"><link rel="prefetch" href="/mao-blog/assets/js/61.d56ed0f8.js"><link rel="prefetch" href="/mao-blog/assets/js/62.b21d1cc3.js"><link rel="prefetch" href="/mao-blog/assets/js/63.eadaa890.js"><link rel="prefetch" href="/mao-blog/assets/js/64.67bc0773.js"><link rel="prefetch" href="/mao-blog/assets/js/65.ea6aa7cc.js"><link rel="prefetch" href="/mao-blog/assets/js/66.cc349a1f.js"><link rel="prefetch" href="/mao-blog/assets/js/67.838b75e8.js"><link rel="prefetch" href="/mao-blog/assets/js/68.e59ea1bc.js"><link rel="prefetch" href="/mao-blog/assets/js/69.6ac56165.js"><link rel="prefetch" href="/mao-blog/assets/js/7.4209526f.js"><link rel="prefetch" href="/mao-blog/assets/js/70.0dc5fc42.js"><link rel="prefetch" href="/mao-blog/assets/js/71.a9ff44b1.js"><link rel="prefetch" href="/mao-blog/assets/js/72.bd59cddf.js"><link rel="prefetch" href="/mao-blog/assets/js/73.b6b0d409.js"><link rel="prefetch" href="/mao-blog/assets/js/74.92094ea4.js"><link rel="prefetch" href="/mao-blog/assets/js/75.57b289ff.js"><link rel="prefetch" href="/mao-blog/assets/js/77.c4f1a7a5.js"><link rel="prefetch" href="/mao-blog/assets/js/78.72a68f19.js"><link rel="prefetch" href="/mao-blog/assets/js/79.42919070.js"><link rel="prefetch" href="/mao-blog/assets/js/8.23939aab.js"><link rel="prefetch" href="/mao-blog/assets/js/80.063e6e91.js"><link rel="prefetch" href="/mao-blog/assets/js/81.c0a3b3d7.js"><link rel="prefetch" href="/mao-blog/assets/js/9.cea725c3.js">
+    <link rel="stylesheet" href="/mao-blog/assets/css/0.styles.c7f09f7b.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container" data-v-1156296a><div data-v-1156296a><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-1156296a data-v-1156296a><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-4e82dffc data-v-1156296a data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>Mr.Mao's blog</h3> <p class="description" data-v-4e82dffc data-v-4e82dffc>For man is man and master of his fate.</p> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>Mr.Mao</span>
+            
+          <span data-v-4e82dffc>2020 - </span>
+          2021
+        </a></span></div></div> <div class="hide" data-v-1156296a><header class="navbar" data-v-1156296a><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/mao-blog/" class="home-link router-link-active"><img src="/mao-blog/avatar.png" alt="Mr.Mao's blog" class="logo"> <span class="site-name">Mr.Mao's blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/mao-blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-document"></i>
+      软件开发
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mao-blog/软件开发/前端笔记/01-HTML-超文本标记语言.html" class="nav-link"><i class="undefined"></i>
+  前端开发
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/软件开发/后端笔记/01-php-后端应用.html" class="nav-link"><i class="undefined"></i>
+  后端开发
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/软件开发/扩展笔记/01-Promise-异步解决方案.html" class="nav-link"><i class="undefined"></i>
+  知识扩展
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-npm"></i>
+      我的扩展
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mao-blog/我的扩展/create-uniapp-view.html" class="nav-link"><i class="undefined"></i>
+  快速创建视图 | create-uniapp-view
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/我的扩展/u-draw-poster/01-base-desc.html" class="nav-link"><i class="undefined"></i>
+  多端海报绘制 | uni-draw-poster
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/我的扩展/form-strategy.html" class="nav-link"><i class="undefined"></i>
+  表单策略验证 | form-strategy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-date"></i>
+      规划指南
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mao-blog/规划指南/01-日常指标.html" class="nav-link"><i class="undefined"></i>
+  生活指标
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/规划指南/02-总结与规划.html" class="nav-link"><i class="undefined"></i>
+  总结与规划
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/个人记录/职场事项.html" class="nav-link"><i class="undefined"></i>
+  职场 RULE
+</a></li></ul></div></div><div class="nav-item"><a href="/mao-blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-1156296a></div> <aside class="sidebar" data-v-1156296a><div class="personal-info-wrapper" data-v-828910c6 data-v-1156296a><img src="/mao-blog/avatar.png" alt="author-avatar" class="personal-img" data-v-828910c6> <h3 class="name" data-v-828910c6>
+    Mr.Mao
+  </h3> <div class="num" data-v-828910c6><div data-v-828910c6><h3 data-v-828910c6>70</h3> <h6 data-v-828910c6>Articles</h6></div> <div data-v-828910c6><h3 data-v-828910c6>46</h3> <h6 data-v-828910c6>Tags</h6></div></div> <ul class="social-links" data-v-828910c6></ul> <hr data-v-828910c6></div> <nav class="nav-links"><div class="nav-item"><a href="/mao-blog/" class="nav-link"><i class="iconfont reco-home"></i>
+  首页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-document"></i>
+      软件开发
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mao-blog/软件开发/前端笔记/01-HTML-超文本标记语言.html" class="nav-link"><i class="undefined"></i>
+  前端开发
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/软件开发/后端笔记/01-php-后端应用.html" class="nav-link"><i class="undefined"></i>
+  后端开发
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/软件开发/扩展笔记/01-Promise-异步解决方案.html" class="nav-link"><i class="undefined"></i>
+  知识扩展
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-npm"></i>
+      我的扩展
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mao-blog/我的扩展/create-uniapp-view.html" class="nav-link"><i class="undefined"></i>
+  快速创建视图 | create-uniapp-view
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/我的扩展/u-draw-poster/01-base-desc.html" class="nav-link"><i class="undefined"></i>
+  多端海报绘制 | uni-draw-poster
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/我的扩展/form-strategy.html" class="nav-link"><i class="undefined"></i>
+  表单策略验证 | form-strategy
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-date"></i>
+      规划指南
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/mao-blog/规划指南/01-日常指标.html" class="nav-link"><i class="undefined"></i>
+  生活指标
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/规划指南/02-总结与规划.html" class="nav-link"><i class="undefined"></i>
+  总结与规划
+</a></li><li class="dropdown-item"><!----> <a href="/mao-blog/个人记录/职场事项.html" class="nav-link"><i class="undefined"></i>
+  职场 RULE
+</a></li></ul></div></div><div class="nav-item"><a href="/mao-blog/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  标签
+</a></div> <!----></nav> <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>扩展笔记</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/01-promise-yi-bu-jie-jue-fang-an.html" class="sidebar-link">Promise 异步解决方案</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/02-socked.io-shi-shi-ying-yong-kai-fa.html" class="sidebar-link">socked.io 实时应用开发</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html" aria-current="page" class="active sidebar-link">VSCode 插件编写</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/04-flutter-yi-dong-duan-ying-yong-kai-fa.html" class="sidebar-link">Flutter 移动端应用开发</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/05-babel-astyu-fa-bian-yi-qi.html" class="sidebar-link">babel AST语法编译器</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/06-babel-yu-fa-bian-yi-zhuan-huan-qi.html" class="sidebar-link">babel 语法编译转换器</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/07-vuepress-jing-tai-wang-zhan-sheng-cheng-qi.html" class="sidebar-link">vuepress 静态网站生成器</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/08-an-zhuo-yu-iosshen-he-liu-cheng-uni-app-.html" class="sidebar-link">关于 Android 证书</a></li><li><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/09-cocos-creator-you-xi-kai-fa-ru-men.html" class="sidebar-link">关于 Cocos Creator</a></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-4e82dffc data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>VSCode 插件编写</h3> <!----> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>Mr.Mao</span>
+            
+          <span data-v-4e82dffc>2020 - </span>
+          2021
+        </a></span></div></div> <div data-v-1156296a><main class="page"><section><div class="page-title"><h1 class="title">VSCode 插件编写</h1> <div data-v-1ff7123e><i class="iconfont reco-account" data-v-1ff7123e><span data-v-1ff7123e>Mr.Mao</span></i> <i class="iconfont reco-date" data-v-1ff7123e><span data-v-1ff7123e>11/1/2020</span></i> <i class="iconfont reco-eye" data-v-1ff7123e><span id="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html" data-flag-title="Your Article Title" class="leancloud-visitors" data-v-1ff7123e><a class="leancloud-visitors-count" style="font-size:.9rem;font-weight:normal;color:#999;"></a></span></i> <i class="tags iconfont reco-tag" data-v-1ff7123e><span class="tag-item" data-v-1ff7123e>vscode</span></i></div></div> <div class="theme-reco-content content__default"><h2 id="关于-vscode-插件"><a href="#关于-vscode-插件" class="header-anchor">#</a> 关于 vscode 插件</h2> <p>VSCode是微软出的一款轻量级代码编辑器，免费而且功能强大，以功能强大、提示友好、不错的性能和颜值俘获了大量开发者的青睐，对JavaScript和NodeJS的支持非常好，自带很多功能，例如代码格式化，代码智能提示补全、Emmet插件等。</p> <p>再强大的IDE那也不可能面面俱到什么功能都塞进去，那样只会导致IDE本身太臃肿。功能嘛，按需索取，所以，vscode的很多强大功能都是基于插件实现的，IDE只提供一个最基本的框子和最基本功能，由插件来丰富和扩展它的功能。</p> <p>因为vscode本身都是用浏览器实现的，所以其插件不用说肯定也是基于<code>HTML+JS</code>等前端技术实现，从形式上看就是一个类似于npm包的<code>vsix</code>文件，只不过按照一些特殊规范来实现一些特殊功能，所以vscode插件开发难度不大，甚至可以说熟悉了相关API之后很容易。</p> <h3 id="有必要学习vscode插件开发吗"><a href="#有必要学习vscode插件开发吗" class="header-anchor">#</a> 有必要学习vscode插件开发吗</h3> <p>有！而且非常有必要！每个人都会多多少少有一些自己的特殊定制需求，当你不知道开发一个<code>IDE</code>插件其实也很容易、或者你没有意识到通过开发插件可以帮你提升多大效率时，你并不会下意识的将一些问题的解决方式往IDE插件开发上去想。至少我曾经就是这样的，提升开发效率大部分时候想到的都是写一些脚本工具、写一些浏览器插件、写一些客户端工具等，接触到IDE插件开发之后发现原来有些问题可以通过更高效的方式来解决，毕竟IDE才是我们程序员每天接触最多的东西。</p> <h2 id="脚手架创建插件项目"><a href="#脚手架创建插件项目" class="header-anchor">#</a> 脚手架创建插件项目</h2> <div class="language-makefile extra-class"><pre class="language-makefile"><code>npm install -g yo generator-code <span class="token comment">## 安装脚手架</span>
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+yo code
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+? <span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span>
+我们一直在寻找使您变得更好的方法！
+我们可以匿名报告使用情况统计信息以改进工具吗？
+<span class="token symbol">更多信息：https：//github.com/yeoman/insight和http</span><span class="token punctuation">:</span>//yeoman.io
+<span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span><span class="token operator">=</span> <span class="token punctuation">(</span>Y/n<span class="token punctuation">)</span>
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+     _-----_     ╭──────────────────────────╮
+    <span class="token operator">|</span>       <span class="token operator">|</span>    │   Welcome to the Visual  │
+    <span class="token operator">|</span>--<span class="token punctuation">(</span>o<span class="token punctuation">)</span>--<span class="token operator">|</span>    │   Studio Code Extension  │
+   `---------´   │        generator!        │
+    <span class="token punctuation">(</span> _´U`_ <span class="token punctuation">)</span>    ╰──────────────────────────╯
+    /___A___\   /
+     <span class="token operator">|</span>  ~  <span class="token operator">|</span>
+   __<span class="token string">'.___.'</span>__
+ ´   `  <span class="token operator">|</span>° ´ Y `
+ 
+ <span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+ 
+ ? What type of extension do you want to create? <span class="token comment">## 使用哪种扩展名</span>
+  New Extension <span class="token punctuation">(</span>TypeScript<span class="token punctuation">)</span>
+  New Extension <span class="token punctuation">(</span>JavaScript<span class="token punctuation">)</span>
+  New Color Theme
+  New Language Support
+  New Code Snippets
+&gt; New Keymap
+  New Extension Pack
+  New Language Pack <span class="token punctuation">(</span>Localization<span class="token punctuation">)</span>
+  
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+  
+? What<span class="token string">'s the name of your extension? '</span> <span class="token comment">## 您的扩展名是什么(插件名)</span>
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+? What<span class="token string">'s the identifier of your extension? (create-mpvue-view))'</span> <span class="token comment">## 您的扩展名的标识符是什么</span>
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+? What<span class="token string">'s the description of your extension?'</span> <span class="token comment">## 您对扩展的描述是什么</span>
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+? Initialize a git repository? <span class="token punctuation">(</span>Y/n<span class="token punctuation">)</span> <span class="token comment">## 是否初始化Git仓库</span>
+
+<span class="token comment">#↓↓↓↓↓↓↓↓↓#</span>
+
+? Which package manager to use? <span class="token punctuation">(</span>Use arrow keys<span class="token punctuation">)</span> <span class="token comment">## 扩展安装方式使用哪种?</span>
+&gt; npm
+  yarn
+</code></pre></div><h3 id="项目目录文件解析"><a href="#项目目录文件解析" class="header-anchor">#</a> 项目目录文件解析</h3> <div class="language-markdown extra-class"><pre class="language-markdown"><code><span class="token title important"><span class="token punctuation">##</span> 项目总文件</span>
+  <span class="token list punctuation">-</span> .vsocde 		webpack相关配置
+  <span class="token list punctuation">-</span> node_modules	用node安装的依赖包
+  <span class="token list punctuation">-</span> src				资源文件夹
+  <span class="token list punctuation">-</span> .eslintrc.json	代码规范配置
+  <span class="token list punctuation">-</span> .vscodeignore	上传插件需要忽略的文件格式
+  <span class="token list punctuation">-</span> .gitignore		上传需要忽略的文件格式
+  <span class="token list punctuation">-</span> CHANGELOG.md	更改日志
+  <span class="token list punctuation">-</span> README.md		说明文件
+  <span class="token list punctuation">-</span> tsconfig.json	ts配置
+  <span class="token list punctuation">-</span> package.json	项目基本信息(项目开发所需模块,项目名称,版本)
+<span class="token title important"><span class="token punctuation">##</span> src目录文件 &gt; 项目资源</span>
+  <span class="token list punctuation">-</span> test		   单元测试文件
+  <span class="token list punctuation">-</span> extension.ts	默认入口文件
+</code></pre></div><h3 id="extension-ts-入口文件解析"><a href="#extension-ts-入口文件解析" class="header-anchor">#</a> extension.ts 入口文件解析</h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// 模块“ vscode”包含VS Code可扩展性API</span>
+<span class="token comment">// 导入模块，并在下面的代码中使用别名vscode引用该模块</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> vscode <span class="token keyword">from</span> <span class="token string">'vscode'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 激活您的扩展程序时将调用此方法</span>
+<span class="token comment">// 您的扩展程序在第一次执行命令时被激活</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">activate</span><span class="token punctuation">(</span>context<span class="token operator">:</span> vscode<span class="token punctuation">.</span>ExtensionContext<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+	<span class="token comment">// 使用控制台输出诊断信息（console.log）和错误（console.error）</span>
+	<span class="token comment">// 这行代码只会在您的扩展程序激活后执行一次</span>
+	<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'恭喜，您的扩展“ create-mpvue-view”现已激活！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	<span class="token comment">// 该命令已在package.json文件中定义</span>
+	<span class="token comment">// 现在使用registerCommand提供命令的实现</span>
+	<span class="token comment">// commandId参数必须与package.json中的command字段匹配</span>
+	<span class="token keyword">let</span> disposable <span class="token operator">=</span> vscode<span class="token punctuation">.</span>commands<span class="token punctuation">.</span><span class="token function">registerCommand</span><span class="token punctuation">(</span><span class="token string">'create-mpvue-view.helloWorld'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 每次执行命令时都会执行您放置在此处的代码</span>
+
+		<span class="token comment">// 向用户显示一个消息框</span>
+		vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showInformationMessage</span><span class="token punctuation">(</span><span class="token string">'Hello World from create-mpvue-view!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+	context<span class="token punctuation">.</span>subscriptions<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>disposable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 停用您的扩展程序时调用此方法</span>
+<span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">deactivate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
+</code></pre></div><h2 id="插件配置模块与api"><a href="#插件配置模块与api" class="header-anchor">#</a> 插件配置模块与API</h2> <h3 id="package-json-插件配置"><a href="#package-json-插件配置" class="header-anchor">#</a> package.json 插件配置</h3> <div class="language-json extra-class"><pre class="language-json"><code><span class="token punctuation">{</span>
+	<span class="token comment">// 插件的名字，应全部小写，不能有空格</span>
+    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vscode-plugin-demo&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 插件的友好显示名称，用于显示在应用市场，支持中文</span>
+    <span class="token property">&quot;displayName&quot;</span><span class="token operator">:</span> <span class="token string">&quot;VSCode插件demo&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 描述</span>
+    <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;VSCode插件demo集锦&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 关键字，用于应用市场搜索</span>
+    <span class="token property">&quot;keywords&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">&quot;vscode&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;plugin&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;demo&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+	<span class="token comment">// 版本号</span>
+    <span class="token property">&quot;version&quot;</span><span class="token operator">:</span> <span class="token string">&quot;1.0.0&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 发布者，如果要发布到应用市场的话，这个名字必须与发布者一致</span>
+    <span class="token property">&quot;publisher&quot;</span><span class="token operator">:</span> <span class="token string">&quot;sxei&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 表示插件最低支持的vscode版本</span>
+    <span class="token property">&quot;engines&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;vscode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.27.0&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token comment">// 插件应用市场分类，可选值： [Programming Languages, Snippets, Linters, Themes, Debuggers, Formatters, Keymaps, SCM Providers, Other, Extension Packs, Language Packs]</span>
+    <span class="token property">&quot;categories&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">&quot;Other&quot;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+	<span class="token comment">// 插件图标，至少128x128像素</span>
+    <span class="token property">&quot;icon&quot;</span><span class="token operator">:</span> <span class="token string">&quot;images/icon.png&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 扩展的激活事件数组，可以被哪些事件激活扩展，后文有详细介绍</span>
+    <span class="token property">&quot;activationEvents&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token string">&quot;onCommand:extension.sayHello&quot;</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+	<span class="token comment">// 插件的主入口</span>
+    <span class="token property">&quot;main&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./src/extension&quot;</span><span class="token punctuation">,</span>
+	<span class="token comment">// 贡献点，整个插件最重要最多的配置项</span>
+    <span class="token property">&quot;contributes&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 插件配置项</span>
+		<span class="token property">&quot;configuration&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+			<span class="token comment">// 配置项标题，会显示在vscode的设置页</span>
+            <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;vscode-plugin-demo&quot;</span><span class="token punctuation">,</span>
+            <span class="token property">&quot;properties&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+				<span class="token comment">// 这里我随便写了2个设置，配置你的昵称</span>
+                <span class="token property">&quot;vscodePluginDemo.yourName&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;default&quot;</span><span class="token operator">:</span> <span class="token string">&quot;guest&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;你的名字&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+				<span class="token comment">// 是否在启动时显示提示</span>
+                <span class="token property">&quot;vscodePluginDemo.showTip&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+                    <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;boolean&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;default&quot;</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;description&quot;</span><span class="token operator">:</span> <span class="token string">&quot;是否在每次启动时显示欢迎提示！&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token comment">// 命令</span>
+        <span class="token property">&quot;commands&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.sayHello&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;Hello World&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token comment">// 快捷键绑定</span>
+        <span class="token property">&quot;keybindings&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.sayHello&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;key&quot;</span><span class="token operator">:</span> <span class="token string">&quot;ctrl+f10&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;mac&quot;</span><span class="token operator">:</span> <span class="token string">&quot;cmd+f10&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;when&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editorTextFocus&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token comment">// 菜单</span>
+        <span class="token property">&quot;menus&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+			<span class="token comment">// 编辑器右键菜单</span>
+            <span class="token property">&quot;editor/context&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+					<span class="token comment">// 表示只有编辑器具有焦点时才会在菜单中出现</span>
+                    <span class="token property">&quot;when&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editorFocus&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.sayHello&quot;</span><span class="token punctuation">,</span>
+					<span class="token comment">// navigation是一个永远置顶的分组，后面的@6是人工进行组内排序</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation@6&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;when&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editorFocus&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.getCurrentFilePath&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation@5&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+					<span class="token comment">// 只有编辑器具有焦点，并且打开的是JS文件才会出现</span>
+                    <span class="token property">&quot;when&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editorFocus &amp;&amp; resourceLangId == javascript&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.testMenuShow&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;z_commands&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.openWebview&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+			<span class="token comment">// 编辑器右上角图标，不配置图片就显示文字</span>
+            <span class="token property">&quot;editor/title&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;when&quot;</span><span class="token operator">:</span> <span class="token string">&quot;editorFocus &amp;&amp; resourceLangId == javascript&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.testMenuShow&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+			<span class="token comment">// 编辑器标题右键菜单</span>
+            <span class="token property">&quot;editor/title/context&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;when&quot;</span><span class="token operator">:</span> <span class="token string">&quot;resourceLangId == javascript&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.testMenuShow&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+			<span class="token comment">// 资源管理器右键菜单</span>
+            <span class="token property">&quot;explorer/context&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.getCurrentFilePath&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;command&quot;</span><span class="token operator">:</span> <span class="token string">&quot;extension.demo.openWebview&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;group&quot;</span><span class="token operator">:</span> <span class="token string">&quot;navigation&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token comment">// 代码片段</span>
+        <span class="token property">&quot;snippets&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;language&quot;</span><span class="token operator">:</span> <span class="token string">&quot;javascript&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;path&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./snippets/javascript.json&quot;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;language&quot;</span><span class="token operator">:</span> <span class="token string">&quot;html&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;path&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./snippets/html.json&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token comment">// 自定义新的activitybar图标，也就是左侧侧边栏大的图标</span>
+        <span class="token property">&quot;viewsContainers&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+            <span class="token property">&quot;activitybar&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;beautifulGirl&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;title&quot;</span><span class="token operator">:</span> <span class="token string">&quot;美女&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;icon&quot;</span><span class="token operator">:</span> <span class="token string">&quot;images/beautifulGirl.svg&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token comment">// 自定义侧边栏内view的实现</span>
+        <span class="token property">&quot;views&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+			<span class="token comment">// 和 viewsContainers 的id对应</span>
+            <span class="token property">&quot;beautifulGirl&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;beautifulGirl1&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;国内美女&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;beautifulGirl2&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;国外美女&quot;</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;beautifulGirl3&quot;</span><span class="token punctuation">,</span>
+                    <span class="token property">&quot;name&quot;</span><span class="token operator">:</span> <span class="token string">&quot;人妖&quot;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+		<span class="token comment">// 图标主题</span>
+        <span class="token property">&quot;iconThemes&quot;</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token property">&quot;id&quot;</span><span class="token operator">:</span> <span class="token string">&quot;testIconTheme&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;label&quot;</span><span class="token operator">:</span> <span class="token string">&quot;测试图标主题&quot;</span><span class="token punctuation">,</span>
+                <span class="token property">&quot;path&quot;</span><span class="token operator">:</span> <span class="token string">&quot;./theme/icon-theme.json&quot;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token comment">// 同 npm scripts</span>
+    <span class="token property">&quot;scripts&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;postinstall&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node ./node_modules/vscode/bin/install&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;test&quot;</span><span class="token operator">:</span> <span class="token string">&quot;node ./node_modules/vscode/bin/test&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token comment">// 开发依赖</span>
+    <span class="token property">&quot;devDependencies&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;typescript&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^2.6.1&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;vscode&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^1.1.6&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;eslint&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^4.11.0&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;@types/node&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^7.0.43&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;@types/mocha&quot;</span><span class="token operator">:</span> <span class="token string">&quot;^2.2.42&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token comment">// 后面这几个应该不用介绍了</span>
+    <span class="token property">&quot;license&quot;</span><span class="token operator">:</span> <span class="token string">&quot;SEE LICENSE IN LICENSE.txt&quot;</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;bugs&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://github.com/sxei/vscode-plugin-demo/issues&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token property">&quot;repository&quot;</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+        <span class="token property">&quot;type&quot;</span><span class="token operator">:</span> <span class="token string">&quot;git&quot;</span><span class="token punctuation">,</span>
+        <span class="token property">&quot;url&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://github.com/sxei/vscode-plugin-demo&quot;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+	<span class="token comment">// 主页</span>
+    <span class="token property">&quot;homepage&quot;</span><span class="token operator">:</span> <span class="token string">&quot;https://github.com/sxei/vscode-plugin-demo/blob/master/README.md&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="常用扩展插件-api"><a href="#常用扩展插件-api" class="header-anchor">#</a> 常用扩展插件 API</h3> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 替换当前编辑器全部内容：</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span>activeTextEditor<span class="token punctuation">.</span><span class="token function">edit</span><span class="token punctuation">(</span><span class="token parameter">editBuilder</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 从开始到结束，全量替换</span>
+    <span class="token keyword">const</span> end <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">vscode<span class="token punctuation">.</span>Position</span><span class="token punctuation">(</span>vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span>activeTextEditor<span class="token punctuation">.</span>document<span class="token punctuation">.</span>lineCount <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> text <span class="token operator">=</span> <span class="token string">'新替换的内容'</span><span class="token punctuation">;</span>
+    editBuilder<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">vscode<span class="token punctuation">.</span>Range</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">vscode<span class="token punctuation">.</span>Position</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> end<span class="token punctuation">)</span><span class="token punctuation">,</span> text<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 打开文件并选中某段文字</span>
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token string">'/Users/somefile.txt'</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> options <span class="token operator">=</span> <span class="token punctuation">{</span>
+	<span class="token comment">// 选中第3行第9列到第3行第17列</span>
+	selection<span class="token operator">:</span> <span class="token keyword">new</span> <span class="token class-name">vscode<span class="token punctuation">.</span>Range</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">vscode<span class="token punctuation">.</span>Position</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">vscode<span class="token punctuation">.</span>Position</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token comment">// 是否预览，默认true，预览的意思是下次再打开文件是否会替换当前文件</span>
+	preview<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+	<span class="token comment">// 显示在第二个编辑器</span>
+	viewColumn<span class="token operator">:</span> vscode<span class="token punctuation">.</span>ViewColumn<span class="token punctuation">.</span>Two
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showTextDocument</span><span class="token punctuation">(</span>vscode<span class="token punctuation">.</span>Uri<span class="token punctuation">.</span><span class="token function">file</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">,</span> options<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 信息提示</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showInformationMessage</span><span class="token punctuation">(</span><span class="token string">'我是info信息！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showErrorMessage</span><span class="token punctuation">(</span><span class="token string">'我是错误信息！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showInformationMessage</span><span class="token punctuation">(</span><span class="token string">'是否要打开小茗同学的博客？'</span><span class="token punctuation">,</span> <span class="token string">'是'</span><span class="token punctuation">,</span> <span class="token string">'否'</span><span class="token punctuation">,</span> <span class="token string">'不再提示'</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">result</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+	<span class="token keyword">if</span> <span class="token punctuation">(</span>result <span class="token operator">===</span> <span class="token string">'是'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token function">exec</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">open 'https://haoji.me'</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>result <span class="token operator">===</span> <span class="token string">'不再提示'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 其它操作</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 修改状态栏</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">setStatusBarMessage</span><span class="token punctuation">(</span><span class="token string">'你好，前端艺术家！'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 打开输入框</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showInputBox</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span> <span class="token comment">// 这个对象中所有参数都是可选参数</span>
+      password<span class="token operator">:</span><span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// 输入内容是否是密码</span>
+      ignoreFocusOut<span class="token operator">:</span><span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 默认false，设置为true时鼠标点击别的地方输入框不会消失</span>
+      placeHolder<span class="token operator">:</span><span class="token string">'你到底想输入什么？'</span><span class="token punctuation">,</span> <span class="token comment">// 在输入框内的提示信息</span>
+      prompt<span class="token operator">:</span><span class="token string">'赶紧输入，不输入就赶紧滚'</span><span class="token punctuation">,</span> <span class="token comment">// 在输入框下方的提示信息</span>
+      <span class="token function-variable function">validateInput</span><span class="token operator">:</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">text</span><span class="token punctuation">)</span><span class="token punctuation">{</span><span class="token keyword">return</span> text<span class="token punctuation">;</span><span class="token punctuation">}</span> <span class="token comment">// 对输入内容进行验证并返回</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">&quot;用户输入：&quot;</span><span class="token operator">+</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 选取文件</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showOpenDialog</span><span class="token punctuation">(</span>
+  <span class="token punctuation">{</span> <span class="token comment">// 可选对象</span>
+    canSelectFiles<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 是否可选文件</span>
+    canSelectFolders<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// 是否可选文件夹</span>
+    canSelectMany<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 是否可以选择多个</span>
+    defaultUri<span class="token operator">:</span> vscode<span class="token punctuation">.</span>Uri<span class="token punctuation">.</span><span class="token function">file</span><span class="token punctuation">(</span><span class="token string">&quot;/D:/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 默认打开本地路径</span>
+    openLabel<span class="token operator">:</span> <span class="token string">'按钮文字说明'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 打开选择框</span>
+vscode<span class="token punctuation">.</span>window<span class="token punctuation">.</span><span class="token function">showQuickPick</span><span class="token punctuation">(</span>
+  <span class="token punctuation">[</span>
+    <span class="token string">&quot;哈哈哈，你是傻逼吗&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;哈哈哈，你是二逼么&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;你他妈有病吧&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;乖，你是妈的智障&quot;</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">{</span>
+    canPickMany<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    ignoreFocusOut<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    matchOnDescription<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    matchOnDetail<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    placeHolder<span class="token operator">:</span> <span class="token string">'温馨提示，请选择你是哪种类型？'</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">msg</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>msg<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h2 id="本地打包或发布"><a href="#本地打包或发布" class="header-anchor">#</a> 本地打包或发布</h2> <div class="language-makefile extra-class"><pre class="language-makefile"><code>npm i vsce -g <span class="token comment">## 安装vsce打包工具</span>
+vsce package <span class="token comment">## 打包成vsix文件</span>
+</code></pre></div><h2 id="vscode-编写技巧"><a href="#vscode-编写技巧" class="header-anchor">#</a> vscode 编写技巧</h2> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 关键字高亮</span>
+<span class="token comment">/**
+ *
+ * 定义promise的`uni`
+ * 用于覆盖原本错误的类型
+ */</span>
+<span class="token comment">// 指名废弃api</span>
+<span class="token keyword">interface</span> <span class="token class-name">www</span> <span class="token punctuation">{</span>
+  <span class="token comment">/** @deprecated 当前版本已弃用 */</span>
+  <span class="token function-variable function">fuc</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> ddd<span class="token operator">:</span> www<span class="token punctuation">;</span>
+ddd<span class="token punctuation">.</span>fuc<span class="token punctuation">;</span>
+</code></pre></div><h2 id="vscode实用插件"><a href="#vscode实用插件" class="header-anchor">#</a> vscode实用插件</h2> <p>quokka（代码调试）</p> <p>code Runner（代码调试）</p> <p>any-rule（正则大全）</p></div></section> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev"><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/02-socked.io-shi-shi-ying-yong-kai-fa.html" class="prev">
+            socked.io 实时应用开发
+          </a></span> <span class="next"><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/04-flutter-yi-dong-duan-ying-yong-kai-fa.html">
+            Flutter 移动端应用开发
+          </a></span></p></div> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-70334359><li class="level-2" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#关于-vscode-插件" class="sidebar-link reco-side-关于-vscode-插件" data-v-70334359>关于 vscode 插件</a></li><li class="level-3" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#有必要学习vscode插件开发吗" class="sidebar-link reco-side-有必要学习vscode插件开发吗" data-v-70334359>有必要学习vscode插件开发吗</a></li><li class="level-2" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#脚手架创建插件项目" class="sidebar-link reco-side-脚手架创建插件项目" data-v-70334359>脚手架创建插件项目</a></li><li class="level-3" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#项目目录文件解析" class="sidebar-link reco-side-项目目录文件解析" data-v-70334359>项目目录文件解析</a></li><li class="level-3" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#extension-ts-入口文件解析" class="sidebar-link reco-side-extension-ts-入口文件解析" data-v-70334359>extension.ts 入口文件解析</a></li><li class="level-2" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#插件配置模块与api" class="sidebar-link reco-side-插件配置模块与api" data-v-70334359>插件配置模块与API</a></li><li class="level-3" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#package-json-插件配置" class="sidebar-link reco-side-package-json-插件配置" data-v-70334359>package.json 插件配置</a></li><li class="level-3" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#常用扩展插件-api" class="sidebar-link reco-side-常用扩展插件-api" data-v-70334359>常用扩展插件 API</a></li><li class="level-2" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#本地打包或发布" class="sidebar-link reco-side-本地打包或发布" data-v-70334359>本地打包或发布</a></li><li class="level-2" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#vscode-编写技巧" class="sidebar-link reco-side-vscode-编写技巧" data-v-70334359>vscode 编写技巧</a></li><li class="level-2" data-v-70334359><a href="/mao-blog/ruan-jian-kai-fa/kuo-zhan-bi-ji/03-vscode-cha-jian-bian-xie.html#vscode实用插件" class="sidebar-link reco-side-vscode实用插件" data-v-70334359>vscode实用插件</a></li></ul></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div><APlayer audio="" fixed="true" mini="true" autoplay="autoplay" theme="#b7daff" loop="loop" order="random" preload="auto" volume="0.15" mutex="true" lrc-type="0" list-max-height="250" storage-name="vuepress-plugin-meting" id="aplayer-fixed"></APlayer><div></div><div id="live2d-widget" class="live2d-widget-container" style="position:fixed;right:65px;bottom:-55px;width:135px;height:300px;z-index:99999;opacity:0.8;pointer-events:none;"><canvas id="live2d_canvas" width="135" height="300" class="live2d_canvas" style="position:absolute;left:0px;top:0px;width:135px;height:300px;"></canvas></div></div></div>
+    <script src="/mao-blog/assets/js/app.19e1b50c.js" defer></script><script src="/mao-blog/assets/js/4.512e8a4d.js" defer></script><script src="/mao-blog/assets/js/1.6b005ada.js" defer></script><script src="/mao-blog/assets/js/76.fae4f14d.js" defer></script>
+  </body>
+</html>
