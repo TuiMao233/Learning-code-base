@@ -668,9 +668,9 @@ url.parse('/search?title=helloWord')
 
 ####### ###
 
-## 服务器系统 (http)
+## 服务器系统 (http|https)
 
-nodejs提供了http模块，自身就可以用来构建服务器，而且http模块是由C++实现的，性能可靠。
+nodejs提供了http|https模块，自身就可以用来构建服务器，而且http模块是由C++实现的，性能可靠。
 
 ### 开启本地服务器的基本流程
 
