@@ -26,6 +26,7 @@
     "@vuepress-reco/vuepress-plugin-kan-ban-niang": "^1.0.5",
     "markdown-it-disable-url-encode": "^1.0.1",
     "nodejs-fs-utils": "^1.2.5",
-    "vuepress-plugin-permalink-pinyin": "^1.0.0"
+    "vuepress-plugin-permalink-pinyin": "^1.0.0",
+    "vuepress-plugin-typing": "^0.1.2"
   }
 }

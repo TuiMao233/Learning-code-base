@@ -1,7 +1,7 @@
 /*
  * @Author: Mr.Mao
  * @Date: 2021-06-25 22:11:23
- * @LastEditTime: 2021-06-27 17:55:55
+ * @LastEditTime: 2021-07-16 10:58:56
  * @Description: 
  * @LastEditors: Mr.Mao
  * @autograph: 任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
@@ -86,6 +86,15 @@ const config = defineConfig({
     }
   },
   plugins: {
+    "typing": {
+      // 对应的标签选择器
+      selector: '.home-blog .hero h1',
+      // 打字内容
+      strings: ["xxx", "aaa", "dd^fasfa", "Mr.Mao's blog"],
+      typeSpeed: 80, // 打字速度
+      backSpeed: 50, // 回退速度
+      showCursor: false, //关闭光标
+    },
     // 自动生成侧边栏
     "vuepress-plugin-auto-sidebar": {
       titleMap: {
