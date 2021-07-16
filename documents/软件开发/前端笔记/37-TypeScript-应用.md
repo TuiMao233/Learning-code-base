@@ -856,6 +856,14 @@ type ReadPerson = Readonly<Person>
 T extends null | undefined ? never : T
 ~~~
 
+### 后缀 ! 代表值必有
+
+~~~typescript
+dec(value!)
+~~~
+
+
+
 ## TypeScript 高级类型
 
 ### ReturnType 获取函数返回值
