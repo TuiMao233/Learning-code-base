@@ -1,7 +1,7 @@
 /*
  * @Author: Mr.Mao
  * @Date: 2021-06-25 22:11:23
- * @LastEditTime: 2021-07-16 10:58:56
+ * @LastEditTime: 2021-07-16 11:03:53
  * @Description: 
  * @LastEditors: Mr.Mao
  * @autograph: 任何一个傻子都能写出让电脑能懂的代码，而只有好的程序员可以写出让人能看懂的代码
@@ -12,7 +12,7 @@ const config = defineConfig({
   // 文档标题
   title: `Mr.Mao's blog`,
   // 文档说明
-  description: 'For man is man and master of his fate.',
+  description: 'F',
   // 静态资源基本路径
   base: '/mao-blog/',
   // 设置网站图标
@@ -88,9 +88,9 @@ const config = defineConfig({
   plugins: {
     "typing": {
       // 对应的标签选择器
-      selector: '.home-blog .hero h1',
+      selector: '.home-blog .hero .description',
       // 打字内容
-      strings: ["xxx", "aaa", "dd^fasfa", "Mr.Mao's blog"],
+      strings: ["For man is man and master of his fate."],
       typeSpeed: 80, // 打字速度
       backSpeed: 50, // 回退速度
       showCursor: false, //关闭光标
